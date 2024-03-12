@@ -5,6 +5,7 @@ test.describe.configure( {mode:'parallel',retries:0,timeout:2800000})
 test('test', async ({ page,request }) => {
     const mailslurp = new MailSlurp({ apiKey: "c5cf96dcfd7bcbb152d6f4d3ed69f512bab660051837640a2c9e843376e21838" });
     const inbox = await mailslurp.inboxController.createInbox({});
+    
     // console.log(inbox);
     // console.log(inbox.emailAddress);
     const data = await request.post(

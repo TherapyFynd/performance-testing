@@ -15,24 +15,6 @@ test('test', async ({ page }) => {
   await page.getByPlaceholder('Enter text here').fill('New every day testing');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 
-// //   Create Appoinment in Top bar
-// await page.getByRole('button', { name: 'Create' }).nth(1).click();
-//   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
-//   await page.getByLabel('Select client *').click();
-//   await page.getByRole('option', { name: 'Owner Client' }).click();
-//   await page.getByLabel('Select service *').click();
-//   await page.getByText('Family psychotherapy...').click();
-//   await page.getByLabel('Choose date, selected date is').click();
-//   await page.getByLabel('Next month').click();
-//   await page.locator('body > div.MuiPickersPopper-root.css-1mtsuo7.MuiPopper-root > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPickersPopper-paper.css-1ovyxhj > div > div > div > div.MuiPickersFadeTransitionGroup-root.MuiDateCalendar-viewTransitionContainer.css-1h73gvd > div > div > div.MuiPickersSlideTransition-root.MuiDayCalendar-slideTransition.css-2ldko6 > div > div:nth-child(5) > button:nth-child(4)').click;
-//   await page.getByLabel('Choose time, selected time is').click();
-//   await page.getByLabel('3 hours').click();
-//   await page.getByLabel('0 minutes', { exact: true }).click();
-//   await page.getByRole('button', { name: 'OK' }).click();
-//   await page.getByPlaceholder('Enter text here').click();
-//   await page.getByPlaceholder('Enter text here').fill('This long month test');
-//   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-
 // Create Appoinment Button
   await page.getByRole('button', { name: 'Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
@@ -40,21 +22,12 @@ test('test', async ({ page }) => {
   await page.getByRole('option', { name: 'James 1' }).click();
   await page.getByLabel('Select service *').click();
   await page.getByText('Family psychotherapy...').click();
-//   await page.getByLabel('Choose date, selected date is').click();
-//   await page.getByLabel('Next month').click();
-// //   Feb 28
-//   await page.locator('body > div.MuiPickersPopper-root.css-1mtsuo7.MuiPopper-root > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPickersPopper-paper.css-1ovyxhj > div > div > div > div.MuiPickersFadeTransitionGroup-root.MuiDateCalendar-viewTransitionContainer.css-1h73gvd > div > div > div.MuiPickersSlideTransition-root.MuiDayCalendar-slideTransition.css-2ldko6 > div > div:nth-child(5) > button:nth-child(4)').click;
-//   await page.waitForTimeout(3000);
-//   await page.getByLabel('Choose time, selected time is').click();
-//   await page.getByLabel('11 hours').click();
-//   await page.getByLabel('0 minutes', { exact: true }).click();
-//   await page.getByLabel('PM').click();
+
   await page.getByPlaceholder('Enter text here').click();
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(4000);
   
-
 
 
 //   In client File

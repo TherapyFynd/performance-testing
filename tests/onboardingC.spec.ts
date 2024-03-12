@@ -4,7 +4,7 @@ test('test', async ({ page }) => {
   await page.goto('');
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByPlaceholder('MM/DD/YYYY').click();
-  await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/9');
+  await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/1999');
   await page.getByLabel('Pronouns').click();
   await page.getByRole('option', { name: 'He/Him' }).click();
   await page.getByPlaceholder('Phone').click();
