@@ -10,7 +10,20 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  timeout: 180000,
+//   use:{
+//   projects: [
+//     {
+//       name: 'setup db',
+//       testMatch: /global\.setup\.ts/,
+//     },
+//     {
+//       name: 'chromium with db',
+//       use: { ...devices['Desktop Chrome'] },
+//       dependencies: ['setup db'],
+//     },
+//   ]
+// }
+  timeout: 5 * 60 * 1000,
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -23,6 +36,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
@@ -33,9 +47,11 @@ export default defineConfig({
     video:"on",
     viewport:{width:1280,height:585}
     
+    
 
   },
 
+  
   /* Configure projects for major browsers */
   projects: [
     {

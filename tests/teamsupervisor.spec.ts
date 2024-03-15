@@ -11,7 +11,8 @@ test('test', async ({ page,request }) => {
         'Content-Type': 'application/json',
         'x-test-key': `omnipractice_random_a83500678d`,
       },
-      data: { email: "d13fe0b9-af27-4458-b209-a089755e6938@mailslurp.net", isTestMode: true },
+      data: { email: 
+      "0ad3d05e-24ee-40af-9a6a-8ce73e9f759a@mailslurp.net", isTestMode: true },
     },
   ); 
 // console.log(data);

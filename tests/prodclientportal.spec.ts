@@ -8,7 +8,8 @@ test('test', async ({ page,request }) => {
         'Content-Type': 'application/json',
         'x-test-key': `omnipractice_random_a83500678d`,
       },
-      data: { email: "2bb74d0d-5f6a-434f-9ea1-8430cc2af9df@mailslurp.net"
+      data: { email: 
+    "2bb74d0d-5f6a-434f-9ea1-8430cc2af9df@mailslurp.net" 
       , isTestMode: true },
     },
   ); 

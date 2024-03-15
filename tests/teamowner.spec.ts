@@ -3,7 +3,7 @@ import { TIMEOUT } from 'dns';
 import { MailSlurp } from "mailslurp-client";
 test.describe.configure( {mode:'parallel',retries:0,timeout:2800000})
 test('test', async ({ page,request }) => {
-    const mailslurp = new MailSlurp({ apiKey: "3530d606b4ce0941991afe391ad3bc4b2008b06473b1ed274cf576a714845db7" });
+    const mailslurp = new MailSlurp({ apiKey: "1a568f348336d7850c0361f7c6f21ccb9f8f6af3dd7fb535bd33ed1db1a4cc85" });
     const inbox = await mailslurp.inboxController.createInbox({});
     // console.log(inbox);
     // console.log(inbox.emailAddress);

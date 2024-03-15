@@ -12,14 +12,14 @@ test('test', async ({ page,request }) => {
         'Content-Type': 'application/json',
         'x-test-key': `omnipractice_random_a83500678d`,
       },
-      data: { email: "67a63700-0dab-425e-8d7c-dd320990aab3@mailslurp.net", isTestMode: true },
+      data: { email: "a5bd991c-19c1-409a-ae9e-24a988474d92@mailslurp.net", isTestMode: true },
     },
   ); 
 // console.log(data);
 const c = await data.text();
   await page.goto(c);
 
-  // Onbaording flows for Supervisor
+  // Onbaording flows for therapist
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Therapist');
   await page.getByPlaceholder('Enter last name').click();
