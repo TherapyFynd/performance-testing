@@ -1,11 +1,11 @@
 import { test } from '@playwright/test';
 import { MailSlurp } from 'mailslurp-client';
 import {
-  
+  BASE_BACKEND_URL,
   BASE_FRONTEND_URL,
-  // isRunningOnLocal,
-  // localBaseUrl,
-  // localPort,
+  isRunningOnLocal,
+  localBaseUrl,
+  localPort,
 } from '../localemails.js/const';
 test.describe.configure({ mode: 'parallel', retries: 0, timeout: 2800000 });
 test('test', async ({ page, request }) => {
@@ -15,13 +15,13 @@ test('test', async ({ page, request }) => {
   const inbox = await mailslurp.inboxController.createInbox({});
 
   const data = await request.post(
-    `${BASE_FRONTEND_URL}/test/get-passwordless-login-link-by-email`,
+    `${BASE_BACKEND_URL}/test/get-passwordless-login-link-by-email`,
     {
       headers: {
         'Content-Type': 'application/json',
         'x-test-key': `omnipractice_random_a83500678d`,
       },
-      data: BASE_FRONTEND_URL
+      data: isRunningOnLocal
         ? { email: inbox.emailAddress, isTestMode: true, localPort: localPort }
         : { email: inbox.emailAddress, isTestMode: true },
     }

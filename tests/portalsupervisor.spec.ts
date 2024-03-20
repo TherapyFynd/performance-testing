@@ -1,25 +1,39 @@
-import { test, expect } from '@playwright/test';
+import { test, type Page } from '@playwright/test';
+import { TIMEOUT } from 'dns';
 import { MailSlurp } from "mailslurp-client";
-test.describe.configure( {mode:'parallel',retries:0,timeout:2800000})
-test('test', async ({ page,request }) => {
-  const mailslurp = new MailSlurp({ apiKey: "3530d606b4ce0941991afe391ad3bc4b2008b06473b1ed274cf576a714845db7" });
-    const inbox = await mailslurp.inboxController.createInbox({});
-  const data = await request.post(
-    'https://leafs-ehr-nest-stage-nmvorvf7ga-as.a.run.app/test/get-passwordless-login-link-by-email',
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        'x-test-key': `omnipractice_random_a83500678d`,
-      },
-      data: { email: 
-      "0ad3d05e-24ee-40af-9a6a-8ce73e9f759a@mailslurp.net", isTestMode: true },
-    },
-  ); 
-// console.log(data);
-const c = await data.text();
-  await page.goto(c);
+// Annotate entire file as serial.
+test.describe.configure({ mode: 'serial' });
 
-  // Onbaording flows for Supervisor
+let page: Page;
+const mailslurp = new MailSlurp({ apiKey: "50ecae5177178143c7df08292c6ec99ae0f600a7084c8527fb556c1a9cbe79dc" });
+test.beforeAll(async ({ browser }) => {
+  page = await browser.newPage();
+});
+
+test.afterAll(async () => {
+  await page.close();
+});
+
+test('Supervisor login and onboarding ', async ({request}) => {
+        const mailslurp = new MailSlurp({ apiKey: "50ecae5177178143c7df08292c6ec99ae0f600a7084c8527fb556c1a9cbe79dc" });
+        const inbox = await mailslurp.inboxController.createInbox({});
+        // console.log(inbox);
+        // console.log(inbox.emailAddress);
+        const data = await request.post(
+            'https://leafs-ehr-nest-stage-nmvorvf7ga-as.a.run.app/test/get-passwordless-login-link-by-email',
+            {
+            headers:{
+             
+                'Content-Type': 'application/json',
+                'x-test-key': `omnipractice_random_a83500678d`,
+              },
+              data: { email: "f4349b5e-2980-4409-8e9e-99b042cc7bdf@mailslurp.net", isTestMode: true },
+            },
+          ); 
+        // console.log(data);
+        const c = await data.text();
+          await page.goto(c);
+          // Onbaording flows for Supervisor
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Supervisor');
   await page.getByPlaceholder('Enter last name').click();
@@ -32,8 +46,10 @@ const c = await data.text();
   await page.waitForTimeout(1000);
   await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
   await page.waitForTimeout(4000);
+        });
 
-  // Settings tab
+        test('Settings Tab', async () => {
+            // Settings tab
   await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
 
   // Cliniacan settings
@@ -121,14 +137,9 @@ const c = await data.text();
   await page1.close();
   await page.getByTestId('ArrowBackRoundedIcon').click();
   await page.waitForTimeout(1000);
+        });
 
-  // Calender tab
-  // await page.getByText('Calendar').click();
-  // // await page.locator('#root > div._layout_731gc_1 > div._content_731gc_7 > div > div > div._linkContainers_1rwfr_19 > div:nth-child(3) > div:nth-child(2) > p').click;
-  // await page.getByLabel('Monday').check();
-  // await page.locator('#root > div._layout_731gc_1 > div._content_731gc_7 > div > div._header_ml86x_4 > button > svg > path').click();
-
-// All Forms tab
+  test('Forms Tab', async () => {
 // All Forms create Forms
 await page.locator('div').filter({ hasText: /^Documents$/ }).getByRole('img').click();
 await page.getByRole('button', { name: 'Create new' }).nth(1).click();
@@ -392,8 +403,10 @@ await page.getByTestId('ArrowBackRoundedIcon').click();
   await page.waitForTimeout(1000);
   await page.getByTestId('ArrowBackRoundedIcon').click();
   await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  });
 
-// Create Clients
+  test('Create Clients', async () => {
+    // Create Clients
   await page.getByRole('button', { name: 'Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
   await page.getByLabel('First Name*').click();
@@ -407,59 +420,52 @@ await page.getByTestId('ArrowBackRoundedIcon').click();
   // await page.getByLabel('Email*').fill('createsupervisorcleint+4@gmail.com');
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
-  
 
+  });
 
-  // Create Appoinments
-  await page.locator('div').filter({ hasText: /^Calendar$/ }).getByRole('img').click();
-  await page.getByRole('button', { name: 'Month' }).click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.locator('div').filter({ hasText: /^20$/ }).click();
-  await page.getByLabel('Select client profile*').click();
-  await page.getByRole('option', { name: 'Supervisor (S1)' }).first().click();
-  await page.getByLabel('Select service *').click();
-  await page.getByText('Developmental Testing, ...').click();
-  await page.getByPlaceholder('Enter text here').click();
-  await page.getByPlaceholder('Enter text here').fill('New every day testing');
-  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  await page.waitForTimeout(1000);
-  // // Past Date Appoinments
-  // await page.getByRole('button', { name: 'Back' }).click();
-  // await page.getByRole('button', { name: 'Back' }).click();
-  // await page.getByRole('button', { name: 'Back' }).click();
-  // await page.locator('div').filter({ hasText: /^04$/ }).click();
-  // await page.getByLabel('Select client profile*').click();
-  // await page.getByRole('option', { name: 'Supervisor (S1)' }).first().click();
-  // await page.getByLabel('Select service *').click();
-  // await page.getByText('Developmental Testing, ...').click();
-  // await page.getByPlaceholder('Enter text here').click();
-  // await page.getByPlaceholder('Enter text here').fill('New every day testing');
-  // await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  test('Create Appoinment', async () => {
+// Create Appoinments
+await page.locator('div').filter({ hasText: /^Calendar$/ }).getByRole('img').click();
+await page.getByRole('button', { name: 'Month' }).click();
+await page.getByRole('button', { name: 'Next' }).click();
+await page.locator('div').filter({ hasText: /^20$/ }).click();
+await page.getByLabel('Select client profile*').click();
+await page.getByRole('option', { name: 'Supervisor (S1)' }).first().click();
+await page.getByLabel('Select service *').click();
+await page.getByText('Developmental Testing, ...').click();
+await page.getByPlaceholder('Enter text here').click();
+await page.getByPlaceholder('Enter text here').fill('New every day testing');
+await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+await page.waitForTimeout(1000);
+//Past Date Appoinments
+await page.getByRole('button', { name: 'Back' }).click();
+await page.getByRole('button', { name: 'Back' }).click();
+await page.getByRole('button', { name: 'Back' }).click();
+await page.locator('div').filter({ hasText: /^04$/ }).click();
+await page.getByLabel('Select client profile*').click();
+await page.getByRole('option', { name: 'Supervisor (S1)' }).first().click();
+await page.getByLabel('Select service *').click();
+await page.getByText('Developmental Testing, ...').click();
+await page.getByPlaceholder('Enter text here').click();
+await page.getByPlaceholder('Enter text here').fill('New every day testing');
+await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 
-  // Create Appoinment Button( top Bar)
-  await page.getByRole('button', { name: 'Create' }).nth(1).click();
-  await page.getByRole('menuitem', { name: 'Create appointment' }).click();
-  await page.getByLabel('Select client profile*').click();
-  await page.getByRole('option', { name: 'Supervisor (S1)' }).first().click();
-  await page.getByLabel('Select service *').click();
-  await page.getByText('Family psychotherapy...').click();
-  await page.getByPlaceholder('Enter text here').click();
-  await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
-  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  await page.waitForTimeout(3000);
+// Create Appoinment Button( top Bar)
+await page.getByRole('button', { name: 'Create' }).nth(1).click();
+await page.getByRole('menuitem', { name: 'Create appointment' }).click();
+await page.getByLabel('Select client profile*').click();
+await page.getByRole('option', { name: 'Supervisor (S1)' }).first().click();
+await page.getByLabel('Select service *').click();
+await page.getByText('Family psychotherapy...').click();
+await page.getByPlaceholder('Enter text here').click();
+await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
+await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+await page.waitForTimeout(3000);
 
-  // Reports
+  });
 
-  // await page.locator('div').filter({ hasText: /^Reports$/ }).getByRole('img').click();
-  // await page.getByText('Appointment Notes').click();
-  // await page.locator('.btn-outline-default').first().click();
-  // // await page.getByRole('tab', { name: 'Personal' }).click();
-  // await page.getByRole('button', { name: 'Add psychotherapy note' }).nth(1).click();
-  // await page.getByPlaceholder('Enter your response here').click();
-  // await page.getByPlaceholder('Enter your response here').fill('Added Psychotherapy Note for this Appoinment');
-  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  // await page.waitForTimeout(3000);
-//    Client file
+  test('Client File', async () => {
+// Client file
 await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
 await page.getByText('Supervisor Test').click();
 
@@ -531,21 +537,24 @@ await page.getByRole('menuitem', { name: 'Appointment' }).getByRole('img').click
 await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 await page.waitForTimeout(2000);
 
+  });
 
-// Supervision Flows
-  // await page.locator('div').filter({ hasText: /^Supervision$/ }).getByRole('img').click();
-  // await page.getByText('Therapist Automation Testing').first().click();
-  // await page.getByRole('button', { name: 'Add signature' }).nth(1).click();
-  // await page.getByPlaceholder('Sign').click();
-  // await page.getByPlaceholder('Sign').fill('Supervisor signed');
-  // await page.getByRole('button', { name: 'Sign' }).nth(1).click();
-  // await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
-  // await page.getByRole('tab', { name: 'Signed' }).click();
-  // await page.getByText('Therapist Automation TestingMar').first().click();
-  // await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
+// test('Supervision Flow', async () => {
+// // Supervision Flows
+//   await page.locator('div').filter({ hasText: /^Supervision$/ }).getByRole('img').click();
+//   await page.getByText('Therapist Automation Testing').first().click();
+//   await page.getByRole('button', { name: 'Add signature' }).nth(1).click();
+//   await page.getByPlaceholder('Sign').click();
+//   await page.getByPlaceholder('Sign').fill('Supervisor signed');
+//   await page.getByRole('button', { name: 'Sign' }).nth(1).click();
+//   await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
+//   await page.getByRole('tab', { name: 'Signed' }).click();
+//   await page.getByText('Therapist Automation TestingMar').first().click();
+//   await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
+//   });
 
-
-// Intake tabs
+  test('Intake Tab', async () => {
+    // Intake tabs
 await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
 await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
 await page.getByLabel('First Name*').click();
@@ -590,6 +599,9 @@ await page.getByRole('option', { name: 'Supervisor 1' }).click();
 await page.getByRole('button', { name: 'Send' }).nth(1).click();
 await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
 await page.waitForTimeout(1000);
+  });
+
+  test('Request Booking Widget', async () => {
 // Request Booking Widget flow
 await page.getByText('Requests').click();
 await page.getByRole('tab', { name: 'Requests' }).click();
@@ -598,8 +610,10 @@ await page.getByRole('button', { name: 'Continue' }).nth(1).click();
 await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
 await page.waitForTimeout(6000);
 await page.reload();
-// Dp Updates and Logout
-await page.locator('#root > div._header_1uy0f_1 > div > div:nth-child(4)').click();
+  });
+
+  test('DP Update and Logout', async () => {
+    await page.locator('#root > div._header_1uy0f_1 > div > div:nth-child(4)').click();
 await page.getByRole('menuitem', { name: 'Profile' }).click();
 await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]').setInputFiles("C:/Users/Rajesh/Downloads/therapist.jpg");
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -607,61 +621,5 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page.locator('#root > div._header_1uy0f_1 > div > div:nth-child(4)').click();
 await page.getByRole('menuitem', { name: 'Logout' }).click();
 
-
-
-
-
-
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
+  });
 
