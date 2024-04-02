@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { MailSlurp } from "mailslurp-client";
 test.describe.configure( {mode:'parallel',retries:0,timeout:2800000})
 test('test', async ({ page,request }) => {
+  const mailslurp = new MailSlurp({ apiKey: "3530d606b4ce0941991afe391ad3bc4b2008b06473b1ed274cf576a714845db7" });
+    const inbox = await mailslurp.inboxController.createInbox({});
   const data = await request.post(
     'https://leafs-ehr-nest-stage-nmvorvf7ga-as.a.run.app/test/get-passwordless-login-link-by-email',
     {
@@ -8,7 +11,8 @@ test('test', async ({ page,request }) => {
         'Content-Type': 'application/json',
         'x-test-key': `omnipractice_random_a83500678d`,
       },
-      data: { email: "4b05ae83-38fc-4649-a745-085acd21c8bd@mailslurp.net", isTestMode: true },
+      data: { email: 
+      "0ad3d05e-24ee-40af-9a6a-8ce73e9f759a@mailslurp.net", isTestMode: true },
     },
   ); 
 // console.log(data);
@@ -52,7 +56,6 @@ const c = await data.text();
   await page.getByLabel('License No.').press('CapsLock');
   await page.getByLabel('License No.').fill('QEY355');
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-
   await page.getByRole('tab', { name: 'Locations' }).click();
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('Office name').click();
@@ -63,13 +66,12 @@ const c = await data.text();
   await page.getByRole('combobox', { name: 'State' }).fill('New');
   await page.getByText('New York', { exact: true }).click();
   await page.getByLabel('City').click();
-  await page.getByRole('combobox', { name: 'City' }).fill('Mount');
-  await page.getByText('Mount Vernon').click();
+  await page.getByRole('combobox', { name: 'City' }).fill('Tro');
+  await page.getByText('Troy').click();
   await page.getByPlaceholder('Zip code').click();
   await page.getByPlaceholder('Zip code').fill('561202');
   await page.getByLabel('Make default location').check();
   await page.getByRole('button', { name: 'Add location' }).nth(1).click();
-
   await page.getByRole('tab', { name: 'Services' }).click();
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('CPT Code').click();
@@ -97,11 +99,11 @@ const c = await data.text();
   await page.getByText('Booking widget').click();
   // await page.getByRole('button', { name: 'Generate link' }).nth(1).click();
   const page1Promise = page.waitForEvent('popup');
-  await page.locator('#root > div._layout_731gc_1 > div._content_731gc_7 > div._bookingWidgetWrapper_4jerd_1 > div._link_zqbdd_1 > p').click();
+  await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._bookingWidgetWrapper_4jerd_1 > div._link_zqbdd_1 > p').click();
   const page1 = await page1Promise;
   // await page1.locator('div').filter({ hasText: /^Owner TeamSelect$/ }).getByRole('button').nth(1).click();
   await page1.locator('div').filter({ hasText: /^Psychotherapy, 45 mins- 45 mins$/ }).nth(1).click();
-  await page1.locator('#root > div._layout_731gc_1 > div > div._bookingWidgetWrapper_tlkra_1 > div._bookingWidgetContainer_tlkra_21 > div._bookingContent_tlkra_44 > div:nth-child(2) > div > div._dateTime_142fu_33 > div > div:nth-child(2) > div > div._timeSlotsWrapper_n1juz_6 > div:first-child').click();
+  await page1.locator('#root > div._layout_10ldc_1 > div > div._bookingWidgetWrapper_tlkra_1 > div._bookingWidgetContainer_tlkra_21 > div._bookingContent_tlkra_44 > div:nth-child(2) > div > div._dateTime_142fu_33 > div > div:nth-child(2) > div > div._timeSlotsWrapper_vyf9q_11 div:first-child').click();
   // await page1.getByLabel('Next month').click();
   await page1.getByPlaceholder('Enter first name').click();
   await page1.getByPlaceholder('Enter first name').fill('James');
@@ -109,9 +111,9 @@ const c = await data.text();
   await page1.getByPlaceholder('Enter last name').fill('Willy');
   await page1.getByPlaceholder('Enter email').click();
   // 
-  // const Bookinginbox = await mailslurp.inboxController.createInbox({});
-  // await page1.getByPlaceholder('Enter email').fill(Bookinginbox.emailAddress);
-  await page1.getByPlaceholder('Enter email').fill('crazy+3@gmail.com');
+  const Bookinginbox = await mailslurp.inboxController.createInbox({});
+  await page1.getByPlaceholder('Enter email').fill(Bookinginbox.emailAddress);
+  // await page1.getByPlaceholder('Enter email').fill('crazy+4@gmail.com');
   await page1.getByPlaceholder('Enter phone').click();
   await page1.getByPlaceholder('Enter phone').fill('(800) 553-00024');
   await page1.getByRole('button', { name: 'Request appointment' }).nth(1).click();
@@ -175,11 +177,11 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
 // await page.reload();
 // await page.waitForTimeout(1000);
 
-await page.locator('#root > div._layout_731gc_1 > div._content_731gc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path').click();
+await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path').click();
 await page.getByRole('menuitem', { name: 'Preview' }).click();
 await page.locator('.MuiButtonBase-root').first().click();
 
-await page.locator('#root > div._layout_731gc_1 > div._content_731gc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path').click();
+await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path').click();
 await page.getByRole('menuitem', { name: 'Rename' }).click();
 await page.getByPlaceholder('type here').clear();
 await page.getByPlaceholder('type here').fill('Supervisor Automation Forms');
@@ -187,7 +189,7 @@ await page.reload();
 await page.waitForTimeout(1000);
 // await page.getByRole('button', { name: 'Rename' }).nth(1).click();
 
-await page.locator('#root > div._layout_731gc_1 > div._content_731gc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path').click();
+await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path').click();
 await page.getByRole('menuitem', { name: 'Edit' }).click();
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page.getByTestId('ArrowBackRoundedIcon').click();
@@ -254,7 +256,7 @@ await page.getByRole('button', { name: 'Preview' }).nth(1).click();
 await page.getByRole('button').first().click();
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
 // await page.waitForTimeout(1000);
-await page.locator('#root > div._layout_731gc_1 > div._content_731gc_7 > div._formsList_faptv_1 > div._header_faptv_4 > div > div > svg > path').click();
+await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._formsList_faptv_1 > div._header_faptv_4 > div > div > svg > path').click();
 // await page.getByTestId('ArrowBackRoundedIcon').click();
 // // Treatment plan
 await page.getByRole('button', { name: 'Create new' }).nth(1).click();
@@ -400,9 +402,9 @@ await page.getByTestId('ArrowBackRoundedIcon').click();
   await page.getByLabel('Last Name*').fill('Test');
   await page.getByLabel('Email*').click();
   // 
-  // const clientinbox = await mailslurp.inboxController.createInbox({});
-  // await page.getByLabel('Email*').fill(clientinbox.emailAddress);
-  await page.getByLabel('Email*').fill('createsupervisorcleint+3@gmail.com');
+  const clientinbox = await mailslurp.inboxController.createInbox({});
+  await page.getByLabel('Email*').fill(clientinbox.emailAddress);
+  // await page.getByLabel('Email*').fill('createsupervisorcleint+4@gmail.com');
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
   
@@ -420,6 +422,19 @@ await page.getByTestId('ArrowBackRoundedIcon').click();
   await page.getByPlaceholder('Enter text here').click();
   await page.getByPlaceholder('Enter text here').fill('New every day testing');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  await page.waitForTimeout(1000);
+  // // Past Date Appoinments
+  // await page.getByRole('button', { name: 'Back' }).click();
+  // await page.getByRole('button', { name: 'Back' }).click();
+  // await page.getByRole('button', { name: 'Back' }).click();
+  // await page.locator('div').filter({ hasText: /^04$/ }).click();
+  // await page.getByLabel('Select client profile*').click();
+  // await page.getByRole('option', { name: 'Supervisor (S1)' }).first().click();
+  // await page.getByLabel('Select service *').click();
+  // await page.getByText('Developmental Testing, ...').click();
+  // await page.getByPlaceholder('Enter text here').click();
+  // await page.getByPlaceholder('Enter text here').fill('New every day testing');
+  // await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 
   // Create Appoinment Button( top Bar)
   await page.getByRole('button', { name: 'Create' }).nth(1).click();
@@ -435,36 +450,15 @@ await page.getByTestId('ArrowBackRoundedIcon').click();
 
   // Reports
 
-  await page.locator('div').filter({ hasText: /^Reports$/ }).getByRole('img').click();
-  await page.getByText('Appointment Notes').click();
-  await page.locator('.btn-outline-default').first().click();
-  await page.getByRole('tab', { name: 'Personal' }).click();
-await page.getByText('Progress notes').click();
-await page.getByPlaceholder('Search').click();
-await page.getByPlaceholder('Search').fill('Supervisor');
-await page.getByRole('dialog').locator('div').filter({ hasText: /^Supervisor Automation Testing$/ }).click();
-await page.getByPlaceholder('Enter your response here').first().click();
-await page.getByPlaceholder('Enter your response here').first().fill('Rajesh');
-await page.getByPlaceholder('Enter your response here').nth(1).click();
-await page.getByPlaceholder('Enter your response here').nth(1).fill('Good');
-await page.getByPlaceholder('MM/DD/YYYY').click();
-await page.getByPlaceholder('MM/DD/YYYY').fill('10/09/1999');
-await page.getByRole('checkbox', { name: 'option1' }).check();
-await page.locator('div').filter({ hasText: /^6Client CPT code\? \*Enter your response hereEnter your response here$/ }).getByLabel('Enter your response here').click();
-await page.locator('div').filter({ hasText: /^6Client CPT code\? \*Enter your response hereEnter your response here$/ }).getByLabel('Enter your response here').fill('90791');
-await page.getByRole('option', { name: '90791 - Psychiatric' }).click();
-await page.locator('div').filter({ hasText: /^90791 - Psychiatric diagnostic evaluationEnter your response here$/ }).getByLabel('Enter your response here').click();
-await page.locator('div').filter({ hasText: /^Enter your response here$/ }).getByLabel('Enter your response here').click();
-await page.locator('div').filter({ hasText: /^Enter your response here$/ }).getByLabel('Enter your response here').fill('F05');
-await page.getByRole('option', { name: 'F05 - Delirium due to known' }).click();
-await page.locator('div').filter({ hasText: /^F05 - Delirium due to known physiological conditionEnter your response here$/ }).getByLabel('Enter your response here').click();
-await page.locator('div').filter({ hasText: /^Sign here$/ }).nth(2).click();
-await page.getByPlaceholder('Please type your name here').click();
-await page.getByPlaceholder('Please type your name here').fill('Rajesh');
-await page.getByRole('button', { name: 'Sign' }).nth(1).click();
-await page.getByRole('button', { name: 'Save' }).nth(1).click();
-await page.waitForTimeout(3000);
-
+  // await page.locator('div').filter({ hasText: /^Reports$/ }).getByRole('img').click();
+  // await page.getByText('Appointment Notes').click();
+  // await page.locator('.btn-outline-default').first().click();
+  // // await page.getByRole('tab', { name: 'Personal' }).click();
+  // await page.getByRole('button', { name: 'Add psychotherapy note' }).nth(1).click();
+  // await page.getByPlaceholder('Enter your response here').click();
+  // await page.getByPlaceholder('Enter your response here').fill('Added Psychotherapy Note for this Appoinment');
+  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  // await page.waitForTimeout(3000);
 //    Client file
 await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
 await page.getByText('Supervisor Test').click();
@@ -531,19 +525,24 @@ await page.getByPlaceholder('Please type your name here').fill('Rajesh');
 await page.getByRole('button', { name: 'Sign' }).nth(1).click();
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
 
-// Diagnosis tab
-await page.getByRole('tab', { name: 'Diagnosis' }).click();
-await page.getByRole('button', { name: 'Add' }).nth(3).click();
-await page.getByLabel('Code').click();
-await page.getByRole('combobox', { name: 'Code' }).fill('F01A0');
-await page.getByText('F01A0').click();
-await page.getByRole('button', { name: 'Add diagnosis' }).nth(1).click();
-
 // Create Appoinment
 await page.getByRole('button', { name: 'Add' }).nth(1).click();
 await page.getByRole('menuitem', { name: 'Appointment' }).getByRole('img').click();
 await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 await page.waitForTimeout(2000);
+
+
+// Supervision Flows
+  // await page.locator('div').filter({ hasText: /^Supervision$/ }).getByRole('img').click();
+  // await page.getByText('Therapist Automation Testing').first().click();
+  // await page.getByRole('button', { name: 'Add signature' }).nth(1).click();
+  // await page.getByPlaceholder('Sign').click();
+  // await page.getByPlaceholder('Sign').fill('Supervisor signed');
+  // await page.getByRole('button', { name: 'Sign' }).nth(1).click();
+  // await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
+  // await page.getByRole('tab', { name: 'Signed' }).click();
+  // await page.getByText('Therapist Automation TestingMar').first().click();
+  // await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
 
 
 // Intake tabs
@@ -555,9 +554,9 @@ await page.getByLabel('Last Name').click();
 await page.getByLabel('Last Name').fill('1');
 await page.getByLabel('Email').click();
 // 
-// const Leadinbox = await mailslurp.inboxController.createInbox({});
-// await page.getByLabel('Email').fill(Leadinbox.emailAddress);
-await page.getByLabel('Email').fill('intaketest+3@gmail.com')
+const Leadinbox = await mailslurp.inboxController.createInbox({});
+await page.getByLabel('Email').fill(Leadinbox.emailAddress);
+// await page.getByLabel('Email').fill('intaketest+4@gmail.com')
 await page.getByLabel('Seeking treatment for').click();
 await page.getByRole('option', { name: 'Cancer' }).click();
 await page.getByLabel('Note').click();
@@ -602,11 +601,15 @@ await page.reload();
 // Dp Updates and Logout
 await page.locator('#root > div._header_1uy0f_1 > div > div:nth-child(4)').click();
 await page.getByRole('menuitem', { name: 'Profile' }).click();
-await page.locator('#root > div._layout_731gc_1 > div._content_731gc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]').setInputFiles("C:/Users/Rajesh/Downloads/therapist.jpg");
+await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]').setInputFiles("C:/Users/Rajesh/Downloads/therapist.jpg");
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page.locator('#root > div._header_1uy0f_1 > div > div:nth-child(4)').click();
 await page.getByRole('menuitem', { name: 'Logout' }).click();
+
+
+
+
 
 
 
@@ -659,22 +662,6 @@ await page.getByRole('menuitem', { name: 'Logout' }).click();
 
 
 
-// //   Supervision sign 
-//   await page.getByText('Supervision').click();
-//   await page.getByText('Automation Testing form', { exact: true }).click();
-// //   await page.getByPlaceholder('Enter your response here').click();
-// //   await page.getByPlaceholder('Enter your response here').fill('James Willy and Ram Willy');
-// //   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-//   await page.getByRole('button', { name: 'Add signature' }).nth(1).click();
-//   await page.getByPlaceholder('Sign').click();
-//   await page.getByPlaceholder('Sign').fill('Supervisor Seen');
-//   await page.getByRole('button', { name: 'Sign' }).nth(1).click();
-//   await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click;
-// //  Signed Tab
-// //   Signed Tab
-// await page.getByRole('tab', { name: 'Signed' }).click();
-// await page.getByText('Automation Testing form').click();
-// await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click;
 
   
 

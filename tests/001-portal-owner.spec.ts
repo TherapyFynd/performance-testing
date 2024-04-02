@@ -7,7 +7,7 @@ test.describe.configure({ mode: 'serial' });
 
 let page: Page;
 const mailslurp = new MailSlurp({ apiKey:
-   "50ecae5177178143c7df08292c6ec99ae0f600a7084c8527fb556c1a9cbe79dc" });
+   "10a2ebad9782380166a114606ec97fe051f73d8a7dd10639bde9cca41cf2a405" });
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
 });
@@ -17,9 +17,9 @@ test.afterAll(async () => {
 });
 
 test('Owner login and  onboarding ', async ({request}) => {
-        const mailslurp = new MailSlurp({ apiKey: "50ecae5177178143c7df08292c6ec99ae0f600a7084c8527fb556c1a9cbe79dc" });
+        const mailslurp = new MailSlurp({ apiKey: "10a2ebad9782380166a114606ec97fe051f73d8a7dd10639bde9cca41cf2a405" });
         const inbox = await mailslurp.inboxController.createInbox({});
-        headless:false
+        
         // console.log(inbox);
         // console.log(inbox.emailAddress);
         const data = await request.post(
@@ -100,16 +100,16 @@ test('Owner login and  onboarding ', async ({request}) => {
       await page.getByLabel('Make default service').check();
       await page.getByRole('button', { name: 'Add service' }).nth(1).click();
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-      await page.getByLabel('Enter email').click();
-      // 
-      const teaminbox = await mailslurp.inboxController.createInbox({});
-      // console.log(teaminbox.emailAddress);
-      await page.getByLabel('Enter email').fill(teaminbox.emailAddress);
-      // await page.getByLabel('Enter email').fill('mn+5@gmail.com');
-      await page.getByLabel('Role').click();
-      await page.getByRole('option', { name: 'Therapist' }).click();
-      await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-      await page.waitForTimeout(2000);
+      // await page.getByLabel('Enter email').click();
+      // // 
+      // const teaminbox = await mailslurp.inboxController.createInbox({});
+      // // console.log(teaminbox.emailAddress);
+      // await page.getByLabel('Enter email').fill(teaminbox.emailAddress);
+      // // await page.getByLabel('Enter email').fill('mn+5@gmail.com');
+      // await page.getByLabel('Role').click();
+      // await page.getByRole('option', { name: 'Therapist' }).click();
+      // await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+      // await page.waitForTimeout(2000);
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
       await page.getByRole('checkbox').check();
       await page.waitForTimeout(2000);
@@ -123,16 +123,6 @@ test('Owner login and  onboarding ', async ({request}) => {
 
 test('Settings Flows', async () => {
     await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
-    await page.getByText('Practice settings').click();
-    await page.getByLabel('Practice Name').click();
-    await page.getByLabel('Practice Name').fill('Mind Simple Hospital');
-    await page.getByLabel('About').click();
-    await page.getByLabel('About').fill('This Nice company');
-    await page.getByPlaceholder('Enter phone').click();
-    await page.getByPlaceholder('Enter phone').fill('(975) 734-53565');
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
-
     //Clinican Settings Flows
     await page.getByText('Clinician settings').click();
     await page.getByPlaceholder('Enter first name').click();
@@ -180,14 +170,23 @@ test('Settings Flows', async () => {
     await page.getByLabel('Duration *').fill('15');
     await page.getByLabel('Make default service').check();
     await page.getByRole('button', { name: 'Add service' }).nth(1).click();
-    await page.getByTestId('ArrowBackRoundedIcon').click();
+    // Practice Settings
+    await page.getByText('Practice settings').click();
+    await page.getByLabel('Practice Name').click();
+    await page.getByLabel('Practice Name').fill('Mind Simple Hospital');
+    await page.getByLabel('About').click();
+    await page.getByLabel('About').fill('This Nice company');
+    await page.getByPlaceholder('Enter phone').click();
+    await page.getByPlaceholder('Enter phone').fill('(975) 734-53565');
+    await page.getByRole('button', { name: 'Save' }).nth(1).click();
     //Booking widget flows
     await page.getByText('Booking widget').click();
     await page.getByRole('button', { name: 'Generate link' }).nth(1).click();
     const page1Promise = page.waitForEvent('popup');
-    await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._bookingWidgetWrapper_4jerd_1 > div._copyLinkContainer_4jerd_19 > div._link_4jerd_28 > p').click();
+    await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._bookingWidgetWrapper_4jerd_1 > div._therapistLinks_4jerd_53 > div:nth-child(1) > p').click();
+    // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._bookingWidgetWrapper_4jerd_1 > div._copyLinkContainer_4jerd_19 > div._link_4jerd_28 > p').click();
     const page1 = await page1Promise;
-    await page1.locator('div').filter({ hasText: /^Owner TeamSelect$/ }).getByRole('button').nth(1).click();
+    // await page1.locator('div').filter({ hasText: /^Owner TeamSelect$/ }).getByRole('button').nth(1).click();
     await page1.locator('div').filter({ hasText: /^Psychotherapy, 45 mins- 45 mins$/ }).nth(1).click();
     await page1.locator('#root > div._layout_10ldc_1 > div > div._bookingWidgetWrapper_tlkra_1 > div._bookingWidgetContainer_tlkra_21 > div._bookingContent_tlkra_44 > div:nth-child(2) > div > div._dateTime_142fu_33 > div > div:nth-child(2) > div > div._timeSlotsWrapper_vyf9q_11 div:first-child').click();
     // await page1.getByLabel('Next month').click();
@@ -205,24 +204,18 @@ test('Settings Flows', async () => {
     await page1.getByRole('button', { name: 'Request appointment' }).nth(1).click();
     await page1.waitForTimeout(1000);
     await page1.close();
-    await page.getByTestId('ArrowBackRoundedIcon').click();
-    // Team Member Invite
-    await page.getByText('Team members').first().click();
-    await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    await page.getByLabel('Enter email').click();
-    const team1inbox = await mailslurp.inboxController.createInbox({});
-    await page.getByLabel('Enter email').fill(team1inbox.emailAddress);
-  // await page.getByLabel('Enter email').fill('mn++5@gmail.com');
-    await page.getByLabel('Role').click();
-    await page.getByRole('option', { name: 'Supervisor' }).click();
-    await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    await page.waitForTimeout(2000);
-    await page.getByRole('button', { name: 'Done' }).nth(1).click();
-    await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
     // Calender Day start
-    await page.getByText('Calendar').nth(1).click();
+    await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
     await page.getByLabel('Monday').check();
-    await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._header_ml86x_4 > button > svg > path').click();
+  // Billing sections
+  await page.locator('p').filter({ hasText: 'Billing' }).click();
+  await page.getByRole('tab', { name: 'Insurance' }).click();
+  await page.getByText('Payers').click();
+  await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
+  await page.getByLabel('Search for insurance payers').click();
+  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('Absolute');
+  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  await page.getByRole('button', { name: 'Add' }).nth(1).click();
   
     // // Referal settings
     await page.getByText('Team members').nth(1).click();
@@ -232,41 +225,29 @@ test('Settings Flows', async () => {
     await page.getByRole('option', { name: 'Abuse', exact: true }).click();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.locator('div').filter({ hasText: /^Owner Team, ALC$/ }).getByRole('button').click();
-    // await page.getByRole('tab', { name: 'Accepted Insurance' }).click();
-    // await page.getByRole('row', { name: 'Owner Team, ALC' }).getByRole('img').nth(1).click();
-    // await page.getByLabel('Select accepted payment').click();
-    // await page.getByRole('combobox', { name: 'Select accepted payment' }).fill('Absolute');
-    // await page.getByText('ABSOLUTE TOTAL CARE-').click();
-    // await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    // await page.locator('div').filter({ hasText: /^Owner Team, ALC$/ }).getByRole('button').click();
+    await page.getByRole('tab', { name: 'Accepted Insurance' }).click();
+    await page.getByRole('row', { name: 'Owner Team, ALC' }).getByRole('img').nth(1).click();
+    await page.getByLabel('Select accepted payment').click();
+    await page.getByRole('combobox', { name: 'Select accepted payment' }).fill('Absolute');
+    await page.getByText('ABSOLUTE TOTAL CARE-').click();
+    await page.getByRole('button', { name: 'Save' }).nth(1).click();
+    await page.locator('div').filter({ hasText: /^Owner Team, ALC$/ }).getByRole('button').click();
     await page.getByRole('tab', { name: 'Email Imports' }).click();
     await page.getByRole('button', { name: 'Edit' }).nth(1).click();
     await page.goto('https://leafs-ehr-web-stage-nmvorvf7ga-as.a.run.app/settings/intake-team-members/edit/email-imports');
     await page.locator('._form_ekpvv_1 > .MuiButtonBase-root > .btn-filled-default').first().click();
-    await page.locator('[id="\\:ra\\:"]').click();
-    await page.locator('[id="\\:ra\\:"]').fill('testtherapy1@gmail.com');
-    await page.locator('div:nth-child(2) > .MuiButtonBase-root > .btn-filled-default').click();
-    await page.locator('[id="\\:rb\\:"]').click();
-    await page.locator('[id="\\:rb\\:"]').fill('testpyhsco1@gmail.com');
-    await page.locator('[id="\\:r7\\:"]').click();
-    await page.locator('[id="\\:r7\\:"]').fill('nicewebsite1@gmail.com');
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.locator('div').filter({ hasText: /^Mails to import$/ }).getByRole('button').click();
-    await page.waitForTimeout(1000);
-    await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
-
-});
-
-test('Billing Section', async () => {
-  await page.getByText('Billing').nth(2).click();
-  await page.getByRole('tab', { name: 'Insurance' }).click();
-  await page.getByText('Payers').click();
-  await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-  await page.getByLabel('Search for insurance payers').click();
-  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('Absolute');
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
-  await page.getByRole('button', { name: 'Add' }).nth(1).click();
-  await page.locator('._title_g7u48_6 > .MuiButtonBase-root').click();
+    await page.getByRole('textbox').first().click();
+  await page.getByRole('textbox').first().fill('testtherapyden+1@gmail.com');
+  await page.getByRole('textbox').nth(1).click();
+  await page.getByRole('textbox').nth(1).fill('testpsychtoday+1@gmail.com');
+  await page.getByRole('textbox').nth(2).click();
+  await page.getByRole('textbox').nth(2).fill('websitetest1@gmail.com');
+  await page.getByRole('textbox').nth(3).click();
+  await page.getByRole('textbox').nth(3).fill('testother@ho.com');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.locator('div').filter({ hasText: /^Mails to import$/ }).getByRole('button').click();
+  await page.waitForTimeout(1000);
+  await page.locator('#root > div._layout_10ldc_1 > div._tabSpecificSidebar_7s8hh_2 > div:nth-child(1) > div._sidebarHeader_7s8hh_129 > svg > path').click();
 });
 
     test('Forms Tab', async () => {
@@ -722,8 +703,9 @@ test('Billing Section', async () => {
   await page.waitForTimeout(1000);
   await page.reload();
   await page.waitForTimeout(2000);
-  await page.getByTestId('ArrowBackRoundedIcon').click();
-
+  // await page.getByTestId('ArrowBackRoundedIcon').click();
+  await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
+  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
   });
 
     test('Create Clients', async () => {
@@ -770,7 +752,8 @@ await page.getByPlaceholder('Enter text here').click();
 await page.getByPlaceholder('Enter text here').fill('New every day testing');
 await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 // Create Appoinment Button( top Bar)
-await page.getByRole('button', { name: 'Create' }).nth(1).click();
+// await page.getByRole('button', { name: 'Create' }).nth(1).click();
+await page.locator('#root > div._layout_10ldc_1 > div._sideBar_7s8hh_1 > div._createBtnContainer_7s8hh_88 > button > button').click();
 await page.getByRole('menuitem', { name: 'Create appointment' }).click();
 await page.getByLabel('Select client profile*').click();
 await page.getByRole('option', { name: 'Automation (OT)' }).first().click();
@@ -941,14 +924,15 @@ await page.waitForTimeout(3000);
   
     // Diagnosis tab
     await page.getByRole('tab', { name: 'Diagnosis' }).click();
-    await page.getByRole('button', { name: 'Add' }).nth(3).click();
+    await page.getByRole('button', { name: 'Add', exact: true }).nth(3).click();
     await page.getByLabel('Code').click();
     await page.getByRole('combobox', { name: 'Code' }).fill('F01A0');
     await page.getByText('F01A0').click();
     await page.getByRole('button', { name: 'Add diagnosis' }).nth(1).click();
   
     // Create Appoinment
-    await page.getByRole('button', { name: 'Add' }).nth(1).click();
+    await page.getByRole('tab', { name: 'Sessions' }).click();
+    await page.getByRole('button', { name: 'Add' }).nth(3).click();
     await page
       .getByRole('menuitem', { name: 'Appointment' })
       .getByRole('img')
@@ -961,11 +945,12 @@ await page.waitForTimeout(3000);
     test('Insurance Tab', async () => {
       await page.locator('div').filter({ hasText: /^Insurance$/ }).getByRole('img').click();
       await page.getByRole('button', { name: 'Select all' }).nth(1).click();
-      await page.getByRole('button', { name: 'Deselect all' }).nth(1).click();
-      await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_avgkz_33 > table > tbody > tr:nth-child(1) > td:nth-child(1) > span > div > div > label > span > input').click();
+      // await page.getByRole('button', { name: 'Deselect all' }).nth(1).click();
+      // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_126te_33 > table > tbody > tr:nth-child(1) > td:nth-child(1) > span > div > div > label > span > svg > path').click();
       await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
       await page.getByRole('tab', { name: 'Claims' }).click(); 
-      await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_1hgma_16 > table > tbody > tr:nth-child(1) > td:nth-child(8) > span > button > button').click();
+      // await page.getByRole('cell', { name: 'View' }).first()
+      await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(1) > td:nth-child(8) > span > button > button > span > span._label_ns5gx_15').click();
       await page.getByRole('button', { name: 'Add note' }).nth(1).click();
   await page.getByPlaceholder('Start typing here').click();
   await page.getByPlaceholder('Start typing here').fill('Hey I am Adding Clients File Details here so check this');
@@ -993,10 +978,11 @@ await page.waitForTimeout(3000);
   // await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._header_174vt_7 > span > button > svg > path').click();
 
-   }); 
+    }); 
 
     test('Intake tab', async () => {
-      await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
+      await page.locator('._sideBarItem_7s8hh_25 > img').first().click();
+      // await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
     await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('bangaloe');
@@ -1039,33 +1025,30 @@ await page.waitForTimeout(3000);
     await page.getByLabel('Send inquiry form').click();
     await page.getByRole('button', { name: 'Send' }).nth(1).click();
     await page.waitForTimeout(1000);
-    await page.getByLabel('Send therapist scheduling link').click();
-    await page.getByLabel('Select Therapist').click();
-    await page.getByRole('option', { name: 'Owner Team' }).click();
-    await page.getByRole('button', { name: 'Send' }).nth(1).click();
-    await page
-      .locator('div')
-      .filter({ hasText: /^Filters \(01\)$/ })
-      .getByRole('button')
-      .nth(2)
-      .click();
+    // await page.getByLabel('Send therapist scheduling link').click();
+    // await page.getByLabel('Select Therapist').click();
+    // await page.getByRole('option', { name: 'Owner Team' }).click();
+    // await page.getByRole('button', { name: 'Send' }).nth(1).click();
+    await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
     await page.waitForTimeout(1000);
 
     });
 
     test('Request Booking Widget', async () => {
 // Request Booking Widget flow
+await page.locator('div').filter({ hasText: /^Notifications$/ }).getByRole('img').click();
 await page.getByText('Requests').click();
-await page.getByRole('tab', { name: 'Requests' }).click();
-await page.getByRole('button', { name: 'Accept' }).nth(1).click();
+await page.locator('button').filter({ hasText: 'Accept' }).nth(1).click();
 await page.getByRole('button', { name: 'Continue' }).nth(1).click();
 await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
-await page.waitForTimeout(6000);
-await page.reload();
+ await page.waitForTimeout(2000);
+// await page.reload();
+
     });
 
     test('DP Update and Logout', async () => {
-      await page.locator('#root > div._header_1uy0f_1 > div > div:nth-child(4)').click();
+      // await page.locator('#root > div._header_1uy0f_1 > div > div > p').click();
+      await page.locator('div').filter({ hasText: 'Owner Team' }).nth(3).click();
        await page.getByRole('menuitem', { name: 'Profile' }).click();
       await page
     .locator(
@@ -1074,9 +1057,10 @@ await page.reload();
     .setInputFiles('C:/Users/Rajesh/Downloads/therapist.jpg');
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page
-    .locator('#root > div._header_1uy0f_1 > div > div:nth-child(4)')
-    .click();
+  // await page
+  //   .locator('#root > div._header_1uy0f_1 > div > div > p')
+  //   .click();
+    await page.locator('div').filter({ hasText: 'Owner Team' }).nth(3).click();
   await page.getByRole('menuitem', { name: 'Logout' }).click();
 
     });

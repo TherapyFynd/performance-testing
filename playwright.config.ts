@@ -10,29 +10,17 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-//   use:{
-//   projects: [
-//     {
-//       name: 'setup db',
-//       testMatch: /global\.setup\.ts/,
-//     },
-//     {
-//       name: 'chromium with db',
-//       use: { ...devices['Desktop Chrome'] },
-//       dependencies: ['setup db'],
-//     },
-//   ]
-// }
+
   timeout: 5 * 60 * 1000,
   testDir: './tests',
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers:5,
+  workers:1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -45,12 +33,20 @@ export default defineConfig({
     trace:"on",
     screenshot:"only-on-failure",
     video:"on",
-    viewport:{width:1280,height:585}
-    
-    
+    viewport:null,
+    browserName:"chromium",
+    headless:false,
+
+    launchOptions: {
+      // 1
+      args: ["--start-maximized"],
+    },
+  
 
   },
 
+  
+  
   
   /* Configure projects for major browsers */
   projects: [
