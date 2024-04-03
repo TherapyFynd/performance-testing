@@ -238,7 +238,7 @@ test('Settings Flows', async () => {
     await page.getByRole('tab', { name: 'Email Imports' }).click();
     await page.getByRole('button', { name: 'Edit' }).nth(1).click();
     await page.goto(isRunningOnLocal
-      ? localBaseUrl
+      ? `${localBaseUrl}/settings/intake-team-members/edit/email-imports`
       : `${BASE_FRONTEND_URL}/settings/intake-team-members/edit/email-imports`)
     await page.locator('._form_ekpvv_1 > .MuiButtonBase-root > .btn-filled-default').first().click();
     await page.getByRole('textbox').first().click();

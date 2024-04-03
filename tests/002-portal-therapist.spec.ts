@@ -1,6 +1,7 @@
 import { test, type Page } from '@playwright/test';
 import { TIMEOUT } from 'dns';
 import { MailSlurp } from "mailslurp-client";
+import { BASE_BACKEND_URL, isRunningOnLocal, localPort } from '../localemails.js/const';
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
 
@@ -20,16 +21,17 @@ test('Therapist login and onboarding ', async ({request}) => {
         // console.log(inbox);
         // console.log(inbox.emailAddress);
         const data = await request.post(
-            'https://leafs-ehr-nest-stage-nmvorvf7ga-as.a.run.app/test/get-passwordless-login-link-by-email',
+            // 'https://leafs-ehr-nest-stage-nmvorvf7ga-as.a.run.app/test/get-passwordless-login-link-by-email',
+            `${BASE_BACKEND_URL}/test/get-passwordless-login-link-by-email`,
             {
             headers:{
              
                 'Content-Type': 'application/json',
                 'x-test-key': `omnipractice_random_a83500678d`,
               },
-              data: { email: 
-              
-              "2bdfb50c-e987-412b-912a-1nfgb569f1620@mailslurp.net", isTestMode: true },
+              data: isRunningOnLocal
+               ? { email: inbox.emailAddress, isTestMode: true, localPort: localPort }
+               : { email: "f4349b5e-7785-4409-8e9e-99b042cc7bdf@mailslurp.net" ,isTestMode: true },
             },
           ); 
         // console.log(data);
