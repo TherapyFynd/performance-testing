@@ -1,6 +1,7 @@
 import { test, type Page } from '@playwright/test';
 import { TIMEOUT } from 'dns';
 import { MailSlurp } from "mailslurp-client";
+import { BASE_BACKEND_URL, BASE_FRONTEND_URL, isRunningOnLocal, localBaseUrl, localPort } from '../localemails.js/const';
 
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
@@ -23,15 +24,17 @@ test('Owner login and  onboarding ', async ({request}) => {
         // console.log(inbox);
         // console.log(inbox.emailAddress);
         const data = await request.post(
-            'https://leafs-ehr-nest-stage-nmvorvf7ga-as.a.run.app/test/get-passwordless-login-link-by-email',
-            // '${STAGE}/test/get-passwordless-login-link-by-email)',
+            // 'https://leafs-ehr-nest-stage-nmvorvf7ga-as.a.run.app/test/get-passwordless-login-link-by-email',
+            `${BASE_BACKEND_URL}/test/get-passwordless-login-link-by-email`,
             // 'https://ehr-api.joinleafs.com/test/get-passwordless-login-link-by-email',
             {
               headers: {
                 'Content-Type': 'application/json',
                 'x-test-key': `omnipractice_random_a83500678d`,
               },
-              data: { email: inbox.emailAddress, isTestMode: true },
+               data: isRunningOnLocal
+               ? { email: inbox.emailAddress, isTestMode: true, localPort: localPort }
+               : { email: inbox.emailAddress, isTestMode: true },
             },
           ); 
         // console.log(data);
@@ -234,7 +237,9 @@ test('Settings Flows', async () => {
     await page.locator('div').filter({ hasText: /^Owner Team, ALC$/ }).getByRole('button').click();
     await page.getByRole('tab', { name: 'Email Imports' }).click();
     await page.getByRole('button', { name: 'Edit' }).nth(1).click();
-    await page.goto('https://leafs-ehr-web-stage-nmvorvf7ga-as.a.run.app/settings/intake-team-members/edit/email-imports');
+    await page.goto(isRunningOnLocal
+      ? localBaseUrl
+      : `${BASE_FRONTEND_URL}/settings/intake-team-members/edit/email-imports`)
     await page.locator('._form_ekpvv_1 > .MuiButtonBase-root > .btn-filled-default').first().click();
     await page.getByRole('textbox').first().click();
   await page.getByRole('textbox').first().fill('testtherapyden+1@gmail.com');
