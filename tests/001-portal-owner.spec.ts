@@ -708,9 +708,21 @@ test('Settings Flows', async () => {
   await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
   });
 
+  test('Request Booking Widget', async () => {
+    // Request Booking Widget flow
+    await page.locator('div').filter({ hasText: /^Notifications$/ }).getByRole('img').click();
+    await page.getByText('Requests').click();
+    await page.locator('button').filter({ hasText: 'Accept' }).nth(1).click();
+    await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+    await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
+    await page.waitForTimeout(5000);
+    await page.reload();
+
+  });
+
     test('Create Clients', async () => {
-       //   Create Single Client
-  await page.getByRole('button', { name: 'Create' }).nth(1).click();
+      await page.locator('#root > div._layout_10ldc_1 > div._sideBar_7s8hh_1 > div._createBtnContainer_7s8hh_88 > button > button').click();
+  // await page.getByRole('button', { name: 'Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
   await page.getByLabel('First Name*').click();
   await page.getByLabel('First Name*').fill('Automation');
@@ -1034,17 +1046,15 @@ await page.waitForTimeout(3000);
 
     });
 
-    test('Request Booking Widget', async () => {
-// Request Booking Widget flow
-await page.locator('div').filter({ hasText: /^Notifications$/ }).getByRole('img').click();
-await page.getByText('Requests').click();
-await page.locator('button').filter({ hasText: 'Accept' }).nth(1).click();
-await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
- await page.waitForTimeout(2000);
-// await page.reload();
-
-    });
+//     test('Request Booking Widget', async () => {
+// // Request Booking Widget flow
+// await page.locator('div').filter({ hasText: /^Notifications$/ }).getByRole('img').click();
+// await page.getByText('Requests').click();
+// await page.locator('button').filter({ hasText: 'Accept' }).nth(1).click();
+// await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+// await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
+//  await page.waitForTimeout(2000);
+//     });
 
     test('DP Update and Logout', async () => {
       // await page.locator('#root > div._header_1uy0f_1 > div > div > p').click();
