@@ -6,7 +6,7 @@ import { BASE_BACKEND_URL, isRunningOnLocal, localPort } from '../localemails.js
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-const mailslurp = new MailSlurp({ apiKey: "10a2ebad9782380166a114606ec97fe051f73d8a7dd10639bde9cca41cf2a405" });
+const mailslurp = new MailSlurp({ apiKey: "253481e1826dacfde7b3d46c37b0c2a19fe11df634007b9f1aea32b2d6621ad4" });
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
 });
@@ -16,7 +16,7 @@ test.afterAll(async () => {
 });
 
 test('Therapist login and onboarding ', async ({request}) => {
-        const mailslurp = new MailSlurp({ apiKey: "10a2ebad9782380166a114606ec97fe051f73d8a7dd10639bde9cca41cf2a405" });
+        const mailslurp = new MailSlurp({ apiKey: "253481e1826dacfde7b3d46c37b0c2a19fe11df634007b9f1aea32b2d6621ad4" });
         const inbox = await mailslurp.inboxController.createInbox({});
         // console.log(inbox);
         // console.log(inbox.emailAddress);
@@ -31,7 +31,7 @@ test('Therapist login and onboarding ', async ({request}) => {
               },
               data: isRunningOnLocal
                ? { email: inbox.emailAddress, isTestMode: true, localPort: localPort }
-               : { email: "f4349b5e-7785-4409-8e9e-99b042cc7bdf@mailslurp.net" ,isTestMode: true },
+               : { email:"a12d1f6d-7bf5-4c0f-b60e-78428ffadf78@mailslurp.net" ,isTestMode: true },
             },
           ); 
         // console.log(data);
@@ -50,11 +50,12 @@ test('Therapist login and onboarding ', async ({request}) => {
   await page.waitForTimeout(1000);
   await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
   await page.waitForTimeout(4000);
+
   });
 
 test('Settings Tab', async () => {
 //     Settings tab
-  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
   // Cliniacan settings
   await page.getByText('Clinician settings').click();
   await page.getByPlaceholder('Enter first name').click();
@@ -126,6 +127,10 @@ test('Settings Tab', async () => {
   await page1.waitForTimeout(1000);
   await page1.close();
 
+ // Calender Day start
+ await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
+ await page.getByLabel('Monday').check();
+ await page.locator('#root > div._layout_10ldc_1 > div._tabSpecificSidebar_7s8hh_2 > div:nth-child(1) > div._sidebarHeader_7s8hh_129 > svg > path').click();
   });
 
 test('Forms Tab', async () => {
@@ -394,9 +399,22 @@ await page.getByTestId('ArrowBackRoundedIcon').click();
   await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
   });
 
+  test('Request Booking Widget', async () => {
+    // Request Booking Widget flow
+    await page.locator('div').filter({ hasText: /^Notifications$/ }).getByRole('img').click();
+    await page.getByText('Requests').click();
+    await page.locator('button').filter({ hasText: 'Accept' }).nth(1).click();
+    await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+    await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
+    await page.waitForTimeout(2000);
+    await page.locator('button').filter({ hasText: 'Accept' }).nth(1).click();
+    await page.waitForTimeout(2000);
+    await page.reload();
+
+  });
   test('Create Clients', async () => {
 // Create Clients
-await page.getByRole('button', { name: 'Create' }).nth(1).click();
+await page.locator('#root > div._layout_10ldc_1 > div._sideBar_7s8hh_1 > div._createBtnContainer_7s8hh_88 > button > button').click();
 await page.getByRole('menuitem', { name: 'Create client' }).click();
 await page.getByLabel('First Name*').click();
 await page.getByLabel('First Name*').fill('Rajesh');
@@ -411,9 +429,9 @@ await page.getByRole('button', { name: 'Continue' }).nth(1).click();
 await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
   
   
-//   Minor client
+// //   Minor client
 await page.waitForTimeout(2000);
-await page.getByRole('button', { name: 'Create' }).nth(1).click();
+await page.locator('#root > div._layout_10ldc_1 > div._sideBar_7s8hh_1 > div._createBtnContainer_7s8hh_88 > button > button').click();
 await page.getByRole('menuitem', { name: 'Create client' }).click();
 await page.getByLabel('Minor').check();
 await page.getByLabel('First Name*').click();
@@ -443,7 +461,7 @@ await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
 
 // //   Create Couple Account
 await page.waitForTimeout(2000);
-await page.getByRole('button', { name: 'Create' }).nth(1).click();
+await page.locator('#root > div._layout_10ldc_1 > div._sideBar_7s8hh_1 > div._createBtnContainer_7s8hh_88 > button > button').click();
 await page.getByRole('menuitem', { name: 'Create client' }).click();
 await page.getByLabel('Couple').check();
 await page.getByLabel('First Name*').click();
@@ -501,7 +519,7 @@ await page.getByPlaceholder('Enter text here').click();
 await page.getByPlaceholder('Enter text here').fill('New every day testing');
 await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 // Create Appoinment Button( top Bar)
-await page.getByRole('button', { name: 'Create' }).nth(1).click();
+await page.locator('#root > div._layout_10ldc_1 > div._sideBar_7s8hh_1 > div._createBtnContainer_7s8hh_88 > button > button').click();
 await page.getByRole('menuitem', { name: 'Create appointment' }).click();
 await page.getByLabel('Select client profile*').click();
 await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
@@ -617,114 +635,124 @@ await page.getByPlaceholder('Please type your name here').fill('Rajesh');
 await page.getByRole('button', { name: 'Sign' }).nth(1).click();
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
 
+// Diagnosis tab
+await page.getByRole('tab', { name: 'Diagnosis' }).click();
+await page.getByRole('button', { name: 'Add', exact: true }).nth(3).click();
+await page.getByLabel('Code').click();
+await page.getByRole('combobox', { name: 'Code' }).fill('F01A0');
+await page.getByText('F01A0').click();
+await page.getByRole('button', { name: 'Add diagnosis' }).nth(1).click();
+
 // Create Appoinment
-await page.getByRole('button', { name: 'Add' }).nth(1).click();
-await page.getByRole('menuitem', { name: 'Appointment' }).getByRole('img').click();
+await page.getByRole('tab', { name: 'Sessions' }).click();
+await page.getByRole('button', { name: 'Add' }).nth(3).click();
+await page
+  .getByRole('menuitem', { name: 'Appointment' })
+  .getByRole('img')
+  .click();
 await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-await page.waitForTimeout(1000);
-// await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+await page.waitForTimeout(2000);
 
-// Multi Client Flows
-// await page.getByText('Rajesh Das').click();
-  await page.getByRole('button', { name: 'Profile & Clinician' }).nth(1).click();
-  await page.getByRole('button', { name: 'Add profile' }).nth(1).click();
-  await page.getByLabel('', { exact: true }).click();
-  await page.getByRole('option', { name: 'Owner Team' }).click();
-  await page.getByRole('textbox').click();
-  await page.getByRole('textbox').fill('Rajesh@1');
-  await page.getByRole('button', { name: 'Create' }).nth(1).click();
-  await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._clientFileWrapper_17198_1 > div > div._clientNavigationFixedTop_111x7_1 > div > button > svg > path').click();
-  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
-
-  });
-
-  // test('Supervision Flows', async () => {
-  //   await page.getByRole('tab', { name: 'Sessions' }).click();
-  //   // Supervision Flows
-  //   await page.getByText('Upcoming').click();
-  //   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
-  //   await page.getByRole('tab', { name: 'Personal' }).click();
-  //   await page.getByText('Progress notes').click();
-  //   await page.getByPlaceholder('Search').click();
-  //   await page.getByPlaceholder('Search').fill('Therapist');
-  //   await page.getByRole('dialog').locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).click();
-  //   await page.getByPlaceholder('Enter your response here').first().click();
-  //   await page.getByPlaceholder('Enter your response here').first().fill('Rajesh');
-  //   await page.getByPlaceholder('Enter your response here').nth(1).click();
-  //   await page.getByPlaceholder('Enter your response here').nth(1).fill('Good');
-  //   await page.getByPlaceholder('MM/DD/YYYY').click();
-  //   await page.getByPlaceholder('MM/DD/YYYY').fill('10/09/1999');
-  //   await page.getByRole('checkbox', { name: 'option1' }).check();
-  //   await page.locator('div').filter({ hasText: /^6Client CPT code\? \*Enter your response hereEnter your response here$/ }).getByLabel('Enter your response here').click();
-  //   await page.locator('div').filter({ hasText: /^6Client CPT code\? \*Enter your response hereEnter your response here$/ }).getByLabel('Enter your response here').fill('90791');
-  //   await page.getByRole('option', { name: '90791 - Psychiatric' }).click();
-  //   await page.locator('div').filter({ hasText: /^90791 - Psychiatric diagnostic evaluationEnter your response here$/ }).getByLabel('Enter your response here').click();
-  //   await page.locator('div').filter({ hasText: /^Enter your response here$/ }).getByLabel('Enter your response here').click();
-  //   await page.locator('div').filter({ hasText: /^Enter your response here$/ }).getByLabel('Enter your response here').fill('F05');
-  //   await page.getByRole('option', { name: 'F05 - Delirium due to known' }).click();
-  //   await page.locator('div').filter({ hasText: /^F05 - Delirium due to known physiological conditionEnter your response here$/ }).getByLabel('Enter your response here').click();
-  //   await page.locator('div').filter({ hasText: /^Sign here$/ }).nth(2).click();
-  //   await page.getByPlaceholder('Please type your name here').click();
-  //   await page.getByPlaceholder('Please type your name here').fill('Rajesh');
-  //   await page.getByRole('button', { name: 'Sign' }).nth(1).click();
-  //   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  //   await page.waitForTimeout(1000);
-  //   await page.getByText('Upcoming').click();
-  //   await page.waitForTimeout(2000);
-  //   await page.getByText('Therapist Automation Testing').click();
-  //   await page.getByRole('button', { name: 'Sign & Lock' }).nth(1).click();
-  //   await page.getByPlaceholder('Sign').click();
-  //   await page.getByPlaceholder('Sign').fill('Therapist 1');
-  //   await page.getByRole('button', { name: 'Sign and Lock' }).nth(1).click();
-  //   await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
-  //   await page.locator('div').filter({ hasText: /^Supervision$/ }).getByRole('img').click();
-  //   await page.getByText('Therapist Automation Testing').nth(1).click();
-  //   await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
-    
-  //     });
-
-      test('Multi-Client Flows', async () => {
-        // await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
-  // Minor 
-  await page.getByText('Shiva Kumar').click();
-  await page.getByRole('button', { name: 'Profile & Clinician' }).nth(1).click();
-  await page.getByRole('button', { name: 'Add profile' }).nth(1).click();
-  await page.getByLabel('Minor').check();
-  await page.getByLabel('', { exact: true }).first().click();
-  await page.getByRole('option', { name: 'Owner Team' }).click();
-  await page.getByRole('button', { name: '​', exact: true }).click();
-  await page.getByRole('option', { name: 'Venkatesh Prasad' }).click();
-  await page.getByRole('textbox').click();
-  await page.getByRole('textbox').fill('Shiva &Venkatesh@1');
-  await page.getByRole('button', { name: 'Create' }).nth(1).click();
-  await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._clientFileWrapper_17198_1 > div > div._clientNavigationFixedTop_111x7_1 > div > button > svg > path').click();
-  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
-  // Couple 
-  await page.getByText('Rakesh Das').click();
-  await page.getByRole('button', { name: 'Profile & Clinician' }).nth(1).click();
-  await page.getByRole('button', { name: 'Add profile' }).nth(1).click();
-  await page.getByLabel('Couple').check();
-  await page.getByLabel('', { exact: true }).first().click();
-  await page.getByRole('option', { name: 'Owner Team' }).click();
-  await page.getByRole('button', { name: '​', exact: true }).click();
-  await page.getByRole('option', { name: 'Poornima Das' }).click();
-  await page.getByRole('textbox').click();
-  await page.getByRole('textbox').fill('Rakesh &Poornima@1');
-  await page.getByRole('button', { name: 'Create' }).nth(1).click();
-  await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._clientFileWrapper_17198_1 > div > div._clientNavigationFixedTop_111x7_1 > div > button > svg > path').click();
-  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+// // Multi Client Flows
+// // await page.getByText('Rajesh Das').click();
+//   await page.getByRole('button', { name: 'Profile & Clinician' }).nth(1).click();
+//   await page.getByRole('button', { name: 'Add profile' }).nth(1).click();
+//   await page.getByLabel('', { exact: true }).click();
+//   await page.getByRole('option', { name: 'Owner Team' }).click();
+//   await page.getByRole('textbox').click();
+//   await page.getByRole('textbox').fill('Rajesh@1');
+//   await page.getByRole('button', { name: 'Create' }).nth(1).click();
+//   await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._clientFileWrapper_17198_1 > div > div._clientNavigationFixedTop_111x7_1 > div > button > svg > path').click();
+  // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
 
   });
+
+  test('Supervision Flows', async () => {
+    // await page.getByRole('tab', { name: 'Sessions' }).click();
+    // Supervision Flows
+    await page.getByText('Upcoming').click();
+    await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+    await page.getByRole('tab', { name: 'Personal' }).click();
+    await page.getByText('Progress notes').click();
+    await page.getByPlaceholder('Search').click();
+    await page.getByPlaceholder('Search').fill('Therapist');
+    await page.getByRole('dialog').locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).click();
+    await page.getByPlaceholder('Enter your response here').first().click();
+    await page.getByPlaceholder('Enter your response here').first().fill('Rajesh');
+    await page.getByPlaceholder('Enter your response here').nth(1).click();
+    await page.getByPlaceholder('Enter your response here').nth(1).fill('Good');
+    await page.getByPlaceholder('MM/DD/YYYY').click();
+    await page.getByPlaceholder('MM/DD/YYYY').fill('10/09/1999');
+    await page.getByRole('checkbox', { name: 'option1' }).check();
+    await page.locator('div').filter({ hasText: /^6Client CPT code\? \*Enter your response hereEnter your response here$/ }).getByLabel('Enter your response here').click();
+    await page.locator('div').filter({ hasText: /^6Client CPT code\? \*Enter your response hereEnter your response here$/ }).getByLabel('Enter your response here').fill('90791');
+    await page.getByRole('option', { name: '90791 - Psychiatric' }).click();
+    await page.locator('div').filter({ hasText: /^90791 - Psychiatric diagnostic evaluationEnter your response here$/ }).getByLabel('Enter your response here').click();
+    await page.locator('div').filter({ hasText: /^Enter your response here$/ }).getByLabel('Enter your response here').click();
+    await page.locator('div').filter({ hasText: /^Enter your response here$/ }).getByLabel('Enter your response here').fill('F05');
+    await page.getByRole('option', { name: 'F05 - Delirium due to known' }).click();
+    await page.locator('div').filter({ hasText: /^F05 - Delirium due to known physiological conditionEnter your response here$/ }).getByLabel('Enter your response here').click();
+    await page.locator('div').filter({ hasText: /^Sign here$/ }).nth(2).click();
+    await page.getByPlaceholder('Please type your name here').click();
+    await page.getByPlaceholder('Please type your name here').fill('Rajesh');
+    await page.getByRole('button', { name: 'Sign' }).nth(1).click();
+    await page.getByRole('button', { name: 'Save' }).nth(1).click();
+    await page.waitForTimeout(1000);
+    await page.getByText('Upcoming').click();
+    await page.waitForTimeout(4000);
+    await page.getByText('Therapist Automation Testing').click();
+    await page.getByRole('button', { name: 'Sign & Lock' }).nth(1).click();
+    await page.getByPlaceholder('Sign').click();
+    await page.getByPlaceholder('Sign').fill('Therapist 1');
+    await page.getByRole('button', { name: 'Sign and Lock' }).nth(1).click();
+    await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
+    // await page.getByText('Upcoming').click();
+    // await page.getByText('Therapist Automation Testing').nth(1).click();
+    // await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
+    // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+
+     });
+
+  //     test('Multi-Client Flows', async () => {
+  //       // await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
+  // // Minor 
+  // await page.getByText('Shiva Kumar').click();
+  // await page.getByRole('button', { name: 'Profile & Clinician' }).nth(1).click();
+  // await page.getByRole('button', { name: 'Add profile' }).nth(1).click();
+  // await page.getByLabel('Minor').check();
+  // await page.getByLabel('', { exact: true }).first().click();
+  // await page.getByRole('option', { name: 'Owner Team' }).click();
+  // await page.getByRole('button', { name: '​', exact: true }).click();
+  // await page.getByRole('option', { name: 'Venkatesh Prasad' }).click();
+  // await page.getByRole('textbox').click();
+  // await page.getByRole('textbox').fill('Shiva &Venkatesh@1');
+  // await page.getByRole('button', { name: 'Create' }).nth(1).click();
+  // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._clientFileWrapper_17198_1 > div > div._clientNavigationFixedTop_111x7_1 > div > button > svg > path').click();
+  // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+  // // Couple 
+  // await page.getByText('Rakesh Das').click();
+  // await page.getByRole('button', { name: 'Profile & Clinician' }).nth(1).click();
+  // await page.getByRole('button', { name: 'Add profile' }).nth(1).click();
+  // await page.getByLabel('Couple').check();
+  // await page.getByLabel('', { exact: true }).first().click();
+  // await page.getByRole('option', { name: 'Owner Team' }).click();
+  // await page.getByRole('button', { name: '​', exact: true }).click();
+  // await page.getByRole('option', { name: 'Poornima Das' }).click();
+  // await page.getByRole('textbox').click();
+  // await page.getByRole('textbox').fill('Rakesh &Poornima@1');
+  // await page.getByRole('button', { name: 'Create' }).nth(1).click();
+  // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._clientFileWrapper_17198_1 > div > div._clientNavigationFixedTop_111x7_1 > div > button > svg > path').click();
+  // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+
+  // });
 
 // Insurance Tab
 test('Insurance Tab', async () => {
   await page.locator('div').filter({ hasText: /^Insurance$/ }).getByRole('img').click();
   await page.getByRole('button', { name: 'Select all' }).nth(1).click();
-  await page.getByRole('button', { name: 'Deselect all' }).nth(1).click();
-  await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_avgkz_33 > table > tbody > tr:nth-child(1) > td:nth-child(1) > span > div > div > label > span > input').click();
   await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
   await page.getByRole('tab', { name: 'Claims' }).click(); 
-  await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_1hgma_16 > table > tbody > tr:nth-child(1) > td:nth-child(8) > span > button > button').click();
+  await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(1) > td:nth-child(8) > span > button > button > span > span._label_ns5gx_15').click();
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
 await page.getByPlaceholder('Start typing here').click();
 await page.getByPlaceholder('Start typing here').fill('Hey I am Adding Clients File Details here so check this');
@@ -751,76 +779,77 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
 // await page.locator('input[name="writeOffAmount"]').fill('10');
 // await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._header_174vt_7 > span > button > svg > path').click();
+await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
 
 });
 
-  test('Intake Tab', async () => {
-// Intake tabs
-await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
-await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
-await page.getByLabel('First Name*').click();
-await page.getByLabel('First Name*').fill('Lead');
-await page.getByLabel('Last Name').click();
-await page.getByLabel('Last Name').fill('1');
-await page.getByLabel('Email').click();
-// 
-const Leadinbox = await mailslurp.inboxController.createInbox({});
-await page.getByLabel('Email').fill(Leadinbox.emailAddress);
-// await page.getByLabel('Email').fill('intaketabSuperman+3@gmail.com')
-await page.getByLabel('Seeking treatment for').click();
-await page.getByRole('option', { name: 'Cancer' }).click();
-await page.getByLabel('Note').click();
-await page.getByLabel('Note').fill('I am Very sick');
-await page.getByRole('button', { name: 'Create' }).nth(1).click();
-await page.waitForTimeout(2000);
+//   test('Intake Tab', async () => {
+// // Intake tabs
+// await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
+// await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
+// await page.getByLabel('First Name*').click();
+// await page.getByLabel('First Name*').fill('Lead');
+// await page.getByLabel('Last Name').click();
+// await page.getByLabel('Last Name').fill('1');
+// await page.getByLabel('Email').click();
+// // 
+// const Leadinbox = await mailslurp.inboxController.createInbox({});
+// await page.getByLabel('Email').fill(Leadinbox.emailAddress);
+// // await page.getByLabel('Email').fill('intaketabSuperman+3@gmail.com')
+// await page.getByLabel('Seeking treatment for').click();
+// await page.getByRole('option', { name: 'Cancer' }).click();
+// await page.getByLabel('Note').click();
+// await page.getByLabel('Note').fill('I am Very sick');
+// await page.getByRole('button', { name: 'Create' }).nth(1).click();
+// await page.waitForTimeout(2000);
 
-await page.getByRole('cell', { name: 'Lead 1' }).click();
-await page.getByRole('tab', { name: 'Basic Information' }).click();
-await page.getByLabel('Sex').click();
-await page.getByRole('option', { name: 'Male', exact: true }).click();
-await page.getByLabel('Member ID').click();
-await page.getByLabel('Member ID').fill('GAH23');
-await page.getByLabel('Name on Card').click();
-await page.getByLabel('Name on Card').fill('Rajesh');
-await page.getByLabel('Payer ID').click();
-await page.getByLabel('Payer ID').fill('BDJSB546');
-await page.getByLabel('Insurance Company').click();
-await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
-await page.getByText('ABSOLUTE TOTAL CARE-').click();
-await page.getByRole('button', { name: 'Save' }).nth(1).click();
-await page.locator('span').filter({ hasText: 'Current Status :Inquiry' }).locator('div').nth(2).click();
-await page.getByRole('option', { name: 'Initial consultation call' }).click();
-await page.waitForTimeout(1000);
-await page.getByLabel('Send inquiry form').click();
-await page.getByRole('button', { name: 'Send' }).nth(1).click();
-await page.waitForTimeout(1000);
-await page.getByLabel('Send therapist scheduling link').click();
-await page.getByLabel('Select Therapist').click();
-await page.getByRole('option', { name: 'Therapist 1, ALC' }).click();
-await page.getByRole('button', { name: 'Send' }).nth(1).click();
-await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
-await page.waitForTimeout(1000);
-  });
+// await page.getByRole('cell', { name: 'Lead 1' }).click();
+// await page.getByRole('tab', { name: 'Basic Information' }).click();
+// await page.getByLabel('Sex').click();
+// await page.getByRole('option', { name: 'Male', exact: true }).click();
+// await page.getByLabel('Member ID').click();
+// await page.getByLabel('Member ID').fill('GAH23');
+// await page.getByLabel('Name on Card').click();
+// await page.getByLabel('Name on Card').fill('Rajesh');
+// await page.getByLabel('Payer ID').click();
+// await page.getByLabel('Payer ID').fill('BDJSB546');
+// await page.getByLabel('Insurance Company').click();
+// await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
+// await page.getByText('ABSOLUTE TOTAL CARE-').click();
+// await page.getByRole('button', { name: 'Save' }).nth(1).click();
+// await page.locator('span').filter({ hasText: 'Current Status :Inquiry' }).locator('div').nth(2).click();
+// await page.getByRole('option', { name: 'Initial consultation call' }).click();
+// await page.waitForTimeout(1000);
+// await page.getByLabel('Send inquiry form').click();
+// await page.getByRole('button', { name: 'Send' }).nth(1).click();
+// await page.waitForTimeout(1000);
+// await page.getByLabel('Send therapist scheduling link').click();
+// await page.getByLabel('Select Therapist').click();
+// await page.getByRole('option', { name: 'Therapist 1, ALC' }).click();
+// await page.getByRole('button', { name: 'Send' }).nth(1).click();
+// await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
+// await page.waitForTimeout(1000);
+//   });
 
-  test('Request Booking Widget', async () => {
-// Request Booking Widget flow
-await page.getByText('Requests').click();
-await page.getByRole('tab', { name: 'Requests' }).click();
-await page.getByRole('button', { name: 'Accept' }).nth(1).click();
-await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
-await page.waitForTimeout(6000);
-await page.reload();
-  });
+//   test('Request Booking Widget', async () => {
+// // Request Booking Widget flow
+// await page.getByText('Requests').click();
+// await page.getByRole('tab', { name: 'Requests' }).click();
+// await page.getByRole('button', { name: 'Accept' }).nth(1).click();
+// await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+// await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
+// await page.waitForTimeout(6000);
+// await page.reload();
+//   });
 
   // Update DP and Logout Flow
   test('Update and Logout Flow', async () => {
-await page.locator('#root > div._header_1uy0f_1 > div > div:nth-child(4)').click();
+    await page.locator('div').filter({ hasText: 'Therapist' }).nth(3).click();
 await page.getByRole('menuitem', { name: 'Profile' }).click();
 await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]').setInputFiles("C:/Users/Rajesh/Downloads/therapist.jpg");
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
-await page.locator('#root > div._header_1uy0f_1 > div > div:nth-child(4)').click();
+await page.locator('div').filter({ hasText: 'Therapist' }).nth(3).click();
 await page.getByRole('menuitem', { name: 'Logout' }).click();
 
 

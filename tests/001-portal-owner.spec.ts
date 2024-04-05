@@ -8,7 +8,7 @@ test.describe.configure({ mode: 'serial' });
 
 let page: Page;
 const mailslurp = new MailSlurp({ apiKey:
-   "10a2ebad9782380166a114606ec97fe051f73d8a7dd10639bde9cca41cf2a405" });
+   "253481e1826dacfde7b3d46c37b0c2a19fe11df634007b9f1aea32b2d6621ad4" });
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
 });
@@ -18,7 +18,7 @@ test.afterAll(async () => {
 });
 
 test('Owner login and  onboarding ', async ({request}) => {
-        const mailslurp = new MailSlurp({ apiKey: "10a2ebad9782380166a114606ec97fe051f73d8a7dd10639bde9cca41cf2a405" });
+        const mailslurp = new MailSlurp({ apiKey: "253481e1826dacfde7b3d46c37b0c2a19fe11df634007b9f1aea32b2d6621ad4" });
         const inbox = await mailslurp.inboxController.createInbox({});
         
         // console.log(inbox);
@@ -182,6 +182,40 @@ test('Settings Flows', async () => {
     await page.getByPlaceholder('Enter phone').click();
     await page.getByPlaceholder('Enter phone').fill('(975) 734-53565');
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
+    // Team member invites flows ( Therapist role)
+  await page.getByText('Team members').first().click();
+  await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+  await page.getByLabel('First Name*').click();
+  await page.getByLabel('First Name*').fill('Therapist');
+  await page.getByLabel('Last Name*').click();
+  await page.getByLabel('Last Name*').fill('1');
+  await page.getByLabel('Email*').click();
+// 
+  const Bookinginbox1 = await mailslurp.inboxController.createInbox({});
+  await page.getByLabel('Email*').fill(Bookinginbox1.emailAddress);
+  await page.getByRole('button', { name: 'Next' }).nth(1).click();
+  await page.getByLabel('Therapist').check();
+  await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+  await page.waitForTimeout(2000);
+  await page.reload();
+// Supervisor role
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Supervisor');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('1');
+await page.getByLabel('Email*').click();
+// 
+const Bookinginbox2 = await mailslurp.inboxController.createInbox({});
+await page.getByLabel('Email*').fill(Bookinginbox2.emailAddress);
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Supervisor').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(2000);
+await page.reload();
+await page.getByText('Role settings').click();
+
     //Booking widget flows
     await page.getByText('Booking widget').click();
     await page.getByRole('button', { name: 'Generate link' }).nth(1).click();
@@ -1042,10 +1076,10 @@ await page.waitForTimeout(3000);
     await page.getByLabel('Send inquiry form').click();
     await page.getByRole('button', { name: 'Send' }).nth(1).click();
     await page.waitForTimeout(1000);
-    // await page.getByLabel('Send therapist scheduling link').click();
-    // await page.getByLabel('Select Therapist').click();
-    // await page.getByRole('option', { name: 'Owner Team' }).click();
-    // await page.getByRole('button', { name: 'Send' }).nth(1).click();
+    await page.getByLabel('Send therapist scheduling link').click();
+    await page.getByLabel('Select Therapist').click();
+    await page.getByRole('option', { name: 'Owner Team' }).click();
+    await page.getByRole('button', { name: 'Send' }).nth(1).click();
     await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
     await page.waitForTimeout(1000);
 

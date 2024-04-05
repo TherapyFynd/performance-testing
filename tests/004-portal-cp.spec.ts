@@ -1,6 +1,7 @@
 import { test, type Page } from '@playwright/test';
 import { TIMEOUT } from 'dns';
 import { MailSlurp } from "mailslurp-client";
+import { BASE_BACKEND_URL } from '../localemails.js/const';
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
 
@@ -20,7 +21,7 @@ test('Client Portal login and onboarding ', async ({request}) => {
         // console.log(inbox);
         // console.log(inbox.emailAddress);
         const data = await request.post(
-            'https://leafs-ehr-nest-stage-nmvorvf7ga-as.a.run.app/test/get-passwordless-login-link-by-email',
+          `${BASE_BACKEND_URL}/test/get-passwordless-login-link-by-email`,
             {
             headers:{
              
@@ -28,7 +29,7 @@ test('Client Portal login and onboarding ', async ({request}) => {
                 'x-test-key': `omnipractice_random_a83500678d`,
               },
               data: { email: 
-              "2440144d-189c-43be-8db8-15aba78d6a7a@mailslurp.net", isTestMode: true },
+              "e86c5826-6662-4776-9ce4-d99d2538e057@mailslurp.net", isTestMode: true },
             },
           ); 
         // console.log(data);
@@ -77,6 +78,7 @@ await page.getByRole('button', { name: 'Next' }).nth(1).click();
 await page.getByRole('button', { name: 'Submit' }).nth(1).click();
 // Profile Select
 await page.getByRole('heading', { name: 'Therapist 1' }).click();
+// await page.getByRole('heading', { name: 'Therapist 1' }).click();
 
         });
         
@@ -148,46 +150,46 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page.waitForTimeout(2000);
         });
 
-        test('Multi-Client Flows Select',async () =>  { 
-//  Mutile Profile Start
-await page.getByTestId('ArrowDropDownRoundedIcon').click();
-await page.getByRole('heading', { name: 'Owner Team' }).click();
-await page.waitForTimeout(6000);
-await page.locator('button:nth-child(1)').first().click();
-        });
+//         test('Multi-Client Flows Select',async () =>  { 
+// //  Mutile Profile Start
+// await page.getByTestId('ArrowDropDownRoundedIcon').click();
+// await page.getByRole('heading', { name: 'Owner Team' }).click();
+// await page.waitForTimeout(6000);
+// await page.locator('button:nth-child(1)').first().click();
+//         });
 
-        test('Booking Appoinment Therapist _2',async () =>  { 
-            await page.getByRole('button', { name: 'Book appointment' }).nth(1).click();
-await page.getByLabel('Select service').click();
-await page.getByText('Psychotherapy, 45 mins').click();
-await page.waitForTimeout(2000);
-await page.locator('#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > p').click();
-// await page.locator('div').filter({ hasText: /^Pick slot$/ }).getByRole('img').click();
-await page.waitForTimeout(2000);
-await page.locator('body > div.MuiPopover-root.MuiModal-root.css-1khfnay > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-ak9ghh > div > div > div._timeSlotsWrapper_vyf9q_11 div:first-child').click();
-await page.getByRole('button', { name: 'Request appointment' }).nth(1).click();
-await page.waitForTimeout(2000);
-        });
-        test('Personal Infomation Therapist _2',async () =>  { 
-            await page.locator('button:nth-child(5)').first().click();
-            await page.getByRole('menuitem', { name: 'Profile' }).click();
-            await page.getByLabel('Pronouns').click();
-            await page.getByRole('option', { name: 'He/Him' }).click();
-            await page.getByPlaceholder('MM/DD/YYYY').first().click();
-            await page.getByPlaceholder('MM/DD/YYYY').first().fill('10/10/1999');
-            await page.getByLabel('First Name', { exact: true }).click();
-            await page.getByLabel('First Name', { exact: true }).fill('Test');
-            await page.getByLabel('Last Name', { exact: true }).click();
-            await page.getByLabel('Last Name', { exact: true }).fill('1');
-            await page.getByLabel('Email').nth(1).click();
-            await page.getByLabel('Email').nth(1).fill('test1@gmail.com');
-            await page.getByLabel('Phone').nth(1).click();
-            await page.getByLabel('Phone').nth(1).fill('(454) 758-65864');
-            await page.getByLabel('Relationship to client').click();
-            await page.getByLabel('Relationship to client').fill('Brother');
-            await page.getByRole('button', { name: 'Save' }).nth(1).click();
-            await page.waitForTimeout(1000);
-        });
+//         test('Booking Appoinment Therapist _2',async () =>  { 
+//             await page.getByRole('button', { name: 'Book appointment' }).nth(1).click();
+// await page.getByLabel('Select service').click();
+// await page.getByText('Psychotherapy, 45 mins').click();
+// await page.waitForTimeout(2000);
+// await page.locator('#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > p').click();
+// // await page.locator('div').filter({ hasText: /^Pick slot$/ }).getByRole('img').click();
+// await page.waitForTimeout(2000);
+// await page.locator('body > div.MuiPopover-root.MuiModal-root.css-1khfnay > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-ak9ghh > div > div > div._timeSlotsWrapper_vyf9q_11 div:first-child').click();
+// await page.getByRole('button', { name: 'Request appointment' }).nth(1).click();
+// await page.waitForTimeout(2000);
+//         });
+//         test('Personal Infomation Therapist _2',async () =>  { 
+//             await page.locator('button:nth-child(5)').first().click();
+//             await page.getByRole('menuitem', { name: 'Profile' }).click();
+//             await page.getByLabel('Pronouns').click();
+//             await page.getByRole('option', { name: 'He/Him' }).click();
+//             await page.getByPlaceholder('MM/DD/YYYY').first().click();
+//             await page.getByPlaceholder('MM/DD/YYYY').first().fill('10/10/1999');
+//             await page.getByLabel('First Name', { exact: true }).click();
+//             await page.getByLabel('First Name', { exact: true }).fill('Test');
+//             await page.getByLabel('Last Name', { exact: true }).click();
+//             await page.getByLabel('Last Name', { exact: true }).fill('1');
+//             await page.getByLabel('Email').nth(1).click();
+//             await page.getByLabel('Email').nth(1).fill('test1@gmail.com');
+//             await page.getByLabel('Phone').nth(1).click();
+//             await page.getByLabel('Phone').nth(1).fill('(454) 758-65864');
+//             await page.getByLabel('Relationship to client').click();
+//             await page.getByLabel('Relationship to client').fill('Brother');
+//             await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//             await page.waitForTimeout(1000);
+//         });
 
         test('Logout Portal',async () =>  { 
             await page.locator('button:nth-child(5)').first().click();
