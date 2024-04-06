@@ -6,7 +6,7 @@ import { BASE_BACKEND_URL, isRunningOnLocal, localPort } from '../localemails.js
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-const mailslurp = new MailSlurp({ apiKey: "253481e1826dacfde7b3d46c37b0c2a19fe11df634007b9f1aea32b2d6621ad4" });
+const mailslurp = new MailSlurp({ apiKey: "8a2f9dbb1c0c5ebd1694202438d2b4e6a6135b00893638c41fb3fd0b3f4b3a51" });
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
 });
@@ -16,7 +16,7 @@ test.afterAll(async () => {
 });
 
 test('Therapist login and onboarding ', async ({request}) => {
-        const mailslurp = new MailSlurp({ apiKey: "253481e1826dacfde7b3d46c37b0c2a19fe11df634007b9f1aea32b2d6621ad4" });
+        const mailslurp = new MailSlurp({ apiKey: "8a2f9dbb1c0c5ebd1694202438d2b4e6a6135b00893638c41fb3fd0b3f4b3a51" });
         const inbox = await mailslurp.inboxController.createInbox({});
         // console.log(inbox);
         // console.log(inbox.emailAddress);
@@ -31,7 +31,7 @@ test('Therapist login and onboarding ', async ({request}) => {
               },
               data: isRunningOnLocal
                ? { email: inbox.emailAddress, isTestMode: true, localPort: localPort }
-               : { email:"a12d1f6d-7bf5-4c0f-b60e-78428ffadf78@mailslurp.net" ,isTestMode: true },
+               : { email:"d176c359-a94f-4e3c-b9c5-033da777ce36@mailslurp.net" ,isTestMode: true },
             },
           ); 
         // console.log(data);
@@ -130,7 +130,7 @@ await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').cli
  // Calender Day start
  await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
  await page.getByLabel('Monday').check();
- await page.locator('#root > div._layout_10ldc_1 > div._tabSpecificSidebar_7s8hh_2 > div:nth-child(1) > div._sidebarHeader_7s8hh_129 > svg > path').click();
+ await page.locator('#root > div._layout_10ldc_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(3) > div._sidebarHeader_148j7_138 > svg > path').click();
   });
 
 test('Forms Tab', async () => {
@@ -414,7 +414,7 @@ await page.getByTestId('ArrowBackRoundedIcon').click();
   });
   test('Create Clients', async () => {
 // Create Clients
-await page.locator('#root > div._layout_10ldc_1 > div._sideBar_7s8hh_1 > div._createBtnContainer_7s8hh_88 > button > button').click();
+await page.locator('#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button').click();
 await page.getByRole('menuitem', { name: 'Create client' }).click();
 await page.getByLabel('First Name*').click();
 await page.getByLabel('First Name*').fill('Rajesh');
@@ -431,7 +431,7 @@ await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
   
 // //   Minor client
 await page.waitForTimeout(2000);
-await page.locator('#root > div._layout_10ldc_1 > div._sideBar_7s8hh_1 > div._createBtnContainer_7s8hh_88 > button > button').click();
+await page.locator('#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button').click();
 await page.getByRole('menuitem', { name: 'Create client' }).click();
 await page.getByLabel('Minor').check();
 await page.getByLabel('First Name*').click();
@@ -461,7 +461,7 @@ await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
 
 // //   Create Couple Account
 await page.waitForTimeout(2000);
-await page.locator('#root > div._layout_10ldc_1 > div._sideBar_7s8hh_1 > div._createBtnContainer_7s8hh_88 > button > button').click();
+await page.locator('#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button').click();
 await page.getByRole('menuitem', { name: 'Create client' }).click();
 await page.getByLabel('Couple').check();
 await page.getByLabel('First Name*').click();
@@ -519,7 +519,7 @@ await page.getByPlaceholder('Enter text here').click();
 await page.getByPlaceholder('Enter text here').fill('New every day testing');
 await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 // Create Appoinment Button( top Bar)
-await page.locator('#root > div._layout_10ldc_1 > div._sideBar_7s8hh_1 > div._createBtnContainer_7s8hh_88 > button > button').click();
+await page.locator('#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button').click();
 await page.getByRole('menuitem', { name: 'Create appointment' }).click();
 await page.getByLabel('Select client profile*').click();
 await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();

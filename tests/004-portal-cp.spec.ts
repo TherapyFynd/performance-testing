@@ -29,7 +29,7 @@ test('Client Portal login and onboarding ', async ({request}) => {
                 'x-test-key': `omnipractice_random_a83500678d`,
               },
               data: { email: 
-              "e86c5826-6662-4776-9ce4-d99d2538e057@mailslurp.net", isTestMode: true },
+              "557cc0e9-1a17-4cbf-942f-74bd63d960fd@mailslurp.net", isTestMode: true },
             },
           ); 
         // console.log(data);

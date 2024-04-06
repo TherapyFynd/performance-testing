@@ -8,7 +8,7 @@ test.describe.configure({ mode: 'serial' });
 
 let page: Page;
 const mailslurp = new MailSlurp({ apiKey:
-   "253481e1826dacfde7b3d46c37b0c2a19fe11df634007b9f1aea32b2d6621ad4" });
+   "8a2f9dbb1c0c5ebd1694202438d2b4e6a6135b00893638c41fb3fd0b3f4b3a51" });
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
 });
@@ -18,7 +18,7 @@ test.afterAll(async () => {
 });
 
 test('Owner login and  onboarding ', async ({request}) => {
-        const mailslurp = new MailSlurp({ apiKey: "253481e1826dacfde7b3d46c37b0c2a19fe11df634007b9f1aea32b2d6621ad4" });
+        const mailslurp = new MailSlurp({ apiKey: "8a2f9dbb1c0c5ebd1694202438d2b4e6a6135b00893638c41fb3fd0b3f4b3a51" });
         const inbox = await mailslurp.inboxController.createInbox({});
         
         // console.log(inbox);
@@ -286,7 +286,7 @@ await page.getByText('Role settings').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.locator('div').filter({ hasText: /^Mails to import$/ }).getByRole('button').click();
   await page.waitForTimeout(1000);
-  await page.locator('#root > div._layout_10ldc_1 > div._tabSpecificSidebar_7s8hh_2 > div:nth-child(1) > div._sidebarHeader_7s8hh_129 > svg > path').click();
+  await page.locator('#root > div._layout_10ldc_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(3) > div._sidebarHeader_148j7_138 > svg > path').click();
 });
 
     test('Forms Tab', async () => {
@@ -760,7 +760,7 @@ await page.getByText('Role settings').click();
   });
 
     test('Create Clients', async () => {
-      await page.locator('#root > div._layout_10ldc_1 > div._sideBar_7s8hh_1 > div._createBtnContainer_7s8hh_88 > button > button').click();
+      await page.locator('#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button').click();
   // await page.getByRole('button', { name: 'Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
   await page.getByLabel('First Name*').click();
@@ -804,7 +804,7 @@ await page.getByPlaceholder('Enter text here').fill('New every day testing');
 await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 // Create Appoinment Button( top Bar)
 // await page.getByRole('button', { name: 'Create' }).nth(1).click();
-await page.locator('#root > div._layout_10ldc_1 > div._sideBar_7s8hh_1 > div._createBtnContainer_7s8hh_88 > button > button').click();
+await page.locator('#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button').click();
 await page.getByRole('menuitem', { name: 'Create appointment' }).click();
 await page.getByLabel('Select client profile*').click();
 await page.getByRole('option', { name: 'Automation (OT)' }).first().click();
@@ -1032,7 +1032,7 @@ await page.waitForTimeout(3000);
     }); 
 
     test('Intake tab', async () => {
-      await page.locator('._sideBarItem_7s8hh_25 > img').first().click();
+      await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
       // await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
     await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
     await page.getByLabel('First Name*').click();
