@@ -31,7 +31,7 @@ test('Therapist login and onboarding ', async ({request}) => {
               },
               data: isRunningOnLocal
                ? { email: inbox.emailAddress, isTestMode: true, localPort: localPort }
-               : { email:"d176c359-a94f-4e3c-b9c5-033da777ce36@mailslurp.net" ,isTestMode: true },
+               : { email:"658b762f-5919-4b41-996e-a1a3401598b4@mailslurp.net" ,isTestMode: true },
             },
           ); 
         // console.log(data);
