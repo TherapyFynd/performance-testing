@@ -130,7 +130,7 @@ await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').cli
  // Calender Day start
  await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
  await page.getByLabel('Monday').check();
- await page.locator('#root > div._layout_10ldc_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(3) > div._sidebarHeader_148j7_138 > svg > path').click();
+ await page.locator('#root > div._layout_10ldc_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(1) > div._sidebarHeader_148j7_138 > svg > path').click();
   });
 
 test('Forms Tab', async () => {
