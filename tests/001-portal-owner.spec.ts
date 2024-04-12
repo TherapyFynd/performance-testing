@@ -8,7 +8,7 @@ test.describe.configure({ mode: 'serial' });
 
 let page: Page;
 const mailslurp = new MailSlurp({ apiKey:
-   "8a2f9dbb1c0c5ebd1694202438d2b4e6a6135b00893638c41fb3fd0b3f4b3a51" });
+   "c5cf96dcfd7bcbb152d6f4d3ed69f512bab660051837640a2c9e843376e21838" });
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
 });
@@ -18,7 +18,7 @@ test.afterAll(async () => {
 });
 
 test('Owner login and  onboarding ', async ({request}) => {
-        const mailslurp = new MailSlurp({ apiKey: "8a2f9dbb1c0c5ebd1694202438d2b4e6a6135b00893638c41fb3fd0b3f4b3a51" });
+        const mailslurp = new MailSlurp({ apiKey: "c5cf96dcfd7bcbb152d6f4d3ed69f512bab660051837640a2c9e843376e21838" });
         const inbox = await mailslurp.inboxController.createInbox({});
         
         // console.log(inbox);
@@ -286,7 +286,7 @@ await page.getByText('Role settings').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.locator('div').filter({ hasText: /^Mails to import$/ }).getByRole('button').click();
   await page.waitForTimeout(1000);
-  await page.locator('#root > div._layout_10ldc_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(3) > div._sidebarHeader_148j7_138 > svg > path').click();
+  await page.locator('#root > div._layout_10ldc_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(1) > div._sidebarHeader_148j7_138 > svg > path').click();
 });
 
     test('Forms Tab', async () => {
