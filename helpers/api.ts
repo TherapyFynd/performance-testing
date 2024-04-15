@@ -14,6 +14,7 @@ export const generatePasswordlessLoginLink = async ({
   request: APIRequestContext;
 }) => {
   try {
+    console.log(email)
     const data = await request.post(
       `${BASE_BACKEND_URL}/test/get-passwordless-login-link-by-email`,
 
@@ -31,7 +32,7 @@ export const generatePasswordlessLoginLink = async ({
           : { email: email, isTestMode: true },
       }
     );
-
+    console.log(data)
     const c = await data.text();
     return c;
   } catch (error) {

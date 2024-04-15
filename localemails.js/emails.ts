@@ -33,6 +33,8 @@ var myEmails = {
   therapistEmail: '',
   supervisorEmail: '',
   clientEmail: '',
+  intakeAdminEmail: '',
+  
 };
 
 export default myEmails;

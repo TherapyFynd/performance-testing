@@ -138,7 +138,7 @@ test('Forms Tab', async () => {
 await page.locator('div').filter({ hasText: /^Documents$/ }).getByRole('img').click();
 await page.getByRole('button', { name: 'Create new' }).nth(1).click();
 
-// // Questionaries Form Code
+// Questionaries Form Code
 await page.getByText('Questionnaire').click();
 await page.getByPlaceholder('type here').click();
 await page.getByPlaceholder('type here').fill('Therapist Automation Forms');
