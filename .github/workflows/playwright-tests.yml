@@ -22,7 +22,7 @@ jobs:
         run: npm ci
 
       - name: Install playwright browser
-        run: npx install @playwright/test^1.40.1
+        run: npx playwright install --with-deps
 
       - name: Run Playwright core tests
         run: npx playwright test ./core
