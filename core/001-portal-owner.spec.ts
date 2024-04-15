@@ -2,9 +2,6 @@ import { test, type Page } from '@playwright/test';
 import { generatePasswordlessLoginLink } from '../helpers/api';
 import { createMailSurpEmail } from '../helpers/mailsurp';
 
-// Annotate entire file as serial.
-test.describe.configure({ mode: 'serial' });
-
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
