@@ -34,7 +34,7 @@ export default defineConfig({
     video: 'on',
     viewport: null,
     browserName: 'chromium',
-    headless: false,
+    headless: true,
 
     launchOptions: {
       // 1

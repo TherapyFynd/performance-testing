@@ -29,4 +29,10 @@ export function f() {
 
 /** New constants */
 
-export const therapistEmail = {};
+var myEmails = {
+  therapistEmail: '',
+  supervisorEmail: '',
+  clientEmail: '',
+};
+
+export default myEmails;
