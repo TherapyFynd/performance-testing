@@ -1,0 +1,24 @@
+name: Daily Playwright Tests
+
+on:
+  schedule:
+    - cron: '*/10 * * * *' # Runs every 5 minutes
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Playwright core tests
+        run: npx playwright test ./core
