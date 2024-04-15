@@ -6,7 +6,7 @@ import { BASE_BACKEND_URL, isRunningOnLocal, localPort } from '../localemails.js
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-const mailslurp = new MailSlurp({ apiKey: "8a2f9dbb1c0c5ebd1694202438d2b4e6a6135b00893638c41fb3fd0b3f4b3a51" });
+const mailslurp = new MailSlurp({ apiKey: "e065b0350cd442089b49035587b92e00c9e26f6004adce9e2ac12acafa0ac7a1" });
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
 });
@@ -16,7 +16,7 @@ test.afterAll(async () => {
 });
 
 test('Therapist login and onboarding ', async ({request}) => {
-        const mailslurp = new MailSlurp({ apiKey: "8a2f9dbb1c0c5ebd1694202438d2b4e6a6135b00893638c41fb3fd0b3f4b3a51" });
+        const mailslurp = new MailSlurp({ apiKey: "e065b0350cd442089b49035587b92e00c9e26f6004adce9e2ac12acafa0ac7a1" });
         const inbox = await mailslurp.inboxController.createInbox({});
         // console.log(inbox);
         // console.log(inbox.emailAddress);
@@ -31,7 +31,7 @@ test('Therapist login and onboarding ', async ({request}) => {
               },
               data: isRunningOnLocal
                ? { email: inbox.emailAddress, isTestMode: true, localPort: localPort }
-               : { email:"658b762f-5919-4b41-996e-a1a3401598b4@mailslurp.net" ,isTestMode: true },
+               : { email:"fc538c68-281b-4c1e-8d70-634342636f4e@mailslurp.net" ,isTestMode: true },
             },
           ); 
         // console.log(data);
@@ -782,65 +782,6 @@ await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > d
 await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
 
 });
-
-//   test('Intake Tab', async () => {
-// // Intake tabs
-// await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
-// await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
-// await page.getByLabel('First Name*').click();
-// await page.getByLabel('First Name*').fill('Lead');
-// await page.getByLabel('Last Name').click();
-// await page.getByLabel('Last Name').fill('1');
-// await page.getByLabel('Email').click();
-// // 
-// const Leadinbox = await mailslurp.inboxController.createInbox({});
-// await page.getByLabel('Email').fill(Leadinbox.emailAddress);
-// // await page.getByLabel('Email').fill('intaketabSuperman+3@gmail.com')
-// await page.getByLabel('Seeking treatment for').click();
-// await page.getByRole('option', { name: 'Cancer' }).click();
-// await page.getByLabel('Note').click();
-// await page.getByLabel('Note').fill('I am Very sick');
-// await page.getByRole('button', { name: 'Create' }).nth(1).click();
-// await page.waitForTimeout(2000);
-
-// await page.getByRole('cell', { name: 'Lead 1' }).click();
-// await page.getByRole('tab', { name: 'Basic Information' }).click();
-// await page.getByLabel('Sex').click();
-// await page.getByRole('option', { name: 'Male', exact: true }).click();
-// await page.getByLabel('Member ID').click();
-// await page.getByLabel('Member ID').fill('GAH23');
-// await page.getByLabel('Name on Card').click();
-// await page.getByLabel('Name on Card').fill('Rajesh');
-// await page.getByLabel('Payer ID').click();
-// await page.getByLabel('Payer ID').fill('BDJSB546');
-// await page.getByLabel('Insurance Company').click();
-// await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
-// await page.getByText('ABSOLUTE TOTAL CARE-').click();
-// await page.getByRole('button', { name: 'Save' }).nth(1).click();
-// await page.locator('span').filter({ hasText: 'Current Status :Inquiry' }).locator('div').nth(2).click();
-// await page.getByRole('option', { name: 'Initial consultation call' }).click();
-// await page.waitForTimeout(1000);
-// await page.getByLabel('Send inquiry form').click();
-// await page.getByRole('button', { name: 'Send' }).nth(1).click();
-// await page.waitForTimeout(1000);
-// await page.getByLabel('Send therapist scheduling link').click();
-// await page.getByLabel('Select Therapist').click();
-// await page.getByRole('option', { name: 'Therapist 1, ALC' }).click();
-// await page.getByRole('button', { name: 'Send' }).nth(1).click();
-// await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
-// await page.waitForTimeout(1000);
-//   });
-
-//   test('Request Booking Widget', async () => {
-// // Request Booking Widget flow
-// await page.getByText('Requests').click();
-// await page.getByRole('tab', { name: 'Requests' }).click();
-// await page.getByRole('button', { name: 'Accept' }).nth(1).click();
-// await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-// await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
-// await page.waitForTimeout(6000);
-// await page.reload();
-//   });
 
   // Update DP and Logout Flow
   test('Update and Logout Flow', async () => {

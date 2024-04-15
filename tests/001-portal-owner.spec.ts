@@ -8,7 +8,7 @@ test.describe.configure({ mode: 'serial' });
 
 let page: Page;
 const mailslurp = new MailSlurp({ apiKey:
-   "c5cf96dcfd7bcbb152d6f4d3ed69f512bab660051837640a2c9e843376e21838" });
+   "e065b0350cd442089b49035587b92e00c9e26f6004adce9e2ac12acafa0ac7a1" });
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
 });
@@ -18,7 +18,7 @@ test.afterAll(async () => {
 });
 
 test('Owner login and  onboarding ', async ({request}) => {
-        const mailslurp = new MailSlurp({ apiKey: "c5cf96dcfd7bcbb152d6f4d3ed69f512bab660051837640a2c9e843376e21838" });
+        const mailslurp = new MailSlurp({ apiKey: "e065b0350cd442089b49035587b92e00c9e26f6004adce9e2ac12acafa0ac7a1" });
         const inbox = await mailslurp.inboxController.createInbox({});
         
         // console.log(inbox);
@@ -199,7 +199,7 @@ test('Settings Flows', async () => {
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(2000);
   await page.reload();
-// Supervisor role
+// Invite team members
 await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
 await page.getByLabel('First Name*').click();
 await page.getByLabel('First Name*').fill('Supervisor');
@@ -271,6 +271,7 @@ await page.getByText('Role settings').click();
     await page.locator('div').filter({ hasText: /^Owner Team, ALC$/ }).getByRole('button').click();
     await page.getByRole('tab', { name: 'Email Imports' }).click();
     await page.getByRole('button', { name: 'Edit' }).nth(1).click();
+    
     await page.goto(isRunningOnLocal
       ? `${localBaseUrl}/settings/intake-team-members/edit/email-imports`
       : `${BASE_FRONTEND_URL}/settings/intake-team-members/edit/email-imports`)
@@ -1084,16 +1085,6 @@ await page.waitForTimeout(3000);
     await page.waitForTimeout(1000);
 
     });
-
-//     test('Request Booking Widget', async () => {
-// // Request Booking Widget flow
-// await page.locator('div').filter({ hasText: /^Notifications$/ }).getByRole('img').click();
-// await page.getByText('Requests').click();
-// await page.locator('button').filter({ hasText: 'Accept' }).nth(1).click();
-// await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-// await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
-//  await page.waitForTimeout(2000);
-//     });
 
     test('DP Update and Logout', async () => {
       // await page.locator('#root > div._header_1uy0f_1 > div > div > p').click();

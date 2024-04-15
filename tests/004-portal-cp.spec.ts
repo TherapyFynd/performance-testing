@@ -29,7 +29,7 @@ test('Client Portal login and onboarding ', async ({request}) => {
                 'x-test-key': `omnipractice_random_a83500678d`,
               },
               data: { email: 
-              "a40f7be1-a364-466d-acf0-77bf890eda26@mailslurp.net", isTestMode: true },
+              "049b0217-4794-402f-8bcf-baaa126e3b7a@mailslurp.net", isTestMode: true },
             },
           ); 
         // console.log(data);
@@ -78,7 +78,7 @@ await page.getByRole('button', { name: 'Next' }).nth(1).click();
 await page.getByRole('button', { name: 'Submit' }).nth(1).click();
 // Profile Select
 await page.getByRole('heading', { name: 'Therapist 1' }).click();
-// await page.getByRole('heading', { name: 'Therapist 1' }).click();
+
 
         });
         
