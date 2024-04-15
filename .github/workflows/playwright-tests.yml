@@ -3,7 +3,7 @@ name: Daily Playwright Tests
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/5 * * * *' # Runs every 5 minutes
+    - cron: '11 0 * * *' # Runs at 04:30 PM IST everyday
 
 jobs:
   build:
