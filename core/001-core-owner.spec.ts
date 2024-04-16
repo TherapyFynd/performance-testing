@@ -64,8 +64,6 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByLabel('Address Line').click();
   await page.getByLabel('Address Line').fill('New York City');
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
-  await page.getByRole('heading', { name: 'Skip' }).click();
-  await page.getByRole('heading', { name: 'Back' }).click();
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('Office name').click();
   await page.getByLabel('Office name').fill('KanTime Healthcare System');
@@ -95,12 +93,12 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('checkbox').check();
-  await page.waitForTimeout(2000);
+  
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(1000);
+  
   await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(4000);
+  
 });
 test('Settings Flows', async () => {
   await page
@@ -178,11 +176,11 @@ test('Settings Flows', async () => {
   const Bookinginbox1 = await createMailSurpEmail();
   await page.getByLabel('Email*').fill(Bookinginbox1!);
  myEmails.therapistEmail=Bookinginbox1!
-
+ console.log(myEmails)
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Therapist').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-  await page.waitForTimeout(2000);
+ 
   await page.reload();
 
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -195,11 +193,11 @@ test('Settings Flows', async () => {
  const invitesinbox1 = await createMailSurpEmail();
   await page.getByLabel('Email*').fill(invitesinbox1!);
  myEmails.intakeAdminEmail=invitesinbox1!
-
+console.log(myEmails)
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Intake Admin').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-  await page.waitForTimeout(2000);
+ 
   await page.reload();
 // Booking widget
   await page.getByText('Booking widget').click();

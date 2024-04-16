@@ -323,7 +323,7 @@ await page
   .getByRole('img')
   .click();
 await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-await page.waitForTimeout(1000);
+
 
       });
       test('Insurance Tab', async () => {
@@ -337,7 +337,7 @@ await page.waitForTimeout(1000);
       await page.getByPlaceholder('Start typing here').fill('Hey I am Adding Clients File Details here so check this');
       await page.getByRole('button', { name: 'Save' }).nth(1).click();
       await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
-      await page.waitForTimeout(2000);
+      
       await page.locator('div').filter({ hasText: /^StatusSubmittedEdit$/ }).getByRole('button').nth(1).click();
       await page.getByLabel('Select status').click();
       await page.getByRole('option', { name: 'Sent' }).click();

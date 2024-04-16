@@ -87,14 +87,14 @@ test('Intake admin login and  onboarding ', async ({ request }) => {
             await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
             await page.getByText('ABSOLUTE TOTAL CARE-').click();
             await page.getByRole('button', { name: 'Save' }).nth(1).click();
-            // await page
-            //   .locator('span')
-            //   .filter({ hasText: 'Current Status :Inquiry' })
-            //   .locator('div')
-            //   .nth(2)
-            //   .click();
-            // await page.getByRole('option', { name: 'Initial consultation call' }).click();
-            // await page.waitForTimeout(1000);
+            await page
+              .locator('span')
+              .filter({ hasText: 'Current Status :Inquiry' })
+              .locator('div')
+              .nth(2)
+              .click();
+            await page.getByRole('option', { name: 'Initial consultation call' }).click();
+            
             await page.getByLabel('Send inquiry form').click();
             await page.getByRole('button', { name: 'Send' }).nth(1).click();
            
