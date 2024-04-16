@@ -1,7 +1,7 @@
 import { test, type Page } from '@playwright/test';
+import path from 'path';
 import { generatePasswordlessLoginLink } from '../helpers/api';
 import { createMailSurpEmail } from '../helpers/mailsurp';
-import MailSlurp from 'mailslurp-client';
 import myEmails from '../localemails.js/emails';
 
 // Annotate entire file as serial.
@@ -35,7 +35,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
     .locator(
       '#root > div._layout_10ldc_1 > div > div._onboardProfile_bqqcv_1 > div > div > div > div._imagePicker_bqqcv_35 > input[type=file]'
     )
-    .setInputFiles('../files/ther_img.jpg');
+    .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
   // Onboarding Flows
   await page.getByPlaceholder('Enter first name').click();
@@ -177,7 +177,7 @@ test('Settings Flows', async () => {
   //
   const Bookinginbox1 = await createMailSurpEmail();
   await page.getByLabel('Email*').fill(Bookinginbox1!);
- myEmails.therapistEmail=Bookinginbox1!
+  myEmails.therapistEmail = Bookinginbox1!;
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Therapist').check();
@@ -192,16 +192,16 @@ test('Settings Flows', async () => {
   await page.getByLabel('Last Name*').fill('1');
   await page.getByLabel('Email*').click();
   //
- const invitesinbox1 = await createMailSurpEmail();
+  const invitesinbox1 = await createMailSurpEmail();
   await page.getByLabel('Email*').fill(invitesinbox1!);
- myEmails.intakeAdminEmail=invitesinbox1!
+  myEmails.intakeAdminEmail = invitesinbox1!;
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Intake Admin').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(2000);
   await page.reload();
-// Booking widget
+  // Booking widget
   await page.getByText('Booking widget').click();
   await page.getByRole('button', { name: 'Generate link' }).nth(1).click();
   // const page1Promise = page.waitForEvent('popup');
@@ -223,7 +223,6 @@ test('Settings Flows', async () => {
     .fill('Absolute');
   await page.getByText('ABSOLUTE TOTAL CARE-').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
-  
 });
 test('DP Update and Logout', async () => {
   await page.locator('div').filter({ hasText: 'Owner Team' }).nth(3).click();
@@ -232,10 +231,9 @@ test('DP Update and Logout', async () => {
     .locator(
       '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
     )
-    .setInputFiles('../files/ther_img.jpg');
+    .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.locator('div').filter({ hasText: 'Owner Team' }).nth(3).click();
   await page.getByRole('menuitem', { name: 'Logout' }).click();
-
 });
