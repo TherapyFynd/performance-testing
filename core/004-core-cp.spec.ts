@@ -162,7 +162,7 @@ test('Upload Files', async () => {
       'body > div.MuiDialog-root.MuiModal-root.css-mgrfy0 > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div._fileUploadContent_16kg3_14 > div._uploadDocWidget_2o3fs_1 > div > input[type=file]'
     )
     .setInputFiles(path.join(__dirname + '../files/dummy.pdf'));
-
+  await page.getByRole('button', { name: 'Cancle' }).nth(1).click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
 });
 test('Logout Portal', async () => {

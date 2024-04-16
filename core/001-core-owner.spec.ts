@@ -180,7 +180,7 @@ test('Settings Flows', async () => {
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Therapist').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
- 
+  await page.waitForTimeout(2000);
   await page.reload();
 
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -197,7 +197,7 @@ console.log(myEmails)
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Intake Admin').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
- 
+  await page.waitForTimeout(2000);
   await page.reload();
   // Booking widget
   await page.getByText('Booking widget').click();
