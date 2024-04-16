@@ -34,7 +34,6 @@ var myEmails = {
   supervisorEmail: '',
   clientEmail: '',
   intakeAdminEmail: '',
-  
 };
 
 export default myEmails;
