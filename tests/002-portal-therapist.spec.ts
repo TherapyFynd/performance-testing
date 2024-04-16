@@ -2,41 +2,26 @@ import { test, type Page } from '@playwright/test';
 import { TIMEOUT } from 'dns';
 import { MailSlurp } from "mailslurp-client";
 import { BASE_BACKEND_URL, isRunningOnLocal, localPort } from '../localemails.js/const';
+import { generatePasswordlessLoginLink } from '../helpers/api';
+import myEmails from '../localemails.js/emails';
+import { createMailSurpEmail } from '../helpers/mailsurp';
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-const mailslurp = new MailSlurp({ apiKey: "cb93d5b651eb262ee00ca4031eb6b943fe69513666ba5f147acaa6acf24ddc9a" });
-test.beforeAll(async ({ browser }) => {
-  page = await browser.newPage();
-});
+
 
 test.afterAll(async () => {
   await page.close();
 });
 
 test('Therapist login and onboarding ', async ({request}) => {
-        const mailslurp = new MailSlurp({ apiKey: "cb93d5b651eb262ee00ca4031eb6b943fe69513666ba5f147acaa6acf24ddc9a" });
-        const inbox = await mailslurp.inboxController.createInbox({});
-        // console.log(inbox);
-        // console.log(inbox.emailAddress);
-        const data = await request.post(
-            // 'https://leafs-ehr-nest-stage-nmvorvf7ga-as.a.run.app/test/get-passwordless-login-link-by-email',
-            `${BASE_BACKEND_URL}/test/get-passwordless-login-link-by-email`,
-            {
-            headers:{
-             
-                'Content-Type': 'application/json',
-                'x-test-key': `omnipractice_random_a83500678d`,
-              },
-              data: isRunningOnLocal
-               ? { email: inbox.emailAddress, isTestMode: true, localPort: localPort }
-               : { email:"eea9e27b-6752-476f-bfb8-a9a7be341ef7@mailslurp.net" ,isTestMode: true },
-            },
-          ); 
-        // console.log(data);
-        const c = await data.text();
-          await page.goto(c);
+ 
+  const data = await generatePasswordlessLoginLink({
+    email: myEmails.therapistEmail,
+    request: request,
+  });
+  await page.goto(data!);
         // Onbaording flows for therapist
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Therapist');
@@ -118,9 +103,9 @@ await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').cli
   await page1.getByPlaceholder('Enter last name').fill('Willy');
   await page1.getByPlaceholder('Enter email').click();
   // 
-  const Bookinginbox = await mailslurp.inboxController.createInbox({});
-  await page1.getByPlaceholder('Enter email').fill(Bookinginbox.emailAddress);
-  // await page1.getByPlaceholder('Enter email').fill('therapistsuperman+3@gmail.com');
+  const invitesinbox2 = await createMailSurpEmail();
+  await page.getByLabel('Enter email').fill(invitesinbox2!);
+  
   await page1.getByPlaceholder('Enter phone').click();
   await page1.getByPlaceholder('Enter phone').fill('(890) 553-00024');
   await page1.getByRole('button', { name: 'Request appointment' }).nth(1).click();
@@ -422,9 +407,9 @@ await page.getByLabel('Last Name*').click();
 await page.getByLabel('Last Name*').fill('Das');
 await page.getByLabel('Email*').click();
 // 
-const clientinbox = await mailslurp.inboxController.createInbox({});
-await page.getByLabel('Email*').fill(clientinbox.emailAddress);
-// await page.getByLabel('Email*').fill('createtherapist+6@gmail.com');
+const clientinbox1 = await createMailSurpEmail();
+await page.getByLabel('Email*').fill(clientinbox1!);
+
 await page.getByRole('button', { name: 'Continue' }).nth(1).click();
 await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
   
@@ -440,8 +425,9 @@ await page.getByLabel('Last Name*').click();
 await page.getByLabel('Last Name*').fill('Kumar');
 await page.getByLabel('Email*').click();
 // 
-const Minorinbox = await mailslurp.inboxController.createInbox({});
-await page.getByLabel('Email*').fill(Minorinbox.emailAddress);
+const clientinbox2 = await createMailSurpEmail();
+await page.getByLabel('Email*').fill(clientinbox2!);
+
 await page.getByRole('button', { name: 'Next' }).nth(1).click();
 await page.getByLabel('First Name*').click();
 await page.getByLabel('First Name*').fill('Venkatesh');
@@ -449,9 +435,9 @@ await page.getByLabel('Last Name*').click();
 await page.getByLabel('Last Name*').fill('Prasad');
 await page.getByLabel('Email*').click();
 // 
-const Minor1inbox = await mailslurp.inboxController.createInbox({});
-await page.getByLabel('Email*').fill(Minor1inbox.emailAddress);
-// await page.getByLabel('Email*').fill('a---1@gmail.com');
+const clientinbox3 = await createMailSurpEmail();
+await page.getByLabel('Email*').fill(clientinbox3!);
+
 await page.getByLabel('Guardian relationship to').click();
 await page.getByLabel('Guardian relationship to').fill('Brother');
 await page.getByRole('button', { name: 'Next' }).nth(1).click();
@@ -470,9 +456,9 @@ await page.getByLabel('Last Name*').click();
 await page.getByLabel('Last Name*').fill('Das');
 await page.getByLabel('Email*').click();
 // 
-const Coupleinbox = await mailslurp.inboxController.createInbox({});
-await page.getByLabel('Email*').fill(Coupleinbox.emailAddress);
-// await page.getByLabel('Email*').fill('pp1@gmail.com');
+const clientinbox4 = await createMailSurpEmail();
+await page.getByLabel('Email*').fill(clientinbox4!);
+
 await page.getByRole('button', { name: 'Next' }).nth(1).click();
 await page.getByLabel('First Name*').click();
 await page.getByLabel('First Name*').fill('Poornima');
@@ -480,9 +466,9 @@ await page.getByLabel('Last Name*').click();
 await page.getByLabel('Last Name*').fill('Das');
 await page.getByLabel('Email*').click();
 // 
-const Couple1inbox = await mailslurp.inboxController.createInbox({});
-await page.getByLabel('Email*').fill(Couple1inbox.emailAddress);
-// await page.getByLabel('Email*').fill('pp+1@gmail.com');
+const clientinbox5 = await createMailSurpEmail();
+await page.getByLabel('Email*').fill(clientinbox5!);
+
 await page.getByLabel('Phone').click();
 await page.getByLabel('Phone').fill('(506) 704-23454');
 await page.getByRole('button', { name: 'Next' }).nth(1).click();
@@ -491,8 +477,7 @@ await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
 await page.waitForTimeout(2000)
 
   });
-
-  test('Create Appoinment', async () => {
+ test('Create Appoinment', async () => {
 // Create Appoinments
 await page.locator('div').filter({ hasText: /^Calendar$/ }).getByRole('img').click();
 await page.getByRole('button', { name: 'Month' }).click();
@@ -698,6 +683,7 @@ await page.waitForTimeout(2000);
     await page.getByRole('button', { name: 'Sign' }).nth(1).click();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.waitForTimeout(1000);
+    await page.getByRole('tab', { name: 'Sessions' }).click();
     await page.getByText('Upcoming').click();
     await page.waitForTimeout(4000);
     await page.getByText('Therapist Automation Testing').click();

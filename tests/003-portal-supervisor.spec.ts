@@ -2,41 +2,25 @@ import { test, type Page } from '@playwright/test';
 import { TIMEOUT } from 'dns';
 import { MailSlurp } from "mailslurp-client";
 import { BASE_BACKEND_URL, isRunningOnLocal, localPort } from '../localemails.js/const';
+import { generatePasswordlessLoginLink } from '../helpers/api';
+import myEmails from '../localemails.js/emails';
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-const mailslurp = new MailSlurp({ apiKey: "cb93d5b651eb262ee00ca4031eb6b943fe69513666ba5f147acaa6acf24ddc9a" });
-test.beforeAll(async ({ browser }) => {
-  page = await browser.newPage();
-});
+
 
 test.afterAll(async () => {
   await page.close();
 });
 
 test('Supervisor login and onboarding ', async ({request}) => {
-        const mailslurp = new MailSlurp({ apiKey: "cb93d5b651eb262ee00ca4031eb6b943fe69513666ba5f147acaa6acf24ddc9a" });
-        const inbox = await mailslurp.inboxController.createInbox({});
-        // console.log(inbox);
-        // console.log(inbox.emailAddress);
-        const data = await request.post(
-            // 'https://leafs-ehr-nest-stage-nmvorvf7ga-as.a.run.app/test/get-passwordless-login-link-by-email',
-            `${BASE_BACKEND_URL}/test/get-passwordless-login-link-by-email`,
-            {
-            headers:{
-             
-                'Content-Type': 'application/json',
-                'x-test-key': `omnipractice_random_a83500678d`,
-              },
-              data: isRunningOnLocal
-              ? { email: inbox.emailAddress, isTestMode: true, localPort: localPort }
-              : { email: "3afb7306-381a-46a9-9d4f-feec05ea7bcb@mailslurp.net", isTestMode: true },
-            },
-          ); 
-        // console.log(data);
-        const c = await data.text();
-          await page.goto(c);
+  const data = await generatePasswordlessLoginLink({
+    email: myEmails.supervisorEmail,
+    request: request,      
+  });
+  await page.goto(data!); 
+  
           // Onbaording flows for Supervisor
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Supervisor');
