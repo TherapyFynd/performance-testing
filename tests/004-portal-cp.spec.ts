@@ -2,11 +2,15 @@ import { test, type Page } from '@playwright/test';
 import { TIMEOUT } from 'dns';
 import { MailSlurp } from "mailslurp-client";
 import { BASE_BACKEND_URL } from '../localemails.js/const';
+import { createMailSurpEmail } from '../helpers/mailsurp';
+import { generatePasswordlessLoginLink } from '../helpers/api';
+import myEmails from '../localemails.js/emails';
+import path from 'path';
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-const mailslurp = new MailSlurp({ apiKey: "cb93d5b651eb262ee00ca4031eb6b943fe69513666ba5f147acaa6acf24ddc9a" });
+
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
 });
@@ -16,26 +20,15 @@ test.afterAll(async () => {
 });
 
 test('Client Portal login and onboarding ', async ({request}) => {
-        const mailslurp = new MailSlurp({ apiKey: "cb93d5b651eb262ee00ca4031eb6b943fe69513666ba5f147acaa6acf24ddc9a" });
-        const inbox = await mailslurp.inboxController.createInbox({});
-        // console.log(inbox);
-        // console.log(inbox.emailAddress);
-        const data = await request.post(
-          `${BASE_BACKEND_URL}/test/get-passwordless-login-link-by-email`,
-            {
-            headers:{
-             
-                'Content-Type': 'application/json',
-                'x-test-key': `omnipractice_random_a83500678d`,
-              },
-              data: { email: 
-              
-              "6a072d88-e90f-4489-8179-1814b8012df4@mailslurp.net", isTestMode: true },
-            },
-          ); 
-        // console.log(data);
-        const c = await data.text();
-          await page.goto(c);
+  
+
+  const data = await generatePasswordlessLoginLink({
+    email: myEmails.clientEmail,
+    request: request,
+  });
+
+  // goto page
+  await page.goto(data!);       
 // onboarding Flow
 await page.getByPlaceholder('Enter first name').click();
 await page.getByPlaceholder('Enter first name').fill('Automation');
@@ -119,7 +112,7 @@ await page.getByRole('button').click();
         test('Personal Infomation', async () => {
             await page.locator('button:nth-child(5)').first().click();
 await page.getByRole('menuitem', { name: 'Profile' }).click();
-await page.locator('#root > div._clientPortalLayout_10ldc_25 > div > div > div > div._userNameDetailsContainer_io6q5_18 > div > div._imagePicker_io6q5_27 > input[type=file]').setInputFiles("C:/Users/Rajesh/Downloads/therapist.jpg");
+await page.locator('#root > div._clientPortalLayout_10ldc_25 > div > div > div > div._userNameDetailsContainer_io6q5_18 > div > div._imagePicker_io6q5_27 > input[type=file]').setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
 await page.getByLabel('Pronouns').click();
 await page.getByRole('option', { name: 'He/Him' }).click();
@@ -145,10 +138,14 @@ await page.locator('button:nth-child(5)').first().click();
 await page.getByRole('menuitem', { name: 'My Uploads' }).click();
 await page.getByRole('button', { name: 'Add file' }).nth(1).click();
 await page.getByLabel('Title').click();
-await page.getByLabel('Title').fill('Test1');
-await page.locator('body > div.MuiDialog-root.MuiModal-root.css-mgrfy0 > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div._fileUploadContent_16kg3_14 > div._uploadDocWidget_2o3fs_1 > div > input[type=file]').setInputFiles("C:/Users/Rajesh/Downloads/testpdf.pdf");
-await page.getByRole('button', { name: 'Save' }).nth(1).click();
-await page.waitForTimeout(2000);
+await page.getByLabel('Title').fill('Test pdf');
+await page
+    .locator(
+      'body > div.MuiDialog-root.MuiModal-root.css-mgrfy0 > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div._fileUploadContent_16kg3_14 > div._uploadDocWidget_2o3fs_1 > div > input[type=file]'
+    )
+    .setInputFiles(path.join(__dirname + '../files/dummy.pdf'));
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.getByText('Cancel').click();
         });
 
 //         test('Multi-Client Flows Select',async () =>  { 

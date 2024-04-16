@@ -4,11 +4,15 @@ import { MailSlurp } from "mailslurp-client";
 import { BASE_BACKEND_URL, isRunningOnLocal, localPort } from '../localemails.js/const';
 import { generatePasswordlessLoginLink } from '../helpers/api';
 import myEmails from '../localemails.js/emails';
+import path from 'path';
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
 
+test.beforeAll(async ({ browser }) => {
+  page = await browser.newPage();
+});
 
 test.afterAll(async () => {
   await page.close();
@@ -146,7 +150,7 @@ test('Supervision Flow', async () => {
   test('DP Update and Logout', async () => {
     await page.locator('div').filter({ hasText: 'Supervisor' }).nth(3).click();
 await page.getByRole('menuitem', { name: 'Profile' }).click();
-await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]').setInputFiles("C:/Users/Rajesh/Downloads/therapist.jpg");
+await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]').setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page.locator('div').filter({ hasText: 'Supervisor' }).nth(3).click();

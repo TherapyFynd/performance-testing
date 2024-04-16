@@ -42,9 +42,9 @@ test('Intake admin login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Enter last name').fill('Admin');
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(3000);
   await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(3000);
 });
 test('Intake tab', async () => {
   await page

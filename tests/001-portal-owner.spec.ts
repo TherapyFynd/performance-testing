@@ -10,6 +10,7 @@ import {
 import { createMailSurpEmail } from '../helpers/mailsurp';
 import { generatePasswordlessLoginLink } from '../helpers/api';
 import myEmails from '../localemails.js/emails';
+import path from 'path';
 
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
@@ -40,7 +41,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
     .locator(
       '#root > div._layout_10ldc_1 > div > div._onboardProfile_bqqcv_1 > div > div > div > div._imagePicker_bqqcv_35 > input[type=file]'
     )
-    .setInputFiles('C:/Users/Rajesh/Downloads/therapist.jpg');
+    .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
   // Onboarding Flows
   await page.getByPlaceholder('Enter first name').click();
@@ -69,8 +70,6 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByLabel('Address Line').click();
   await page.getByLabel('Address Line').fill('New York City');
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
-  await page.getByRole('heading', { name: 'Skip' }).click();
-  await page.getByRole('heading', { name: 'Back' }).click();
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('Office name').click();
   await page.getByLabel('Office name').fill('KanTime Healthcare System');
@@ -86,6 +85,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Zip code').fill('561202');
   await page.getByLabel('Make default location').check();
   await page.getByRole('button', { name: 'Add location' }).nth(1).click();
+  await page.waitForTimeout(1000);
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('CPT Code').click();
@@ -100,12 +100,12 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('checkbox').check();
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(3000);
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(3000);
   await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(4000);
+  await page.waitForTimeout(3000);
 });
 
 test('Settings Flows', async () => {
@@ -185,7 +185,7 @@ test('Settings Flows', async () => {
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Therapist').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(4000);
   await page.reload();
   // Invite team members
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -203,7 +203,7 @@ test('Settings Flows', async () => {
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Supervisor').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(4000);
   await page.reload();
   await page.getByText('Role settings').click();
 
@@ -236,8 +236,8 @@ test('Settings Flows', async () => {
   await page1.getByPlaceholder('Enter last name').fill('Willy');
   await page1.getByPlaceholder('Enter email').click();
   //
-  const invitesinbox1 = await createMailSurpEmail();
-  await page.getByLabel('Enter email').fill(invitesinbox1!);
+  const inviteinbox1 = await createMailSurpEmail();
+  await page1.getByPlaceholder('Enter email').fill(inviteinbox1!);
   
   await page1.getByPlaceholder('Enter phone').click();
   await page1.getByPlaceholder('Enter phone').fill('(893) 553-00024');
@@ -452,7 +452,7 @@ test('Forms Tab', async () => {
     .locator(
       '#root > div > div > div._formContainer_1srfm_1 > div > div._editor_1srfm_16 > input[type=file]'
     )
-    .setInputFiles('C:/Users/Rajesh/Downloads/testpdf.pdf');
+    .setInputFiles(path.join(__dirname + '../files/dummy.pdf'));
   await page.getByLabel('Add Provider signature').check();
   await page.getByRole('button', { name: 'Preview' }).nth(1).click();
   await page.getByRole('button').click();
@@ -1188,7 +1188,7 @@ test('DP Update and Logout', async () => {
     .locator(
       '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
     )
-    .setInputFiles('C:/Users/Rajesh/Downloads/therapist.jpg');
+    .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   // await page

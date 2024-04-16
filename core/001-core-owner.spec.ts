@@ -43,6 +43,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Enter last name').click();
   await page.getByPlaceholder('Enter last name').fill('Team');
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+  // Practice Name
   await page.getByPlaceholder('Enter your practice name').click();
   await page
     .getByPlaceholder('Enter your practice name')
@@ -64,6 +65,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByLabel('Address Line').click();
   await page.getByLabel('Address Line').fill('New York City');
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
+// Add locations
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('Office name').click();
   await page.getByLabel('Office name').fill('KanTime Healthcare System');
@@ -80,6 +82,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByLabel('Make default location').check();
   await page.getByRole('button', { name: 'Add location' }).nth(1).click();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
+// Add New Services
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('CPT Code').click();
   await page.getByRole('combobox', { name: 'CPT Code' }).fill('90832');
@@ -93,11 +96,12 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('checkbox').check();
-
+  await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-
+  await page.waitForTimeout(3000);
   await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
+  await page.waitForTimeout(3000);
 });
 test('Settings Flows', async () => {
   await page
