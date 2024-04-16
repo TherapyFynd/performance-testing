@@ -13,7 +13,7 @@ test.describe.configure({ mode: 'serial' });
 
 let page: Page;
 const mailslurp = new MailSlurp({
-  apiKey: 'e065b0350cd442089b49035587b92e00c9e26f6004adce9e2ac12acafa0ac7a1',
+  apiKey: 'cb93d5b651eb262ee00ca4031eb6b943fe69513666ba5f147acaa6acf24ddc9a',
 });
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
@@ -25,7 +25,7 @@ test.afterAll(async () => {
 
 test('Owner login and  onboarding ', async ({ request }) => {
   const mailslurp = new MailSlurp({
-    apiKey: 'e065b0350cd442089b49035587b92e00c9e26f6004adce9e2ac12acafa0ac7a1',
+    apiKey: 'cb93d5b651eb262ee00ca4031eb6b943fe69513666ba5f147acaa6acf24ddc9a',
   });
   const inbox = await mailslurp.inboxController.createInbox({});
 
@@ -358,7 +358,7 @@ test('Settings Flows', async () => {
   await page.waitForTimeout(1000);
   await page
     .locator(
-      '#root > div._layout_10ldc_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(1) > div._sidebarHeader_148j7_138 > svg > path'
+      '#root > div._layout_10ldc_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(3) > div._sidebarHeader_148j7_138 > svg > path'
     )
     .click();
 });

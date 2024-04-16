@@ -155,6 +155,7 @@ await page.getByRole('button', { name: 'Create new' }).nth(1).click();
 
     // await page.getByLabel('Email*').fill('createtherapist+6@gmail.com');
     await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+    await page.getByLabel('Therapist Automation Forms').check();
     await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
       
       
@@ -263,25 +264,97 @@ await page.getByRole('button', { name: 'Create new' }).nth(1).click();
     await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     
-    
       });
       test('Client File', async () => {
         //  Client file
     await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
     await page.getByText('Rajesh Das').click();
+// Info and Settings
+await page.getByRole('button', { name: 'Info & settings' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Rajesh');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('Das');
+await page.getByLabel('Pronouns').click();
+await page.getByText('She/They').click();
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
 
-    // Forms Section
-await page.getByRole('tab', { name: 'Forms' }).click();
-await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
-await page.getByRole('tab', { name: 'Personal' }).click();
-await page.getByText('Questionnaires').click();
-await page.getByLabel('Select Forms to send').click();
-await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Therapist Automation Testing');
-await page.getByRole('option', { name: 'Therapist Automation Testing' }).click();
-await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
-await page.getByRole('button', { name: 'Send' }).nth(1).click();
+//  Payment tab
+  await page.getByRole('tab', { name: 'Payment' }).click();
+  await page.getByLabel('Insurance').check();
+  await page.getByLabel('Client itself').check();
+  await page.getByPlaceholder('MM/DD/YYYY').first().click();
+  await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/1999');
+  await page.getByLabel('Sex').click();
+  await page.getByRole('option', { name: 'Male', exact: true }).click();
+  await page.getByPlaceholder('Phone').click();
+  await page.getByPlaceholder('Phone').fill('(734) 573-25415');
+  await page.getByLabel('Address line').click();
+  await page.getByLabel('Address line').fill('New City main office');
+  await page.getByLabel('State').click();
+  await page.getByRole('combobox', { name: 'State' }).fill('Utah');
+  await page.getByRole('option', { name: 'Utah' }).click();
+  await page.getByLabel('City').click();
+  await page.getByRole('combobox', { name: 'City' }).fill('Roy');
+  await page.getByRole('option', { name: 'Roy' }).click();
+  await page.getByLabel('Zip code').click();
+  await page.getByLabel('Zip code').fill('678203');
+  await page.getByLabel('Insurance Company').click();
+  await page.getByLabel('Insurance Company').fill('Absolute');
+  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  await page.getByLabel('Member ID').click();
+  await page.getByLabel('Member ID').fill('GHR345');
+  await page.getByLabel('Group ID').click();
+  await page.getByLabel('Group ID').fill('GGH3');
+  await page.getByLabel('Plan ID').click();
+  await page.getByLabel('Plan ID').fill('KKH45');
+  await page.getByPlaceholder('MM/DD/YYYY').nth(1).click();
+  await page.getByPlaceholder('MM/DD/YYYY').nth(1).fill('10/10/2000');
+  await page.getByPlaceholder('MM/DD/YYYY').nth(2).click();
+  await page.getByPlaceholder('MM/DD/YYYY').nth(2).fill('10/10/2030');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.locator('div').filter({ hasText: /^Basic InfoIndividual$/ }).getByRole('button').click();
+
+    // Create Appoinment
+
+await page.getByRole('button', { name: 'Add' }).nth(3).click();
+await page
+  .getByRole('menuitem', { name: 'Appointment' })
+  .getByRole('img')
+  .click();
+await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+await page.waitForTimeout(1000);
 
       });
+      test('Insurance Tab', async () => {
+        await page.locator('div').filter({ hasText: /^Insurance$/ }).getByRole('img').click();
+        await page.getByRole('button', { name: 'Select all' }).nth(1).click();
+        await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
+        await page.getByRole('tab', { name: 'Claims' }).click(); 
+        await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(1) > td:nth-child(8) > span > button > button > span > span._label_ns5gx_15').click();
+        await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+      await page.getByPlaceholder('Start typing here').click();
+      await page.getByPlaceholder('Start typing here').fill('Hey I am Adding Clients File Details here so check this');
+      await page.getByRole('button', { name: 'Save' }).nth(1).click();
+      await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
+      await page.waitForTimeout(2000);
+      await page.locator('div').filter({ hasText: /^StatusSubmittedEdit$/ }).getByRole('button').nth(1).click();
+      await page.getByLabel('Select status').click();
+      await page.getByRole('option', { name: 'Sent' }).click();
+      await page.getByPlaceholder('Remarks').click();
+      await page.getByPlaceholder('Remarks').fill('Sent this Payer Details to Change Healthcare');
+      await page.getByRole('button', { name: 'Save' }).nth(1).click();
+      await page.locator('div').filter({ hasText: /^StatusSentEdit$/ }).getByRole('button').nth(1).click();
+      await page.getByLabel('Sent').click();
+      await page.getByRole('option', { name: 'Paid', exact: true }).click();
+      await page.getByPlaceholder('Remarks').click();
+      await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
+      await page.getByRole('button', { name: 'Save' }).nth(1).click();
+      await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._header_174vt_7 > span > button > svg > path').click();
+      await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+      
+      });
+      
       test('Update and Logout Flow', async () => {
         await page.locator('div').filter({ hasText: 'Therapist' }).nth(3).click();
     await page.getByRole('menuitem', { name: 'Profile' }).click();

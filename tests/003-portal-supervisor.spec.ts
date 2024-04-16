@@ -6,7 +6,7 @@ import { BASE_BACKEND_URL, isRunningOnLocal, localPort } from '../localemails.js
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-const mailslurp = new MailSlurp({ apiKey: "e065b0350cd442089b49035587b92e00c9e26f6004adce9e2ac12acafa0ac7a1" });
+const mailslurp = new MailSlurp({ apiKey: "cb93d5b651eb262ee00ca4031eb6b943fe69513666ba5f147acaa6acf24ddc9a" });
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
 });
@@ -16,7 +16,7 @@ test.afterAll(async () => {
 });
 
 test('Supervisor login and onboarding ', async ({request}) => {
-        const mailslurp = new MailSlurp({ apiKey: "e065b0350cd442089b49035587b92e00c9e26f6004adce9e2ac12acafa0ac7a1" });
+        const mailslurp = new MailSlurp({ apiKey: "cb93d5b651eb262ee00ca4031eb6b943fe69513666ba5f147acaa6acf24ddc9a" });
         const inbox = await mailslurp.inboxController.createInbox({});
         // console.log(inbox);
         // console.log(inbox.emailAddress);
@@ -31,7 +31,7 @@ test('Supervisor login and onboarding ', async ({request}) => {
               },
               data: isRunningOnLocal
               ? { email: inbox.emailAddress, isTestMode: true, localPort: localPort }
-              : { email: "4842213d-e1b5-455f-8645-4de96ac024f8@mailslurp.net", isTestMode: true },
+              : { email: "3afb7306-381a-46a9-9d4f-feec05ea7bcb@mailslurp.net", isTestMode: true },
             },
           ); 
         // console.log(data);
@@ -72,7 +72,7 @@ test('Supervisor login and onboarding ', async ({request}) => {
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
   await page.getByLabel('Monday').check();
-  await page.locator('#root > div._layout_10ldc_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(1) > div._sidebarHeader_148j7_138 > svg > path').click();
+  await page.locator('#root > div._layout_10ldc_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(3) > div._sidebarHeader_148j7_138 > svg > path').click();
      });
 
   test('Create Appoinment', async () => {

@@ -6,7 +6,7 @@ import { BASE_BACKEND_URL } from '../localemails.js/const';
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-const mailslurp = new MailSlurp({ apiKey: "50ecae5177178143c7df08292c6ec99ae0f600a7084c8527fb556c1a9cbe79dc" });
+const mailslurp = new MailSlurp({ apiKey: "cb93d5b651eb262ee00ca4031eb6b943fe69513666ba5f147acaa6acf24ddc9a" });
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
 });
@@ -16,7 +16,7 @@ test.afterAll(async () => {
 });
 
 test('Client Portal login and onboarding ', async ({request}) => {
-        const mailslurp = new MailSlurp({ apiKey: "50ecae5177178143c7df08292c6ec99ae0f600a7084c8527fb556c1a9cbe79dc" });
+        const mailslurp = new MailSlurp({ apiKey: "cb93d5b651eb262ee00ca4031eb6b943fe69513666ba5f147acaa6acf24ddc9a" });
         const inbox = await mailslurp.inboxController.createInbox({});
         // console.log(inbox);
         // console.log(inbox.emailAddress);
@@ -29,7 +29,8 @@ test('Client Portal login and onboarding ', async ({request}) => {
                 'x-test-key': `omnipractice_random_a83500678d`,
               },
               data: { email: 
-              "049b0217-4794-402f-8bcf-baaa126e3b7a@mailslurp.net", isTestMode: true },
+              
+              "6a072d88-e90f-4489-8179-1814b8012df4@mailslurp.net", isTestMode: true },
             },
           ); 
         // console.log(data);

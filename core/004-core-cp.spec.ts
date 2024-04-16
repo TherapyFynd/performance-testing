@@ -17,7 +17,7 @@ test.afterAll(async () => {
   await page.close();
 });
 
-test('Owner login and  onboarding ', async ({ request }) => {
+test('Client Portal login and  onboarding ', async ({ request }) => {
   
 
   const data = await generatePasswordlessLoginLink({
@@ -28,16 +28,8 @@ test('Owner login and  onboarding ', async ({ request }) => {
   // goto page
   await page.goto(data!);
 
-  // Onboarding Flows for Owner
-
-  // DP
-  await page
-    .locator(
-      '#root > div._layout_10ldc_1 > div > div._onboardProfile_bqqcv_1 > div > div > div > div._imagePicker_bqqcv_35 > input[type=file]'
-    )
-    .setInputFiles('../files/ther_img.jpg');
-  await page.getByRole('button', { name: 'Done' }).nth(1).click();
-  // onboarding Flow
+  // Onboarding Flows for Client Portal
+  
 await page.getByPlaceholder('Enter first name').click();
 await page.getByPlaceholder('Enter first name').fill('Automation');
 await page.getByPlaceholder('Enter last name').click();
@@ -84,7 +76,7 @@ await page.getByRole('heading', { name: 'Therapist 1' }).click();
 
         });
         
-        test('Booking Appoinment', async () => {
+        test('Request Booking Appoinment', async () => {
             //  Book Appoinment
 await page.getByRole('button', { name: 'Book appointment' }).nth(1).click();
 await page.getByLabel('Select service').click();
@@ -96,7 +88,7 @@ await page.getByRole('button', { name: 'Request appointment' }).nth(1).click();
 
         });
 
-        test('Filling Form', async () => {
+        test('Form Filling', async () => {
 // Filling the form
 await page.locator('button:nth-child(2)').first().click();
 await page.locator('#root > div._clientPortalLayout_10ldc_25 > div > div > div._formsItemContainer_4be5w_12 > div > div:nth-child(1) > div > div._formIconAndNameContainer_1pbgi_16 > p').click();
@@ -148,6 +140,7 @@ await page.getByRole('button', { name: 'Add file' }).nth(1).click();
 await page.getByLabel('Title').click();
 await page.getByLabel('Title').fill('Test pdf ');
 await page.locator('body > div.MuiDialog-root.MuiModal-root.css-mgrfy0 > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div._fileUploadContent_16kg3_14 > div._uploadDocWidget_2o3fs_1 > div > input[type=file]').setInputFiles("../files/dummy.pdf");
+
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
 
         });
