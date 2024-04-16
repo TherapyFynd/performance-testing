@@ -93,12 +93,11 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('checkbox').check();
-  
+
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  
+
   await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  
 });
 test('Settings Flows', async () => {
   await page
@@ -175,8 +174,8 @@ test('Settings Flows', async () => {
   //
   const Bookinginbox1 = await createMailSurpEmail();
   await page.getByLabel('Email*').fill(Bookinginbox1!);
- myEmails.therapistEmail=Bookinginbox1!
- console.log(myEmails)
+  myEmails.therapistEmail = Bookinginbox1!;
+  console.log(myEmails);
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Therapist').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
@@ -192,8 +191,8 @@ test('Settings Flows', async () => {
   //
   const invitesinbox1 = await createMailSurpEmail();
   await page.getByLabel('Email*').fill(invitesinbox1!);
- myEmails.intakeAdminEmail=invitesinbox1!
-console.log(myEmails)
+  myEmails.intakeAdminEmail = invitesinbox1!;
+  console.log(myEmails);
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Intake Admin').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
