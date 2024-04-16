@@ -5,11 +5,15 @@ import { BASE_BACKEND_URL, isRunningOnLocal, localPort } from '../localemails.js
 import { generatePasswordlessLoginLink } from '../helpers/api';
 import myEmails from '../localemails.js/emails';
 import { createMailSurpEmail } from '../helpers/mailsurp';
+import path from 'path';
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
 
+test.beforeAll(async ({ browser }) => {
+  page = await browser.newPage();
+});
 
 test.afterAll(async () => {
   await page.close();
@@ -104,7 +108,7 @@ await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').cli
   await page1.getByPlaceholder('Enter email').click();
   // 
   const invitesinbox2 = await createMailSurpEmail();
-  await page.getByLabel('Enter email').fill(invitesinbox2!);
+  await page1.getByPlaceholder('Enter email').fill(invitesinbox2!);
   
   await page1.getByPlaceholder('Enter phone').click();
   await page1.getByPlaceholder('Enter phone').fill('(890) 553-00024');
@@ -192,7 +196,7 @@ await page.getByRole('button', { name: 'Done' }).nth(1).click();
 await page.locator('pre').getByRole('paragraph').click();
 await page.locator('pre div').first().fill('Here I am Writing Praragraph?');
 // Add Pdf code
-await page.locator('#root > div > div > div._formContainer_1srfm_1 > div > div._editor_1srfm_16 > input[type=file]').setInputFiles("C:/Users/Rajesh/Downloads/testpdf.pdf");
+await page.locator('#root > div > div > div._formContainer_1srfm_1 > div > div._editor_1srfm_16 > input[type=file]').setInputFiles(path.join(__dirname + '../files/dummy.pdf'));
 await page.getByLabel('Add Provider signature').check();
 await page.getByRole('button', { name: 'Preview' }).nth(1).click();
 await page.getByRole('button').click();
@@ -407,8 +411,10 @@ await page.getByLabel('Last Name*').click();
 await page.getByLabel('Last Name*').fill('Das');
 await page.getByLabel('Email*').click();
 // 
-const clientinbox1 = await createMailSurpEmail();
-await page.getByLabel('Email*').fill(clientinbox1!);
+const Bookinginbox1 = await createMailSurpEmail();
+await page.getByLabel('Email*').fill(Bookinginbox1!);
+myEmails.clientEmail = Bookinginbox1!;
+console.log(myEmails);
 
 await page.getByRole('button', { name: 'Continue' }).nth(1).click();
 await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
@@ -773,7 +779,7 @@ await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').cli
   test('Update and Logout Flow', async () => {
     await page.locator('div').filter({ hasText: 'Therapist' }).nth(3).click();
 await page.getByRole('menuitem', { name: 'Profile' }).click();
-await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]').setInputFiles("C:/Users/Rajesh/Downloads/therapist.jpg");
+await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]').setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page.locator('div').filter({ hasText: 'Therapist' }).nth(3).click();
