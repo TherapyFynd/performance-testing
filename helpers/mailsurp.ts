@@ -16,6 +16,8 @@ export const createMailSurpEmail = async () => {
   try {
     const inbox = await mailslurp.inboxController.createInbox({});
     createdInboxes.push({ email: inbox.emailAddress, id: inbox.id });
+
+    console.log(`Mailsurp email created : ${inbox.emailAddress}`);
     return inbox.emailAddress;
   } catch (error) {
     console.log(`Error while creating inbox : `, error);
@@ -28,7 +30,6 @@ export const deleteMailSurpInboxes = async (ids: string[]) => {
   });
 
   try {
-    console.log(createdInboxes);
     const promise: Promise<void>[] = [];
 
     ids?.forEach((id) => {
@@ -37,6 +38,7 @@ export const deleteMailSurpInboxes = async (ids: string[]) => {
 
     await Promise.all(promise);
 
+    console.log(`Mailsurp emails deleted : ${ids?.join(',')}`);
     return true;
   } catch (error) {
     console.log(`Error while deleting inbox ${ids?.join(',')} : `, error);

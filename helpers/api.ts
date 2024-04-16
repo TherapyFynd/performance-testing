@@ -14,10 +14,8 @@ export const generatePasswordlessLoginLink = async ({
   request: APIRequestContext;
 }) => {
   try {
-    console.log(email)
     const data = await request.post(
       `${BASE_BACKEND_URL}/test/get-passwordless-login-link-by-email`,
-
       {
         headers: {
           'Content-Type': 'application/json',
@@ -32,8 +30,9 @@ export const generatePasswordlessLoginLink = async ({
           : { email: email, isTestMode: true },
       }
     );
-    console.log(data)
+
     const c = await data.text();
+    console.log(`Passwordless link generated for ${email}`);
     return c;
   } catch (error) {
     console.log(`Error while generating passwordless link for ${email}`, error);
@@ -51,7 +50,7 @@ export const deleteAccounts = async ({
     const emails = inboxes?.map((ib) => ib?.email);
     const inboxIds = inboxes?.map((ib) => ib?.id);
 
-    const data = await request.delete(`${BASE_BACKEND_URL}/test/user/delete`, {
+    await request.delete(`${BASE_BACKEND_URL}/test/user/delete`, {
       headers: {
         'Content-Type': 'application/json',
         'x-test-key': `omnipractice_random_a83500678d`,

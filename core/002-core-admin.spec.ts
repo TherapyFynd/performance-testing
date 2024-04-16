@@ -1,7 +1,7 @@
 import { test, type Page } from '@playwright/test';
+import path from 'path';
 import { generatePasswordlessLoginLink } from '../helpers/api';
 import { createMailSurpEmail } from '../helpers/mailsurp';
-import MailSlurp from 'mailslurp-client';
 import myEmails from '../localemails.js/emails';
 
 // Annotate entire file as serial.
@@ -18,8 +18,6 @@ test.afterAll(async () => {
 });
 
 test('Intake admin login and  onboarding ', async ({ request }) => {
-  
-
   const data = await generatePasswordlessLoginLink({
     email: myEmails.intakeAdminEmail,
     request: request,
@@ -35,36 +33,15 @@ test('Intake admin login and  onboarding ', async ({ request }) => {
     .locator(
       '#root > div._layout_10ldc_1 > div > div._onboardProfile_bqqcv_1 > div > div > div > div._imagePicker_bqqcv_35 > input[type=file]'
     )
-    .setInputFiles('../files/ther_img.jpg');
+    .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
-   // Onboarding Flows
-   await page.getByPlaceholder('Enter first name').click();
-   await page.getByPlaceholder('Enter first name').fill('Intake ');
-   await page.getByPlaceholder('Enter last name').click();
-   await page.getByPlaceholder('Enter last name').fill('Admin');
-   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-   await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-     
-     await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-     
-        });
-        test('Intake tab', async () => {
-            await page
-              .locator('div')
-              .filter({ hasText: /^Referrals$/ })
-              .getByRole('img')
-              .click();
-            // await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
-            await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
-            await page.getByLabel('First Name*').click();
-            await page.getByLabel('First Name*').fill('bangaloe');
-            await page.getByLabel('Last Name').click();
-            await page.getByLabel('Last Name').fill('23');
-            await page.getByLabel('Email').click();
-            //
-            
-            const Bookinginbox3 = await createMailSurpEmail();
-            await page.getByLabel('Email').fill(Bookinginbox3!);
+  // Onboarding Flows
+  await page.getByPlaceholder('Enter first name').click();
+  await page.getByPlaceholder('Enter first name').fill('Intake ');
+  await page.getByPlaceholder('Enter last name').click();
+  await page.getByPlaceholder('Enter last name').fill('Admin');
+  await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+  await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
 
             await page.getByLabel('Seeking treatment for').click();
             await page.getByRole('option', { name: 'Cancer' }).click();
