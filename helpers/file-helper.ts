@@ -1,11 +1,10 @@
 import fs from 'fs';
 import path from 'path';
-import { IInbox } from './mailsurp';
 
 const filePath = path.join(__dirname, '../inboxes.txt');
 
 export const writeJSONToFileAsync = async (
-  jsonData: IInbox[]
+  jsonData: string[]
 ): Promise<void> => {
   try {
     await fs.promises.writeFile(filePath, JSON.stringify(jsonData, null, 2));
@@ -16,10 +15,10 @@ export const writeJSONToFileAsync = async (
   }
 };
 
-export const readJSONFromFileAsync = async (): Promise<IInbox[] | null> => {
+export const readJSONFromFileAsync = async (): Promise<string[] | null> => {
   try {
     const data = await fs.promises.readFile(filePath, 'utf8');
-    const jsonData = JSON.parse(data) as IInbox[];
+    const jsonData = JSON.parse(data) as string[];
     console.log('JSON data read from file:', jsonData);
     return jsonData;
   } catch (err) {

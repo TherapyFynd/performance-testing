@@ -1,5 +1,4 @@
-import MailSlurp from 'mailslurp-client';
-import { MAILSURP_API_KEY } from '../localemails.js/const';
+import { BASE_EMAIL_NAMESPACE, TAG_NAMESPACE } from '../localemails.js/const';
 import { readJSONFromFileAsync, writeJSONToFileAsync } from './file-helper';
 
 export interface IInbox {
@@ -7,45 +6,55 @@ export interface IInbox {
   id: string;
 }
 
-export const createMailSurpEmail = async () => {
-  const mailslurp = new MailSlurp({
-    apiKey: MAILSURP_API_KEY,
-  });
+function generateRandomText(length: number): string {
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let randomText = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    randomText += characters.charAt(randomIndex);
+  }
+  return randomText;
+}
 
+export const createNewEmail = async () => {
   try {
-    const inbox = await mailslurp.inboxController.createInbox({});
-    let data: IInbox[] | null = await readJSONFromFileAsync();
+    const randomText = generateRandomText(5);
+    const email = BASE_EMAIL_NAMESPACE.replace(TAG_NAMESPACE, randomText);
+
+    let data: string[] | null = await readJSONFromFileAsync();
     if (data) {
-      data?.push({ email: inbox.emailAddress, id: inbox.id });
+      data?.push(email);
     } else {
-      data = [{ email: inbox.emailAddress, id: inbox.id }];
+      data = [email];
     }
     await writeJSONToFileAsync(data);
 
-    console.log(`Mailsurp email created : ${inbox.emailAddress}`);
-    return inbox.emailAddress;
+    console.log(`Email created : ${email}`);
+    return email;
   } catch (error) {
     console.log(`Error while creating inbox : `, error);
   }
 };
 
-export const deleteMailSurpInboxes = async (ids: string[]) => {
-  const mailslurp = new MailSlurp({
-    apiKey: MAILSURP_API_KEY,
-  });
+// Not used
+// export const deleteMailSurpInboxes = async (ids: string[]) => {
+//   const mailslurp = new MailSlurp({
+//     apiKey: MAILSURP_API_KEY,
+//   });
 
-  try {
-    const promise: Promise<void>[] = [];
+//   try {
+//     const promise: Promise<void>[] = [];
 
-    ids?.forEach((id) => {
-      promise.push(mailslurp.inboxController.deleteInbox({ inboxId: id }));
-    });
+//     ids?.forEach((id) => {
+//       promise.push(mailslurp.inboxController.deleteInbox({ inboxId: id }));
+//     });
 
-    await Promise.all(promise);
+//     await Promise.all(promise);
 
-    console.log(`Mailsurp emails deleted : ${ids?.join(',')}`);
-    return true;
-  } catch (error) {
-    console.log(`Error while deleting inbox ${ids?.join(',')} : `, error);
-  }
-};
+//     console.log(`Mailsurp emails deleted : ${ids?.join(',')}`);
+//     return true;
+//   } catch (error) {
+//     console.log(`Error while deleting inbox ${ids?.join(',')} : `, error);
+//   }
+// };

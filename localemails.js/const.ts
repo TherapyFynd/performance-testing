@@ -15,9 +15,8 @@ const TYPE_OF_URLS_FRONTEND = {
   DEV: 'https://leafs-ehr-web-dev-nmvorvf7ga-uc.a.run.app',
 };
 
-export const BASE_BACKEND_URL = TYPE_OF_URLS_BACKEND.STAGE;
+export const BASE_BACKEND_URL = TYPE_OF_URLS_BACKEND.DEV;
+export const BASE_FRONTEND_URL = TYPE_OF_URLS_FRONTEND.DEV;
 
-export const BASE_FRONTEND_URL = TYPE_OF_URLS_FRONTEND.STAGE;
-
-export const MAILSURP_API_KEY =
-'876f690e9d1b4cec76ee36fbcd6977b4c98263de331b2088178a51e3b72d40ae';
+export const TAG_NAMESPACE = `tag`;
+export const BASE_EMAIL_NAMESPACE = `z7knk.${TAG_NAMESPACE}@inbox.testmail.app`;

@@ -1,16 +1,13 @@
 import { test, type Page } from '@playwright/test';
-import { MailSlurp } from 'mailslurp-client';
+import path from 'path';
+import { generatePasswordlessLoginLink } from '../helpers/api';
+import { createNewEmail } from '../helpers/mailsurp';
 import {
-  BASE_BACKEND_URL,
   BASE_FRONTEND_URL,
   isRunningOnLocal,
   localBaseUrl,
-  localPort,
 } from '../localemails.js/const';
-import { createMailSurpEmail } from '../helpers/mailsurp';
-import { generatePasswordlessLoginLink } from '../helpers/api';
 import myEmails from '../localemails.js/emails';
-import path from 'path';
 
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
@@ -26,7 +23,7 @@ test.afterAll(async () => {
 });
 
 test('Owner login and  onboarding ', async ({ request }) => {
-  const inbox = await createMailSurpEmail();
+  const inbox = await createNewEmail();
 
   const data = await generatePasswordlessLoginLink({
     email: inbox!,
@@ -109,7 +106,11 @@ test('Owner login and  onboarding ', async ({ request }) => {
 });
 
 test('Settings Flows', async () => {
-  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  await page
+    .locator('div')
+    .filter({ hasText: /^Settings$/ })
+    .getByRole('img')
+    .click();
   //Clinican Settings Flows
   await page.getByText('Clinician settings').click();
   await page.getByPlaceholder('Enter first name').click();
@@ -177,10 +178,10 @@ test('Settings Flows', async () => {
   await page.getByLabel('Email*').click();
 
   //
-  const Bookinginbox1 = await createMailSurpEmail();
+  const Bookinginbox1 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox1!);
- myEmails.therapistEmail=Bookinginbox1!
- console.log(myEmails)
+  myEmails.therapistEmail = Bookinginbox1!;
+  console.log(myEmails);
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Therapist').check();
@@ -195,10 +196,10 @@ test('Settings Flows', async () => {
   await page.getByLabel('Last Name*').fill('1');
   await page.getByLabel('Email*').click();
   //
-  const Bookinginbox2 = await createMailSurpEmail();
+  const Bookinginbox2 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox2!);
- myEmails.supervisorEmail=Bookinginbox2!
- console.log(myEmails)
+  myEmails.supervisorEmail = Bookinginbox2!;
+  console.log(myEmails);
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Supervisor').check();
@@ -236,9 +237,9 @@ test('Settings Flows', async () => {
   await page1.getByPlaceholder('Enter last name').fill('Willy');
   await page1.getByPlaceholder('Enter email').click();
   //
-  const inviteinbox1 = await createMailSurpEmail();
+  const inviteinbox1 = await createNewEmail();
   await page1.getByPlaceholder('Enter email').fill(inviteinbox1!);
-  
+
   await page1.getByPlaceholder('Enter phone').click();
   await page1.getByPlaceholder('Enter phone').fill('(893) 553-00024');
   await page1
@@ -829,9 +830,9 @@ test('Create Clients', async () => {
   await page.getByLabel('Last Name*').fill('Test');
   await page.getByLabel('Email*').click();
   //
-  const invitesinbox2 = await createMailSurpEmail();
+  const invitesinbox2 = await createNewEmail();
   await page.getByLabel('Email*').fill(invitesinbox2!);
-  
+
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
 });
@@ -1132,7 +1133,7 @@ test('Intake tab', async () => {
   await page.getByLabel('Last Name').fill('23');
   await page.getByLabel('Email').click();
   //
-  const invitesinbox3 = await createMailSurpEmail();
+  const invitesinbox3 = await createNewEmail();
   await page.getByLabel('Email').fill(invitesinbox3!);
 
   await page.getByLabel('Seeking treatment for').click();
