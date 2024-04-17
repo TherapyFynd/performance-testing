@@ -1,7 +1,7 @@
 import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../helpers/api';
-import { createMailSurpEmail } from '../helpers/mailsurp';
+import { createNewEmail } from '../helpers/mailsurp';
 import myEmails from '../localemails.js/emails';
 
 // Annotate entire file as serial.
@@ -231,7 +231,7 @@ test('Create Clients', async () => {
   await page.getByLabel('Last Name*').fill('Das');
   await page.getByLabel('Email*').click();
   //
-  const Bookinginbox1 = await createMailSurpEmail();
+  const Bookinginbox1 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox1!);
   myEmails.clientEmail = Bookinginbox1!;
   console.log(myEmails);
@@ -257,7 +257,7 @@ test('Create Clients', async () => {
   await page.getByLabel('Email*').click();
   //
 
-  const Bookinginbox2 = await createMailSurpEmail();
+  const Bookinginbox2 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox2!);
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
@@ -267,7 +267,7 @@ test('Create Clients', async () => {
   await page.getByLabel('Last Name*').fill('Prasad');
   await page.getByLabel('Email*').click();
   //
-  const Bookinginbox3 = await createMailSurpEmail();
+  const Bookinginbox3 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox3!);
 
   // await page.getByLabel('Email*').fill('a---1@gmail.com');
@@ -293,7 +293,7 @@ test('Create Clients', async () => {
   await page.getByLabel('Last Name*').fill('Das');
   await page.getByLabel('Email*').click();
   //
-  const Bookinginbox4 = await createMailSurpEmail();
+  const Bookinginbox4 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox4!);
 
   // await page.getByLabel('Email*').fill('pp1@gmail.com');
@@ -304,7 +304,7 @@ test('Create Clients', async () => {
   await page.getByLabel('Last Name*').fill('Das');
   await page.getByLabel('Email*').click();
   //
-  const Bookinginbox5 = await createMailSurpEmail();
+  const Bookinginbox5 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox5!);
 
   // await page.getByLabel('Email*').fill('pp+1@gmail.com');

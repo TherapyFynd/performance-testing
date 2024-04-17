@@ -1,7 +1,7 @@
 import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../helpers/api';
-import { createMailSurpEmail } from '../helpers/mailsurp';
+import { createNewEmail } from '../helpers/mailsurp';
 import myEmails from '../localemails.js/emails';
 
 // Annotate entire file as serial.
@@ -60,7 +60,7 @@ test('Intake tab', async () => {
   await page.getByLabel('Last Name').fill('23');
   await page.getByLabel('Email').click();
   //
-  const invitesinbox1 = await createMailSurpEmail();
+  const invitesinbox1 = await createNewEmail();
   await page.getByLabel('Email').fill(invitesinbox1!);
 
   await page.getByLabel('Seeking treatment for').click();

@@ -1,7 +1,7 @@
 import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../helpers/api';
-import { createMailSurpEmail } from '../helpers/mailsurp';
+import { createNewEmail } from '../helpers/mailsurp';
 import myEmails from '../localemails.js/emails';
 
 // Annotate entire file as serial.
@@ -18,7 +18,7 @@ test.afterAll(async () => {
 });
 
 test('Owner login and  onboarding ', async ({ request }) => {
-  const inbox = await createMailSurpEmail();
+  const inbox = await createNewEmail();
 
   const data = await generatePasswordlessLoginLink({
     email: inbox!,
@@ -65,7 +65,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByLabel('Address Line').click();
   await page.getByLabel('Address Line').fill('New York City');
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
-// Add locations
+  // Add locations
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('Office name').click();
   await page.getByLabel('Office name').fill('KanTime Healthcare System');
@@ -82,7 +82,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByLabel('Make default location').check();
   await page.getByRole('button', { name: 'Add location' }).nth(1).click();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
-// Add New Services
+  // Add New Services
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('CPT Code').click();
   await page.getByRole('combobox', { name: 'CPT Code' }).fill('90832');
@@ -176,7 +176,7 @@ test('Settings Flows', async () => {
   await page.getByLabel('Email*').click();
 
   //
-  const Bookinginbox1 = await createMailSurpEmail();
+  const Bookinginbox1 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox1!);
   myEmails.therapistEmail = Bookinginbox1!;
   console.log(myEmails);
@@ -193,7 +193,7 @@ test('Settings Flows', async () => {
   await page.getByLabel('Last Name*').fill('1');
   await page.getByLabel('Email*').click();
   //
-  const invitesinbox1 = await createMailSurpEmail();
+  const invitesinbox1 = await createNewEmail();
   await page.getByLabel('Email*').fill(invitesinbox1!);
   myEmails.intakeAdminEmail = invitesinbox1!;
   console.log(myEmails);
