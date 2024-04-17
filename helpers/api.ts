@@ -4,7 +4,6 @@ import {
   isRunningOnLocal,
   localPort,
 } from '../localemails.js/const';
-import { IInbox, deleteMailSurpInboxes } from './mailsurp';
 
 export const generatePasswordlessLoginLink = async ({
   email,
@@ -43,12 +42,11 @@ export const deleteAccounts = async ({
   inboxes,
   request,
 }: {
-  inboxes: IInbox[];
+  inboxes: string[];
   request: APIRequestContext;
 }) => {
   try {
-    const emails = inboxes?.map((ib) => ib?.email);
-    const inboxIds = inboxes?.map((ib) => ib?.id);
+    const emails = inboxes;
 
     await request.delete(`${BASE_BACKEND_URL}/test/user/delete`, {
       headers: {
@@ -57,8 +55,6 @@ export const deleteAccounts = async ({
       },
       data: { emails: emails },
     });
-
-    await deleteMailSurpInboxes(inboxIds);
 
     console.log(`Account deleted (${emails?.length}) : ${emails?.join(',')} `);
     return true;
