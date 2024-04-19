@@ -3,7 +3,7 @@ name: Daily Playwright Tests
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 10 * * *' # Runs at 04:00 PM IST everyday
+    - cron: "30 10 * * *" # Runs at 04:00 PM IST everyday
 
   pull_request:
     branches: [main, master]
@@ -27,8 +27,11 @@ jobs:
       - name: Install playwright browser
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
+      - name: Run Playwright all tests
         run: npx playwright test ./tests
+
+      - name: Run Playwright core test
+        run: npx playwright test ./core
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}

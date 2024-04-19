@@ -206,6 +206,24 @@ test('Settings Flows', async () => {
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
+// Invite Practice Manager
+  await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+  await page.getByLabel('First Name*').click();
+  await page.getByLabel('First Name*').fill('Practice');
+  await page.getByLabel('Last Name*').click();
+  await page.getByLabel('Last Name*').fill('1');
+  await page.getByLabel('Email*').click();
+  //
+  const Bookinginbox3 = await createNewEmail();
+  await page.getByLabel('Email*').fill(Bookinginbox3!);
+  myEmails.practiceAdminEmail = Bookinginbox3!;
+  console.log(myEmails);
+
+  await page.getByRole('button', { name: 'Next' }).nth(1).click();
+  await page.getByLabel('Practice manager', { exact: true }).check();
+  await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+  await page.waitForTimeout(4000);
+  await page.reload();
   await page.getByText('Role settings').click();
 
   //Booking widget flows
@@ -942,10 +960,10 @@ test('Client File', async () => {
   await page.getByRole('tab', { name: 'Files' }).click();
   await page.getByRole('button', { name: 'Request upload' }).nth(1).click();
   await page.getByLabel('Enter file name').click();
-  await page.getByLabel('Enter file name').fill('test');
+  await page.getByLabel('Enter file name').fill('Test Pdf');
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
   await page.getByLabel('Enter file name').nth(1).click();
-  await page.getByLabel('Enter file name').nth(1).fill('test1');
+  await page.getByLabel('Enter file name').nth(1).fill('Test Pdf 2');
   await page.getByRole('button', { name: 'Request' }).nth(1).click();
   await page
     .locator('div')

@@ -34,6 +34,11 @@ var myEmails = {
   supervisorEmail: '',
   clientEmail: '',
   intakeAdminEmail: '',
+  practiceAdminEmail: '',
+  
+  billerEmail: '',
+  schedulerEmail: '',
+  intakeadmin1Email: '',
 };
 
 export default myEmails;
