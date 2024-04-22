@@ -1,10 +1,9 @@
 import fs from 'fs';
-import path from 'path';
-
-const filePath = path.join(__dirname, '../inboxes.txt');
+import { IEmail } from '../localemails.js/emails';
 
 export const writeJSONToFileAsync = async (
-  jsonData: string[]
+  jsonData: string[] | IEmail,
+  filePath: string
 ): Promise<void> => {
   try {
     await fs.promises.writeFile(filePath, JSON.stringify(jsonData, null, 2));
@@ -15,7 +14,9 @@ export const writeJSONToFileAsync = async (
   }
 };
 
-export const readJSONFromFileAsync = async (): Promise<string[] | null> => {
+export const readJSONFromFileAsync = async (
+  filePath: string
+): Promise<string[] | IEmail | null> => {
   try {
     const data = await fs.promises.readFile(filePath, 'utf8');
     const jsonData = JSON.parse(data) as string[];
@@ -27,7 +28,7 @@ export const readJSONFromFileAsync = async (): Promise<string[] | null> => {
   }
 };
 
-export const makeFileEmpty = async () => {
+export const makeFileEmpty = async (filePath: string) => {
   try {
     await fs.promises.writeFile(filePath, '');
     console.log('File made empty successfully');
