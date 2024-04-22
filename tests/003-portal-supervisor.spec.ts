@@ -11,6 +11,10 @@ test.describe.configure({ mode: 'serial' });
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
+  if (!myEmails.supervisorEmail.length) {
+    console.log(`SupervisorEmail not present returning...`);
+    return;
+  }
   page = await browser.newPage();
 });
 
@@ -21,10 +25,10 @@ test.afterAll(async () => {
 test('Supervisor login and onboarding ', async ({request}) => {
   const data = await generatePasswordlessLoginLink({
     email: myEmails.supervisorEmail,
-    request: request,      
+    request: request,
   });
-  await page.goto(data!); 
-  
+  await page.goto(data!);
+
           // Onbaording flows for Supervisor
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Supervisor');
