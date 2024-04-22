@@ -2,13 +2,16 @@ import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../helpers/api';
 import myEmails from '../localemails.js/emails';
-import { Console } from 'console';
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
+  if (!myEmails.clientEmail.length) {
+    console.log(`ClientEmail not present returning...`);
+    return;
+  }
   page = await browser.newPage();
 });
 
@@ -79,12 +82,18 @@ test('Booking Appoinment', async () => {
   await page.waitForTimeout(2000);
   // Logic For Fail Locator
   try {
-    await page.locator('#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > p').click();
-    
+    await page
+      .locator(
+        '#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > p'
+      )
+      .click();
   } catch (error) {
-    console.log('Failed to find first locator, trying second locator')
-    await page.locator('#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > img').click();
-    
+    console.log('Failed to find first locator, trying second locator');
+    await page
+      .locator(
+        '#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > img'
+      )
+      .click();
   }
   await page
     .locator(
