@@ -9,8 +9,7 @@ let page: Page;
 
 test.beforeAll(async ({ browser }) => {
   if (!myEmails.supervisorEmail.length) {
-    console.log(`SupervisorEmail not present returning...`);
-    return;
+    throw new Error(`SupervisorEmail not present returning...`);
   }
   page = await browser.newPage();
 });

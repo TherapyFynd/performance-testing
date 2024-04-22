@@ -11,8 +11,7 @@ let page: Page;
 
 test.beforeAll(async ({ browser }) => {
   if (!myEmails.intakeAdminEmail.length) {
-    console.log(`IntakeAdminEmail not present returning...`);
-    return;
+    throw new Error(`IntakeAdminEmail not present returning...`);
   }
   page = await browser.newPage();
 });

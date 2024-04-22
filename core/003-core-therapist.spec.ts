@@ -11,8 +11,7 @@ let page: Page;
 
 test.beforeAll(async ({ browser }) => {
   if (!myEmails.therapistEmail.length) {
-    console.log(`TherapistEmail not present returning...`);
-    return;
+    throw new Error(`TherapistEmail not present returning...`);
   }
   page = await browser.newPage();
 });

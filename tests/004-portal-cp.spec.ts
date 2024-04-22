@@ -9,8 +9,7 @@ let page: Page;
 
 test.beforeAll(async ({ browser }) => {
   if (!myEmails.clientEmail.length) {
-    console.log(`ClientEmail not present returning...`);
-    return;
+    throw new Error(`ClientEmail not present returning...`);
   }
   page = await browser.newPage();
 });
