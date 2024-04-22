@@ -2,7 +2,7 @@ import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../helpers/api';
 import { createNewEmail } from '../helpers/mailsurp';
-import myEmails from '../localemails.js/emails';
+import { IEmail, readEmails, setEmails } from '../localemails.js/emails';
 
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
@@ -10,7 +10,9 @@ test.describe.configure({ mode: 'serial' });
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
-  if (!myEmails.therapistEmail.length) {
+  const myEmails: IEmail = await readEmails();
+
+  if (!myEmails?.therapistEmail?.length) {
     throw new Error(`TherapistEmail not present returning...`);
   }
   page = await browser.newPage();
@@ -21,8 +23,10 @@ test.afterAll(async () => {
 });
 
 test('Therapist login and  onboarding ', async ({ request }) => {
+  const myEmails: IEmail = await readEmails();
+
   const data = await generatePasswordlessLoginLink({
-    email: myEmails.therapistEmail,
+    email: myEmails.therapistEmail!,
     request: request,
   });
 
@@ -234,10 +238,12 @@ test('Create Clients', async () => {
   await page.getByLabel('Last Name*').fill('Das');
   await page.getByLabel('Email*').click();
   //
+
   const Bookinginbox1 = await createNewEmail();
-  await page.getByLabel('Email*').fill(Bookinginbox1!);
-  myEmails.clientEmail = Bookinginbox1!;
+  let myEmails = await readEmails();
+  await setEmails({ ...myEmails, clientEmail: Bookinginbox1! });
   console.log(myEmails);
+  await page.getByLabel('Email*').fill(Bookinginbox1!);
 
   // await page.getByLabel('Email*').fill('createtherapist+6@gmail.com');
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();

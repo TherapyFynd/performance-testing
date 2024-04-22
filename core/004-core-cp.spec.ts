@@ -1,7 +1,7 @@
 import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../helpers/api';
-import myEmails from '../localemails.js/emails';
+import { IEmail, readEmails } from '../localemails.js/emails';
 
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
@@ -9,9 +9,12 @@ test.describe.configure({ mode: 'serial' });
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
-  if (!myEmails.clientEmail.length) {
+  const myEmails: IEmail = await readEmails();
+
+  if (!myEmails?.clientEmail?.length) {
     throw new Error(`ClientEmail not present returning...`);
   }
+
   page = await browser.newPage();
 });
 
@@ -20,8 +23,10 @@ test.afterAll(async () => {
 });
 
 test('Client Portal login and  onboarding ', async ({ request }) => {
+  const myEmails: IEmail = await readEmails();
+
   const data = await generatePasswordlessLoginLink({
-    email: myEmails.clientEmail,
+    email: myEmails.clientEmail!,
     request: request,
   });
 

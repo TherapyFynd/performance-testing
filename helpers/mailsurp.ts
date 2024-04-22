@@ -1,3 +1,4 @@
+import path from 'path';
 import { BASE_EMAIL_NAMESPACE, TAG_NAMESPACE } from '../localemails.js/const';
 import { readJSONFromFileAsync, writeJSONToFileAsync } from './file-helper';
 
@@ -21,14 +22,14 @@ export const createNewEmail = async () => {
   try {
     const randomText = generateRandomText(5);
     const email = BASE_EMAIL_NAMESPACE.replace(TAG_NAMESPACE, randomText);
-
-    let data: string[] | null = await readJSONFromFileAsync();
+    const filePath = path.join(__dirname, '../inboxes.txt');
+    let data = await readJSONFromFileAsync(filePath);
     if (data) {
-      data?.push(email);
+      (data as string[])?.push(email);
     } else {
       data = [email];
     }
-    await writeJSONToFileAsync(data);
+    await writeJSONToFileAsync(data, filePath);
 
     console.log(`Email created : ${email}`);
     return email;

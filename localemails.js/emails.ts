@@ -1,4 +1,11 @@
 // 16 Emails will Require for all roles
+
+import path from 'path';
+import {
+  readJSONFromFileAsync,
+  writeJSONToFileAsync,
+} from '../helpers/file-helper';
+
 // Owner Login
 export const mainowneremails: String = 'doom50643@gmail.com';
 export const invitetherapist: String = 'katalonbussiness@gmail.com';
@@ -29,11 +36,22 @@ export function f() {
 
 /** New constants */
 
-var myEmails = {
-  therapistEmail: '',
-  supervisorEmail: '',
-  clientEmail: '',
-  intakeAdminEmail: '',
+export interface IEmail {
+  therapistEmail?: string;
+  supervisorEmail?: string;
+  clientEmail?: string;
+  intakeAdminEmail?: string;
+}
+
+export const readEmails = async (): Promise<IEmail | {}> => {
+  const filePath = path.join(__dirname, '../emails.txt');
+
+  let data = await readJSONFromFileAsync(filePath);
+
+  return data ? (data as IEmail) : {};
 };
 
-export default myEmails;
+export const setEmails = async (email: IEmail) => {
+  const filePath = path.join(__dirname, '../emails.txt');
+  await writeJSONToFileAsync(email, filePath);
+};

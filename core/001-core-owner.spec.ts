@@ -2,7 +2,7 @@ import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../helpers/api';
 import { createNewEmail } from '../helpers/mailsurp';
-import myEmails from '../localemails.js/emails';
+import { readEmails, setEmails } from '../localemails.js/emails';
 
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
@@ -178,8 +178,11 @@ test('Settings Flows', async () => {
   //
   const Bookinginbox1 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox1!);
-  myEmails.therapistEmail = Bookinginbox1!;
+
+  let myEmails = await readEmails();
+  await setEmails({ ...myEmails, therapistEmail: Bookinginbox1! });
   console.log(myEmails);
+
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Therapist').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
@@ -193,10 +196,13 @@ test('Settings Flows', async () => {
   await page.getByLabel('Last Name*').fill('1');
   await page.getByLabel('Email*').click();
   //
+
   const invitesinbox1 = await createNewEmail();
-  await page.getByLabel('Email*').fill(invitesinbox1!);
-  myEmails.intakeAdminEmail = invitesinbox1!;
+  myEmails = await readEmails();
+  await setEmails({ ...myEmails, intakeAdminEmail: invitesinbox1! });
   console.log(myEmails);
+
+  await page.getByLabel('Email*').fill(invitesinbox1!);
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Intake Admin').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
