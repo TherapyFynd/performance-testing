@@ -1,14 +1,18 @@
 import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../helpers/api';
-import myEmails from '../localemails.js/emails';
-import { Console } from 'console';
+import { IEmail, readEmails } from '../localemails.js/emails';
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
+  const myEmails: IEmail = await readEmails();
+
+  if (!myEmails?.clientEmail?.length) {
+    throw new Error(`ClientEmail not present returning...`);
+  }
   page = await browser.newPage();
 });
 
@@ -17,8 +21,11 @@ test.afterAll(async () => {
 });
 
 test('Client Portal login and onboarding ', async ({ request }) => {
+  const myEmails: IEmail = await readEmails();
+
   const data = await generatePasswordlessLoginLink({
-    email: myEmails.clientEmail,
+    email: myEmails.clientEmail!,
+    // email:"z7knk.JJmSr@inbox.testmail.app",
     request: request,
   });
 
@@ -69,7 +76,7 @@ test('Client Portal login and onboarding ', async ({ request }) => {
   await page.getByRole('button', { name: 'Submit' }).nth(1).click();
   // Profile Select
   await page.getByRole('heading', { name: 'Therapist 1' }).click();
-});
+ });
 
 test('Booking Appoinment', async () => {
   //  Book Appoinment
@@ -79,12 +86,18 @@ test('Booking Appoinment', async () => {
   await page.waitForTimeout(2000);
   // Logic For Fail Locator
   try {
-    await page.locator('#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > p').click();
-    
+    await page
+      .locator(
+        '#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > p'
+      )
+      .click();
   } catch (error) {
-    console.log('Failed to find first locator, trying second locator')
-    await page.locator('#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > img').click();
-    
+    console.log('Failed to find first locator, trying second locator');
+    await page
+      .locator(
+        '#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > img'
+      )
+      .click();
   }
   await page
     .locator(
@@ -95,7 +108,7 @@ test('Booking Appoinment', async () => {
     .getByRole('button', { name: 'Request appointment' })
     .nth(1)
     .click();
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(5000);
 });
 
 test('Filling Form', async () => {
@@ -169,46 +182,46 @@ test('Upload Files', async () => {
   await page.getByText('Cancel').click();
 });
 
-//         test('Multi-Client Flows Select',async () =>  {
-// //  Mutile Profile Start
-// await page.getByTestId('ArrowDropDownRoundedIcon').click();
-// await page.getByRole('heading', { name: 'Owner Team' }).click();
-// await page.waitForTimeout(6000);
-// await page.locator('button:nth-child(1)').first().click();
-//         });
+        test('Multi-Client Flows Select',async () =>  {
+//  Mutile Profile Start
+await page.getByTestId('ArrowDropDownRoundedIcon').click();
+await page.getByRole('heading', { name: 'Owner Team' }).click();
+await page.waitForTimeout(6000);
+await page.locator('button:nth-child(1)').first().click();
+        });
 
-//         test('Booking Appoinment Therapist _2',async () =>  {
-//             await page.getByRole('button', { name: 'Book appointment' }).nth(1).click();
-// await page.getByLabel('Select service').click();
-// await page.getByText('Psychotherapy, 45 mins').click();
-// await page.waitForTimeout(2000);
-// await page.locator('#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > p').click();
-// // await page.locator('div').filter({ hasText: /^Pick slot$/ }).getByRole('img').click();
-// await page.waitForTimeout(2000);
-// await page.locator('body > div.MuiPopover-root.MuiModal-root.css-1khfnay > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-ak9ghh > div > div > div._timeSlotsWrapper_vyf9q_11 div:first-child').click();
-// await page.getByRole('button', { name: 'Request appointment' }).nth(1).click();
-// await page.waitForTimeout(2000);
-//         });
-//         test('Personal Infomation Therapist _2',async () =>  {
-//             await page.locator('button:nth-child(5)').first().click();
-//             await page.getByRole('menuitem', { name: 'Profile' }).click();
-//             await page.getByLabel('Pronouns').click();
-//             await page.getByRole('option', { name: 'He/Him' }).click();
-//             await page.getByPlaceholder('MM/DD/YYYY').first().click();
-//             await page.getByPlaceholder('MM/DD/YYYY').first().fill('10/10/1999');
-//             await page.getByLabel('First Name', { exact: true }).click();
-//             await page.getByLabel('First Name', { exact: true }).fill('Test');
-//             await page.getByLabel('Last Name', { exact: true }).click();
-//             await page.getByLabel('Last Name', { exact: true }).fill('1');
-//             await page.getByLabel('Email').nth(1).click();
-//             await page.getByLabel('Email').nth(1).fill('test1@gmail.com');
-//             await page.getByLabel('Phone').nth(1).click();
-//             await page.getByLabel('Phone').nth(1).fill('(454) 758-65864');
-//             await page.getByLabel('Relationship to client').click();
-//             await page.getByLabel('Relationship to client').fill('Brother');
-//             await page.getByRole('button', { name: 'Save' }).nth(1).click();
-//             await page.waitForTimeout(1000);
-//         });
+        test('Booking Appoinment Therapist _2',async () =>  {
+            await page.getByRole('button', { name: 'Book appointment' }).nth(1).click();
+await page.getByLabel('Select service').click();
+await page.getByText('Psychotherapy, 45 mins').click();
+await page.waitForTimeout(2000);
+await page.locator('#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > p').click();
+// await page.locator('div').filter({ hasText: /^Pick slot$/ }).getByRole('img').click();
+await page.waitForTimeout(2000);
+await page.locator('body > div.MuiPopover-root.MuiModal-root.css-1khfnay > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-ak9ghh > div > div > div._timeSlotsWrapper_vyf9q_11 div:first-child').click();
+await page.getByRole('button', { name: 'Request appointment' }).nth(1).click();
+await page.waitForTimeout(2000);
+        });
+        test('Personal Infomation Therapist _2',async () =>  {
+            await page.locator('button:nth-child(5)').first().click();
+            await page.getByRole('menuitem', { name: 'Profile' }).click();
+            await page.getByLabel('Pronouns').click();
+            await page.getByRole('option', { name: 'He/Him' }).click();
+            await page.getByPlaceholder('MM/DD/YYYY').first().click();
+            await page.getByPlaceholder('MM/DD/YYYY').first().fill('10/10/1999');
+            await page.getByLabel('First Name', { exact: true }).click();
+            await page.getByLabel('First Name', { exact: true }).fill('Test');
+            await page.getByLabel('Last Name', { exact: true }).click();
+            await page.getByLabel('Last Name', { exact: true }).fill('1');
+            await page.getByLabel('Email').nth(1).click();
+            await page.getByLabel('Email').nth(1).fill('test1@gmail.com');
+            await page.getByLabel('Phone').nth(1).click();
+            await page.getByLabel('Phone').nth(1).fill('(454) 758-65864');
+            await page.getByLabel('Relationship to client').click();
+            await page.getByLabel('Relationship to client').fill('Brother');
+            await page.getByRole('button', { name: 'Save' }).nth(1).click();
+            await page.waitForTimeout(1000);
+        });
 
 test('Logout Portal', async () => {
   await page.locator('button:nth-child(5)').first().click();

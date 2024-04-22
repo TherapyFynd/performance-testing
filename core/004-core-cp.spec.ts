@@ -1,7 +1,7 @@
 import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../helpers/api';
-import myEmails from '../localemails.js/emails';
+import { IEmail, readEmails } from '../localemails.js/emails';
 
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
@@ -9,6 +9,12 @@ test.describe.configure({ mode: 'serial' });
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
+  const myEmails: IEmail = await readEmails();
+
+  if (!myEmails?.clientEmail?.length) {
+    throw new Error(`ClientEmail not present returning...`);
+  }
+
   page = await browser.newPage();
 });
 
@@ -17,8 +23,10 @@ test.afterAll(async () => {
 });
 
 test('Client Portal login and  onboarding ', async ({ request }) => {
+  const myEmails: IEmail = await readEmails();
+
   const data = await generatePasswordlessLoginLink({
-    email: myEmails.clientEmail,
+    email: myEmails.clientEmail!,
     request: request,
   });
 
@@ -79,17 +87,22 @@ test('Request Booking Appoinment', async () => {
   await page.getByLabel('Select service').click();
   await page.getByText('Psychotherapy, 45 mins').click();
   await page.waitForTimeout(3000);
-   // Logic For Fail Locator
-   try {
-    await page.locator('#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > p').click();
-    
+  // Logic For Fail Locator
+  try {
+    await page
+      .locator(
+        '#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > p'
+      )
+      .click();
   } catch (error) {
-    console.log('Failed to find first locator, trying second locator')
-    await page.locator('#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > img').click();
-    
+    console.log('Failed to find first locator, trying second locator');
+    await page
+      .locator(
+        '#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > img'
+      )
+      .click();
   }
 
-    
   await page
     .locator(
       'body > div.MuiPopover-root.MuiModal-root.css-1khfnay > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-ak9ghh > div > div > div._timeSlotsWrapper_vyf9q_11 div:first-child'
@@ -170,7 +183,6 @@ test('Upload Files', async () => {
     .setInputFiles(path.join(__dirname + '../files/dummy.pdf'));
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.getByText('Cancel').click();
-  
 });
 test('Logout Portal', async () => {
   await page.locator('button:nth-child(5)').first().click();

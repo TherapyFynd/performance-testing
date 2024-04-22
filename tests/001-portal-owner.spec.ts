@@ -7,7 +7,7 @@ import {
   isRunningOnLocal,
   localBaseUrl,
 } from '../localemails.js/const';
-import myEmails from '../localemails.js/emails';
+import { readEmails, setEmails } from '../localemails.js/emails';
 
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
@@ -180,7 +180,8 @@ test('Settings Flows', async () => {
   //
   const Bookinginbox1 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox1!);
-  myEmails.therapistEmail = Bookinginbox1!;
+  let myEmails = await readEmails();
+  await setEmails({ ...myEmails, therapistEmail: Bookinginbox1! });
   console.log(myEmails);
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
@@ -198,7 +199,8 @@ test('Settings Flows', async () => {
   //
   const Bookinginbox2 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox2!);
-  myEmails.supervisorEmail = Bookinginbox2!;
+  myEmails = await readEmails();
+  await setEmails({ ...myEmails, supervisorEmail: Bookinginbox2! });
   console.log(myEmails);
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
@@ -216,7 +218,8 @@ test('Settings Flows', async () => {
   //
   const Bookinginbox3 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox3!);
-  myEmails.practiceAdminEmail = Bookinginbox3!;
+  myEmails = await readEmails();
+  await setEmails({ ...myEmails, practiceAdminEmail: Bookinginbox3! });
   console.log(myEmails);
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();

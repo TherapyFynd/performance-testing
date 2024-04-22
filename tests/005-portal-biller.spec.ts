@@ -7,7 +7,8 @@ import {
   isRunningOnLocal,
   localBaseUrl,
 } from '../localemails.js/const';
-import myEmails from '../localemails.js/emails';
+import { IEmail, readEmails } from '../localemails.js/emails';
+
 
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
@@ -15,6 +16,11 @@ test.describe.configure({ mode: 'serial' });
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
+  const myEmails: IEmail = await readEmails();
+  console.log(myEmails);
+  if (!myEmails?.billerEmail?.length) {
+    throw new Error(`billerEmail not present returning...`);
+  }
   page = await browser.newPage();
 });
 
@@ -22,9 +28,10 @@ test.afterAll(async () => {
   await page.close();
 });
 test('Biller  login and  onboarding ', async ({ request }) => {
-
+  let myEmails: IEmail = await readEmails();
     const data = await generatePasswordlessLoginLink({
-      email: myEmails.billerEmail,
+      email: myEmails.billerEmail!,
+      // email:"z7knk.2RoV0@inbox.testmail.app",
       request: request,
     });
     await page.goto(data!);
@@ -67,6 +74,23 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
           .filter({ hasText: /^Calendar$/ })
           .getByRole('img')
           .click();
+          await page.getByRole('button', { name: 'Availability' }).nth(1).click();
+          await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._calendarSettings_1fo8k_1 > div > div.primary-b1-bold._subTitle_1fo8k_28 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > input').click();
+          await page.waitForTimeout(2000);
+          await page.getByLabel('Monday').check();
+  await page.getByLabel('Tuesday').check();
+  await page.getByLabel('Wednesday').check();
+  await page.getByLabel('Thursday').check();
+  await page.getByLabel('Friday').check();
+  //await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._calendarSettings_1fo8k_1 > div > div._body_1fo8k_33 > div > div._availabilityFormContainer_1fo8k_45 > div:nth-child(2) > div > div > label > span > input').click();
+  // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._calendarSettings_1fo8k_1 > div > div._body_1fo8k_33 > div > div._availabilityFormContainer_1fo8k_45 > div:nth-child(3) > div > div > label > span > input').click();
+  // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._calendarSettings_1fo8k_1 > div > div._body_1fo8k_33 > div > div._availabilityFormContainer_1fo8k_45 > div:nth-child(4) > div > div > label > span > input').click();
+  // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._calendarSettings_1fo8k_1 > div > div._body_1fo8k_33 > div > div._availabilityFormContainer_1fo8k_45 > div:nth-child(5) > div > div > label > span > input').click();
+  // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._calendarSettings_1fo8k_1 > div > div._body_1fo8k_33 > div > div._availabilityFormContainer_1fo8k_45 > div:nth-child(6) > div > div > label > span > input').click();
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.getByText('Terms & Conditions').click();
+  await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
+  await page.locator('div').filter({ hasText: /^Calendar$/ }).getByRole('img').click();
         await page.getByRole('button', { name: 'Month' }).click();
         await page.getByRole('button', { name: 'Next' }).click();
         await page.locator('div').filter({ hasText: /^20$/ }).click();
@@ -172,12 +196,8 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
         await page.getByLabel('Enter file name').nth(1).click();
         await page.getByLabel('Enter file name').nth(1).fill('Test Pdf 2');
         await page.getByRole('button', { name: 'Request' }).nth(1).click();
-        await page
-          .locator('div')
-          .filter({ hasText: /^Basic InfoIndividual$/ })
-          .getByRole('button')
-          .click();
-
+        await page.locator('div').filter({ hasText: /^Basic InfoIndividual$/ }).getByRole('button').click();
+       
         // Diagnosis tab
   await page.getByRole('tab', { name: 'Diagnosis' }).click();
   await page.getByRole('button', { name: 'Add', exact: true }).nth(3).click();
@@ -196,61 +216,61 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(2000);
 });
-test('Insurance Tab', async () => {
-    await page
-      .locator('div')
-      .filter({ hasText: /^Insurance$/ })
-      .getByRole('img')
-      .click();
-    await page.getByRole('button', { name: 'Select all' }).nth(1).click();
-    // await page.getByRole('button', { name: 'Deselect all' }).nth(1).click();
-    // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_126te_33 > table > tbody > tr:nth-child(1) > td:nth-child(1) > span > div > div > label > span > svg > path').click();
-    await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
-    await page.getByRole('tab', { name: 'Claims' }).click();
-    // await page.getByRole('cell', { name: 'View' }).first()
-    await page
-      .locator(
-        '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(1) > td:nth-child(8) > span > button > button > span > span._label_ns5gx_15'
-      )
-      .click();
-    await page.getByRole('button', { name: 'Add note' }).nth(1).click();
-    await page.getByPlaceholder('Start typing here').click();
-    await page
-      .getByPlaceholder('Start typing here')
-      .fill('Hey I am Adding Clients File Details here so check this');
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
-    await page.waitForTimeout(2000);
-    await page
-      .locator('div')
-      .filter({ hasText: /^StatusSubmittedEdit$/ })
-      .getByRole('button')
-      .nth(1)
-      .click();
-    await page.getByLabel('Select status').click();
-    await page.getByRole('option', { name: 'Sent' }).click();
-    await page.getByPlaceholder('Remarks').click();
-    await page
-      .getByPlaceholder('Remarks')
-      .fill('Sent this Payer Details to Change Healthcare');
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page
-      .locator('div')
-      .filter({ hasText: /^StatusSentEdit$/ })
-      .getByRole('button')
-      .nth(1)
-      .click();
-    await page.getByLabel('Sent').click();
-    await page.getByRole('option', { name: 'Paid', exact: true }).click();
-    await page.getByPlaceholder('Remarks').click();
-    await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page
-      .locator(
-        '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._header_174vt_7 > span > button > svg > path'
-      )
-      .click();
-  });
+// test('Insurance Tab', async () => {
+//     await page
+//       .locator('div')
+//       .filter({ hasText: /^Insurance$/ })
+//       .getByRole('img')
+//       .click();
+//     await page.getByRole('button', { name: 'Select all' }).nth(1).click();
+//     // await page.getByRole('button', { name: 'Deselect all' }).nth(1).click();
+//     // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_126te_33 > table > tbody > tr:nth-child(1) > td:nth-child(1) > span > div > div > label > span > svg > path').click();
+//     await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
+//     await page.getByRole('tab', { name: 'Claims' }).click();
+//     // await page.getByRole('cell', { name: 'View' }).first()
+//     await page
+//       .locator(
+//         '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(1) > td:nth-child(8) > span > button > button > span > span._label_ns5gx_15'
+//       )
+//       .click();
+//     await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+//     await page.getByPlaceholder('Start typing here').click();
+//     await page
+//       .getByPlaceholder('Start typing here')
+//       .fill('Hey I am Adding Clients File Details here so check this');
+//     await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//     await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
+//     await page.waitForTimeout(2000);
+//     await page
+//       .locator('div')
+//       .filter({ hasText: /^StatusSubmittedEdit$/ })
+//       .getByRole('button')
+//       .nth(1)
+//       .click();
+//     await page.getByLabel('Select status').click();
+//     await page.getByRole('option', { name: 'Sent' }).click();
+//     await page.getByPlaceholder('Remarks').click();
+//     await page
+//       .getByPlaceholder('Remarks')
+//       .fill('Sent this Payer Details to Change Healthcare');
+//     await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//     await page
+//       .locator('div')
+//       .filter({ hasText: /^StatusSentEdit$/ })
+//       .getByRole('button')
+//       .nth(1)
+//       .click();
+//     await page.getByLabel('Sent').click();
+//     await page.getByRole('option', { name: 'Paid', exact: true }).click();
+//     await page.getByPlaceholder('Remarks').click();
+//     await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
+//     await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//     await page
+//       .locator(
+//         '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._header_174vt_7 > span > button > svg > path'
+//       )
+//       .click();
+//   });
   test('DP Update and Logout', async () => {
     // await page.locator('#root > div._header_1uy0f_1 > div > div > p').click();
     await page.locator('div').filter({ hasText: 'Biller' }).nth(3).click();

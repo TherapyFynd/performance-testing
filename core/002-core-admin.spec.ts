@@ -2,7 +2,7 @@ import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../helpers/api';
 import { createNewEmail } from '../helpers/mailsurp';
-import myEmails from '../localemails.js/emails';
+import { IEmail, readEmails } from '../localemails.js/emails';
 
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
@@ -10,6 +10,11 @@ test.describe.configure({ mode: 'serial' });
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
+  const myEmails: IEmail = await readEmails();
+
+  if (!myEmails?.intakeAdminEmail?.length) {
+    throw new Error(`IntakeAdminEmail not present returning...`);
+  }
   page = await browser.newPage();
 });
 
@@ -18,8 +23,10 @@ test.afterAll(async () => {
 });
 
 test('Intake admin login and  onboarding ', async ({ request }) => {
+  const myEmails: IEmail = await readEmails();
+
   const data = await generatePasswordlessLoginLink({
-    email: myEmails.intakeAdminEmail,
+    email: myEmails?.intakeAdminEmail!,
     request: request,
   });
 
@@ -47,21 +54,17 @@ test('Intake admin login and  onboarding ', async ({ request }) => {
   await page.waitForTimeout(3000);
 });
 test('Intake tab', async () => {
-  await page
-    .locator('div')
-    .filter({ hasText: /^Referrals$/ })
-    .getByRole('img')
-    .click();
+  await page.locator('._sideBarItem_148j7_34 > img').first().click();
   // await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
   await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
   await page.getByLabel('First Name*').click();
-  await page.getByLabel('First Name*').fill('bangaloe');
+  await page.getByLabel('First Name*').fill('New');
   await page.getByLabel('Last Name').click();
-  await page.getByLabel('Last Name').fill('23');
+  await page.getByLabel('Last Name').fill('Lead');
   await page.getByLabel('Email').click();
   //
-  const invitesinbox1 = await createNewEmail();
-  await page.getByLabel('Email').fill(invitesinbox1!);
+  const invitesinbox3 = await createNewEmail();
+  await page.getByLabel('Email').fill(invitesinbox3!);
 
   await page.getByLabel('Seeking treatment for').click();
   await page.getByRole('option', { name: 'Cancer' }).click();
@@ -69,8 +72,22 @@ test('Intake tab', async () => {
   await page.getByLabel('Note').fill('I am Very sick');
   await page.getByRole('button', { name: 'Create' }).nth(1).click();
   await page.waitForTimeout(2000);
-
-  await page.getByRole('cell', { name: 'bangaloe' }).click();
+  // Filter add
+  await page.getByRole('button', { name: 'Today' }).click();
+  await page.waitForTimeout(2000);
+  await page.getByRole('button', { name: 'All Time' }).click();
+  await page.waitForTimeout(2000);
+  // Serach Lead
+  await page.getByPlaceholder('Search by name').click();
+  await page.getByPlaceholder('Search by name').fill('New Lead');
+  await page.getByPlaceholder('Search by name').press('Enter');
+  await page.waitForTimeout(2000);
+  await page.locator('.MuiInputAdornment-root > .MuiButtonBase-root').click();
+  await page.getByPlaceholder('Search by name').click();
+  await page.getByPlaceholder('Search by name').press('Enter');
+  await page.waitForTimeout(2000);
+  // Lead File
+  await page.getByRole('cell', { name: 'New Lead' }).click();
   await page.getByRole('tab', { name: 'Basic Information' }).click();
   await page.getByLabel('Sex').click();
   await page.getByRole('option', { name: 'Male', exact: true }).click();
@@ -84,13 +101,15 @@ test('Intake tab', async () => {
   await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
   await page.getByText('ABSOLUTE TOTAL CARE-').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page
-    .locator('span')
-    .filter({ hasText: 'Current Status :Inquiry' })
-    .locator('div')
-    .nth(2)
-    .click();
+  await page.locator('span').filter({ hasText: 'Current Status :Inquiry' }).locator('div').nth(2).click();
   await page.getByRole('option', { name: 'Initial consultation call' }).click();
+  await page.waitForTimeout(1000);
+  await page.locator('div').filter({ hasText: /^Assign to$/ }).nth(1).click();
+  await page.getByLabel('Choose team member').click();
+  await page.getByRole('option', { name: 'Owner Team' }).click();
+  await page.getByPlaceholder('Optional note for team member').click();
+  await page.getByPlaceholder('Optional note for team member').fill('Owner Assigned to u check this');
+  await page.getByRole('button', { name: 'Assign' }).nth(1).click();
   await page.waitForTimeout(1000);
   await page.getByLabel('Send inquiry form').click();
   await page.getByRole('button', { name: 'Send' }).nth(1).click();
@@ -99,15 +118,9 @@ test('Intake tab', async () => {
   await page.getByLabel('Select Therapist').click();
   await page.getByRole('option', { name: 'Owner Team' }).click();
   await page.getByRole('button', { name: 'Send' }).nth(1).click();
-  await page
-    .locator('div')
-    .filter({ hasText: /^Filters \(01\)$/ })
-    .getByRole('button')
-    .nth(2)
-    .click();
+  await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
   await page.waitForTimeout(1000);
 });
-
 test('DP Update and Logout', async () => {
   await page.locator('div').filter({ hasText: 'Intake Admin' }).nth(3).click();
   await page.getByRole('menuitem', { name: 'Profile' }).click();
