@@ -139,7 +139,8 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
           
         // Info and Settings
         await page.getByRole('button', { name: 'Info & settings' }).nth(1).click();
-        await page.getByLabel('First Name*').click();
+        // await page.getByLabel('First Name*').click();
+
         await page.getByLabel('First Name*').fill('Rakesh');
         await page.getByLabel('Last Name*').click();
         await page.getByLabel('Last Name*').fill('Das');
