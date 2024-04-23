@@ -48,11 +48,7 @@ test('Therapist login and onboarding ', async ({ request }) => {
 
 test('Settings Tab', async () => {
   //     Settings tab
-  await page
-    .locator('div')
-    .filter({ hasText: /^Settings$/ })
-    .getByRole('img')
-    .click();
+  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
   // Cliniacan settings
   await page.getByText('Clinician settings').click();
   await page.getByPlaceholder('Enter first name').click();
@@ -120,7 +116,6 @@ test('Settings Tab', async () => {
       '#root > div._layout_10ldc_1 > div > div._bookingWidgetWrapper_tlkra_1 > div._bookingWidgetContainer_tlkra_21 > div._bookingContent_tlkra_44 > div:nth-child(2) > div > div._dateTime_142fu_33 > div > div:nth-child(2) > div > div._timeSlotsWrapper_vyf9q_11 div:first-child'
     )
     .click();
-  // await page1.getByLabel('Next month').click();
   await page1.getByPlaceholder('Enter first name').click();
   await page1.getByPlaceholder('Enter first name').fill('James');
   await page1.getByPlaceholder('Enter last name').click();
@@ -222,15 +217,6 @@ test('Forms Tab', async () => {
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
 
   // Action in Forms
-  // await page.locator('#root > div._layout_731gc_1 > div._content_731gc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path').click();
-  // await page.getByRole('menuitem', { name: 'Send' }).click();
-  // await page.getByLabel('Select Clients').click();
-  // await page.getByRole('option', { name: 'Automation Forms' }).click();
-  // await page.getByRole('combobox', { name: 'Select Clients' }).click();
-  // await page.getByRole('button', { name: 'Send' }).nth(1).click();
-  // await page.reload();
-  // await page.waitForTimeout(1000);
-
   await page
     .locator(
       '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path'
@@ -851,17 +837,6 @@ test('Client File', async () => {
     .filter({ hasText: /^Basic InfoIndividual$/ })
     .getByRole('button')
     .click();
-
-  // Forms Section
-  // await page.getByRole('tab', { name: 'Forms' }).click();
-  // await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
-  // await page.getByRole('tab', { name: 'Personal' }).click();
-  // await page.getByText('Questionnaires').click();
-  // await page.getByLabel('Select Forms to send').click();
-  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Therapist Automation Testing');
-  // await page.getByRole('option', { name: 'Therapist Automation Testing' }).click();
-  // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
-  // await page.getByRole('button', { name: 'Send' }).nth(1).click();
 
   // Notes Section
   await page.getByRole('tab', { name: 'Notes' }).click();

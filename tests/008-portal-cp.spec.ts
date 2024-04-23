@@ -25,7 +25,7 @@ test('Client Portal login and onboarding ', async ({ request }) => {
 
   const data = await generatePasswordlessLoginLink({
     email: myEmails.clientEmail!,
-    // email:"z7knk.JJmSr@inbox.testmail.app",
+    
     request: request,
   });
 

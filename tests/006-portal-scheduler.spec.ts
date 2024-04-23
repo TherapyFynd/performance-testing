@@ -30,7 +30,7 @@ test('Scheduler login and  onboarding ', async ({ request }) => {
   let myEmails: IEmail = await readEmails();
     const data = await generatePasswordlessLoginLink({
       email: myEmails.schedulerEmail!,
-      // email:"z7knk.l50eN@inbox.testmail.app",
+      
       request: request,
     });
     await page.goto(data!);

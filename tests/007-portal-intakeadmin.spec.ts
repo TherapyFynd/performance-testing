@@ -31,7 +31,7 @@ test('Intake admin login and  onboarding ', async ({ request }) => {
   let myEmails: IEmail = await readEmails();
   const data = await generatePasswordlessLoginLink({
     email: myEmails.intakeadminroleEmail!,
-    // email:"z7knk.yJM2b@inbox.testmail.app",
+    
     
     request: request,
   });
@@ -53,15 +53,15 @@ await page.waitForTimeout(4000);
     // Invite Team Member (Therapist 1)
     await page.getByText('Team members').first().click();
 //     // Billing Tab
-// await page.locator('p').filter({ hasText: 'Billing' }).click();
-// await page.getByRole('tab', { name: 'Insurance' }).click();
-//   await page.getByText('Payers').click();
-//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-//   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('caremore');
-//   await page.getByText('Caremore- CRMRE1').click();
-//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
-  //   Add practice Emails Imports
+await page.locator('p').filter({ hasText: 'Billing' }).click();
+await page.getByRole('tab', { name: 'Insurance' }).click();
+  await page.getByText('Payers').click();
+  await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
+  await page.getByLabel('Search for insurance payers').click();
+  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('careplus');
+  await page.getByText('CAREPLUS- NHC04').click();
+  await page.getByRole('button', { name: 'Add' }).nth(1).click();
+    // Add practice Emails Imports
 await page.getByText('Practice Email Imports').click();
 await page.getByRole('button', { name: 'Add New' }).nth(1).click();
 await page.getByLabel('Email Address').click();

@@ -188,7 +188,7 @@ test('Supervision Flow', async () => {
     .getByRole('button')
     .click();
   // await page.getByRole('tab', { name: 'Signed' }).click();
-  // await page.getByText('Therapist Automation TestingMar').first().click();
+  // await page.getByText('Therapist Automation Testing').first().click();
   // await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
 });
 

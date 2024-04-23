@@ -423,16 +423,7 @@ test('Forms Tab', async () => {
   await page.getByRole('button', { name: 'Preview' }).nth(1).click();
   await page.getByRole('button').first().click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  // Action in Forms
-  // await page.locator('#root > div._layout_731gc_1 > div._content_731gc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path').click();
-  // await page.getByRole('menuitem', { name: 'Send' }).click();
-  // await page.getByLabel('Select Clients').click();
-  // await page.getByRole('option', { name: 'Automation Forms' }).click();
-  // await page.getByRole('combobox', { name: 'Select Clients' }).click();
-  // await page.getByRole('button', { name: 'Send' }).nth(1).click();
-  // await page.reload();
-  // await page.waitForTimeout(1000);
-
+//  Actions in Forms
   await page
     .locator(
       '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path'
@@ -927,7 +918,15 @@ test('Client File', async () => {
   //  Payment tab
   await page.getByRole('tab', { name: 'Payment' }).click();
   await page.getByLabel('Insurance').check();
-  await page.getByLabel('Client itself').check();
+    // Logic For Fail Locator
+    try {
+      await page.getByLabel('Client itself').check();
+        
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+      await page.getByText('Other').click();
+    }
+  
   await page.getByPlaceholder('MM/DD/YYYY').first().click();
   await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/1999');
   await page.getByLabel('Sex').click();

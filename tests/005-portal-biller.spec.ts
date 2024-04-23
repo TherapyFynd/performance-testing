@@ -31,7 +31,7 @@ test('Biller  login and  onboarding ', async ({ request }) => {
   let myEmails: IEmail = await readEmails();
     const data = await generatePasswordlessLoginLink({
       email: myEmails.billerEmail!,
-      // email:"z7knk.2RoV0@inbox.testmail.app",
+      
       request: request,
     });
     await page.goto(data!);
@@ -82,11 +82,6 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
   await page.getByLabel('Wednesday').check();
   await page.getByLabel('Thursday').check();
   await page.getByLabel('Friday').check();
-  //await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._calendarSettings_1fo8k_1 > div > div._body_1fo8k_33 > div > div._availabilityFormContainer_1fo8k_45 > div:nth-child(2) > div > div > label > span > input').click();
-  // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._calendarSettings_1fo8k_1 > div > div._body_1fo8k_33 > div > div._availabilityFormContainer_1fo8k_45 > div:nth-child(3) > div > div > label > span > input').click();
-  // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._calendarSettings_1fo8k_1 > div > div._body_1fo8k_33 > div > div._availabilityFormContainer_1fo8k_45 > div:nth-child(4) > div > div > label > span > input').click();
-  // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._calendarSettings_1fo8k_1 > div > div._body_1fo8k_33 > div > div._availabilityFormContainer_1fo8k_45 > div:nth-child(5) > div > div > label > span > input').click();
-  // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._calendarSettings_1fo8k_1 > div > div._body_1fo8k_33 > div > div._availabilityFormContainer_1fo8k_45 > div:nth-child(6) > div > div > label > span > input').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.getByText('Terms & Conditions').click();
   await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
@@ -155,7 +150,14 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
         //  Payment tab
         await page.getByRole('tab', { name: 'Payment' }).click();
         await page.getByLabel('Insurance').check();
-        await page.getByLabel('Client itself').check();
+           // Logic For Fail Locator
+    try {
+      await page.getByLabel('Client\'s spouse').check();
+        
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+      await page.getByText('Other').click();
+    }
         await page.getByPlaceholder('MM/DD/YYYY').first().click();
         await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/1999');
         await page.getByLabel('Sex').click();

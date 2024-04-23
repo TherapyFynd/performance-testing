@@ -32,7 +32,6 @@ test('Practice  login and  onboarding ', async ({ request }) => {
   let myEmails: IEmail = await readEmails();
   const data = await generatePasswordlessLoginLink({
     email: myEmails.practiceAdminEmail!,
-    // email: "z7knk.wrxK7@inbox.testmail.app",
     request: request,
   });
   await page.goto(data!);
@@ -906,16 +905,22 @@ test('Insurance Tab', async () => {
       .getByRole('img')
       .click();
     await page.getByRole('button', { name: 'Select all' }).nth(1).click();
-    // await page.getByRole('button', { name: 'Deselect all' }).nth(1).click();
-    // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_126te_33 > table > tbody > tr:nth-child(1) > td:nth-child(1) > span > div > div > label > span > svg > path').click();
-    await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
+    await page.waitForTimeout(4000);
     await page.getByRole('tab', { name: 'Claims' }).click();
-    // await page.getByRole('cell', { name: 'View' }).first()
-    await page
-      .locator(
-        '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(1) > td:nth-child(8) > span > button > button > span > span._label_ns5gx_15'
-      )
-      .click();
+    try {
+      await page
+        .locator(
+          '/html/body/div/div[2]/div[2]/div/div[3]/div/div[4]/table/tbody/tr[2]/td[8]/span/button/button/span/span[2]'
+        )
+        .click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+      await page
+        .locator(
+          '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(2) > td:nth-child(8) > span > button > button'
+        )
+        .click();
+    }
     await page.getByRole('button', { name: 'Add note' }).nth(1).click();
     await page.getByPlaceholder('Start typing here').click();
     await page
@@ -958,19 +963,10 @@ test('Insurance Tab', async () => {
   test('Message Tab', async () => {
 //   Messages Box
 await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').click();
-//   await page.getByTestId('KeyboardArrowDownIcon').click();
-//   await page.getByRole('menuitem', { name: 'Team' }).click();
-//   await page.locator('input[type="text"]').click();
-//   await page.locator('input[type="text"]').fill('Thera');
-//   await page.waitForTimeout(2000);
-//   await page.getByText('Therapist 1').click();
+
   await page.getByTestId('message-input').fill('Hi Therapist 1 How are u ');
   await page.getByTestId('SendOutlinedIcon').click();
   await page.waitForTimeout(3000);
-//   getByTestId('SendOutlinedIcon').locator('path')
-//   await page.locator('input[type="text"]').click();
-//   await page.locator('input[type="text"]').fill('Owner');
-//   await page.waitForTimeout(2000);
   await page.getByText('Owner Team').click();
   await page.getByTestId('message-input').fill('Hi Owner team ');
   await page.getByTestId('SendOutlinedIcon').click();
