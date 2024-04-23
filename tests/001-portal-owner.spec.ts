@@ -284,6 +284,7 @@ test('Settings Flows', async () => {
   await page
     .getByRole('combobox', { name: 'Search for insurance payers' })
     .fill('Absolute');
+    await page.waitForTimeout(2000);
   await page.getByText('ABSOLUTE TOTAL CARE-').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
 
