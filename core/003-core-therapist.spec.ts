@@ -443,6 +443,7 @@ test('Insurance Tab', async () => {
     .getByRole('img')
     .click();
   await page.getByRole('button', { name: 'Select all' }).nth(1).click();
+  await page.waitForTimeout(3000);
   await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
   await page.getByRole('tab', { name: 'Claims' }).click();
   await page

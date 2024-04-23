@@ -146,7 +146,7 @@ await page
     await page.getByLabel('Select client profile*').click();
     await page.getByRole('option', { name: 'Shiva & Venkatesh (T1)' }).first().click();
     await page.getByLabel('Select service *').click();
-    await page.getByText('Family psychotherapy...').click();
+    await page.getByText('Developmental Testing, ...').click();
     await page.getByPlaceholder('Enter text here').click();
     await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();

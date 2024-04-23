@@ -172,11 +172,14 @@ test('Client File', async () => {
 
 test('Supervision Flow', async () => {
   // Supervision Flows
-  await page
-    .locator('div')
-    .filter({ hasText: /^Supervision$/ })
-    .getByRole('img')
-    .click();
+  try {
+    await page.locator('div').filter({ hasText: /^Supervision$/ }).getByRole('img').click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page
+      .locator('#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div:nth-child(10) > div._sideBarItem_148j7_34._active_148j7_88')
+              .click();
+  }
   await page.getByText('Therapist Automation Testing').first().click();
   await page.getByRole('button', { name: 'Add signature' }).nth(1).click();
   await page.getByPlaceholder('Sign').click();

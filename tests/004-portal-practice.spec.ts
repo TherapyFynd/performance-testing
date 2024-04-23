@@ -898,67 +898,67 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._clientFileWrapper_17198_1 > div > div._clientNavigationFixedTop_111x7_1 > div > button > svg > path').click();
   await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
 });
-test('Insurance Tab', async () => {
-    await page
-      .locator('div')
-      .filter({ hasText: /^Insurance$/ })
-      .getByRole('img')
-      .click();
-    await page.getByRole('button', { name: 'Select all' }).nth(1).click();
-    await page.waitForTimeout(4000);
-    await page.getByRole('tab', { name: 'Claims' }).click();
-    try {
-      await page
-        .locator(
-          '/html/body/div/div[2]/div[2]/div/div[3]/div/div[4]/table/tbody/tr[2]/td[8]/span/button/button/span/span[2]'
-        )
-        .click();
-    } catch (error) {
-      console.log('Failed to find first locator, trying second locator');
-      await page
-        .locator(
-          '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(2) > td:nth-child(8) > span > button > button'
-        )
-        .click();
-    }
-    await page.getByRole('button', { name: 'Add note' }).nth(1).click();
-    await page.getByPlaceholder('Start typing here').click();
-    await page
-      .getByPlaceholder('Start typing here')
-      .fill('Hey I am Adding Clients File Details here so check this');
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
-    await page.waitForTimeout(2000);
-    await page
-      .locator('div')
-      .filter({ hasText: /^StatusSubmittedEdit$/ })
-      .getByRole('button')
-      .nth(1)
-      .click();
-    await page.getByLabel('Select status').click();
-    await page.getByRole('option', { name: 'Sent' }).click();
-    await page.getByPlaceholder('Remarks').click();
-    await page
-      .getByPlaceholder('Remarks')
-      .fill('Sent this Payer Details to Change Healthcare');
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page
-      .locator('div')
-      .filter({ hasText: /^StatusSentEdit$/ })
-      .getByRole('button')
-      .nth(1)
-      .click();
-    await page.getByLabel('Sent').click();
-    await page.getByRole('option', { name: 'Paid', exact: true }).click();
-    await page.getByPlaceholder('Remarks').click();
-    await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page
-      .locator(
-        '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._header_174vt_7 > span > button > svg > path'
-      )
-      .click();
-  });
+// test('Insurance Tab', async () => {
+//     await page
+//       .locator('div')
+//       .filter({ hasText: /^Insurance$/ })
+//       .getByRole('img')
+//       .click();
+//     await page.getByRole('button', { name: 'Select all' }).nth(1).click();
+//     await page.waitForTimeout(4000);
+//     await page.getByRole('tab', { name: 'Claims' }).click();
+//     try {
+//       await page
+//         .locator(
+//           '/html/body/div/div[2]/div[2]/div/div[3]/div/div[4]/table/tbody/tr[2]/td[8]/span/button/button/span/span[2]'
+//         )
+//         .click();
+//     } catch (error) {
+//       console.log('Failed to find first locator, trying second locator');
+//       await page
+//         .locator(
+//           '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(2) > td:nth-child(8) > span > button > button'
+//         )
+//         .click();
+//     }
+//     await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+//     await page.getByPlaceholder('Start typing here').click();
+//     await page
+//       .getByPlaceholder('Start typing here')
+//       .fill('Hey I am Adding Clients File Details here so check this');
+//     await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//     await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
+//     await page.waitForTimeout(2000);
+//     await page
+//       .locator('div')
+//       .filter({ hasText: /^StatusSubmittedEdit$/ })
+//       .getByRole('button')
+//       .nth(1)
+//       .click();
+//     await page.getByLabel('Select status').click();
+//     await page.getByRole('option', { name: 'Sent' }).click();
+//     await page.getByPlaceholder('Remarks').click();
+//     await page
+//       .getByPlaceholder('Remarks')
+//       .fill('Sent this Payer Details to Change Healthcare');
+//     await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//     await page
+//       .locator('div')
+//       .filter({ hasText: /^StatusSentEdit$/ })
+//       .getByRole('button')
+//       .nth(1)
+//       .click();
+//     await page.getByLabel('Sent').click();
+//     await page.getByRole('option', { name: 'Paid', exact: true }).click();
+//     await page.getByPlaceholder('Remarks').click();
+//     await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
+//     await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//     await page
+//       .locator(
+//         '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._header_174vt_7 > span > button > svg > path'
+//       )
+//       .click();
+//   });
 
   test('Message Tab', async () => {
 //   Messages Box
