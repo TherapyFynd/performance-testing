@@ -3,7 +3,7 @@ name: Daily Playwright Tests
 on:
   workflow_dispatch:
   schedule:
-    - cron: "30 10 * * *" # Runs at 04:00 PM IST everyday
+    - cron: '30 10 * * *' # Runs at 04:00 PM IST everyday
 
   pull_request:
     branches: [main, master]
@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -38,4 +38,4 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
-          retention-days: 30
+          retention-days: 10
