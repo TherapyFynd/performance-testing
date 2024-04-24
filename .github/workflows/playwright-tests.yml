@@ -39,3 +39,28 @@ jobs:
           name: playwright-report
           path: playwright-report
           retention-days: 10
+
+      - name: Check if HTML report exists
+        run: |
+          if [ -d "playwright-report" ]; then
+            echo "HTML report exists."
+          else
+            echo "HTML report does not exist. Exiting..."
+            exit 1
+          fi
+        if: always()
+
+      # Step to zip html-report folder
+      - name: Zip HTML report
+        run: zip -r html-report.zip playwright-report
+        # This step should always run, even if previous steps fail
+        if: always()
+
+      # Step to upload artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: html-report
+          path: html-report.zip
+          if-no-files-found: error
+        if: always()
