@@ -15,11 +15,11 @@ test.describe.configure({ mode: 'serial' });
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
-  const myEmails: IEmail = await readEmails();
-  console.log(myEmails);
-  if (!myEmails?.schedulerEmail?.length) {
-    throw new Error(`schedulerEmail not present returning...`);
-  }
+  // const myEmails: IEmail = await readEmails();
+  // console.log(myEmails);
+  // if (!myEmails?.schedulerEmail?.length) {
+  //   throw new Error(`schedulerEmail not present returning...`);
+  // }
   page = await browser.newPage();
 });
 
@@ -27,10 +27,10 @@ test.afterAll(async () => {
   await page.close();
 });
 test('Scheduler login and  onboarding ', async ({ request }) => {
-  let myEmails: IEmail = await readEmails();
+  // let myEmails: IEmail = await readEmails();
     const data = await generatePasswordlessLoginLink({
-      email: myEmails.schedulerEmail!,
-      
+      // email: myEmails.schedulerEmail!,
+      email:"rs349b5e-7785-4409-8e9e-99b042cc7bdf@mailslurp.net",
       request: request,
     });
     await page.goto(data!);
@@ -52,29 +52,13 @@ test('Scheduler login and  onboarding ', async ({ request }) => {
     await page.getByText('Team members').first().click();
     // Role Management
     await page.getByText('Role settings').click();
-await page.getByRole('button', { name: 'Create custom role' }).nth(1).click();
-await page.waitForTimeout(2000);
-try {
-    await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
-    
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator')
-    await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._header_1skpn_1 > div > button:nth-child(2) > button').click();
-    
-  }
-  
-  await page.getByLabel('Therapist', { exact: true }).check();
-  
-  try {
-    await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
-    
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator')
-    await page.locator('body > div.MuiDialog-root.MuiModal-root.css-126xj0f > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div.MuiDialogActions-root.MuiDialogActions-spacing._actionContainer_mi6fq_8.css-14b29qc > button:nth-child(2) > button').click();
-    
-  }
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.waitForTimeout(2000);
+    await page.getByRole('button', { name: 'Create custom role' }).nth(1).click();
+    await page.getByLabel('Role title').clear();
+    await page.waitForTimeout(2000);
+    await page.getByLabel('Role title').fill('New Role');
+    await page.waitForTimeout(2000);
+    await page.getByRole('button', { name: 'Save' }).nth(1).click();
+    await page.waitForTimeout(3000);
   await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._header_1skpn_1 > span > span > svg > path').click();
   
 //   Scheduler Calender 
