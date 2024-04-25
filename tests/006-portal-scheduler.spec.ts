@@ -15,11 +15,11 @@ test.describe.configure({ mode: 'serial' });
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {
-  // const myEmails: IEmail = await readEmails();
-  // console.log(myEmails);
-  // if (!myEmails?.schedulerEmail?.length) {
-  //   throw new Error(`schedulerEmail not present returning...`);
-  // }
+  const myEmails: IEmail = await readEmails();
+  console.log(myEmails);
+  if (!myEmails?.schedulerEmail?.length) {
+    throw new Error(`schedulerEmail not present returning...`);
+  }
   page = await browser.newPage();
 });
 
@@ -27,10 +27,10 @@ test.afterAll(async () => {
   await page.close();
 });
 test('Scheduler login and  onboarding ', async ({ request }) => {
-  // let myEmails: IEmail = await readEmails();
+  let myEmails: IEmail = await readEmails();
     const data = await generatePasswordlessLoginLink({
-      // email: myEmails.schedulerEmail!,
-      email:"rs349b5e-7785-4409-8e9e-99b042cc7bdf@mailslurp.net",
+      email: myEmails.schedulerEmail!,
+     
       request: request,
     });
     await page.goto(data!);
