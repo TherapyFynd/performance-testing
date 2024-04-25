@@ -54,8 +54,8 @@ test('Intake admin login and  onboarding ', async ({ request }) => {
   await page.waitForTimeout(3000);
 });
 test('Intake tab', async () => {
-  await page.locator('._sideBarItem_148j7_34 > img').first().click();
-  // await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
+  // await page.locator('._sideBarItem_148j7_34 > img').first().click();
+  await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
   await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
   await page.getByLabel('First Name*').click();
   await page.getByLabel('First Name*').fill('New');

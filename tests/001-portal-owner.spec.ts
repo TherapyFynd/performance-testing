@@ -238,7 +238,7 @@ test('Settings Flows', async () => {
       '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._bookingWidgetWrapper_4jerd_1 > div._therapistLinks_4jerd_53 > div:nth-child(1) > p'
     )
     .click();
- 
+  // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._bookingWidgetWrapper_4jerd_1 > div._copyLinkContainer_4jerd_19 > div._link_4jerd_28 > p').click();
   const page1 = await page1Promise;
   // await page1.locator('div').filter({ hasText: /^Owner TeamSelect$/ }).getByRole('button').nth(1).click();
   await page1
@@ -992,13 +992,17 @@ test('Client File', async () => {
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
   await page.getByRole('tab', { name: 'Personal' }).click();
   await page.getByText('Progress notes').click();
-  await page.getByPlaceholder('Search').click();
-  await page.getByPlaceholder('Search').fill('Automation');
-  await page
-    .getByRole('dialog')
-    .locator('div')
-    .filter({ hasText: /^Automation Testing$/ })
-    .click();
+  // await page.getByPlaceholder('Search').click();
+  // Stage
+  await page.getByRole('textbox', { name: 'Search' }).click();
+  await page.getByRole('textbox', { name: 'Search' }).fill('Automation');
+  // await page.getByPlaceholder('Search').fill('Automation');
+  // await page
+  //   .getByRole('dialog')
+  //   .locator('div')
+  //   .filter({ hasText: /^Automation Testing$/ })
+  //   .click();
+    await page.locator('div').filter({ hasText: /^Automation Testing$/ }).click();
   await page.getByPlaceholder('Enter your response here').first().click();
   await page
     .getByPlaceholder('Enter your response here')
@@ -1149,9 +1153,12 @@ test('Intake tab', async () => {
   // await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
   await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
   await page.getByLabel('First Name*').click();
-  await page.getByLabel('First Name*').fill('bangaloe');
+  await page.getByLabel('First Name*').fill('James');
   await page.getByLabel('Last Name').click();
-  await page.getByLabel('Last Name').fill('23');
+  await page.getByLabel('Last Name').fill('lead');
+  // SMS Phone Number
+  // await page.getByLabel('Phone').click();
+  // await page.getByLabel('Phone').fill('3312762635');
   await page.getByLabel('Email').click();
   //
   const invitesinbox3 = await createNewEmail();
@@ -1164,7 +1171,7 @@ test('Intake tab', async () => {
   await page.getByRole('button', { name: 'Create' }).nth(1).click();
   await page.waitForTimeout(2000);
 
-  await page.getByRole('cell', { name: 'bangaloe' }).click();
+  await page.getByRole('cell', { name: 'James Lead' }).click();
   await page.getByRole('tab', { name: 'Basic Information' }).click();
   await page.getByLabel('Sex').click();
   await page.getByRole('option', { name: 'Male', exact: true }).click();
@@ -1200,6 +1207,168 @@ test('Intake tab', async () => {
     .nth(2)
     .click();
   await page.waitForTimeout(1000);
+// // Second Lead.
+  await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
+  await page.getByLabel('First Name*').click();
+  await page.getByLabel('First Name*').fill('Ram');
+  await page.getByLabel('Last Name').click();
+  await page.getByLabel('Last Name').fill('lead');
+  // await page.getByLabel('Phone').click();
+  // await page.getByLabel('Phone').fill('4133248551');
+  await page.getByLabel('Email').click();
+  //
+  const invitesinbox9 = await createNewEmail();
+  await page.getByLabel('Email').fill(invitesinbox9!);
+
+  await page.getByLabel('Seeking treatment for').click();
+  await page.getByRole('option', { name: 'Cancer' }).click();
+  await page.getByLabel('Note').click();
+  await page.getByLabel('Note').fill('I am Very sick');
+  await page.getByRole('button', { name: 'Create' }).nth(1).click();
+  await page.waitForTimeout(2000);
+
+  await page.getByRole('cell', { name: 'Ram Lead' }).click();
+  await page.getByRole('tab', { name: 'Basic Information' }).click();
+  await page.getByLabel('Sex').click();
+  await page.getByRole('option', { name: 'Male', exact: true }).click();
+  await page.getByLabel('Member ID').click();
+  await page.getByLabel('Member ID').fill('GAH23');
+  await page.getByLabel('Name on Card').click();
+  await page.getByLabel('Name on Card').fill('Rajesh');
+  await page.getByLabel('Payer ID').click();
+  await page.getByLabel('Payer ID').fill('BDJSB546');
+  await page.getByLabel('Insurance Company').click();
+  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
+  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page
+    .locator('span')
+    .filter({ hasText: 'Current Status :Inquiry' })
+    .locator('div')
+    .nth(2)
+    .click();
+  await page.getByRole('option', { name: 'Initial consultation call' }).click();
+  await page.waitForTimeout(1000);
+  await page.getByLabel('Send inquiry form').click();
+  await page.getByRole('button', { name: 'Send' }).nth(1).click();
+  await page.waitForTimeout(1000);
+  await page.getByLabel('Send therapist scheduling link').click();
+  await page.getByLabel('Select Therapist').click();
+  await page.getByRole('option', { name: 'Owner Team' }).click();
+  await page.getByRole('button', { name: 'Send' }).nth(1).click();
+  await page
+    .locator('div')
+    .filter({ hasText: /^Filters \(01\)$/ })
+    .getByRole('button')
+    .nth(2)
+    .click();
+  await page.waitForTimeout(1000);
+
+});
+// test('SMS Message Chat', async () => {
+// await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').click();
+//   await page.getByTestId('KeyboardArrowDownIcon').click();
+//   await page.getByRole('menuitem', { name: 'Lead' }).click();
+//   await page.getByText('James Lead').click();
+//   await page.getByTestId('message-input').click();
+//   await page.getByTestId('message-input').fill('Hi man');
+//   await page.getByTestId('SendOutlinedIcon').click();
+
+//   await page.getByTestId('message-input').click();
+//   await page.getByLabel('Send Inquiry Form').click();
+//   await page.waitForTimeout(2000);
+//   await page.getByRole('button', { name: 'Send' }).nth(1).click();
+//   await page.waitForTimeout(2000);
+//   await page.getByLabel('Send Inquiry Form').click();
+//   await page.getByLabel('SMS').check();
+//   await page.waitForTimeout(2000);
+//   await page.getByRole('button', { name: 'Send' }).nth(1).click();
+
+//   await page.getByLabel('Send therapist scheduling link').click();
+//   await page.getByLabel('Select Therapist').click();
+//   try {
+//     await page.getByText('Owner Team, ALC').click();
+//   } catch (error) {
+//     console.log('Failed to find first locator, trying second locator');
+//     await page.getByRole('option', { name: 'Owner Team, ALC' }).click();
+//   }
+//   await page.getByRole('button', { name: 'Send' }).nth(1).click();
+// // Ram Lead
+//   await page.getByText('Ram Lead').click();
+//   await page.getByTestId('message-input').click();
+//   await page.getByTestId('message-input').fill('Hi man');
+//   await page.getByTestId('SendOutlinedIcon').click();
+
+//   await page.getByTestId('message-input').click();
+//   await page.getByLabel('Send Inquiry Form').click();
+//   await page.waitForTimeout(2000);
+//   await page.getByRole('button', { name: 'Send' }).nth(1).click();
+//   await page.waitForTimeout(2000);
+
+//   await page.getByLabel('Send Inquiry Form').click();
+//   await page.getByLabel('SMS').check();
+//   await page.getByRole('button', { name: 'Send' }).nth(1).click();
+//   await page.waitForTimeout(2000);
+
+//   await page.getByLabel('Send therapist scheduling link').click();
+//   await page.getByLabel('Select Therapist').click();
+//   await page.waitForTimeout(2000);
+//   try {
+//     await page.getByText('Owner Team, ALC').click();
+//   } catch (error) {
+//     console.log('Failed to find first locator, trying second locator');
+//     await page.getByRole('option', { name: 'Owner Team, ALC' }).click();
+//   }
+ 
+//   await page.getByRole('button', { name: 'Send' }).nth(1).click();
+//   await page.getByRole('img', { name: 'logo' }).click();
+//   await page.waitForTimeout(2000);
+
+// });
+test('Global search', async () => {
+  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  await page.getByText('Clinician settings').click();
+  await page.getByText('Practice settings').click();
+  await page.getByPlaceholder('Search').click();
+  await page.getByPlaceholder('Search here').click();
+  await page.getByRole('tab', { name: 'Client' }).click();
+  await page.getByPlaceholder('Search here').click();
+  await page.getByPlaceholder('Search here').fill('Automation');
+  await page.getByPlaceholder('Search here').press('Enter');
+  await page.getByRole('heading', { name: 'Automation (OT)' }).click();
+  await page.waitForTimeout(2000);
+  await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div:nth-child(2) > div > div._clientNavigationFixedTop_111x7_1 > div._clientFileHeader_111x7_10 > div._primaryHeader_111x7_15 > div._nameDetails_111x7_20 > button > svg > path').click();
+
+  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  await page.getByText('Clinician settings').click();
+  await page.getByText('Practice settings').click();
+  await page.getByPlaceholder('Search').click();
+  await page.getByRole('tab', { name: 'Leads' }).click();
+  await page.getByPlaceholder('Search here').click();
+  await page.getByPlaceholder('Search here').fill('James');
+  await page.getByPlaceholder('Search here').press('Enter');
+  await page.getByRole('heading', { name: 'James Lead' }).click();
+  await page.getByRole('img', { name: 'logo' }).click();
+  await page.waitForTimeout(2000);
+
+  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  await page.getByText('Clinician settings').click();
+  await page.getByText('Practice settings').click();
+  await page.getByPlaceholder('Search').click(); 
+  await page.getByRole('tab', { name: 'Documents' }).click();
+  await page.getByPlaceholder('Search here').click();
+  await page.getByPlaceholder('Search here').fill('Automation Forms');
+  await page.getByPlaceholder('Search here').press('Enter');
+   try {
+    await page.getByRole('heading', { name: 'Automation Forms', exact: true }).first().click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page.locator('._documentRow_1mnx8_69').first().click();
+  }
+  await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByRole('button').click();
+  await page.waitForTimeout(2000);
+  
+  
 });
 
 test('DP Update and Logout', async () => {
@@ -1218,4 +1387,5 @@ test('DP Update and Logout', async () => {
   //   .click();
   await page.locator('div').filter({ hasText: 'Owner Team' }).nth(3).click();
   await page.getByRole('menuitem', { name: 'Logout' }).click();
+
 });

@@ -625,7 +625,12 @@ test('Forms Tab', async () => {
     
         await page.getByRole('combobox', { name: 'Clinician' }).click();
         await page.getByRole('combobox', { name: 'Clinician' }).fill('Therapist 1');
-        await page.getByRole('option', { name: 'icon Therapist' }).getByRole('paragraph').click();
+        try {
+          await page.getByRole('option', { name: 'icon Therapist 1' }).getByRole('paragraph').click();
+        } catch (error) {
+          console.log('Failed to find first locator, trying second locator');
+         await page.getByRole('option', { name: 'icon Therapist 1' }).click();
+        }
         // await page.getByRole('combobox', { name: 'Clinician' }).click();
         // await page.getByLabel('Clear').click();
         // await page.getByRole('combobox', { name: 'Clinician' }).click();
@@ -635,8 +640,8 @@ test('Forms Tab', async () => {
         await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
       });
       test('Intake tab', async () => {
-        await page.locator('._sideBarItem_148j7_34 > img').first().click();
-        // await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
+        // await page.locator('._sideBarItem_148j7_34 > img').first().click();
+        await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
         await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
         await page.getByLabel('First Name*').click();
         await page.getByLabel('First Name*').fill('New');

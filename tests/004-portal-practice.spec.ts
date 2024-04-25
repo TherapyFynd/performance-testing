@@ -113,6 +113,7 @@ await page.waitForTimeout(4000);
   await page.waitForTimeout(4000);
   await page.reload();
   await page.waitForTimeout(2000);
+  
 // // Simple Practice Imports codes
 // await page.getByText('Simple practice import').click();
 // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > input[type=file]').setInputFiles('C:/Users/Rajesh/Downloads/Export_-_Complete_-_2023-08-28_022706_-_3a869953 (1).zip')
@@ -714,7 +715,12 @@ test('Create Clients', async () => {
 
     await page.getByRole('combobox', { name: 'Clinician' }).click();
     await page.getByRole('combobox', { name: 'Clinician' }).fill('Therapist 1');
-    await page.getByRole('option', { name: 'icon Therapist' }).getByRole('paragraph').click();
+    try {
+      await page.getByRole('option', { name: 'icon Therapist 1' }).getByRole('paragraph').click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+     await page.getByRole('option', { name: 'icon Therapist 1' }).click();
+    }
     // await page.getByRole('combobox', { name: 'Clinician' }).click();
     // await page.getByLabel('Clear').click();
     // await page.getByRole('combobox', { name: 'Clinician' }).click();
@@ -984,6 +990,7 @@ await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').cli
   await page.getByTestId('message-input').fill('Hi Supervisor man how are now ');
   await page.getByTestId('SendOutlinedIcon').click();
   await page.getByRole('img', { name: 'logo' }).click();
+  await page.waitForTimeout(1000);
 });
 test('DP Update and Logout', async () => {
     // await page.locator('#root > div._header_1uy0f_1 > div > div > p').click();
