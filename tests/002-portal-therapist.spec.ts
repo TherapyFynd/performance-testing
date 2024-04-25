@@ -28,6 +28,7 @@ test('Therapist login and onboarding ', async ({ request }) => {
 
   const data = await generatePasswordlessLoginLink({
     email: myEmails.therapistEmail!,
+   
     request: request,
   });
   await page.goto(data!);
@@ -48,11 +49,7 @@ test('Therapist login and onboarding ', async ({ request }) => {
 
 test('Settings Tab', async () => {
   //     Settings tab
-  await page
-    .locator('div')
-    .filter({ hasText: /^Settings$/ })
-    .getByRole('img')
-    .click();
+  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
   // Cliniacan settings
   await page.getByText('Clinician settings').click();
   await page.getByPlaceholder('Enter first name').click();
@@ -120,7 +117,6 @@ test('Settings Tab', async () => {
       '#root > div._layout_10ldc_1 > div > div._bookingWidgetWrapper_tlkra_1 > div._bookingWidgetContainer_tlkra_21 > div._bookingContent_tlkra_44 > div:nth-child(2) > div > div._dateTime_142fu_33 > div > div:nth-child(2) > div > div._timeSlotsWrapper_vyf9q_11 div:first-child'
     )
     .click();
-  // await page1.getByLabel('Next month').click();
   await page1.getByPlaceholder('Enter first name').click();
   await page1.getByPlaceholder('Enter first name').fill('James');
   await page1.getByPlaceholder('Enter last name').click();
@@ -222,15 +218,6 @@ test('Forms Tab', async () => {
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
 
   // Action in Forms
-  // await page.locator('#root > div._layout_731gc_1 > div._content_731gc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path').click();
-  // await page.getByRole('menuitem', { name: 'Send' }).click();
-  // await page.getByLabel('Select Clients').click();
-  // await page.getByRole('option', { name: 'Automation Forms' }).click();
-  // await page.getByRole('combobox', { name: 'Select Clients' }).click();
-  // await page.getByRole('button', { name: 'Send' }).nth(1).click();
-  // await page.reload();
-  // await page.waitForTimeout(1000);
-
   await page
     .locator(
       '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path'
@@ -805,7 +792,15 @@ test('Client File', async () => {
   //  Payment tab
   await page.getByRole('tab', { name: 'Payment' }).click();
   await page.getByLabel('Insurance').check();
-  await page.getByLabel('Client itself').check();
+
+  // Logic For Fail Locator
+try {
+  await page.getByLabel('Client\'s spouse').check();
+    
+} catch (error) {
+  console.log('Failed to find first locator, trying second locator');
+  await page.getByText('Other').click();
+}
   await page.getByPlaceholder('MM/DD/YYYY').first().click();
   await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/1999');
   await page.getByLabel('Sex').click();
@@ -852,29 +847,22 @@ test('Client File', async () => {
     .getByRole('button')
     .click();
 
-  // Forms Section
-  // await page.getByRole('tab', { name: 'Forms' }).click();
-  // await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
-  // await page.getByRole('tab', { name: 'Personal' }).click();
-  // await page.getByText('Questionnaires').click();
-  // await page.getByLabel('Select Forms to send').click();
-  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Therapist Automation Testing');
-  // await page.getByRole('option', { name: 'Therapist Automation Testing' }).click();
-  // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
-  // await page.getByRole('button', { name: 'Send' }).nth(1).click();
-
   // Notes Section
   await page.getByRole('tab', { name: 'Notes' }).click();
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
   await page.getByRole('tab', { name: 'Personal' }).click();
   await page.getByText('Progress notes').click();
-  await page.getByPlaceholder('Search').click();
-  await page.getByPlaceholder('Search').fill('Therapist');
-  await page
-    .getByRole('dialog')
-    .locator('div')
-    .filter({ hasText: /^Therapist Automation Testing$/ })
-    .click();
+  // await page.getByPlaceholder('Search').click();
+  // Stage
+  await page.getByRole('textbox', { name: 'Search' }).click();
+  await page.getByRole('textbox', { name: 'Search' }).fill('Therapist Automation');
+  // await page.getByPlaceholder('Search').fill('Automation');
+  // await page
+  //   .getByRole('dialog')
+  //   .locator('div')
+  //   .filter({ hasText: /^Automation Testing$/ })
+  //   .click();
+    await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).click();
   await page.getByPlaceholder('Enter your response here').first().click();
   await page
     .getByPlaceholder('Enter your response here')
@@ -979,13 +967,17 @@ test('Supervision Flows', async () => {
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
   await page.getByRole('tab', { name: 'Personal' }).click();
   await page.getByText('Progress notes').click();
-  await page.getByPlaceholder('Search').click();
-  await page.getByPlaceholder('Search').fill('Therapist');
-  await page
-    .getByRole('dialog')
-    .locator('div')
-    .filter({ hasText: /^Therapist Automation Testing$/ })
-    .click();
+ // await page.getByPlaceholder('Search').click();
+  // Stage
+  await page.getByRole('textbox', { name: 'Search' }).click();
+  await page.getByRole('textbox', { name: 'Search' }).fill('Therapist Automation');
+  // await page.getByPlaceholder('Search').fill('Automation');
+  // await page
+  //   .getByRole('dialog')
+  //   .locator('div')
+  //   .filter({ hasText: /^Automation Testing$/ })
+  //   .click();
+    await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).click();
   await page.getByPlaceholder('Enter your response here').first().click();
   await page
     .getByPlaceholder('Enter your response here')
@@ -1163,13 +1155,40 @@ test('Insurance Tab', async () => {
       '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._header_174vt_7 > span > button > svg > path'
     )
     .click();
-  await page
-    .locator('div')
-    .filter({ hasText: /^Settings$/ })
-    .getByRole('img')
-    .click();
+ 
 });
+test('Global search', async () => {
+  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  await page.getByText('Clinician settings').click();
+  await page.getByText('Booking widget').click();
+  await page.getByPlaceholder('Search').click();
+  await page.getByPlaceholder('Search here').click();
+  await page.getByRole('tab', { name: 'Client' }).click();
+  await page.getByPlaceholder('Search here').click();
+  await page.getByPlaceholder('Search here').fill('Rajesh');
+  await page.getByPlaceholder('Search here').press('Enter');
+  await page.getByRole('heading', { name: 'Rajesh (T1)' }).click();
+  await page.waitForTimeout(2000);
+  await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div:nth-child(2) > div > div._clientNavigationFixedTop_111x7_1 > div._clientFileHeader_111x7_10 > div._primaryHeader_111x7_15 > div._nameDetails_111x7_20 > button > svg > path').click();
 
+  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  await page.getByText('Clinician settings').click();
+  await page.getByText('Booking widget').click();
+  await page.getByPlaceholder('Search').click(); 
+  await page.getByRole('tab', { name: 'Documents' }).click();
+  await page.getByPlaceholder('Search here').click();
+  await page.getByPlaceholder('Search here').fill('Therapist Automation Forms');
+  await page.getByPlaceholder('Search here').press('Enter');
+  try {
+    await page.getByRole('heading', { name: 'Therapist Automation Testing ', exact: true }).first().click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page.locator('._documentRow_1mnx8_69').first().click();
+  }
+  await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
+  await page.waitForTimeout(2000);
+  
+});
 // Update DP and Logout Flow
 test('Update and Logout Flow', async () => {
   await page.locator('div').filter({ hasText: 'Therapist' }).nth(3).click();

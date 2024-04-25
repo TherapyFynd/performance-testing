@@ -119,6 +119,7 @@ test('Create Appoinment', async () => {
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 
   // Create Appoinment Button( top Bar)
+  
   await page
     .locator(
       '#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
@@ -171,11 +172,14 @@ test('Client File', async () => {
 
 test('Supervision Flow', async () => {
   // Supervision Flows
-  await page
-    .locator('div')
-    .filter({ hasText: /^Supervision$/ })
-    .getByRole('img')
-    .click();
+  try {
+    await page.locator('div').filter({ hasText: /^Supervision$/ }).getByRole('img').click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page
+      .locator('#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div:nth-child(10) > div._sideBarItem_148j7_34._active_148j7_88')
+              .click();
+  }
   await page.getByText('Therapist Automation Testing').first().click();
   await page.getByRole('button', { name: 'Add signature' }).nth(1).click();
   await page.getByPlaceholder('Sign').click();
@@ -187,7 +191,7 @@ test('Supervision Flow', async () => {
     .getByRole('button')
     .click();
   // await page.getByRole('tab', { name: 'Signed' }).click();
-  // await page.getByText('Therapist Automation TestingMar').first().click();
+  // await page.getByText('Therapist Automation Testing').first().click();
   // await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
 });
 

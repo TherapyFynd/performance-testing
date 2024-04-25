@@ -230,6 +230,27 @@ test('Settings Flows', async () => {
     .fill('Absolute');
   await page.getByText('ABSOLUTE TOTAL CARE-').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
+
+  //   Add practice Emails Imports
+await page.getByText('Practice Email Imports').click();
+await page.getByRole('button', { name: 'Add New' }).nth(1).click();
+await page.getByLabel('Email Address').click();
+//   
+const Bookinginbox2 = await createNewEmail();
+await page.getByLabel('Email Address').fill(Bookinginbox2!);
+await page.getByLabel('Choose account type').click();
+await page.getByRole('option', { name: 'Google' }).click();
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
+await page.getByRole('button', { name: 'Add New' }).nth(1).click();
+await page.getByLabel('Email Address').click();
+//   
+const Bookinginbox3 = await createNewEmail();
+await page.getByLabel('Email Address').fill(Bookinginbox3!);
+await page.getByLabel('Choose account type').click();
+await page.getByRole('option', { name: 'Outlook' }).click();
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
 });
 test('DP Update and Logout', async () => {
   await page.locator('div').filter({ hasText: 'Owner Team' }).nth(3).click();
