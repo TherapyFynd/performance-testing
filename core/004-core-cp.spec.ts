@@ -87,20 +87,12 @@ test('Request Booking Appoinment', async () => {
   await page.getByLabel('Select service').click();
   await page.getByText('Psychotherapy, 45 mins').click();
   await page.waitForTimeout(4000);
-  // Logic For Fail Locator
-  try {
-    await page
-      .locator(
-        '#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > p'
-      )
-      .click();
+   // Logic For Fail Locator
+   try {
+    await page.getByText('Pick slot').click();
   } catch (error) {
     console.log('Failed to find first locator, trying second locator');
-    await page
-      .locator(
-        '#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > img'
-      )
-      .click();
+    await page.locator('div').filter({ hasText: /^Pick slot$/ }).click();
   }
 
   await page
