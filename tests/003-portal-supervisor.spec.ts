@@ -31,17 +31,30 @@ test('Supervisor login and onboarding ', async ({ request }) => {
   await page.goto(data!);
 
   // Onbaording flows for Supervisor
-  await page.getByPlaceholder('Enter first name').click();
-  await page.getByPlaceholder('Enter first name').fill('Supervisor');
-  await page.getByPlaceholder('Enter last name').click();
-  await page.getByPlaceholder('Enter last name').fill('1');
-  await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-  await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(1000);
-  await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(4000);
-});
+ // DP
+ await page
+ .locator(
+   '#root > div._layout_10ldc_1 > div > div._onboardProfile_c4jce_1 > div > div._leftSection_c4jce_71 > div > div._profileContainer_c4jce_91 > div._imagePicker_c4jce_35 > input[type=file]'
+ )
+ .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
+await page.getByRole('button', { name: 'Done' }).nth(1).click();
 
+await page.getByPlaceholder('Enter first name').click();
+await page.getByPlaceholder('Enter first name').fill('Supervisor ');
+await page.getByPlaceholder('Enter last name').click();
+await page.getByPlaceholder('Enter last name').fill('1');
+await page.getByPlaceholder('Enter phone').click();
+await page.getByPlaceholder('Enter phone').fill('(846) 534-65831');
+await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+await page.waitForTimeout(2000);
+  await page.getByLabel('').check();
+  await page.waitForTimeout(1000);
+  await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+  await page.waitForTimeout(1000);
+  await page.getByLabel('').check();
+  await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+
+});
 test('Settings Tab', async () => {
   await page
     .locator('div')
@@ -167,7 +180,9 @@ test('Client File', async () => {
     .getByRole('img')
     .click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(1000);
+  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+  await page.waitForTimeout(1000);
 });
 
 test('Supervision Flow', async () => {
@@ -177,8 +192,9 @@ test('Supervision Flow', async () => {
   } catch (error) {
     console.log('Failed to find first locator, trying second locator');
     await page
-      .locator('#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div:nth-child(10) > div._sideBarItem_148j7_34._active_148j7_88')
+      .locator('#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div:nth-child(13) > div._sideBarItem_148j7_34._active_148j7_88')
               .click();
+              
   }
   await page.getByText('Therapist Automation Testing').first().click();
   await page.getByRole('button', { name: 'Add signature' }).nth(1).click();

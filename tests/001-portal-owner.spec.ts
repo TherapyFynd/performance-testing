@@ -36,54 +36,55 @@ test('Owner login and  onboarding ', async ({ request }) => {
   // DP
   await page
     .locator(
-      '#root > div._layout_10ldc_1 > div > div._onboardProfile_bqqcv_1 > div > div > div > div._imagePicker_bqqcv_35 > input[type=file]'
+      '#root > div._layout_10ldc_1 > div > div._onboardProfile_c4jce_1 > div > div._leftSection_c4jce_71 > div > div._profileContainer_c4jce_91 > div._imagePicker_c4jce_35 > input[type=file]'
     )
     .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
   // Onboarding Flows
   await page.getByPlaceholder('Enter first name').click();
-  await page.getByPlaceholder('Enter first name').fill('Owner');
+  await page.getByPlaceholder('Enter first name').fill('Owner ');
   await page.getByPlaceholder('Enter last name').click();
   await page.getByPlaceholder('Enter last name').fill('Team');
+  await page.getByPlaceholder('Enter phone').click();
+  await page.getByPlaceholder('Enter phone').fill('(846) 534-65833');
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByPlaceholder('Enter your practice name').click();
-  await page
-    .getByPlaceholder('Enter your practice name')
-    .fill('Simple Practice Hospital');
+  await page.getByPlaceholder('Enter your practice name').fill('KanTime Healthcare System ');
   await page.getByLabel('Address Line').click();
   await page.getByLabel('Address Line').fill('New York City');
+  await page.getByPlaceholder('Street address').click();
+  await page.getByPlaceholder('Street address').fill('New Area City ');
   await page.getByLabel('State').click();
-  await page.getByRole('combobox', { name: 'State' }).fill('cal');
-  await page.getByRole('option', { name: 'California' }).click();
+  await page.getByRole('combobox', { name: 'State' }).fill('cali');
+  await page.getByText('California').click();
   await page.getByLabel('City').click();
   await page.getByRole('combobox', { name: 'City' }).fill('Azu');
-  await page.getByRole('option', { name: 'Azusa' }).click();
+  await page.getByText('Azusa').click();
   await page.getByPlaceholder('Zip code').click();
   await page.getByPlaceholder('Zip code').fill('561202');
   await page.getByPlaceholder('Enter your practice name').click();
-  await page
-    .getByPlaceholder('Enter your practice name')
-    .fill('Simple Practice Hospital');
-  await page.getByLabel('Address Line').click();
-  await page.getByLabel('Address Line').fill('New York City');
+  await page.getByPlaceholder('Enter your practice name').fill('KanTime Healthcare System ');
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
+  
+  
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('Office name').click();
-  await page.getByLabel('Office name').fill('KanTime Healthcare System');
+  await page.getByLabel('Office name').fill('KanTime Healthcare System ');
   await page.getByLabel('Address').click();
-  await page.getByLabel('Address').fill('New Jersy main road #3');
+  await page.getByLabel('Address').fill('New area City');
   await page.getByLabel('State').click();
-  await page.getByRole('combobox', { name: 'State' }).fill('New');
-  await page.getByText('New York', { exact: true }).click();
+  await page.getByRole('combobox', { name: 'State' }).fill('New york');
+  await page.getByText('New York').click();
   await page.getByLabel('City').click();
-  await page.getByRole('combobox', { name: 'City' }).fill('Mount');
-  await page.getByText('Mount Vernon').click();
+  await page.getByRole('combobox', { name: 'City' }).fill('Fre');
+  await page.getByText('Freeport').click();
   await page.getByPlaceholder('Zip code').click();
-  await page.getByPlaceholder('Zip code').fill('561202');
+  await page.getByPlaceholder('Zip code').fill('56192');
   await page.getByLabel('Make default location').check();
   await page.getByRole('button', { name: 'Add location' }).nth(1).click();
-  await page.waitForTimeout(1000);
+
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
+
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('CPT Code').click();
   await page.getByRole('combobox', { name: 'CPT Code' }).fill('90832');
@@ -96,13 +97,13 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByRole('button', { name: 'Add service' }).nth(1).click();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
-  await page.getByRole('checkbox').check();
-  await page.waitForTimeout(3000);
-  await page.getByRole('button', { name: 'Next' }).nth(1).click();
-  await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(3000);
-  await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(3000);
+ 
+  await page.getByLabel('').check();
+  await page.waitForTimeout(2000);
+  await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+  await page.waitForTimeout(2000);
+  await page.getByLabel('').check();
+  await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
 });
 
 test('Settings Flows', async () => {
@@ -138,11 +139,11 @@ test('Settings Flows', async () => {
   await page.getByLabel('Address').click();
   await page.getByLabel('Address').fill('New Jersy main road #3');
   await page.getByLabel('State').click();
-  await page.getByRole('combobox', { name: 'State' }).fill('New');
-  await page.getByText('New York', { exact: true }).click();
+  await page.getByRole('combobox', { name: 'State' }).fill('cali');
+  await page.getByText('California').click();
   await page.getByLabel('City').click();
-  await page.getByRole('combobox', { name: 'City' }).fill('Freeport');
-  await page.getByText('Freeport').click();
+  await page.getByRole('combobox', { name: 'City' }).fill('Azu');
+  await page.getByText('Azusa').click();
   await page.getByPlaceholder('Zip code').click();
   await page.getByPlaceholder('Zip code').fill('561202');
   await page.getByLabel('Make default location').check();
@@ -228,7 +229,20 @@ test('Settings Flows', async () => {
   await page.waitForTimeout(4000);
   await page.reload();
   await page.getByText('Role settings').click();
-
+ 
+  //   Scheduler Calender 
+  await page.getByText('Calendar').click();
+  await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+  await page.getByRole('button', { name: 'Edit' }).nth(1).click();
+  await page.getByLabel('Monday').check();
+  await page.getByLabel('Tuesday').check();
+  await page.getByLabel('Wednesday').check();
+  await page.getByLabel('Thursday').check();
+  await page.getByLabel('Friday').check();
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
+  await page.getByLabel('Monday').check();
+  
   //Booking widget flows
   await page.getByText('Booking widget').click();
   await page.getByRole('button', { name: 'Generate link' }).nth(1).click();
@@ -269,12 +283,7 @@ test('Settings Flows', async () => {
     .click();
   await page1.waitForTimeout(1000);
   await page1.close();
-  // Calender Day start
-  await page
-    .locator('p')
-    .filter({ hasText: /^Calendar$/ })
-    .click();
-  await page.getByLabel('Monday').check();
+  
   // Billing sections
   await page.locator('p').filter({ hasText: 'Billing' }).click();
   await page.getByRole('tab', { name: 'Insurance' }).click();
@@ -318,11 +327,18 @@ test('Settings Flows', async () => {
     .fill('Absolute');
   await page.getByText('ABSOLUTE TOTAL CARE-').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page
+
+  try {
+    await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._editSettingsWrapper_wuekj_1 > div._therapistHeader_wuekj_7 > div._therapistDetail_wuekj_18 > div > button > svg > path').click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page
     .locator('div')
     .filter({ hasText: /^Owner Team, ALC$/ })
     .getByRole('button')
     .click();
+  }
+  
   await page.getByRole('tab', { name: 'Email Imports' }).click();
   await page.getByRole('button', { name: 'Edit' }).nth(1).click();
 

@@ -36,15 +36,28 @@ test('Scheduler login and  onboarding ', async ({ request }) => {
     await page.goto(data!);
   
   // Onbaording flows for Practice Manager
-  await page.getByPlaceholder('Enter first name').click();
-  await page.getByPlaceholder('Enter first name').fill('scheduler');
-  await page.getByPlaceholder('Enter last name').click();
-  await page.getByPlaceholder('Enter last name').fill('1');
-  await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-  await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
+ // DP
+ await page
+ .locator(
+   '#root > div._layout_10ldc_1 > div > div._onboardProfile_c4jce_1 > div > div._leftSection_c4jce_71 > div > div._profileContainer_c4jce_91 > div._imagePicker_c4jce_35 > input[type=file]'
+ )
+ .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
+await page.getByRole('button', { name: 'Done' }).nth(1).click();
+
+await page.getByPlaceholder('Enter first name').click();
+await page.getByPlaceholder('Enter first name').fill('Scheduler ');
+await page.getByPlaceholder('Enter last name').click();
+await page.getByPlaceholder('Enter last name').fill('1');
+await page.getByPlaceholder('Enter phone').click();
+await page.getByPlaceholder('Enter phone').fill('(846) 534-65834');
+await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+await page.waitForTimeout(2000);
+  await page.getByLabel('').check();
   await page.waitForTimeout(1000);
-  await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(4000);
+  await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+  await page.waitForTimeout(1000);
+  await page.getByLabel('').check();
+  await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
    });
    test('Settings Tab', async () => {
     await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
@@ -211,7 +224,7 @@ await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
   });
   test('DP Update and Logout', async () => {
     // await page.locator('#root > div._header_1uy0f_1 > div > div > p').click();
-    await page.locator('div').filter({ hasText: 'scheduler' }).nth(3).click();
+    await page.locator('div').filter({ hasText: 'Scheduler' }).nth(3).click();
     await page.getByRole('menuitem', { name: 'Profile' }).click();
     await page
       .locator(
@@ -223,6 +236,6 @@ await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
     // await page
     //   .locator('#root > div._header_1uy0f_1 > div > div > p')
     //   .click();
-    await page.locator('div').filter({ hasText: 'scheduler' }).nth(3).click();
+    await page.locator('div').filter({ hasText: 'Scheduler' }).nth(3).click();
     await page.getByRole('menuitem', { name: 'Logout' }).click();
   });

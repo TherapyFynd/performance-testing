@@ -37,15 +37,28 @@ test('Biller  login and  onboarding ', async ({ request }) => {
     await page.goto(data!);
   
   // Onbaording flows for Practice Manager
-  await page.getByPlaceholder('Enter first name').click();
-  await page.getByPlaceholder('Enter first name').fill('Biller');
-  await page.getByPlaceholder('Enter last name').click();
-  await page.getByPlaceholder('Enter last name').fill('1');
-  await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-  await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(1000);
-  await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(4000);
+  // DP
+  await page
+  .locator(
+    '#root > div._layout_10ldc_1 > div > div._onboardProfile_c4jce_1 > div > div._leftSection_c4jce_71 > div > div._profileContainer_c4jce_91 > div._imagePicker_c4jce_35 > input[type=file]'
+  )
+  .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
+await page.getByRole('button', { name: 'Done' }).nth(1).click();
+
+await page.getByPlaceholder('Enter first name').click();
+await page.getByPlaceholder('Enter first name').fill('Biller ');
+await page.getByPlaceholder('Enter last name').click();
+await page.getByPlaceholder('Enter last name').fill('1');
+await page.getByPlaceholder('Enter phone').click();
+await page.getByPlaceholder('Enter phone').fill('(846) 534-65833');
+await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+await page.waitForTimeout(2000);
+   await page.getByLabel('').check();
+   await page.waitForTimeout(1000);
+   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+   await page.waitForTimeout(1000);
+   await page.getByLabel('').check();
+   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
    });
    test('Settings Tab', async () => {
     await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
@@ -147,7 +160,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
         await page.getByLabel('Pronouns').click();
         await page.getByText('She/They').click();
         await page.getByRole('button', { name: 'Save' }).nth(1).click();
-      
+        await page.waitForTimeout(2000);
         //  Payment tab
         await page.getByRole('tab', { name: 'Payment' }).click();
         await page.getByLabel('Insurance').check();
