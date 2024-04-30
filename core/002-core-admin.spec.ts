@@ -33,26 +33,30 @@ test('Intake admin login and  onboarding ', async ({ request }) => {
   // goto page
   await page.goto(data!);
 
-  // Onboarding Flows for Owner
+// Onbaording flows for Practice Manager
+// DP
+await page
+.locator(
+  '#root > div._layout_10ldc_1 > div > div._onboardProfile_c4jce_1 > div > div._leftSection_c4jce_71 > div > div._profileContainer_c4jce_91 > div._imagePicker_c4jce_35 > input[type=file]'
+)
+.setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
+await page.getByRole('button', { name: 'Done' }).nth(1).click();
 
-  // DP
-  await page
-    .locator(
-      '#root > div._layout_10ldc_1 > div > div._onboardProfile_bqqcv_1 > div > div > div > div._imagePicker_bqqcv_35 > input[type=file]'
-    )
-    .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
-  await page.getByRole('button', { name: 'Done' }).nth(1).click();
-  // Onboarding Flows
-  await page.getByPlaceholder('Enter first name').click();
-  await page.getByPlaceholder('Enter first name').fill('Intake ');
-  await page.getByPlaceholder('Enter last name').click();
-  await page.getByPlaceholder('Enter last name').fill('Admin');
-  await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-  await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(3000);
-  await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-  await page.waitForTimeout(3000);
-});
+await page.getByPlaceholder('Enter first name').click();
+await page.getByPlaceholder('Enter first name').fill('Intake');
+await page.getByPlaceholder('Enter last name').click();
+await page.getByPlaceholder('Enter last name').fill('Admin');
+await page.getByPlaceholder('Enter phone').click();
+await page.getByPlaceholder('Enter phone').fill('(846) 534-65836');
+await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+await page.waitForTimeout(2000);
+ await page.getByLabel('').check();
+ await page.waitForTimeout(1000);
+ await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+ await page.waitForTimeout(1000);
+ await page.getByLabel('').check();
+ await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+   });
 test('Intake tab', async () => {
   // await page.locator('._sideBarItem_148j7_34 > img').first().click();
   await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();

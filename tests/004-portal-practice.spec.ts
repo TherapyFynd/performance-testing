@@ -37,15 +37,28 @@ test('Practice  login and  onboarding ', async ({ request }) => {
   await page.goto(data!);
 
 // Onbaording flows for Practice Manager
+// DP
+await page
+.locator(
+  '#root > div._layout_10ldc_1 > div > div._onboardProfile_c4jce_1 > div > div._leftSection_c4jce_71 > div > div._profileContainer_c4jce_91 > div._imagePicker_c4jce_35 > input[type=file]'
+)
+.setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
+await page.getByRole('button', { name: 'Done' }).nth(1).click();
+
 await page.getByPlaceholder('Enter first name').click();
-await page.getByPlaceholder('Enter first name').fill('Practice');
+await page.getByPlaceholder('Enter first name').fill('Practice ');
 await page.getByPlaceholder('Enter last name').click();
 await page.getByPlaceholder('Enter last name').fill('1');
+await page.getByPlaceholder('Enter phone').click();
+await page.getByPlaceholder('Enter phone').fill('(846) 534-65832');
 await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-await page.waitForTimeout(1000);
-await page.getByRole('button', { name: 'Agree  & Continue' }).nth(1).click();
-await page.waitForTimeout(4000);
+await page.waitForTimeout(2000);
+ await page.getByLabel('').check();
+ await page.waitForTimeout(1000);
+ await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+ await page.waitForTimeout(1000);
+ await page.getByLabel('').check();
+ await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
  });
       test('Settings Tab', async () => {
         await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
@@ -189,7 +202,14 @@ await page.getByText('Team members').nth(1).click();
   await page.getByRole('combobox', { name: 'Select accepted payment' }).fill('allway');
   await page.getByText('AllWays Health Partners -').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.locator('div').filter({ hasText: /^Practice 1Save$/ }).getByRole('button').first().click();
+  try {
+    await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._editSettingsWrapper_wuekj_1 > div._therapistHeader_wuekj_7 > div._therapistDetail_wuekj_18 > div > button > svg > path').click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page.locator('div').filter({ hasText: /^Practice 1Save$/ }).getByRole('button').first().click();
+
+  }
+  
   await page.getByRole('tab', { name: 'Email Imports' }).click();
   await page.getByRole('button', { name: 'Edit' }).nth(1).click();
   await page.goto(
