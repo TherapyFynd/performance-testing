@@ -160,7 +160,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
         await page.getByLabel('Pronouns').click();
         await page.getByText('She/They').click();
         await page.getByRole('button', { name: 'Save' }).nth(1).click();
-      
+        await page.waitForTimeout(2000);
         //  Payment tab
         await page.getByRole('tab', { name: 'Payment' }).click();
         await page.getByLabel('Insurance').check();
