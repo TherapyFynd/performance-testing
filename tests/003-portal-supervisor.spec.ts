@@ -180,7 +180,9 @@ test('Client File', async () => {
     .getByRole('img')
     .click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(1000);
+  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+  await page.waitForTimeout(1000);
 });
 
 test('Supervision Flow', async () => {
@@ -190,8 +192,9 @@ test('Supervision Flow', async () => {
   } catch (error) {
     console.log('Failed to find first locator, trying second locator');
     await page
-      .locator('#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div:nth-child(10) > div._sideBarItem_148j7_34._active_148j7_88')
+      .locator('#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div:nth-child(13) > div._sideBarItem_148j7_34._active_148j7_88')
               .click();
+              
   }
   await page.getByText('Therapist Automation Testing').first().click();
   await page.getByRole('button', { name: 'Add signature' }).nth(1).click();
