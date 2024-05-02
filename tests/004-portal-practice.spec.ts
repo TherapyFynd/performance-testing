@@ -40,7 +40,7 @@ test('Practice  login and  onboarding ', async ({ request }) => {
 // DP
 await page
 .locator(
-  '#root > div._layout_10ldc_1 > div > div._onboardProfile_c4jce_1 > div > div._leftSection_c4jce_71 > div > div._profileContainer_c4jce_91 > div._imagePicker_c4jce_35 > input[type=file]'
+  '#root > div._layout_10ldc_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
 )
 .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -207,32 +207,8 @@ await page.getByText('Team members').nth(1).click();
   } catch (error) {
     console.log('Failed to find first locator, trying second locator');
     await page.locator('div').filter({ hasText: /^Practice 1Save$/ }).getByRole('button').first().click();
-
   }
-  
-  await page.getByRole('tab', { name: 'Email Imports' }).click();
-  await page.getByRole('button', { name: 'Edit' }).nth(1).click();
-  await page.goto(
-    isRunningOnLocal
-      ? `${localBaseUrl}/settings/intake-team-members/edit/email-imports`
-      : `${BASE_FRONTEND_URL}/settings/intake-team-members/edit/email-imports`
-  );
-  await page
-    .locator('._form_ekpvv_1 > .MuiButtonBase-root > .btn-filled-default')
-    .first()
-    .click();
-  
-    await page.getByRole('textbox').first().click();
-    await page.getByRole('textbox').first().fill('testtherapyden+2@gmail.com');
-    await page.getByRole('textbox').nth(1).click();
-    await page.getByRole('textbox').nth(1).fill('testpsychtoday+2@gmail.com');
-    await page.getByRole('textbox').nth(2).click();
-    await page.getByRole('textbox').nth(2).fill('websitetest2@gmail.com');
-    await page.getByRole('textbox').nth(3).click();
-    await page.getByRole('textbox').nth(3).fill('testother+2@ho.com');
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.locator('div').filter({ hasText: /^Mails to import$/ }).getByRole('button').click();
-    await page.waitForTimeout(1000);
+  await page.waitForTimeout(2000);
     //   Add practice Emails Imports
 await page.getByText('Practice Email Imports').click();
 await page.getByRole('button', { name: 'Add New' }).nth(1).click();

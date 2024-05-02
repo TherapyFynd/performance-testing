@@ -41,7 +41,7 @@ test('Intake admin login and  onboarding ', async ({ request }) => {
 // DP
 await page
 .locator(
-  '#root > div._layout_10ldc_1 > div > div._onboardProfile_c4jce_1 > div > div._leftSection_c4jce_71 > div > div._profileContainer_c4jce_91 > div._imagePicker_c4jce_35 > input[type=file]'
+  '#root > div._layout_10ldc_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
 )
 .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
