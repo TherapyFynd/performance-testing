@@ -36,7 +36,7 @@ test('Therapist login and onboarding ', async ({ request }) => {
   // DP
   await page
   .locator(
-    '#root > div._layout_10ldc_1 > div > div._onboardProfile_c4jce_1 > div > div._leftSection_c4jce_71 > div > div._profileContainer_c4jce_91 > div._imagePicker_c4jce_35 > input[type=file]'
+    '#root > div._layout_10ldc_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
   )
   .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -1156,11 +1156,14 @@ test('Insurance Tab', async () => {
   await page.getByRole('button', { name: 'Select all' }).nth(1).click();
   await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
   await page.getByRole('tab', { name: 'Claims' }).click();
-  await page
-    .locator(
-      '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(1) > td:nth-child(8) > span > button > button > span > span._label_ns5gx_15'
-    )
-    .click();
+  try {
+    await page
+    .locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(1) > td:nth-child(8) > span > button > button > span > span._label_ns5gx_15').click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page.getByRole('button', { name: 'View' }).first().click();
+
+  };
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
   await page.getByPlaceholder('Start typing here').click();
   await page
