@@ -40,7 +40,7 @@ test('Practice  login and  onboarding ', async ({ request }) => {
 // DP
 await page
 .locator(
-  '#root > div._layout_10ldc_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
+  '#root > div._layout_1p3av_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
 )
 .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -149,28 +149,34 @@ try {
     
   } catch (error) {
     console.log('Failed to find first locator, trying second locator')
-    await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._header_1skpn_1 > div > button:nth-child(2) > button').click();
+    await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._header_1skpn_1 > div > button:nth-child(2) > button').click();
     
   }
   
   await page.getByLabel('Therapist', { exact: true }).check();
-  
   try {
     await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
     
   } catch (error) {
     console.log('Failed to find first locator, trying second locator')
-    await page.locator('body > div.MuiDialog-root.MuiModal-root.css-126xj0f > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div.MuiDialogActions-root.MuiDialogActions-spacing._actionContainer_mi6fq_8.css-14b29qc > button:nth-child(2) > button').click();
+    await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div.MuiDialogActions-root.MuiDialogActions-spacing._actionContainer_mi6fq_8.css-14b29qc > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
     
   }
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.waitForTimeout(2000);
-  await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._header_1skpn_1 > span > span > svg > path').click();
+  await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._header_1skpn_1 > span > span > svg > path').click();
   
 //   Scheduler Calender 
   await page.getByText('Calendar').click();
-  await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
-  await page.getByRole('button', { name: 'Edit' }).nth(1).click();
+
+  try {
+    await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+    
+     } catch (error) {
+     console.log('Failed to find first locator, trying second locator');
+     await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span').click();
+     }
+      await page.getByRole('button', { name: 'Edit' }).nth(1).click();
   await page.getByLabel('Monday').check();
   await page.getByLabel('Tuesday').check();
   await page.getByLabel('Wednesday').check();
@@ -203,7 +209,7 @@ await page.getByText('Team members').nth(1).click();
   await page.getByText('AllWays Health Partners -').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   try {
-    await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._editSettingsWrapper_wuekj_1 > div._therapistHeader_wuekj_7 > div._therapistDetail_wuekj_18 > div > button > svg > path').click();
+    await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._editSettingsWrapper_wuekj_1 > div._therapistHeader_wuekj_7 > div._therapistDetail_wuekj_18 > div > button > svg > path').click();
   } catch (error) {
     console.log('Failed to find first locator, trying second locator');
     await page.locator('div').filter({ hasText: /^Practice 1Save$/ }).getByRole('button').first().click();
@@ -306,7 +312,7 @@ test('Forms Tab', async () => {
   
     await page
       .locator(
-        '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path'
+        '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div:nth-child(1) > div._content_q8wpx_10 > div > svg > path'
       )
       .click();
     await page.getByRole('menuitem', { name: 'Preview' }).click();
@@ -314,7 +320,7 @@ test('Forms Tab', async () => {
   
     await page
       .locator(
-        '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path'
+        '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div:nth-child(1) > div._content_q8wpx_10 > div > svg > path'
       )
       .click();
     await page.getByRole('menuitem', { name: 'Rename' }).click();
@@ -323,15 +329,22 @@ test('Forms Tab', async () => {
     await page.reload();
     await page.waitForTimeout(1000);
     // await page.getByRole('button', { name: 'Rename' }).nth(1).click();
-  
+
     await page
       .locator(
-        '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div > div._content_q8wpx_10 > div > svg > path'
+        '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div:nth-child(1) > div._content_q8wpx_10 > div > svg > path'
       )
       .click();
     await page.getByRole('menuitem', { name: 'Edit' }).click();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.getByTestId('ArrowBackRoundedIcon').click();
+    try {
+      await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._formsList_faptv_1 > div._header_faptv_4 > div > div > svg > path').click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+        await page.getByTestId('ArrowBackRoundedIcon').click();
+
+      }
+    
     await page.getByRole('button', { name: 'Create new' }).nth(1).click();
     // // Consent Form
     await page.getByText('Consent form', { exact: true }).click();
@@ -448,10 +461,10 @@ test('Forms Tab', async () => {
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
     // await page.waitForTimeout(1000);
     await page
-      .locator(
-        '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._formsList_faptv_1 > div._header_faptv_4 > div > div > svg > path'
-      )
-      .click();
+    .locator(
+      '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._formsList_faptv_1 > div._header_faptv_4 > div > div > svg > path'
+    )
+    .click();
     // await page.getByTestId('ArrowBackRoundedIcon').click();
     // // Treatment plan
     await page.getByRole('button', { name: 'Create new' }).nth(1).click();
@@ -695,7 +708,7 @@ test('Forms Tab', async () => {
 test('Create Clients', async () => {
     await page
       .locator(
-        '#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+        '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
       )
       .click();
     // await page.getByRole('button', { name: 'Create' }).nth(1).click();
@@ -760,7 +773,7 @@ test('Create Clients', async () => {
     // await page.getByRole('button', { name: 'Create' }).nth(1).click();
     await page
       .locator(
-        '#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+        '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
       )
       .click();
     await page.getByRole('menuitem', { name: 'Create appointment' }).click();
@@ -906,7 +919,7 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.getByRole('textbox').click();
     await page.getByRole('textbox').fill('Rajesh@1');
     await page.getByRole('button', { name: 'Create' }).nth(1).click();
-    await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._clientFileWrapper_17198_1 > div > div._clientNavigationFixedTop_111x7_1 > div > button > svg > path').click();
+    await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._clientFileWrapper_17198_1 > div > div._clientNavigationFixedTop_111x7_1 > div > button > svg > path').click();
   await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
 });
 test('Insurance Tab', async () => {
@@ -933,7 +946,7 @@ test('DP Update and Logout', async () => {
     await page.getByRole('menuitem', { name: 'Profile' }).click();
     await page
       .locator(
-        '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
+        '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
       )
       .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
     await page.getByRole('button', { name: 'Done' }).nth(1).click();

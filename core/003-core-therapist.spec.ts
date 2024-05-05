@@ -37,7 +37,7 @@ test('Therapist login and  onboarding ', async ({ request }) => {
   // DP
   await page
   .locator(
-    '#root > div._layout_10ldc_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
+    '#root > div._layout_1p3av_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
   )
   .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -102,8 +102,15 @@ test('Settings Flows', async () => {
   
    //   Scheduler Calender 
    await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
-   await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
-   await page.getByRole('button', { name: 'Edit' }).nth(1).click();
+
+try {
+    await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > input').click();
+  }
+     await page.getByRole('button', { name: 'Edit' }).nth(1).click();
    await page.getByLabel('Monday').check();
    await page.getByLabel('Tuesday').check();
    await page.getByLabel('Wednesday').check();
@@ -115,7 +122,7 @@ test('Settings Flows', async () => {
    await page.waitForTimeout(2000);
    await page
     .locator(
-      '#root > div._layout_10ldc_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(3) > div._sidebarHeader_148j7_138 > svg > path'
+      '#root > div._layout_1p3av_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(3) > div._sidebarHeader_148j7_138 > svg > path'
     )
     .click();
 });
@@ -280,7 +287,7 @@ test('Forms Tab', async () => {
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page
     .locator(
-      '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._formsList_faptv_1 > div._header_faptv_4 > div > div > svg > path'
+      '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._formsList_faptv_1 > div._header_faptv_4 > div > div > svg > path'
     )
     .click();
 });
@@ -288,7 +295,7 @@ test('Create Clients', async () => {
   // Create Clients
   await page
     .locator(
-      '#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
     )
     .click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
@@ -314,7 +321,7 @@ test('Create Clients', async () => {
 
   await page
     .locator(
-      '#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
     )
     .click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
@@ -351,7 +358,7 @@ test('Create Clients', async () => {
 
   await page
     .locator(
-      '#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
     )
     .click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
@@ -417,7 +424,7 @@ test('Create Appoinment', async () => {
   // Create Appoinment Button( top Bar)
   await page
     .locator(
-      '#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
     )
     .click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
@@ -508,7 +515,7 @@ test('Insurance Tab', async () => {
   await page.getByRole('tab', { name: 'Claims' }).click();
   await page
     .locator(
-      '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(1) > td:nth-child(8) > span > button > button > span > span._label_ns5gx_15'
+      '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(1) > td:nth-child(8) > span > button > button > span > span._label_ns5gx_15'
     )
     .click();
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
@@ -545,7 +552,7 @@ test('Insurance Tab', async () => {
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page
     .locator(
-      '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._header_174vt_7 > span > button > svg > path'
+      '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._header_174vt_7 > span > button > svg > path'
     )
     .click();
   await page
@@ -560,7 +567,7 @@ test('Update and Logout Flow', async () => {
   await page.getByRole('menuitem', { name: 'Profile' }).click();
   await page
     .locator(
-      '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
+      '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
     )
     .setInputFiles('C:/Users/Rajesh/Downloads/therapist.jpg');
   await page.getByRole('button', { name: 'Done' }).nth(1).click();

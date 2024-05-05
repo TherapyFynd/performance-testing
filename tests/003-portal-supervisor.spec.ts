@@ -34,7 +34,7 @@ test('Supervisor login and onboarding ', async ({ request }) => {
  // DP
  await page
  .locator(
-  '#root > div._layout_10ldc_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
+  '#root > div._layout_1p3av_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
 )
  .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -75,11 +75,13 @@ test('Settings Tab', async () => {
     .locator('p')
     .filter({ hasText: /^Calendar$/ })
     .click();
-  await page
-    .locator(
-      '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383'
-    )
-    .click();
+    try {
+      await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+      
+       } catch (error) {
+       console.log('Failed to find first locator, trying second locator');
+       await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span').click();
+       }
   await page.getByRole('button', { name: 'Edit' }).nth(1).click();
   await page.getByLabel('Monday').check();
   await page.getByLabel('Tuesday').check();
@@ -94,8 +96,7 @@ test('Settings Tab', async () => {
   await page.getByLabel('Monday').check();
   await page
     .locator(
-      '#root > div._layout_10ldc_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(3) > div._sidebarHeader_148j7_138 > svg > path'
-    )
+      '#root > div._layout_1p3av_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(3) > div._sidebarHeader_148j7_138 > svg > path')
     .click();
 });
 
@@ -135,7 +136,7 @@ test('Create Appoinment', async () => {
   
   await page
     .locator(
-      '#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
     )
     .click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
@@ -216,7 +217,7 @@ test('DP Update and Logout', async () => {
   await page.getByRole('menuitem', { name: 'Profile' }).click();
   await page
     .locator(
-      '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
+      '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
     )
     .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
   await page.getByRole('button', { name: 'Done' }).nth(1).click();

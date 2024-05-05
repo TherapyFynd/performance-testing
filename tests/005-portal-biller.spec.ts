@@ -40,7 +40,7 @@ test('Biller  login and  onboarding ', async ({ request }) => {
   // DP
   await page
   .locator(
-    '#root > div._layout_10ldc_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
+    '#root > div._layout_1p3av_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
   )
   .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -80,6 +80,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
 await page.getByText('Terms & Conditions').click();
 await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
    });
+
    test('Create Appoinment', async () => {
         // Create Appoinments
         await page
@@ -88,7 +89,20 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
           .getByRole('img')
           .click();
           await page.getByRole('button', { name: 'Availability' }).nth(1).click();
-          await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._calendarSettings_1fo8k_1 > div > div.primary-b1-bold._subTitle_1fo8k_28 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > input').click();
+          
+          try {
+            await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._calendarSettings_1fo8k_1 > div > div.primary-b1-bold._subTitle_1fo8k_28 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+          } catch (error) {
+            console.log('Failed to find first locator, trying second locator');
+            await page
+              .locator(
+                '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._calendarSettings_1fo8k_1 > div > div.primary-b1-bold._subTitle_1fo8k_28 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > span.MuiSwitch-thumb.css-19gndve'
+              )
+              .click();
+            }
+          
+            
+             
           await page.waitForTimeout(2000);
           await page.getByLabel('Monday').check();
   await page.getByLabel('Tuesday').check();
@@ -126,7 +140,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
         // await page.getByRole('button', { name: 'Create' }).nth(1).click();
         await page
           .locator(
-            '#root > div._layout_10ldc_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+            '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
           )
           .click();
         await page.getByRole('menuitem', { name: 'Create appointment' }).click();
@@ -293,7 +307,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.getByRole('menuitem', { name: 'Profile' }).click();
     await page
       .locator(
-        '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
+        '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
       )
       .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
     await page.getByRole('button', { name: 'Done' }).nth(1).click();
