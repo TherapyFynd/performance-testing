@@ -92,21 +92,6 @@ test('Booking Appoinment', async () => {
     await page.locator('div').filter({ hasText: /^Pick slot$/ }).click();
   }
 
-  // try {
-  //   await page
-  //     .locator(
-  //       '#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > p'
-  //     )
-  //     .click();
-  // } catch (error) {
-  //   console.log('Failed to find first locator, trying second locator');
-  //   await page
-  //     .locator(
-  //       '#root > div._clientPortalLayout_10ldc_25 > div > div > div > div > div._upcomingAppointments_1ssoc_1 > div._modalContainer_ff5w5_1 > div._bookAppointmentModalChild_gn0e8_1 > div._dateAndSlotContainer_gn0e8_129 > div._slotDetail_gn0e8_135 > img'
-  //     )
-  //     .click();
-  // }
-
   await page.locator('body > div.MuiPopover-root.MuiModal-root.css-1khfnay > div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-ak9ghh > div > div > div._timeSlotsWrapper_vyf9q_11 div:first-child').click();
   await page.getByRole('button', { name: 'Request appointment' }).nth(1).click();
   await page.waitForTimeout(5000);
@@ -115,11 +100,16 @@ test('Booking Appoinment', async () => {
 test('Filling Form', async () => {
   // Filling the form
   await page.locator('button:nth-child(2)').first().click();
-  await page
-    .locator(
-      '#root > div._clientPortalLayout_10ldc_25 > div > div > div._formsItemContainer_4be5w_12 > div > div:nth-child(1) > div > div._formIconAndNameContainer_1pbgi_16 > p'
-    )
-    .click();
+  try {
+    await page.getByText('Therapist Automation Forms').click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page
+      .locator(
+        '#root > div._clientPortalLayout_1p3av_25 > div > div > div._formsItemContainer_4be5w_12 > div > div > div > div._formIconAndNameContainer_1pbgi_16 > p'
+      )
+      .click();
+    }
   // await page.getByText('Automation Forms').click();
   await page.getByPlaceholder('Enter your response here').first().click();
   await page
@@ -136,7 +126,7 @@ test('Filling Form', async () => {
   await page.getByRole('button', { name: 'Sign' }).nth(1).click();
   await page.getByRole('button', { name: 'Submit' }).nth(1).click();
   await page.getByRole('tab', { name: 'Completed (1)' }).click();
-  await page.getByText('Automation Forms').click();
+  await page.getByText('Therapist Automation Forms').click();
   await page.getByRole('button').click();
 });
 
@@ -145,7 +135,7 @@ test('Personal Infomation', async () => {
   await page.getByRole('menuitem', { name: 'Profile' }).click();
   await page
     .locator(
-      '#root > div._clientPortalLayout_10ldc_25 > div > div > div > div._userNameDetailsContainer_io6q5_18 > div > div._imagePicker_io6q5_27 > input[type=file]'
+      '#root > div._clientPortalLayout_1p3av_25 > div > div > div > div._userNameDetailsContainer_io6q5_18 > div > div._imagePicker_io6q5_27 > input[type=file]'
     )
     .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
   await page.getByRole('button', { name: 'Done' }).nth(1).click();

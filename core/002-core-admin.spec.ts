@@ -37,7 +37,7 @@ test('Intake admin login and  onboarding ', async ({ request }) => {
 // DP
 await page
 .locator(
-  '#root > div._layout_10ldc_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
+  '#root > div._layout_1p3av_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
 )
 .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -130,7 +130,7 @@ test('DP Update and Logout', async () => {
   await page.getByRole('menuitem', { name: 'Profile' }).click();
   await page
     .locator(
-      '#root > div._layout_10ldc_1 > div._content_10ldc_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
+      '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
     )
     .setInputFiles('../files/ther_img.jpg');
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
