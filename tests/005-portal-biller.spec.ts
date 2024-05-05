@@ -89,9 +89,18 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
           .getByRole('img')
           .click();
           await page.getByRole('button', { name: 'Availability' }).nth(1).click();
-
           
-            await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+          try {
+            await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._calendarSettings_1fo8k_1 > div > div.primary-b1-bold._subTitle_1fo8k_28 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+          } catch (error) {
+            console.log('Failed to find first locator, trying second locator');
+            await page
+              .locator(
+                '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._calendarSettings_1fo8k_1 > div > div.primary-b1-bold._subTitle_1fo8k_28 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > span.MuiSwitch-thumb.css-19gndve'
+              )
+              .click();
+            }
+          
             
              
           await page.waitForTimeout(2000);
