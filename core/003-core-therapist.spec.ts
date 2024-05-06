@@ -443,7 +443,13 @@ test('Client File', async () => {
     .filter({ hasText: /^Clients$/ })
     .getByRole('img')
     .click();
-  await page.getByText('Rajesh Das').click();
+    try {
+      await page.getByRole('cell', { name: 'icon Rajesh Das' }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+      await page.getByText('Rajesh Das').click();
+    }
+    
   // Info and Settings
   await page.getByRole('button', { name: 'Info & settings' }).nth(1).click();
   await page.getByLabel('First Name*').click();
