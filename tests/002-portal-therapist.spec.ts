@@ -36,7 +36,7 @@ test('Therapist login and onboarding ', async ({ request }) => {
   // DP
   await page
     .locator(
-      '#root > div._layout_1p3av_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
+      '#root > div._layout_1p3av_1 > div > div._onboardProfile_1mh3p_1 > div > div._leftSection_1mh3p_71 > div > div._cardContent_1mh3p_98 > div._profileContainer_1mh3p_116 > div._imagePicker_1mh3p_35 > input[type=file]'
     )
     .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -200,7 +200,7 @@ test('Settings Tab', async () => {
   await page.waitForTimeout(2000);
   await page
     .locator(
-      '#root > div._layout_1p3av_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(3) > div._sidebarHeader_148j7_138 > svg > path')
+      '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1._tabSpecificSidebar_13uy6_2 > div._scrollableWrapper_13uy6_13 > div > div._sidebarHeader_13uy6_135 > svg > path')
     .click();
 
 });
@@ -691,7 +691,7 @@ test('Create Clients', async () => {
   // Create Clients
   await page
     .locator(
-      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
     )
     .click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
@@ -715,7 +715,7 @@ test('Create Clients', async () => {
   await page.waitForTimeout(2000);
   await page
     .locator(
-      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
     )
     .click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
@@ -750,7 +750,7 @@ test('Create Clients', async () => {
   await page.waitForTimeout(2000);
   await page
     .locator(
-      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
     )
     .click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
@@ -780,6 +780,26 @@ test('Create Clients', async () => {
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
   await page.waitForTimeout(2000);
+
+  await page
+      .locator(
+        '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
+      )
+      .click();
+    // await page.getByRole('button', { name: 'Create' }).nth(1).click();
+    await page.getByRole('menuitem', { name: 'Create client' }).click();
+    await page.getByLabel('First Name*').click();
+    await page.getByLabel('First Name*').fill('Alfred');
+    await page.getByLabel('Last Name*').click();
+    await page.getByLabel('Last Name*').fill('Arnoldson');
+    await page.getByLabel('Email*').click();
+    //
+    const invitesinbox2 = await createNewEmail();
+    await page.getByLabel('Email*').fill(invitesinbox2!);
+  
+    await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+    await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
+
 });
 test('Create Appoinment', async () => {
   // Create Appoinments
@@ -814,7 +834,7 @@ test('Create Appoinment', async () => {
   // Create Appoinment Button( top Bar)
   await page
     .locator(
-      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
     )
     .click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
@@ -1005,17 +1025,7 @@ test('Client File', async () => {
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(2000);
 
-  // // Multi Client Flows
-  // // await page.getByText('Rajesh Das').click();
-  //   await page.getByRole('button', { name: 'Profile & Clinician' }).nth(1).click();
-  //   await page.getByRole('button', { name: 'Add profile' }).nth(1).click();
-  //   await page.getByLabel('', { exact: true }).click();
-  //   await page.getByRole('option', { name: 'Owner Team' }).click();
-  //   await page.getByRole('textbox').click();
-  //   await page.getByRole('textbox').fill('Rajesh@1');
-  //   await page.getByRole('button', { name: 'Create' }).nth(1).click();
-  //   await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._clientFileWrapper_17198_1 > div > div._clientNavigationFixedTop_111x7_1 > div > button > svg > path').click();
-  // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+  
 });
 
 test('Supervision Flows', async () => {
@@ -1115,44 +1125,67 @@ test('Supervision Flows', async () => {
     .filter({ hasText: /^Therapist Automation Testing$/ })
     .getByRole('button')
     .click();
-  // await page.getByText('Upcoming').click();
-  // await page.getByText('Therapist Automation Testing').nth(1).click();
-  // await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
-  // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+    await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div:nth-child(2) > div > div._clientNavigationFixedTop_111x7_1 > div._clientFileHeader_111x7_10 > div._primaryHeader_111x7_15 > div._nameDetails_111x7_20 > button > svg > path').click();
+
+    // Back Button
+    await page.waitForTimeout(2000);
+    await page.getByText('Alfred Arnoldson').click();
+  
+    // Info and Settings
+    await page.getByRole('button', { name: 'Info & settings' }).nth(1).click();
+    await page.getByLabel('First Name*').click();
+    await page.getByLabel('First Name*').fill('Alfred');
+    await page.getByLabel('Last Name*').click();
+    await page.getByLabel('Last Name*').fill('Arnoldson');
+    await page.getByLabel('Pronouns').click();
+    await page.getByText('She/They').click();
+    await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  
+    //  Payment tab
+    await page.getByRole('tab', { name: 'Payment' }).click();
+    await page.getByLabel('Insurance').check();
+      // Logic For Fail Locator
+      try {
+        await page.getByLabel('Client itself').check();
+          
+      } catch (error) {
+        console.log('Failed to find first locator, trying second locator');
+        await page.getByText('Other').click();
+      }
+    
+    await page.getByPlaceholder('MM/DD/YYYY').first().click();
+    await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/2000');
+    await page.getByLabel('Sex').click();
+    await page.getByRole('option', { name: 'Male', exact: true }).click();
+    await page.getByPlaceholder('Phone').click();
+    await page.getByPlaceholder('Phone').fill('(734) 573-25415');
+    await page.getByLabel('Address line').click();
+    await page.getByLabel('Address line').fill('New City main office');
+    await page.getByLabel('State').click();
+    await page.getByRole('combobox', { name: 'State' }).fill('Utah');
+    await page.getByRole('option', { name: 'Utah' }).click();
+    await page.getByLabel('City').click();
+    await page.getByRole('combobox', { name: 'City' }).fill('Roy');
+    await page.getByRole('option', { name: 'Roy' }).click();
+    await page.getByLabel('Zip code').click();
+    await page.getByLabel('Zip code').fill('678203');
+    await page.getByLabel('Insurance Company').click();
+    await page.getByLabel('Insurance Company').fill('MEM');
+    await page.getByText('Maine Medicaid- MEMCD').click();
+    await page.getByLabel('Member ID').click();
+    await page.getByLabel('Member ID').fill('MEDICAID');
+    await page.getByLabel('Group ID').click();
+    await page.getByLabel('Group ID').fill('GGH3');
+    await page.getByLabel('Plan ID').click();
+    await page.getByLabel('Plan ID').fill('KKH45');
+    await page.getByPlaceholder('MM/DD/YYYY').nth(1).click();
+    await page.getByPlaceholder('MM/DD/YYYY').nth(1).fill('10/10/2000');
+    await page.getByPlaceholder('MM/DD/YYYY').nth(2).click();
+    await page.getByPlaceholder('MM/DD/YYYY').nth(2).fill('10/10/2030');
+    await page.getByRole('button', { name: 'Save' }).nth(1).click();
+    await page.locator('div').filter({ hasText: /^Basic InfoIndividual$/ }).getByRole('button').click();
+    await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div:nth-child(2) > div > div._clientNavigationFixedTop_111x7_1 > div._clientFileHeader_111x7_10 > div._primaryHeader_111x7_15 > div._nameDetails_111x7_20 > button > svg > path').click();
 });
-
-//     test('Multi-Client Flows', async () => {
-//       // await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
-// // Minor
-// await page.getByText('Shiva Kumar').click();
-// await page.getByRole('button', { name: 'Profile & Clinician' }).nth(1).click();
-// await page.getByRole('button', { name: 'Add profile' }).nth(1).click();
-// await page.getByLabel('Minor').check();
-// await page.getByLabel('', { exact: true }).first().click();
-// await page.getByRole('option', { name: 'Owner Team' }).click();
-// await page.getByRole('button', { name: '​', exact: true }).click();
-// await page.getByRole('option', { name: 'Venkatesh Prasad' }).click();
-// await page.getByRole('textbox').click();
-// await page.getByRole('textbox').fill('Shiva &Venkatesh@1');
-// await page.getByRole('button', { name: 'Create' }).nth(1).click();
-// await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._clientFileWrapper_17198_1 > div > div._clientNavigationFixedTop_111x7_1 > div > button > svg > path').click();
-// await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
-// // Couple
-// await page.getByText('Rakesh Das').click();
-// await page.getByRole('button', { name: 'Profile & Clinician' }).nth(1).click();
-// await page.getByRole('button', { name: 'Add profile' }).nth(1).click();
-// await page.getByLabel('Couple').check();
-// await page.getByLabel('', { exact: true }).first().click();
-// await page.getByRole('option', { name: 'Owner Team' }).click();
-// await page.getByRole('button', { name: '​', exact: true }).click();
-// await page.getByRole('option', { name: 'Poornima Das' }).click();
-// await page.getByRole('textbox').click();
-// await page.getByRole('textbox').fill('Rakesh &Poornima@1');
-// await page.getByRole('button', { name: 'Create' }).nth(1).click();
-// await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._clientFileWrapper_17198_1 > div > div._clientNavigationFixedTop_111x7_1 > div > button > svg > path').click();
-// await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
-
-// });
 
 // Insurance Tab
 test('Insurance Tab', async () => {

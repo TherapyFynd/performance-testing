@@ -36,7 +36,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   // DP
   await page
     .locator(
-      '#root > div._layout_1p3av_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
+      '#root > div._layout_1p3av_1 > div > div._onboardProfile_1mh3p_1 > div > div._leftSection_1mh3p_71 > div > div._cardContent_1mh3p_98 > div._profileContainer_1mh3p_116 > div._imagePicker_1mh3p_35 > input[type=file]'
     )
     .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -154,7 +154,7 @@ test('Settings Flows', async () => {
   await page.getByRole('combobox', { name: 'CPT Code' }).fill('90792');
   await page.getByText('90792, Psychiatric diagnostic').click();
   await page.getByLabel('Fee *').click();
-  await page.getByLabel('Fee *').fill('50');
+  await page.getByLabel('Fee *').fill('1000');
   await page.getByLabel('Duration *').click();
   await page.getByLabel('Duration *').fill('15');
   await page.getByLabel('Make default service').check();
@@ -293,6 +293,29 @@ test('Settings Flows', async () => {
   // Billing sections
   await page.locator('p').filter({ hasText: 'Billing' }).click();
   await page.getByRole('tab', { name: 'Insurance' }).click();
+  await page.getByLabel('Practice name').click();
+  await page.getByLabel('Practice name').fill('KanTime Healthcare System');
+  await page.getByLabel('NPI').click();
+  await page.getByLabel('NPI').fill('1234567890');
+  await page.getByLabel('Taxonomy code').click();
+  await page.getByLabel('Taxonomy code').fill('HGXFCS33');
+  await page.getByLabel('SSN').click();
+  await page.getByLabel('SSN').fill('GGH34JH');
+  await page.getByPlaceholder('Address line').click();
+  await page.getByPlaceholder('Address line').press('CapsLock');
+  await page.getByPlaceholder('Address line').fill('New Jersy Road main Block city ');
+  await page.getByLabel('State').click();
+  await page.getByRole('combobox', { name: 'State' }).fill('Ge');
+  await page.getByRole('option', { name: 'Georgia' }).click();
+  await page.getByLabel('City').click();
+  await page.getByRole('combobox', { name: 'City' }).fill('Du');
+  await page.getByRole('option', { name: 'Dunwoody' }).click();
+  await page.getByPlaceholder('Zip code').click();
+  await page.getByPlaceholder('Zip code').fill('5672343');
+  await page.getByLabel('Include Service location in').check();
+  await page.getByLabel('Enable multiple diagnostic').check();
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
   await page.getByText('Payers').click();
   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
   await page.getByLabel('Search for insurance payers').click();
@@ -302,7 +325,13 @@ test('Settings Flows', async () => {
     await page.waitForTimeout(2000);
   await page.getByText('ABSOLUTE TOTAL CARE-').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
-
+  await page.waitForTimeout(2000);
+  await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
+  await page.getByLabel('Search for insurance payers').click();
+  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('MEM');
+  await page.getByText('Maine Medicaid- MEMCD').click();
+  await page.getByRole('button', { name: 'Add' }).nth(1).click();
+  
   // // Referal settings
   await page.getByText('Team members').nth(1).click();
   await page
@@ -316,22 +345,10 @@ test('Settings Flows', async () => {
     .fill('Abuse');
   await page.getByRole('option', { name: 'Abuse', exact: true }).click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page
-    .locator('div')
-    .filter({ hasText: /^Owner Team, ALC$/ })
-    .getByRole('button')
-    .click();
-  await page.getByRole('tab', { name: 'Accepted Insurance' }).click();
-  await page
-    .getByRole('row', { name: 'Owner Team, ALC' })
-    .getByRole('img')
-    .nth(1)
-    .click();
+  await page.getByRole('tab', { name: 'Payment Methods' }).click();
   await page.getByLabel('Select accepted payment').click();
-  await page
-    .getByRole('combobox', { name: 'Select accepted payment' })
-    .fill('Absolute');
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  await page.getByRole('combobox', { name: 'Select accepted payment' }).fill('allway');
+  await page.getByText('AllWays Health Partners -').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
 
   try {
@@ -341,36 +358,10 @@ test('Settings Flows', async () => {
     await page.locator('div').filter({ hasText: /^Owner Team, ALC$/ }).getByRole('button').click();
   }
   
-  await page.getByRole('tab', { name: 'Email Imports' }).click();
-  await page.getByRole('button', { name: 'Edit' }).nth(1).click();
-
-  await page.goto(
-    isRunningOnLocal
-      ? `${localBaseUrl}/settings/intake-team-members/edit/email-imports`
-      : `${BASE_FRONTEND_URL}/settings/intake-team-members/edit/email-imports`
-  );
-  await page
-    .locator('._form_ekpvv_1 > .MuiButtonBase-root > .btn-filled-default')
-    .first()
-    .click();
-  await page.getByRole('textbox').first().click();
-  await page.getByRole('textbox').first().fill('testtherapyden+1@gmail.com');
-  await page.getByRole('textbox').nth(1).click();
-  await page.getByRole('textbox').nth(1).fill('testpsychtoday+1@gmail.com');
-  await page.getByRole('textbox').nth(2).click();
-  await page.getByRole('textbox').nth(2).fill('websitetest1@gmail.com');
-  await page.getByRole('textbox').nth(3).click();
-  await page.getByRole('textbox').nth(3).fill('testother@ho.com');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page
-    .locator('div')
-    .filter({ hasText: /^Mails to import$/ })
-    .getByRole('button')
-    .click();
   await page.waitForTimeout(1000);
   await page
     .locator(
-      '#root > div._layout_1p3av_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(3) > div._sidebarHeader_148j7_138 > svg > path')
+      '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1._tabSpecificSidebar_13uy6_2 > div._scrollableWrapper_13uy6_13 > div > div._sidebarHeader_13uy6_135 > svg > path')
     .click();
 });
 
@@ -849,7 +840,7 @@ test('Request Booking Widget', async () => {
 test('Create Clients', async () => {
   await page
     .locator(
-      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
     )
     .click();
   // await page.getByRole('button', { name: 'Create' }).nth(1).click();
@@ -901,7 +892,7 @@ test('Create Appoinment', async () => {
   // await page.getByRole('button', { name: 'Create' }).nth(1).click();
   await page
     .locator(
-      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
     )
     .click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();

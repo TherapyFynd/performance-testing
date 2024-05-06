@@ -37,7 +37,7 @@ test('Therapist login and  onboarding ', async ({ request }) => {
   // DP
   await page
   .locator(
-    '#root > div._layout_1p3av_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
+    '#root > div._layout_1p3av_1 > div > div._onboardProfile_1mh3p_1 > div > div._leftSection_1mh3p_71 > div > div._cardContent_1mh3p_98 > div._profileContainer_1mh3p_116 > div._imagePicker_1mh3p_35 > input[type=file]'
   )
   .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -122,7 +122,7 @@ try {
    await page.waitForTimeout(2000);
    await page
     .locator(
-      '#root > div._layout_1p3av_1 > div._tabSpecificSidebar_148j7_2 > div:nth-child(3) > div._sidebarHeader_148j7_138 > svg > path'
+      '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1._tabSpecificSidebar_13uy6_2 > div._scrollableWrapper_13uy6_13 > div > div._sidebarHeader_13uy6_135 > svg > path'
     )
     .click();
 });
@@ -295,7 +295,7 @@ test('Create Clients', async () => {
   // Create Clients
   await page
     .locator(
-      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
     )
     .click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
@@ -321,7 +321,7 @@ test('Create Clients', async () => {
 
   await page
     .locator(
-      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
     )
     .click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
@@ -358,7 +358,7 @@ test('Create Clients', async () => {
 
   await page
     .locator(
-      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
     )
     .click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
@@ -424,7 +424,7 @@ test('Create Appoinment', async () => {
   // Create Appoinment Button( top Bar)
   await page
     .locator(
-      '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+      '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
     )
     .click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();

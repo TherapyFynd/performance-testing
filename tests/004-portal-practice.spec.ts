@@ -40,7 +40,7 @@ test('Practice  login and  onboarding ', async ({ request }) => {
 // DP
 await page
 .locator(
-  '#root > div._layout_1p3av_1 > div > div._onboardProfile_12x14_1 > div > div._leftSection_12x14_71 > div > div._cardContent_12x14_97 > div._profileContainer_12x14_115 > div._imagePicker_12x14_35 > input[type=file]'
+  '#root > div._layout_1p3av_1 > div > div._onboardProfile_1mh3p_1 > div > div._leftSection_1mh3p_71 > div > div._cardContent_1mh3p_98 > div._profileContainer_1mh3p_116 > div._imagePicker_1mh3p_35 > input[type=file]'
 )
 .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -708,7 +708,7 @@ test('Forms Tab', async () => {
 test('Create Clients', async () => {
     await page
       .locator(
-        '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+        '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
       )
       .click();
     // await page.getByRole('button', { name: 'Create' }).nth(1).click();
@@ -773,7 +773,7 @@ test('Create Clients', async () => {
     // await page.getByRole('button', { name: 'Create' }).nth(1).click();
     await page
       .locator(
-        '#root > div._layout_1p3av_1 > div._sideBar_148j7_1 > div._createBtnContainer_148j7_97 > button > button'
+        '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
       )
       .click();
     await page.getByRole('menuitem', { name: 'Create appointment' }).click();
@@ -938,7 +938,7 @@ await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').cli
   await page.waitForTimeout(3000);
   await page.getByRole('img', { name: 'logo' }).click();
   await page.waitForTimeout(1000);
-
+  
 });
 test('DP Update and Logout', async () => {
     // await page.locator('#root > div._header_1uy0f_1 > div > div > p').click();
