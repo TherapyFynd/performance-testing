@@ -34,7 +34,7 @@ test('Supervisor login and onboarding ', async ({ request }) => {
  // DP
  await page
  .locator(
-  '#root > div._layout_1p3av_1 > div > div._onboardProfile_1mh3p_1 > div > div._leftSection_1mh3p_71 > div > div._cardContent_1mh3p_98 > div._profileContainer_1mh3p_116 > div._imagePicker_1mh3p_35 > input[type=file]'
+  '#root > div._layout_cqogi_1 > div > div._onboardProfile_pki44_1 > div > div._leftSection_pki44_71 > div > div._cardContent_pki44_98 > div._profileContainer_pki44_116 > div._imagePicker_pki44_35 > input[type=file]'
 )
  .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -99,7 +99,18 @@ test('Settings Tab', async () => {
       '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1._tabSpecificSidebar_13uy6_2 > div._scrollableWrapper_13uy6_13 > div > div._sidebarHeader_13uy6_135 > svg > path')
     .click();
 });
+test('Message Tab', async () => {
+  //   Messages Box
+  await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').click();
+  await page.getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('menuitem', { name: 'Team' }).click();
+  await page.getByTestId('message-input').fill('Hi Therapist 1 How are u ');
+  await page.getByTestId('SendOutlinedIcon').click();
+  await page.waitForTimeout(3000);
+  await page.getByRole('img', { name: 'logo' }).click();
+  await page.waitForTimeout(1000);
 
+});
 test('Create Appoinment', async () => {
   // Create Appoinments
   await page
@@ -197,6 +208,14 @@ test('Client File', async () => {
     await page.waitForTimeout(8000);
     await page.getByRole('button', { name: 'View Log' }).nth(1).click();
     await page.locator('._header_q5khp_1 > .MuiButtonBase-root').click();
+    await page.getByRole('button', { name: 'Share' }).nth(1).click();
+  await page.getByLabel('Select Team Member').click();
+  await page.getByRole('combobox', { name: 'Select Team Member' }).fill('Own');
+  await page.getByRole('option', { name: 'icon Owner Team' }).click();
+  await page.getByPlaceholder('Type message here').click();
+  await page.getByPlaceholder('Type message here').fill('Hey Testing name');
+  await page.getByRole('button', { name: 'Share' }).nth(1).click();
+  await page.waitForTimeout(2000);
     // await page.getByRole('button', { name: 'Share' }).nth(1).click();
     // await page.getByLabel('Select Team Member').click();
     // await page.getByRole('combobox', { name: 'Select Team Member' }).fill('Ther');
