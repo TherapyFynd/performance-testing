@@ -156,10 +156,8 @@ await page.getByRole('button', { name: 'Task priority flag' }).click();
 await page.getByRole('menuitem', { name: 'Urgent' }).click();
 await page.getByRole('button', { name: 'Open' }).click();
 await page.getByText('InProgress').click();
-// await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div._addNewTaskModal_89ect_5 > div._body_89ect_46 > div._attachments_89ect_53 > input[type=file]').setInputFiles(path.join(__dirname + '../files/dummy.pdf'));
 try {
   await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
-  // await  page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div > footer > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
 } catch (error) {
   console.log('Failed to find first locator, trying second locator');
   await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div > footer > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
@@ -168,27 +166,13 @@ await page.waitForTimeout(5000);
 
   
   await page.getByText('Automation Task Owner').click();
-  await page .getByPlaceholder('Add subtask').click();
-  await page .getByPlaceholder('Add subtask').fill('Hi Man How are U');
+  // await page.getByRole('button', { name: 'user icon Add Subtask' }).click();
+  await page.getByPlaceholder('Add comment').click();
+  await page.getByPlaceholder('Add comment').fill('Hi Man How are U');
+  await page.getByRole('button', { name: 'Send' }).nth(1).click();
   await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
   await page.waitForTimeout(2000);
-  // await page.locator('header').filter({ hasText: 'Activity' }).getByRole('button').click();
-  await page.getByRole('row', { name: 'Automation Task Owner 1 Add' }).getByRole('button').nth(4).click();
-  await page.getByRole('row', { name: 'Add subtask Cancel Save Task' }).getByPlaceholder('Add subtask').click();
-  await page.getByRole('row', { name: 'Add subtask Cancel Save Task' }).getByPlaceholder('Add subtask').fill('Owner Subtask 2');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.waitForTimeout(2000);
-  await page.locator('td').filter({ hasText: 'Owner Subtask 2 Owner Subtask' }).getByRole('button').click();
-  await page.getByText('InProgress').click();
-  await page.locator('tr').filter({ hasText: 'Owner Subtask 2 Owner Subtask' }).getByTestId('priority_flag_image').click();
-  await page.getByRole('menuitem', { name: 'Urgent' }).click();
-  await page.getByRole('row', { name: 'Automation Task Owner 1 Add' }).getByRole('button').first().click();
-  await page.getByRole('row', { name: 'Automation Task Owner 1 Add' }).getByRole('button').first().click();
-  await page.locator('tr').filter({ hasText: 'Owner Subtask 2 Owner Subtask' }).getByTestId('priority_flag_image').click();
-  await page.getByRole('menuitem', { name: 'Urgent' }).click();
-  await page.getByRole('row', { name: 'Automation Task Owner 2 Add' }).getByRole('button').first().click();
-  await page.getByRole('row', { name: 'Automation Task Owner 2 Add' }).getByRole('paragraph').nth(1).click();
-  await page.waitForTimeout(2000);
+  
   await page.getByRole('button', { name: 'My Task' }).nth(1).click();
   await page.getByRole('button', { name: 'All Tasks' }).nth(1).click();
   await page.getByRole('button', { name: 'Group by' }).nth(1).click();
@@ -203,8 +187,27 @@ await page.waitForTimeout(5000);
   await page.getByRole('button', { name: 'Month' }).nth(1).click();
   await page.getByText('Automation Task Owner').click();
   await page.locator('header').filter({ hasText: 'Activity' }).getByRole('button').click();
+
   await page.getByRole('heading', { name: 'Board View' }).click();
   await page.getByText('Automation Task Owner').click();
   await page.locator('header').filter({ hasText: 'Activity' }).getByRole('button').click();
+
+  await page.getByRole('button', { name: 'Add Task' }).nth(1).click();
+  await page.getByPlaceholder('Task Name').click();
+  await page.getByPlaceholder('Task Name').fill('Board View Task');
+  await page.getByPlaceholder('Add Description').click();
+  await page.getByPlaceholder('Add Description').fill('Testing Board view task');
+  await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
+ 
+  await page.locator('._header_1k7mt_11 > button').first().click();
+  await page.getByRole('menuitem', { name: 'Set Priority' }).getByRole('img').click();
+  await page.getByRole('menuitem', { name: 'Urgent' }).getByRole('img').click();
+  await page.locator('._header_1k7mt_11 > button').first().click();
+  await page.getByRole('menuitem', { name: 'Add subtask' }).click();
+  await page.getByPlaceholder('Add subtask').clear();
+  await page.getByPlaceholder('Add subtask').fill('New Subtask');
+  await page.getByPlaceholder('Add subtask').press('Enter');
+  
+
 
 });
