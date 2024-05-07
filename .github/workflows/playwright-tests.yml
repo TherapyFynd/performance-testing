@@ -16,9 +16,9 @@ jobs:
       - name: Make POST request on failure
         if: always()
         run: |
-          curl -X POST https://hooks.slack.com/services/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 \
+          curl -X POST ${{ secrets.SLACK_WEBHOOK_URL }} \
             -H 'Content-Type: application/json' \
-            -d '{"text":"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
+            -d '{"text":"Action Failed : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} @here"}'
 
       - name: Checkout code
         uses: actions/checkout@v4
