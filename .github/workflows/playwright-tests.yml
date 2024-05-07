@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Make POST request on failure
-        if: failure()
+        if: always()
         run: |
           curl -X POST \
             -H "Content-Type: application/json" \
