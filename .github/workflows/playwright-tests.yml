@@ -9,6 +9,18 @@ on:
     branches: [main, master]
 
 jobs:
+  send_message:
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Send Slack notification (on failure)
+        uses: ravsamhq/notify-slack-action@v1
+        if: always()
+        with:
+          status: ${{ job.status }}
+          slack_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          fields: ${{ toJson( { repo: github.repository, workflow: github.workflow, job: github.job } ) }}
+
   tests:
     runs-on: ubuntu-latest
 
