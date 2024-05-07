@@ -13,13 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Make POST request on failure
-        if: always()
-        run: |
-          curl -X POST ${{ secrets.SLACK_WEBHOOK_URL }} \
-            -H 'Content-Type: application/json' \
-            -d '{"text":"Action Failed : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} @here"}'
-
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -71,3 +64,10 @@ jobs:
           path: html-report.zip
           if-no-files-found: error
         if: always()
+
+      - name: Make POST request on failure
+        if: ${{ failure() }}
+        run: |
+          curl -X POST ${{ secrets.SLACK_WEBHOOK_URL }} \
+            -H 'Content-Type: application/json' \
+            -d '{"text":"Action Failed : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
