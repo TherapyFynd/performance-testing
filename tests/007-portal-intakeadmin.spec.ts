@@ -171,7 +171,7 @@ test('Forms Tab', async () => {
   
     await page
       .locator(
-        '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div:nth-child(1) > div._content_q8wpx_10 > div > svg > path'
+        '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div:nth-child(1) > div._content_q8wpx_10 > div > svg > path'
       )
       .click();
     await page.getByRole('menuitem', { name: 'Preview' }).click();
@@ -179,7 +179,7 @@ test('Forms Tab', async () => {
   
     await page
       .locator(
-        '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div:nth-child(1) > div._content_q8wpx_10 > div > svg > path'
+        '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div:nth-child(1) > div._content_q8wpx_10 > div > svg > path'
       )
       .click();
     await page.getByRole('menuitem', { name: 'Rename' }).click();
@@ -191,7 +191,7 @@ test('Forms Tab', async () => {
   
     await page
       .locator(
-        '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div:nth-child(1) > div._content_q8wpx_10 > div > svg > path'
+        '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div:nth-child(1) > div._content_q8wpx_10 > div > svg > path'
       )
       .click();
     await page.getByRole('menuitem', { name: 'Edit' }).click();
@@ -314,7 +314,7 @@ test('Forms Tab', async () => {
     // await page.waitForTimeout(1000);
     await page
       .locator(
-        '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._formsList_faptv_1 > div._header_faptv_4 > div > div > svg > path'
+        '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._formsList_faptv_1 > div._header_faptv_4 > div > div > svg > path'
       )
       .click();
     // await page.getByTestId('ArrowBackRoundedIcon').click();
@@ -566,16 +566,14 @@ test('Forms Tab', async () => {
           .click();
           await page.getByRole('button', { name: 'Availability' }).nth(1).click();
           
+            
           try {
-            await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._calendarSettings_1fo8k_1 > div > div.primary-b1-bold._subTitle_1fo8k_28 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+            await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._calendarSettings_1fo8k_1 > div > div.primary-b1-bold._subTitle_1fo8k_28 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+        
           } catch (error) {
             console.log('Failed to find first locator, trying second locator');
-            await page
-              .locator(
-                '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._calendarSettings_1fo8k_1 > div > div.primary-b1-bold._subTitle_1fo8k_28 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > span.MuiSwitch-thumb.css-19gndve'
-              )
-              .click();
-            }
+            await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._calendarSettings_1fo8k_1 > div > div.primary-b1-bold._subTitle_1fo8k_28 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > span.MuiSwitch-thumb.css-19gndve').click();
+          }
            
             await page.waitForTimeout(2000);
           await page.getByLabel('Monday').check();
@@ -616,7 +614,7 @@ test('Forms Tab', async () => {
         // await page.getByRole('button', { name: 'Create' }).nth(1).click();
         await page
           .locator(
-            '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
+            '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
           )
           .click();
         await page.getByRole('menuitem', { name: 'Create appointment' }).click();
@@ -633,7 +631,7 @@ test('Forms Tab', async () => {
       test('Create Clients', async () => {
         await page
           .locator(
-            '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
+            '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
           )
           .click();
         // await page.getByRole('button', { name: 'Create' }).nth(1).click();
@@ -732,19 +730,25 @@ test('Forms Tab', async () => {
         await page.waitForTimeout(1000);
       });
       test('DP Update and Logout', async () => {
-        // await page.locator('#root > div._header_1uy0f_1 > div > div > p').click();
-        await page.locator('div').filter({ hasText: 'IntakeAdmin' }).nth(3).click();
+        try {
+          await page.getByRole('img').nth(1).click();
+        } catch (error) {
+          console.log('Failed to find first locator, trying second locator');
+          await page.locator('.MuiAvatar-img').click();
+        }  
         await page.getByRole('menuitem', { name: 'Profile' }).click();
         await page
           .locator(
-            '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
+            '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
           )
           .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
         await page.getByRole('button', { name: 'Done' }).nth(1).click();
         await page.getByRole('button', { name: 'Save' }).nth(1).click();
-        // await page
-        //   .locator('#root > div._header_1uy0f_1 > div > div > p')
-        //   .click();
-        await page.locator('div').filter({ hasText: 'IntakeAdmin' }).nth(3).click();
+        try {
+          await page.getByRole('img').nth(1).click();
+        } catch (error) {
+          console.log('Failed to find first locator, trying second locator');
+          await page.locator('.MuiAvatar-img').click();
+        }  
         await page.getByRole('menuitem', { name: 'Logout' }).click();
       });

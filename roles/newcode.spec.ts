@@ -136,85 +136,6 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.waitForTimeout(2000);
   await page.getByLabel('').check();
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
-});
- test('Task Board', async () => {
-//   await page.locator('div').filter({ hasText: /^Tasks$/ }).getByRole('img').click();
-//   try {
-//     await page.locator('._viewTypeChips_wopqc_18 > div:nth-child(3)').click();
-//   } catch (error) {
-//     console.log('Failed to find first locator, trying second locator');
-//     await page.getByRole('heading', { name: 'List View' }).click();
-//   }
-// //   await page.locator('._viewTypeChips_wopqc_18 > div:nth-child(3)').click();
-// //   await page.getByRole('heading', { name: 'List View' }).click();
-//   await page.getByRole('button', { name: 'Add Task' }).nth(1).click();
-//   await page.getByPlaceholder('Task Name').click();
-//   await page.getByPlaceholder('Task Name').fill('Testing Task');
-//   await page.getByPlaceholder('Add Description').click();
-//   await page.getByPlaceholder('Add Description').fill('Testing the Task in Automation codes');
-//   await page.getByRole('button', { name: 'user icon Add Subtask' }).click();
-//   await page.getByPlaceholder('Add comment').click();
-// await page.getByPlaceholder('Add comment').fill('Owner Subtask 1');
-// await page.getByRole('button', { name: 'user icon Assign to' }).click();
-// await page.locator('span').filter({ hasText: 'Owner Team' }).getByRole('paragraph').click();
-//   await page.getByRole('button', { name: 'user icon Assign to' }).click();
- 
-//   await page.getByRole('button', { name: 'calendar icon Due Date' }).click();
-//   await page.getByRole('gridcell', { name: '3', exact: true }).click();
-//   await page.getByText('Set Priority').click();
-  
-// //   await page.getByRole('banner').getByTestId('priority_flag_image').click();
-//   await page.getByRole('menuitem', { name: 'Urgent' }).click();
-//   await page.getByRole('button', { name: 'Open' }).click();
-//   await page.getByRole('menuitem', { name: 'InProgress' }).click();
-//   await page.getByRole('button', { name: 'assignee icon' }).click();
-//   await page.locator('p').filter({ hasText: /^Intake Admin$/ }).click();
-//   await page.getByRole('button', { name: 'Task priority flag' }).click();
-//   await page.getByRole('menuitem', { name: 'Urgent' }).click();
-//   await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
-//   await page.waitForTimeout(3000);
-
-//   await page.getByText('Testing Task').click();
-//   await page.getByRole('button', { name: 'user icon Add Subtask' }).click();
-//   await page.getByRole('textbox').nth(3).click();
-//   await page.getByRole('textbox').nth(3).fill('Hey I am testing again');
-//   await page.locator('footer').filter({ hasText: 'Send' }).getByRole('textbox').click();
-//   await page.locator('footer').filter({ hasText: 'Send' }).getByRole('textbox').fill('Hey I am adding here @');
-//   await page.getByText('scheduler 1').click();
-//   await page.getByRole('button', { name: 'Send' }).nth(1).click();
-//   await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
-//   await page.getByRole('heading', { name: 'Calendar View' }).click();
-//   await page.getByRole('button', { name: 'Month' }).nth(1).click();
-//   await page.getByText('Testing Task').click();
-//   await page.getByRole('button', { name: 'user icon Add Subtask' }).click();
-//   await page.locator('div:nth-child(4) > ._subtaskInput_8b4c7_21 > ._commentEditor_13dy9_1 > ._commentInputField_13dy9_11 > div > div > textarea').click();
-//   await page.locator('div:nth-child(4) > ._subtaskInput_8b4c7_21 > ._commentEditor_13dy9_1 > ._commentInputField_13dy9_11 > div > div > textarea').fill('Hey Testing noob');
-//   await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
-//   await page.waitForTimeout(5000);
-//   await page.locator('.primary-ca-bolder').first().click();
-//   await page.getByText('Testing Task').click();
-//   await page.getByRole('button', { name: 'user icon Add Attachment' }).click();
-//   await page.locator('footer').filter({ hasText: 'Send' }).getByRole('textbox').click();
-//   await page.locator('footer').filter({ hasText: 'Send' }).getByRole('textbox').fill('@');
-//   await page.getByRole('option', { name: 'scheduler 1' }).click();
-//   await page.locator('footer').filter({ hasText: '@scheduler 1 @scheduler 1 Send' }).getByRole('textbox').fill('@scheduler 1 Added here again');
-//   await page.getByRole('button', { name: 'Send' }).nth(1).click();
-//   await page.locator('header').filter({ hasText: 'Activity' }).getByRole('button').click();
-//   await page.getByRole('button', { name: 'My Task' }).nth(1).click();
-//   await page.getByRole('heading', { name: 'List View' }).click();
-//   await page.getByRole('button', { name: 'All Tasks' }).nth(1).click();
-//   await page.locator('._addMoreAssignee_7qhwk_61 > img').first().click();
-//   await page.locator('span').filter({ hasText: 'Owner Team' }).getByRole('paragraph').click();
-//   await page.getByRole('button', { name: 'My Task' }).nth(1).click();
-//   await page.getByRole('button', { name: 'All Tasks' }).nth(1).click();
-//   await page.getByRole('button', { name: 'Group by' }).nth(1).click();
-//   await page.getByText('Status').click();
-//   await page.getByRole('button', { name: 'Group by' }).nth(1).click();
-//   await page.locator('p').filter({ hasText: 'Assigned To' }).click();
-//   await page.getByRole('button', { name: 'Group by' }).nth(1).click();
-//   await page.locator('p').filter({ hasText: 'Due Date' }).click();
-//   await page.getByRole('button', { name: 'Group by' }).nth(1).click();
-//   await page.locator('p').filter({ hasText: 'Priority' }).click();
 
 // Add Task 
 await page.locator('div').filter({ hasText: /^Tasks$/ }).getByRole('img').click();
@@ -235,28 +156,26 @@ await page.getByRole('button', { name: 'Task priority flag' }).click();
 await page.getByRole('menuitem', { name: 'Urgent' }).click();
 await page.getByRole('button', { name: 'Open' }).click();
 await page.getByText('InProgress').click();
-await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div._addNewTaskModal_89ect_5 > div._body_89ect_46 > div._attachments_89ect_53 > input[type=file]').setInputFiles(path.join(__dirname + '../files/dummy.pdf'));
+// await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div._addNewTaskModal_89ect_5 > div._body_89ect_46 > div._attachments_89ect_53 > input[type=file]').setInputFiles(path.join(__dirname + '../files/dummy.pdf'));
 try {
-  // await page.getByRole('button', { name: 'Create Task' }).nth(2).click();
-  await  page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div > footer > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
+  await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
+  // await  page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div > footer > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
 } catch (error) {
   console.log('Failed to find first locator, trying second locator');
-  await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div > footer > button:nth-child(2) > button').click();
+  await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div > footer > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
 }
-
-await page.waitForTimeout(4000);
+await page.waitForTimeout(5000);
 
   
   await page.getByText('Automation Task Owner').click();
   await page .getByPlaceholder('Add subtask').click();
-  await page .getByPlaceholder('Add subtaskt').fill('Hi Man How are U');
-  await page.getByRole('button', { name: 'Send' }).nth(1).click();
+  await page .getByPlaceholder('Add subtask').fill('Hi Man How are U');
   await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
   await page.waitForTimeout(2000);
   // await page.locator('header').filter({ hasText: 'Activity' }).getByRole('button').click();
   await page.getByRole('row', { name: 'Automation Task Owner 1 Add' }).getByRole('button').nth(4).click();
-  await page.getByRole('row', { name: 'Add comment Cancel Save Task' }).getByPlaceholder('Add comment').click();
-  await page.getByRole('row', { name: 'Add comment Cancel Save Task' }).getByPlaceholder('Add comment').fill('Owner Subtask 2');
+  await page.getByRole('row', { name: 'Add subtask Cancel Save Task' }).getByPlaceholder('Add subtask').click();
+  await page.getByRole('row', { name: 'Add subtask Cancel Save Task' }).getByPlaceholder('Add subtask').fill('Owner Subtask 2');
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.waitForTimeout(2000);
   await page.locator('td').filter({ hasText: 'Owner Subtask 2 Owner Subtask' }).getByRole('button').click();
