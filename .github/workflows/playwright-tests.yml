@@ -9,24 +9,18 @@ on:
     branches: [main, master]
 
 jobs:
-  send_message:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Send Slack notification (on failure)
-        if: always()
-        uses: ravsamhq/notify-slack-action@v1
-        with:
-          status: ${{ job.status }}
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
   tests:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Make POST request on failure
+        if: failure()
+        run: |
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -d '{"actionUrl": "${{ github.event.workflow_run.url }}"}' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
+
       - name: Checkout code
         uses: actions/checkout@v4
 
