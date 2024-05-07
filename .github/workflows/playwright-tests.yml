@@ -10,6 +10,8 @@ on:
 
 jobs:
   send_message:
+    runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -18,8 +20,6 @@ jobs:
         if: always()
         with:
           status: ${{ job.status }}
-          slack_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-          fields: ${{ toJson( { repo: github.repository, workflow: github.workflow, job: github.job } ) }}
 
   tests:
     runs-on: ubuntu-latest
