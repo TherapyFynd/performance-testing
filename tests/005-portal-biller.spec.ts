@@ -40,7 +40,7 @@ test('Biller  login and  onboarding ', async ({ request }) => {
   // DP
   await page
   .locator(
-    '#root > div._layout_1p3av_1 > div > div._onboardProfile_1mh3p_1 > div > div._leftSection_1mh3p_71 > div > div._cardContent_1mh3p_98 > div._profileContainer_1mh3p_116 > div._imagePicker_1mh3p_35 > input[type=file]'
+    '#root > div._layout_cqogi_1 > div > div._onboardProfile_pki44_1 > div > div._leftSection_pki44_71 > div > div._cardContent_pki44_98 > div._profileContainer_pki44_116 > div._imagePicker_pki44_35 > input[type=file]'
   )
   .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -91,18 +91,13 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
           await page.getByRole('button', { name: 'Availability' }).nth(1).click();
           
           try {
-            await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._calendarSettings_1fo8k_1 > div > div.primary-b1-bold._subTitle_1fo8k_28 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+            await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._calendarSettings_1fo8k_1 > div > div.primary-b1-bold._subTitle_1fo8k_28 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+        
           } catch (error) {
             console.log('Failed to find first locator, trying second locator');
-            await page
-              .locator(
-                '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div._calendarSettings_1fo8k_1 > div > div.primary-b1-bold._subTitle_1fo8k_28 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > span.MuiSwitch-thumb.css-19gndve'
-              )
-              .click();
-            }
-          
-            
-             
+            await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._calendarSettings_1fo8k_1 > div > div.primary-b1-bold._subTitle_1fo8k_28 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > span.MuiSwitch-thumb.css-19gndve').click();
+          }
+           
           await page.waitForTimeout(2000);
           await page.getByLabel('Monday').check();
   await page.getByLabel('Tuesday').check();
@@ -140,7 +135,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
         // await page.getByRole('button', { name: 'Create' }).nth(1).click();
         await page
           .locator(
-            '#root > div._layout_1p3av_1 > div._sideBar_13uy6_1 > div._createBtnContainer_13uy6_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
+            '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
           )
           .click();
         await page.getByRole('menuitem', { name: 'Create appointment' }).click();
@@ -302,19 +297,27 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
 //       .click();
 //   });
   test('DP Update and Logout', async () => {
-    // await page.locator('#root > div._header_1uy0f_1 > div > div > p').click();
-    await page.locator('div').filter({ hasText: 'Biller' }).nth(3).click();
-    await page.getByRole('menuitem', { name: 'Profile' }).click();
+   
+    try {
+      await page.getByRole('img').nth(1).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+      await page.locator('.MuiAvatar-img').click();
+    }  
+        await page.getByRole('menuitem', { name: 'Profile' }).click();
     await page
       .locator(
-        '#root > div._layout_1p3av_1 > div._content_1p3av_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
+        '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
       )
       .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
     await page.getByRole('button', { name: 'Done' }).nth(1).click();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    // await page
-    //   .locator('#root > div._header_1uy0f_1 > div > div > p')
-    //   .click();
-    await page.locator('div').filter({ hasText: 'Biller' }).nth(3).click();
-    await page.getByRole('menuitem', { name: 'Logout' }).click();
+    
+    try {
+      await page.getByRole('img').nth(1).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+      await page.locator('.MuiAvatar-img').click();
+    }  
+        await page.getByRole('menuitem', { name: 'Logout' }).click();
   });  
