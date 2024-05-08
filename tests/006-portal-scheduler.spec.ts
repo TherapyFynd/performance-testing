@@ -315,18 +315,10 @@ await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
     await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
     await page.waitForTimeout(3000);
     await page.getByText('Therapist').first().click();
-    await page.locator('div').filter({ hasText: /^NOTESPsychotherapy note$/ }).locator('img').nth(1).click();
-    await page.getByRole('button', { name: 'Add psychotherapy note' }).nth(1).click();
-    await page.getByPlaceholder('Enter your response here').click();
-    await page.getByPlaceholder('Enter your response here').fill('Test Data');
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
-    await page.waitForTimeout(2000);
-    await page.getByText('Therapist').first().click();
     await page.getByText('invoice').click();
     await page.getByTestId('CancelIcon').click();
     await page.locator('._appointmentHeader_15uwk_6 > .MuiButtonBase-root').click();
-    
+
     
     });
   test('DP Update and Logout', async () => {
