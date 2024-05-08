@@ -567,7 +567,43 @@ test('Insurance Tab', async () => {
     .getByRole('img')
     .click();
 });
+test('Therapist Dashboard', async () => {
+// Create Appoinment Button( top Bar)
+await page
+.locator(
+  '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
+)
+.click();
+await page.getByRole('menuitem', { name: 'Create appointment' }).click();
+await page.getByLabel('Select client profile*').click();
+await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
+await page.getByLabel('Select service *').click();
+await page.getByText('Family psychotherapy...').click();
+await page.getByPlaceholder('Enter text here').click();
+await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
+await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+await page.waitForTimeout(1000);
+await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
+await page.waitForTimeout(3000);
+await page.getByText('Therapist').first().click();
+await page.locator('button').filter({ hasText: 'Add note' }).nth(1).click();
+await page.getByRole('button', { name: 'Add psychotherapy note' }).nth(1).click();
+await page.getByPlaceholder('Enter your response here').click();
+await page.getByPlaceholder('Enter your response here').fill('Test Data');
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
+await page.waitForTimeout(2000);
+await page.getByText('Therapist').first().click();
+await page.locator('button').filter({ hasText: 'Edit' }).nth(1).click();
+await page.getByPlaceholder('Enter text here').click();
+await page.getByPlaceholder('Enter text here').fill('New Date Updated');
+await page.getByRole('button', { name: 'Update Appointment' }).nth(1).click();
+await page.waitForTimeout(2000);
+await page.getByText('Therapist').first().click();
+await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
+await page.getByRole('button', { name: 'Yes' }).nth(1).click();
 
+});
 test('Update and Logout Flow', async () => {
   try {
     await page.getByRole('img').nth(1).click();

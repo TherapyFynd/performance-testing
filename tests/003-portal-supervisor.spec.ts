@@ -264,7 +264,98 @@ test('Supervision Flow', async () => {
   // await page.getByText('Therapist Automation Testing').first().click();
   // await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
 });
+test('TaskBoard Widget Flows', async () => {
 
+  await page.locator('div').filter({ hasText: /^Tasks$/ }).getByRole('img').click();
+  await page.getByRole('heading', { name: 'List View' }).click();
+  await page.getByRole('button', { name: 'Add Task' }).nth(1).click();
+  await page.getByPlaceholder('Task Name').click();
+  await page.getByPlaceholder('Task Name').fill('Supervisor Automation Task');
+  await page.locator('div').filter({ hasText: /^Task Description$/ }).click();
+  await page.getByPlaceholder('Add Description').fill('Testing Taskboard with Owner role');
+  await page.getByRole('button', { name: 'user icon Add Subtask' }).click();
+  await page.getByPlaceholder('Add subtask').click();
+  await page.getByPlaceholder('Add subtask').fill('Supervisor Subtask 1');
+  await page.getByRole('button', { name: 'user icon Assign to' }).click();
+  await page.locator('span').filter({ hasText: 'Supervisor 1' }).getByRole('paragraph').click();
+  await page.getByRole('banner').getByTestId('priority_flag_image').click();
+  await page.getByRole('menuitem', { name: 'Urgent' }).click();
+  await page.getByRole('button', { name: 'Task priority flag' }).click();
+  await page.getByRole('menuitem', { name: 'Urgent' }).click();
+  await page.getByRole('button', { name: 'Open' }).click();
+  await page.getByText('InProgress').click();
+  try {
+    await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div > footer > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
+  }
+  await page.waitForTimeout(5000);
+  
+    await page.getByText('Supervisor Automation Task').click();
+    // await page.getByRole('button', { name: 'user icon Add Subtask' }).click();
+    await page.getByPlaceholder('Add comment').click();
+    await page.getByPlaceholder('Add comment').fill('Hi Man How are U');
+    await page.getByRole('button', { name: 'Send' }).nth(1).click();
+    await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
+    await page.waitForTimeout(2000);
+    
+    await page.getByRole('button', { name: 'My Task' }).nth(1).click();
+    await page.getByRole('button', { name: 'All Tasks' }).nth(1).click();
+    await page.getByRole('button', { name: 'Group by' }).nth(1).click();
+    await page.getByText('Status').click();
+    await page.getByRole('button', { name: 'Group by: status' }).nth(1).click();
+    await page.locator('p').filter({ hasText: 'Assigned To' }).click();
+    await page.getByRole('button', { name: 'Group by: Assigned to' }).nth(1).click();
+    await page.locator('p').filter({ hasText: 'Due Date' }).click();
+    await page.getByRole('button', { name: 'Group by: Due Date' }).nth(1).click();
+    await page.locator('p').filter({ hasText: 'Priority' }).click();
+    await page.getByRole('heading', { name: 'Calendar View' }).click();
+    await page.getByRole('button', { name: 'Month' }).nth(1).click();
+    await page.getByText(' Supervisor Automation Task').click();
+    await page.locator('header').filter({ hasText: 'Activity' }).getByRole('button').click();
+  
+    await page.getByRole('heading', { name: 'Board View' }).click();
+    await page.getByText('Supervisor Automation Task').click();
+    await page.locator('header').filter({ hasText: 'Activity' }).getByRole('button').click();
+  
+    await page.getByRole('button', { name: 'Add Task' }).nth(1).click();
+    await page.getByPlaceholder('Task Name').click();
+    await page.getByPlaceholder('Task Name').fill('Supervisor Board View Task');
+    await page.getByPlaceholder('Add Description').click();
+    await page.getByPlaceholder('Add Description').fill('Testing Board view task');
+    await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
+   
+    await page.locator('._header_1k7mt_11 > button').first().click();
+    await page.getByRole('menuitem', { name: 'Set Priority' }).getByRole('img').click();
+    await page.getByRole('menuitem', { name: 'Urgent' }).getByRole('img').click();
+    
+    
+  });
+  test('Supervisor  Dashboard', async () => {
+    // Create Appoinment Button( top Bar)
+  await page
+  .locator(
+    '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
+  )
+  .click();
+  await page.getByRole('menuitem', { name: 'Create appointment' }).click();
+  await page.getByLabel('Select client profile*').click();
+  await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
+  await page.getByLabel('Select service *').click();
+  await page.getByText('Family psychotherapy...').click();
+  await page.getByPlaceholder('Enter text here').click();
+  await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  await page.waitForTimeout(1000);
+  await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
+  await page.waitForTimeout(3000);
+  await page.getByText('Therapist').first().click();
+  await page.getByText('invoice').click();
+  await page.getByTestId('CancelIcon').click();
+  await page.locator('._appointmentHeader_15uwk_6 > .MuiButtonBase-root').click();
+  
+});
 test('DP Update and Logout', async () => {
   try {
     await page.getByRole('img').nth(1).click();

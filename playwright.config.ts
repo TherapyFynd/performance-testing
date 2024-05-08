@@ -35,7 +35,7 @@ export default defineConfig({
     viewport: null,
     browserName: 'chromium',
     headless: true,
-
+    
     launchOptions: {
       // 1
       args: ['--start-maximized'],

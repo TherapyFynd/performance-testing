@@ -260,8 +260,62 @@ await page.getByLabel('Email Address').fill(Bookinginbox3!);
 await page.getByLabel('Choose account type').click();
 await page.getByRole('option', { name: 'Outlook' }).click();
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
-
+// Privacy Policy
+await page.getByText('Website Privacy Policy').click();
+  await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
 });
+test('Create Clients', async () => {
+  await page
+.locator(
+  '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
+)
+.click();
+await page.getByRole('menuitem', { name: 'Create client' }).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Automation');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('Test');
+await page.getByLabel('Email*').click();
+//
+const invitesinbox2 = await createNewEmail();
+await page.getByLabel('Email*').fill(invitesinbox2!);
+
+await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
+});
+test('Owner Dashboard', async () => {
+// Dashboard Features for Owner roles
+await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'addIcon Create Appointment' }).nth(1).click();
+await page.getByLabel('Select client profile*').click();
+await page.getByText('Automation (OT)').click();
+await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+await page.waitForTimeout(2000);
+await page.getByText('Owner Team').first().click();
+await page.locator('button').filter({ hasText: 'Add note' }).nth(1).click();
+await page.getByRole('button', { name: 'Add psychotherapy note' }).nth(1).click();
+await page.getByPlaceholder('Enter your response here').click();
+await page.getByPlaceholder('Enter your response here').fill('Test Data');
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
+await page.waitForTimeout(2000);
+await page.getByText('Owner Team').first().click();
+await page.locator('button').filter({ hasText: 'Edit' }).nth(1).click();
+await page.getByPlaceholder('Enter text here').click();
+await page.getByPlaceholder('Enter text here').fill('New Date Updated');
+await page.getByRole('button', { name: 'Update Appointment' }).nth(1).click();
+await page.waitForTimeout(2000);
+await page.getByText('Owner Team').first().click();
+await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
+await page.getByRole('button', { name: 'Yes' }).nth(1).click();
+await page.getByLabel('Clinician').click();
+await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
+await page.locator('.MuiBackdrop-root').click();
+await page.getByRole('tab', { name: 'Clinician' }).click();
+await page.getByRole('tab', { name: 'Practice' }).click();
+});
+
 test('DP Update and Logout', async () => {
   try {
     await page.locator('.MuiAvatar-img').click();
