@@ -1274,66 +1274,101 @@ test('Intake tab', async () => {
   await page.waitForTimeout(1000);
 
 });
-// test('SMS Message Chat', async () => {
-// await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').click();
-//   await page.getByTestId('KeyboardArrowDownIcon').click();
-//   await page.getByRole('menuitem', { name: 'Lead' }).click();
-//   await page.getByText('James Lead').click();
-//   await page.getByTestId('message-input').click();
-//   await page.getByTestId('message-input').fill('Hi man');
-//   await page.getByTestId('SendOutlinedIcon').click();
 
-//   await page.getByTestId('message-input').click();
-//   await page.getByLabel('Send Inquiry Form').click();
-//   await page.waitForTimeout(2000);
-//   await page.getByRole('button', { name: 'Send' }).nth(1).click();
-//   await page.waitForTimeout(2000);
-//   await page.getByLabel('Send Inquiry Form').click();
-//   await page.getByLabel('SMS').check();
-//   await page.waitForTimeout(2000);
-//   await page.getByRole('button', { name: 'Send' }).nth(1).click();
+test('TaskBoard Widget Flows', async () => {
 
-//   await page.getByLabel('Send therapist scheduling link').click();
-//   await page.getByLabel('Select Therapist').click();
-//   try {
-//     await page.getByText('Owner Team, ALC').click();
-//   } catch (error) {
-//     console.log('Failed to find first locator, trying second locator');
-//     await page.getByRole('option', { name: 'Owner Team, ALC' }).click();
-//   }
-//   await page.getByRole('button', { name: 'Send' }).nth(1).click();
-// // Ram Lead
-//   await page.getByText('Ram Lead').click();
-//   await page.getByTestId('message-input').click();
-//   await page.getByTestId('message-input').fill('Hi man');
-//   await page.getByTestId('SendOutlinedIcon').click();
+await page.locator('div').filter({ hasText: /^Tasks$/ }).getByRole('img').click();
+await page.getByRole('heading', { name: 'List View' }).click();
+await page.getByRole('button', { name: 'Add Task' }).nth(1).click();
+await page.getByPlaceholder('Task Name').click();
+await page.getByPlaceholder('Task Name').fill('Owner Automation Task');
+await page.locator('div').filter({ hasText: /^Task Description$/ }).click();
+await page.getByPlaceholder('Add Description').fill('Testing Taskboard with Owner role');
+await page.getByRole('button', { name: 'user icon Add Subtask' }).click();
+await page.getByPlaceholder('Add subtask').click();
+await page.getByPlaceholder('Add subtask').fill('Owner Subtask 1');
+await page.getByRole('button', { name: 'user icon Assign to' }).click();
+await page.locator('span').filter({ hasText: 'Owner Team' }).getByRole('paragraph').click();
+await page.getByRole('banner').getByTestId('priority_flag_image').click();
+await page.getByRole('menuitem', { name: 'Urgent' }).click();
+await page.getByRole('button', { name: 'Task priority flag' }).click();
+await page.getByRole('menuitem', { name: 'Urgent' }).click();
+await page.getByRole('button', { name: 'Open' }).click();
+await page.getByText('InProgress').click();
+try {
+  await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
+} catch (error) {
+  console.log('Failed to find first locator, trying second locator');
+  await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div > footer > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
+}
+await page.waitForTimeout(5000);
 
-//   await page.getByTestId('message-input').click();
-//   await page.getByLabel('Send Inquiry Form').click();
-//   await page.waitForTimeout(2000);
-//   await page.getByRole('button', { name: 'Send' }).nth(1).click();
-//   await page.waitForTimeout(2000);
+  await page.getByText('Owner Automation Task').click();
+  // await page.getByRole('button', { name: 'user icon Add Subtask' }).click();
+  await page.getByPlaceholder('Add comment').click();
+  await page.getByPlaceholder('Add comment').fill('Hi Man How are U');
+  await page.getByRole('button', { name: 'Send' }).nth(1).click();
+  await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
+  await page.waitForTimeout(2000);
+  
+  await page.getByRole('button', { name: 'My Task' }).nth(1).click();
+  await page.getByRole('button', { name: 'All Tasks' }).nth(1).click();
+  await page.getByRole('button', { name: 'Group by' }).nth(1).click();
+  await page.getByText('Status').click();
+  await page.getByRole('button', { name: 'Group by: status' }).nth(1).click();
+  await page.locator('p').filter({ hasText: 'Assigned To' }).click();
+  await page.getByRole('button', { name: 'Group by: Assigned to' }).nth(1).click();
+  await page.locator('p').filter({ hasText: 'Due Date' }).click();
+  await page.getByRole('button', { name: 'Group by: Due Date' }).nth(1).click();
+  await page.locator('p').filter({ hasText: 'Priority' }).click();
+  await page.getByRole('heading', { name: 'Calendar View' }).click();
+  await page.getByRole('button', { name: 'Month' }).nth(1).click();
+  await page.getByText('Owner Automation Task').click();
+  await page.locator('header').filter({ hasText: 'Activity' }).getByRole('button').click();
 
-//   await page.getByLabel('Send Inquiry Form').click();
-//   await page.getByLabel('SMS').check();
-//   await page.getByRole('button', { name: 'Send' }).nth(1).click();
-//   await page.waitForTimeout(2000);
+  await page.getByRole('heading', { name: 'Board View' }).click();
+  await page.getByText('Owner Automation Task').click();
+  await page.locator('header').filter({ hasText: 'Activity' }).getByRole('button').click();
 
-//   await page.getByLabel('Send therapist scheduling link').click();
-//   await page.getByLabel('Select Therapist').click();
-//   await page.waitForTimeout(2000);
-//   try {
-//     await page.getByText('Owner Team, ALC').click();
-//   } catch (error) {
-//     console.log('Failed to find first locator, trying second locator');
-//     await page.getByRole('option', { name: 'Owner Team, ALC' }).click();
-//   }
- 
-//   await page.getByRole('button', { name: 'Send' }).nth(1).click();
-//   await page.getByRole('img', { name: 'logo' }).click();
-//   await page.waitForTimeout(2000);
-
-// });
+  await page.getByRole('button', { name: 'Add Task' }).nth(1).click();
+  await page.getByPlaceholder('Task Name').click();
+  await page.getByPlaceholder('Task Name').fill('Owner Board View Task');
+  await page.getByPlaceholder('Add Description').click();
+  await page.getByPlaceholder('Add Description').fill('Testing Board view task');
+  await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
+  await page.locator('._header_1k7mt_11 > button').first().click();
+  await page.getByRole('menuitem', { name: 'Set Priority' }).getByRole('img').click();
+  await page.getByRole('menuitem', { name: 'Urgent' }).getByRole('img').click();
+  
+  
+});
+test('Owner Dashboard', async () => {
+  // Dashboard Features for Owner roles
+  await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
+  await page.waitForTimeout(3000);
+  await page.getByText('Owner Team').first().click();
+  await page.locator('button').filter({ hasText: 'Add note' }).nth(1).click();
+  await page.getByRole('button', { name: 'Add psychotherapy note' }).nth(1).click();
+  await page.getByPlaceholder('Enter your response here').click();
+  await page.getByPlaceholder('Enter your response here').fill('Test Data');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
+  await page.waitForTimeout(2000);
+  await page.getByText('Owner Team').first().click();
+  await page.locator('button').filter({ hasText: 'Edit' }).nth(1).click();
+  await page.getByPlaceholder('Enter text here').click();
+  await page.getByPlaceholder('Enter text here').fill('New Date Updated');
+  await page.getByRole('button', { name: 'Update Appointment' }).nth(1).click();
+  await page.waitForTimeout(2000);
+  await page.getByText('Owner Team').first().click();
+  await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
+  await page.getByRole('button', { name: 'Yes' }).nth(1).click();
+  await page.getByLabel('Clinician').click();
+  await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
+  await page.locator('.MuiBackdrop-root').click();
+  await page.getByRole('tab', { name: 'Clinician' }).click();
+  await page.getByRole('tab', { name: 'Practice' }).click();
+  });
 test('Global search', async () => {
   await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
   await page.getByText('Clinician settings').click();
