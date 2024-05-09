@@ -38,13 +38,7 @@ test('Intake admin login and  onboarding ', async ({ request }) => {
   await page.goto(data!);
 
 // Onbaording flows for Practice Manager
-// DP
-await page
-.locator(
-  '#root > div._layout_cqogi_1 > div > div._onboardProfile_pki44_1 > div > div._leftSection_pki44_71 > div > div._cardContent_pki44_98 > div._profileContainer_pki44_116 > div._imagePicker_pki44_35 > input[type=file]'
-)
-.setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
-await page.getByRole('button', { name: 'Done' }).nth(1).click();
+
 
 await page.getByPlaceholder('Enter first name').click();
 await page.getByPlaceholder('Enter first name').fill('IntakeAdmin ');

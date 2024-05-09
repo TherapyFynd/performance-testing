@@ -37,13 +37,6 @@ test('Practice  login and  onboarding ', async ({ request }) => {
   await page.goto(data!);
 
 // Onbaording flows for Practice Manager
-// DP
-await page
-.locator(
-  '#root > div._layout_cqogi_1 > div > div._onboardProfile_pki44_1 > div > div._leftSection_pki44_71 > div > div._cardContent_pki44_98 > div._profileContainer_pki44_116 > div._imagePicker_pki44_35 > input[type=file]'
-)
-.setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
-await page.getByRole('button', { name: 'Done' }).nth(1).click();
 
 await page.getByPlaceholder('Enter first name').click();
 await page.getByPlaceholder('Enter first name').fill('Practice ');
@@ -162,10 +155,14 @@ try {
     await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div.MuiDialogActions-root.MuiDialogActions-spacing._actionContainer_mi6fq_8.css-14b29qc > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
     
   }
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.getByLabel('Role title').clear();
   await page.waitForTimeout(2000);
+  await page.getByLabel('Role title').fill('Practice Manager role');
+  await page.waitForTimeout(2000);
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.waitForTimeout(1000);
   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._header_1skpn_1 > span > span > svg > path').click();
-  
+  await page.getByText('HIPAA audit logs').click();
 //   Scheduler Calender 
   await page.getByText('Calendar').click();
 
