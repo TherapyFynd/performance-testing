@@ -66,18 +66,19 @@ await page.waitForTimeout(2000);
     await page.waitForTimeout(2000);
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.waitForTimeout(1000);
-  await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._header_1skpn_1 > span > span > svg > path').click();
   await page.getByText('HIPAA audit logs').click();
 //   Scheduler Calender 
   await page.getByText('Calendar').click();
 
-  try {
-    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+ 
+  
+ try {
+  await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
 
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > span.MuiSwitch-thumb.css-19gndve').click();
-  }
+ } catch (error) {
+   console.log('Failed to find first locator, trying second locator');
+   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+ }
        await page.getByRole('button', { name: 'Edit' }).nth(1).click();
   await page.getByLabel('Monday').check();
   await page.getByLabel('Tuesday').check();
@@ -135,11 +136,14 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
   await page.getByPlaceholder('Enter text here').fill('New every day testing');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 // Minor Client Appoinmnets (Shiva Kumar)
-await page
-      .locator(
-        '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
-      )
-      .click();
+
+try {
+  await page.locator('._btns_14sej_85 > button').click();
+} catch (error) {
+  console.log('Failed to find first locator, trying second locator');
+  await page.getByRole('button').nth(2).click();
+}
+await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
     await page.getByRole('menuitem', { name: 'Create appointment' }).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByRole('option', { name: 'Shiva & Venkatesh (T1)' }).first().click();
@@ -150,11 +154,9 @@ await page
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(3000);
     // Single couple 
-    await page
-          .locator(
-            '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
-          )
-          .click();
+   
+    
+    await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
         await page.getByRole('menuitem', { name: 'Create appointment' }).click();
         await page.getByLabel('Select client profile*').click();
         await page.getByRole('option', { name: 'Rakesh (T1)' }).click();
@@ -164,6 +166,7 @@ await page
         await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
         await page.waitForTimeout(3000);
+        await page.reload();
   });
   test('Client File', async () => {
     await page
@@ -243,16 +246,11 @@ await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
     await page.getByRole('menuitem', { name: 'Urgent' }).click();
     await page.getByRole('button', { name: 'Open' }).click();
     await page.getByText('InProgress').click();
-    try {
-      await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
-    } catch (error) {
-      console.log('Failed to find first locator, trying second locator');
-      await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div > footer > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
-    }
+    await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
+    
     await page.waitForTimeout(5000);
     
       await page.getByText('Scheduler Automation Task').click();
-      // await page.getByRole('button', { name: 'user icon Add Subtask' }).click();
       await page.getByPlaceholder('Add comment').click();
       await page.getByPlaceholder('Add comment').fill('Hi Man How are U');
       await page.getByRole('button', { name: 'Send' }).nth(1).click();
@@ -292,12 +290,11 @@ await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
     });
     test('Scheduler Role Dashboard', async () => {
       // Create Appoinment Button( top Bar)
-    await page
-    .locator(
-      '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
-    )
-    .click();
+    
+    await page.locator('._btns_14sej_85 > button').click();
+    await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
     await page.getByRole('menuitem', { name: 'Create appointment' }).click();
+    
     await page.getByLabel('Select client profile*').click();
     await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
     await page.getByLabel('Select service *').click();
@@ -306,12 +303,14 @@ await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
     await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(1000);
+    await page.reload();
     await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
     await page.waitForTimeout(3000);
     await page.getByText('Therapist').first().click();
     await page.getByText('invoice').click();
     await page.getByTestId('CancelIcon').click();
     await page.locator('._appointmentHeader_15uwk_6 > .MuiButtonBase-root').click();
+    
 
     
     });
@@ -328,6 +327,7 @@ await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
         '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
       )
       .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
+
     await page.getByRole('button', { name: 'Done' }).nth(1).click();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
     try {

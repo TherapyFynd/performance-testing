@@ -625,6 +625,216 @@ await page.getByRole('menuitem', { name: 'Logout' }).click();
 
 
 
+// import { test, type Page } from '@playwright/test';
+// import path from 'path';
+// import { generatePasswordlessLoginLink } from '../helpers/api';
+// import { createNewEmail } from '../helpers/mailsurp';
+// import {
+//   BASE_FRONTEND_URL,
+//   isRunningOnLocal,
+//   localBaseUrl,
+// } from '../localemails.js/const';
+// import { readEmails, setEmails } from '../localemails.js/emails';
+
+// // Annotate entire file as serial.
+// test.describe.configure({ mode: 'serial' });
+
+// let page: Page;
+
+// test.beforeAll(async ({ browser }) => {
+//   page = await browser.newPage();
+// });
+
+// test.afterAll(async () => {
+//   await page.close();
+// });
+
+// test('Owner login and  onboarding ', async ({ request }) => {
+//   const inbox = await createNewEmail();
+
+//   const data = await generatePasswordlessLoginLink({
+//     email: inbox!,
+//     request: request,
+//   });
+//   await page.goto(data!);
+
+//   // Onboarding Flows for Owner
+//   // Onboarding Flows
+//   await page.getByPlaceholder('Enter first name').click();
+//   await page.getByPlaceholder('Enter first name').fill('Owner ');
+//   await page.getByPlaceholder('Enter last name').click();
+//   await page.getByPlaceholder('Enter last name').fill('Team');
+//   await page.getByPlaceholder('Enter phone').click();
+//   await page.getByPlaceholder('Enter phone').fill('(846) 534-65833');
+//   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+//   await page.getByPlaceholder('Enter your practice name').click();
+//   await page.getByPlaceholder('Enter your practice name').fill('KanTime Healthcare System ');
+//   await page.getByLabel('Address Line').click();
+//   await page.getByLabel('Address Line').fill('New York City');
+//   await page.getByPlaceholder('Street address').click();
+//   await page.getByPlaceholder('Street address').fill('New Area City ');
+//   await page.getByLabel('State').click();
+//   await page.getByRole('combobox', { name: 'State' }).fill('cali');
+//   await page.getByText('California').click();
+//   await page.getByLabel('City').click();
+//   await page.getByRole('combobox', { name: 'City' }).fill('Azu');
+//   await page.getByText('Azusa').click();
+//   await page.getByPlaceholder('Zip code').click();
+//   await page.getByPlaceholder('Zip code').fill('561202');
+//   await page.getByPlaceholder('Enter your practice name').click();
+//   await page.getByPlaceholder('Enter your practice name').fill('KanTime Healthcare System ');
+//   await page.getByRole('button', { name: 'Next' }).nth(1).click();
+  
+  
+//   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
+//   await page.getByLabel('Office name').click();
+//   await page.getByLabel('Office name').fill('KanTime Healthcare System ');
+//   await page.getByLabel('Address').click();
+//   await page.getByLabel('Address').fill('New area City');
+//   await page.getByLabel('State').click();
+//   await page.getByRole('combobox', { name: 'State' }).fill('New york');
+//   await page.getByText('New York').click();
+//   await page.getByLabel('City').click();
+//   await page.getByRole('combobox', { name: 'City' }).fill('Fre');
+//   await page.getByText('Freeport').click();
+//   await page.getByPlaceholder('Zip code').click();
+//   await page.getByPlaceholder('Zip code').fill('56192');
+//   await page.getByLabel('Make default location').check();
+//   await page.getByRole('button', { name: 'Add location' }).nth(1).click();
+
+//   await page.getByRole('button', { name: 'Next' }).nth(1).click();
+
+//   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
+//   await page.getByLabel('CPT Code').click();
+//   await page.getByRole('combobox', { name: 'CPT Code' }).fill('90832');
+//   await page.getByRole('option', { name: '90832, Psychotherapy, 30' }).click();
+//   await page.getByLabel('Fee *').click();
+//   await page.getByLabel('Fee *').fill('100');
+//   await page.getByLabel('Duration *').click();
+//   await page.getByLabel('Duration *').fill('10');
+//   await page.getByLabel('Make default service').check();
+//   await page.getByRole('button', { name: 'Add service' }).nth(1).click();
+//   await page.getByRole('button', { name: 'Next' }).nth(1).click();
+//   await page.getByRole('button', { name: 'Next' }).nth(1).click();
+ 
+//   await page.getByLabel('').check();
+//   await page.waitForTimeout(2000);
+//   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+//   await page.waitForTimeout(2000);
+//   await page.getByLabel('').check();
+//   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+// });
+
+// test('Settings Flows', async () => {
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^Settings$/ })
+//     .getByRole('img')
+//     .click();
+//       // Logic For Fail Locator
+//    try {
+//     await page.locator('._btns_14sej_85 > button').click();
+//   } catch (error) {
+//     console.log('Failed to find first locator, trying second locator');
+//     await page.getByRole('button').nth(2).click();
+//   }
+//     await page.locator('._btns_14sej_85 > button').click();
+//     // await page.getByRole('button').nth(2).click();
+//     await page.waitForTimeout(9000);
+//   //Clinican Settings Flows
+//   await page.getByText('Clinician settings').click();
+//   await page.pause();
+
+
+
+
+// //   import { test, expect } from '@playwright/test';
+
+// // test('test', async ({ page }) => {
+// //   await page.goto('https://enterprise-e8038.firebaseapp.com/__/auth/action?apiKey=AIzaSyD9w7OjQ1mbRxWX-kqUelVtwpnrxAhkpaA&mode=signIn&oobCode=Yd33S9WE4-Ok9bNxh19NXWlVsLal8DMUPTC2SImFQ3kAAAGPYLufUg&continueUrl=https://leafs-ehr-web-stage-nmvorvf7ga-as.a.run.app/auth/passwordless?email%3Dintakeleaftherapist@gmail.com&lang=en');
+// //   await page.goto('https://leafs-ehr-web-stage-nmvorvf7ga-as.a.run.app/auth/passwordless?email=intakeleaftherapist@gmail.com&apiKey=AIzaSyD9w7OjQ1mbRxWX-kqUelVtwpnrxAhkpaA&oobCode=Yd33S9WE4-Ok9bNxh19NXWlVsLal8DMUPTC2SImFQ3kAAAGPYLufUg&mode=signIn&lang=en');
+// //   await page.goto('https://leafs-ehr-web-stage-nmvorvf7ga-as.a.run.app/appointments');
+//   await page.locator('div').filter({ hasText: /^Documents$/ }).getByRole('img').click();
+//   await page.getByRole('tab', { name: 'Private' }).click();
+//   await page.getByText('Progress notes').click();
+//   await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
+//   await page.getByText('Progress notes').click();
+//   await page.getByTestId('ArrowBackRoundedIcon').click();
+//   await page.getByText('Progress notes').click();
+//   await page.locator('div').filter({ hasText: /^Notes$/ }).nth(1).click();
+//   await page.locator('div').filter({ hasText: /^Insurance$/ }).getByRole('img').click();
+//   await page.getByRole('tab', { name: 'Claims' }).click();
+//   await page.getByRole('row', { name: '01 May 2024 Automation (OT)' }).getByRole('button').nth(2).click();
+//   await page.getByRole('menuitem', { name: 'Claim details' }).click();
+//   await page.locator('span').filter({ hasText: 'Insurance claim #0-HZxMpZ' }).getByRole('button').click();
+//   await page.getByText('Rajesh (OT)').click();
+//   await page.getByRole('button', { name: 'Created' }).click();
+//   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+//   await page.getByRole('button', { name: 'View' }).nth(1).click();
+//   await page.locator('span').filter({ hasText: 'Insurance claim #t3iXjH6X' }).getByRole('button').click();
+//   await page.getByRole('button', { name: 'Created' }).click();
+//   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+//   await page.getByRole('button', { name: 'View' }).nth(3).click();
+//   await page.locator('span').filter({ hasText: 'Insurance claim #ONnTTEja' }).getByRole('button').click();
+//   await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+//   await page.getByText('Clinician settings').click();
+//   await page.getByRole('img', { name: 'image picker' }).click();
+//   await page.locator('i').click();
+//   await page.locator('._iconContainer_1sr0p_19').click();
+//   await page.getByTestId('ArrowBackIcon').click();
+
+//   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox')
+
+//   import { test, expect } from '@playwright/test';
+
+// test('test', async ({ page }) => {
+//   await page.goto('https://enterprise-e8038.firebaseapp.com/__/auth/action?apiKey=AIzaSyD9w7OjQ1mbRxWX-kqUelVtwpnrxAhkpaA&mode=signIn&oobCode=Yd33S9WE4-Ok9bNxh19NXWlVsLal8DMUPTC2SImFQ3kAAAGPYLufUg&continueUrl=https://leafs-ehr-web-stage-nmvorvf7ga-as.a.run.app/auth/passwordless?email%3Dintakeleaftherapist@gmail.com&lang=en');
+//   await page.goto('https://leafs-ehr-web-stage-nmvorvf7ga-as.a.run.app/auth/passwordless?email=intakeleaftherapist@gmail.com&apiKey=AIzaSyD9w7OjQ1mbRxWX-kqUelVtwpnrxAhkpaA&oobCode=Yd33S9WE4-Ok9bNxh19NXWlVsLal8DMUPTC2SImFQ3kAAAGPYLufUg&mode=signIn&lang=en');
+//   await page.goto('https://leafs-ehr-web-stage-nmvorvf7ga-as.a.run.app/appointments');
+//   await page.locator('div').filter({ hasText: /^Documents$/ }).getByRole('img').click();
+//   await page.getByRole('tab', { name: 'Private' }).click();
+//   await page.getByText('Progress notes').click();
+//   await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
+//   await page.getByText('Progress notes').click();
+//   await page.getByTestId('ArrowBackRoundedIcon').click();
+//   await page.getByText('Progress notes').click();
+//   await page.locator('div').filter({ hasText: /^Notes$/ }).nth(1).click();
+//   await page.locator('div').filter({ hasText: /^Insurance$/ }).getByRole('img').click();
+//   await page.getByRole('tab', { name: 'Claims' }).click();
+//   await page.getByRole('row', { name: '01 May 2024 Automation (OT)' }).getByRole('button').nth(2).click();
+//   await page.getByRole('menuitem', { name: 'Claim details' }).click();
+//   await page.locator('span').filter({ hasText: 'Insurance claim #0-HZxMpZ' }).getByRole('button').click();
+//   await page.getByText('Rajesh (OT)').click();
+//   await page.getByRole('button', { name: 'Created' }).click();
+//   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+//   await page.getByRole('button', { name: 'View' }).nth(1).click();
+//   await page.locator('span').filter({ hasText: 'Insurance claim #t3iXjH6X' }).getByRole('button').click();
+//   await page.getByRole('button', { name: 'Created' }).click();
+//   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+//   await page.getByRole('button', { name: 'View' }).nth(3).click();
+//   await page.locator('span').filter({ hasText: 'Insurance claim #ONnTTEja' }).getByRole('button').click();
+//   await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+//   await page.getByText('Clinician settings').click();
+//   await page.getByRole('img', { name: 'image picker' }).click();
+//   await page.locator('i').click();
+//   await page.locator('._iconContainer_1sr0p_19').click();
+//   await page.getByTestId('ArrowBackIcon').click();
+//   await page.getByText('Calendar').nth(1).click();
+//   await page.getByText('Booking widget').click();
+//   await page.getByText('Owner Team, ALC').click();
+//   await page.getByText('Team members').nth(1).click();
+//   await page.getByRole('row', { name: 'Owner Team, ALC' }).getByRole('img').nth(1).click();
+//   await page.locator('div').filter({ hasText: /^Owner Team, ALC$/ }).getByRole('button').click();
+//   await page.getByRole('tab', { name: 'Accepted Insurance' }).click();
+//   await page.getByRole('row', { name: 'Owner Team, ALC' }).getByRole('img').nth(1).click();
+//   await page.getByText('Website Privacy Policy').click();
+//   await page.getByRole('button').click();
+//   await page.locator('div').filter({ hasText: /^Documents$/ }).getByRole('img').click();
+//   await page.getByRole('tab', { name: 'Private' }).click();
+//   await page.getByText('Questionnaires').click();
+//   await page.locator('div').filter({ hasText: /^Automation Forms$/ }).locator('path').click();
+// });
+// });
 
 
 

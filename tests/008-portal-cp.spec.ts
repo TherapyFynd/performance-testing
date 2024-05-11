@@ -129,7 +129,22 @@ test('Filling Form', async () => {
   await page.getByText('Therapist Automation Forms').click();
   await page.getByRole('button').click();
 });
-
+ test(' Chat tab ' ,async () => {
+                    await page.locator('button:nth-child(4)').first().click();
+                    await page.waitForTimeout(3000);
+                    await page.getByTestId('message-input').fill('hi man how arw u');
+                    await page.getByTestId('SendOutlinedIcon').click();
+                    await page.waitForTimeout(3000);
+                  });
+                  test(' Payment tab ' ,async () => {
+                    await page.locator('button:nth-child(3)').first().click();
+                    await page.getByRole('button', { name: 'Pending' }).click();
+                    await page.getByRole('button', { name: 'Paid' }).click();
+                    await page.getByRole('tab', { name: 'Transactions' }).click();
+                    await page.getByRole('button', { name: 'Debt' }).click();
+                    await page.getByRole('button', { name: 'Credit' }).click();
+                    await page.getByRole('tab', { name: 'Card' }).click();
+                  });
 test('Personal Infomation', async () => {
   await page.locator('button:nth-child(5)').first().click();
   await page.getByRole('menuitem', { name: 'Profile' }).click();
@@ -172,7 +187,7 @@ test('Upload Files', async () => {
   await page.getByText('Cancel').click();
 });
 
-        test('Multi-Client Flows Select',async () =>  {
+        test('Multi-Client Flows Secondary therapist',async () =>  {
 //  Mutile Profile Start
 await page.getByTestId('ArrowDropDownRoundedIcon').click();
 await page.getByRole('heading', { name: 'Owner Team' }).click();
@@ -180,7 +195,7 @@ await page.waitForTimeout(6000);
 await page.locator('button:nth-child(1)').first().click();
         });
 
-        test('Booking Appoinment Therapist _2',async () =>  {
+        test('Booking Appoinment Therapist -2',async () =>  {
             await page.getByRole('button', { name: 'Book appointment' }).nth(1).click();
 await page.getByLabel('Select service').click();
 await page.getByText('Psychotherapy, 45 mins').click();
@@ -197,27 +212,22 @@ await page.locator('body > div.MuiPopover-root.MuiModal-root.css-1khfnay > div.M
 await page.getByRole('button', { name: 'Request appointment' }).nth(1).click();
 await page.waitForTimeout(2000);
         });
-        test('Personal Infomation Therapist _2',async () =>  {
-            await page.locator('button:nth-child(5)').first().click();
-            await page.getByRole('menuitem', { name: 'Profile' }).click();
-            await page.getByLabel('Pronouns').click();
-            await page.getByRole('option', { name: 'He/Him' }).click();
-            await page.getByPlaceholder('MM/DD/YYYY').first().click();
-            await page.getByPlaceholder('MM/DD/YYYY').first().fill('10/10/1999');
-            await page.getByLabel('First Name', { exact: true }).click();
-            await page.getByLabel('First Name', { exact: true }).fill('Test');
-            await page.getByLabel('Last Name', { exact: true }).click();
-            await page.getByLabel('Last Name', { exact: true }).fill('1');
-            await page.getByLabel('Email').nth(1).click();
-            await page.getByLabel('Email').nth(1).fill('test1@gmail.com');
-            await page.getByLabel('Phone').nth(1).click();
-            await page.getByLabel('Phone').nth(1).fill('(454) 758-65864');
-            await page.getByLabel('Relationship to client').click();
-            await page.getByLabel('Relationship to client').fill('Brother');
-            await page.getByRole('button', { name: 'Save' }).nth(1).click();
-            await page.waitForTimeout(1000);
+        test('Chat tab Secondary Therapist-2' ,async () => {
+          await page.locator('button:nth-child(4)').first().click();
+          await page.waitForTimeout(3000);
+          await page.getByTestId('message-input').fill('hi man how are u');
+          await page.getByTestId('SendOutlinedIcon').click();
+          await page.waitForTimeout(3000);
         });
-
+                  test(' Payment tab Secondary Therapist-2' ,async () => {
+                    await page.locator('button:nth-child(3)').first().click();
+                    await page.getByRole('button', { name: 'Pending' }).click();
+                    await page.getByRole('button', { name: 'Paid' }).click();
+                    await page.getByRole('tab', { name: 'Transactions' }).click();
+                    await page.getByRole('button', { name: 'Debt' }).click();
+                    await page.getByRole('button', { name: 'Credit' }).click();
+                    await page.getByRole('tab', { name: 'Card' }).click();
+                  });
 test('Logout Portal', async () => {
   await page.locator('button:nth-child(5)').first().click();
   await page.getByRole('menuitem', { name: 'Logout' }).click();

@@ -206,14 +206,21 @@ test('Settings Flows', async () => {
 
    //   Scheduler Calender 
    await page.getByText('Calendar').click();
-try {
-  // await page.getByRole('checkbox', { name: 'Currently accepting appointments' }).check(); 
-  await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+// try {
+//   // await page.getByRole('checkbox', { name: 'Currently accepting appointments' }).check(); 
+//   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
 
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    // await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > span.MuiSwitch-thumb.css-19gndve').click();
-  }
+//   } catch (error) {
+//     console.log('Failed to find first locator, trying second locator');
+//     // await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > span.MuiSwitch-thumb.css-19gndve').click();
+//   }
+try {
+  await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
+
+ } catch (error) {
+   console.log('Failed to find first locator, trying second locator');
+   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+ }
    await page.getByRole('button', { name: 'Edit' }).nth(1).click();
    await page.getByLabel('Monday').check();
    await page.getByLabel('Tuesday').check();
@@ -260,11 +267,19 @@ await page.getByText('Website Privacy Policy').click();
   await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
 });
 test('Create Clients', async () => {
-  await page
-.locator(
-  '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
-)
-.click();
+//   await page
+// .locator(
+//   '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
+// )
+// .click();
+// Logic For Fail Locator
+try {
+  await page.locator('._btns_14sej_85 > button').click();
+} catch (error) {
+  console.log('Failed to find first locator, trying second locator');
+  await page.getByRole('button').nth(2).click();
+}
+await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
 await page.getByRole('menuitem', { name: 'Create client' }).click();
 await page.getByLabel('First Name*').click();
 await page.getByLabel('First Name*').fill('Automation');
@@ -304,6 +319,7 @@ await page.waitForTimeout(2000);
 await page.getByText('Owner Team').first().click();
 await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
 await page.getByRole('button', { name: 'Yes' }).nth(1).click();
+await page.waitForTimeout(3000);
 await page.getByLabel('Clinician').click();
 await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
 await page.locator('.MuiBackdrop-root').click();
@@ -324,6 +340,8 @@ test('DP Update and Logout', async () => {
       '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
     )
     .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
+  // await page.getByRole('img', { name: 'image picker' }).setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
+
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   try {
