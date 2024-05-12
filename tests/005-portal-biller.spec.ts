@@ -155,10 +155,15 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
           await page.getByText('Rakesh Das').click();
           await page.getByTestId('ArrowDropDownIcon').locator('path').click();
           await page.getByRole('heading', { name: 'Rakesh (T1)' }).click();
-          await page.waitForTimeout(3000);
+          await page.waitForTimeout(5000);
           
         // Info and Settings
-        await page.getByRole('button', { name: 'Info & settings' }).nth(1).click();
+        try {
+          await page.getByRole('button', { name: 'Info & settings' }).nth(1).click();
+        } catch (error) {
+          console.log('Failed to find first locator, trying second locator');
+          await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div:nth-child(2) > div > div._clientNavigationFixedTop_111x7_1 > div._clientFileHeader_111x7_10 > div._primaryHeader_111x7_15 > div._actionBtn_111x7_25 > button:nth-child(1) > button').click();
+        }
         await page.getByLabel('First Name*').click();
 
         await page.getByLabel('First Name*').fill('Rakesh');
@@ -238,6 +243,19 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     .click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(2000);
+  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+
+  await page.waitForTimeout(2000);
+  await page.getByText('Rajesh Das').click();
+   // Create Appoinment
+   
+   await page.getByRole('button', { name: 'Add' }).nth(3).click();
+   await page
+     .getByRole('menuitem', { name: 'Appointment' })
+     .getByRole('img')
+     .click();
+   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+   await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
 });
 test('Insurance Tab', async () => {
   await page.locator('div').filter({ hasText: /^Insurance$/ }).getByRole('img').click();
@@ -258,8 +276,7 @@ test('Insurance Tab', async () => {
     console.log('Failed to find first locator, trying second locator');
     await page.getByRole('button', { name: 'View' }).nth(1).click();
   }
-  await page.getByRole('button', { name: 'View' }).first().click();
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(1000);
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
   await page.getByPlaceholder('Start typing here').click();
   await page

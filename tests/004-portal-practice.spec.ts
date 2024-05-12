@@ -187,7 +187,8 @@ await page.getByRole('tab', { name: 'Insurance' }).click();
   await page.getByText('Payers').click();
   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
   await page.getByLabel('Search for insurance payers').click();
-  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('Allways');
+  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('Allway');
+  await page.waitForTimeout(3000);
   await page.getByText('AllWays Health Partners -').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
 
