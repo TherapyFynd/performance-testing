@@ -1,4 +1,4 @@
-import { test, type Page } from '@playwright/test';
+import { test, type Page, } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../helpers/api';
 import { createNewEmail } from '../helpers/mailsurp';
@@ -225,11 +225,11 @@ test('Settings Flows', async () => {
   //   Scheduler Calender 
   await page.getByText('Calendar').click();
   try {
-    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
 
   } catch (error) {
     console.log('Failed to find first locator, trying second locator');
-    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > span.MuiSwitch-thumb.css-19gndve').click();
+    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
   }
   
   await page.getByRole('button', { name: 'Edit' }).nth(1).click();
@@ -250,9 +250,7 @@ test('Settings Flows', async () => {
     .locator(
       '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._bookingWidgetWrapper_4jerd_1 > div._therapistLinks_4jerd_53 > div:nth-child(1) > p')
     .click();
-  // await page.locator('#root > div._layout_10ldc_1 > div._content_10ldc_7 > div._bookingWidgetWrapper_4jerd_1 > div._copyLinkContainer_4jerd_19 > div._link_4jerd_28 > p').click();
   const page1 = await page1Promise;
-  // await page1.locator('div').filter({ hasText: /^Owner TeamSelect$/ }).getByRole('button').nth(1).click();
   await page1
     .locator('div')
     .filter({ hasText: /^Psychotherapy, 45 mins- 45 mins$/ })
@@ -263,7 +261,6 @@ test('Settings Flows', async () => {
       '#root > div._layout_cqogi_1 > div > div._bookingWidgetWrapper_tlkra_1 > div._bookingWidgetContainer_tlkra_21 > div._bookingContent_tlkra_44 > div:nth-child(2) > div > div._dateTime_142fu_33 > div > div:nth-child(2) > div > div._timeSlotsWrapper_vyf9q_11 div:first-child'
     )
     .click();
-  // await page1.getByLabel('Next month').click();
   await page1.getByPlaceholder('Enter first name').click();
   await page1.getByPlaceholder('Enter first name').fill('James');
   await page1.getByPlaceholder('Enter last name').click();
@@ -342,19 +339,13 @@ test('Settings Flows', async () => {
   await page.getByRole('combobox', { name: 'Select accepted payment' }).fill('allway');
   await page.getByText('AllWays Health Partners -').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.waitForTimeout(2000);
 
-  try {
-    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._editSettingsWrapper_wuekj_1 > div._therapistHeader_wuekj_7 > div._therapistDetail_wuekj_18 > div > button > svg > path').click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.locator('div').filter({ hasText: /^Owner Team, ALC$/ }).getByRole('button').click();
-  }
-  
-  await page.waitForTimeout(1000);
-  await page
-    .locator(
-      '#root > div._layout_cqogi_1 > div._sideBar_14sej_1._tabSpecificSidebar_14sej_2 > div._scrollableWrapper_14sej_13 > div > div._sidebarHeader_14sej_135 > svg > path')
-    .click();
+ //   Privacy Policy
+await page.getByText('Website Privacy Policy').click();
+await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
+await page.getByText('Terms & Conditions').click();
+await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
 });
 
 test('Forms Tab', async () => {
@@ -385,7 +376,7 @@ test('Forms Tab', async () => {
   await page
     .getByPlaceholder('Please enter a question')
     .fill('Name of Client?');
-  await page.getByLabel('Mandatory').check();
+  
   await page
     .getByRole('button', { name: '2 Please enter a question' })
     .getByRole('button')
@@ -408,7 +399,7 @@ test('Forms Tab', async () => {
   await page
     .getByPlaceholder('Please enter a question')
     .fill('Client Date Of Birth?');
-  await page.getByLabel('Mandatory').uncheck();
+  
   await page
     .getByRole('button', { name: '4 Please enter a question' })
     .getByRole('button')
@@ -420,36 +411,25 @@ test('Forms Tab', async () => {
   await page
     .getByPlaceholder('Please enter a question')
     .fill('Please Sign Your Sing?');
-  await page.getByLabel('Mandatory').check();
+  
   await page.getByRole('button', { name: 'Preview' }).nth(1).click();
   await page.getByRole('button').first().click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
 //  Actions in Forms
-  await page
-    .locator(
-      '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div:nth-child(1) > div._content_q8wpx_10 > div > svg > path'
-    )
-    .click();
+await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId('MoreVertIcon').click();
+ 
   await page.getByRole('menuitem', { name: 'Preview' }).click();
   await page.locator('.MuiButtonBase-root').first().click();
 
-  await page
-    .locator(
-      '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div:nth-child(1) > div._content_q8wpx_10 > div > svg > path'
-    )
-    .click();
+  
+  await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId('MoreVertIcon').click();
   await page.getByRole('menuitem', { name: 'Rename' }).click();
   await page.getByPlaceholder('type here').clear();
   await page.getByPlaceholder('type here').fill('Automation Forms');
   await page.reload();
   await page.waitForTimeout(1000);
-  // await page.getByRole('button', { name: 'Rename' }).nth(1).click();
-
-  await page
-    .locator(
-      '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._formsList_faptv_1 > div._formCardsContainer_faptv_30 > div:nth-child(1) > div._content_q8wpx_10 > div > svg > path'
-    )
-    .click();
+  
+  await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId('MoreVertIcon').click();
   await page.getByRole('menuitem', { name: 'Edit' }).click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.getByTestId('ArrowBackRoundedIcon').click();
@@ -567,13 +547,9 @@ test('Forms Tab', async () => {
   await page.getByRole('button', { name: 'Preview' }).nth(1).click();
   await page.getByRole('button').first().click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  // await page.waitForTimeout(1000);
-  await page
-    .locator(
-      '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._formsList_faptv_1 > div._header_faptv_4 > div > div > svg > path'
-    )
-    .click();
-  // await page.getByTestId('ArrowBackRoundedIcon').click();
+  await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
+  
+
   // // Treatment plan
   await page.getByRole('button', { name: 'Create new' }).nth(1).click();
   await page.getByText('Treatment plan', { exact: true }).click();
@@ -805,7 +781,6 @@ test('Forms Tab', async () => {
   await page.waitForTimeout(1000);
   await page.reload();
   await page.waitForTimeout(2000);
-  // await page.getByTestId('ArrowBackRoundedIcon').click();
   await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page
     .locator('div')
@@ -830,12 +805,14 @@ test('Request Booking Widget', async () => {
 });
 
 test('Create Clients', async () => {
-  await page
-    .locator(
-      '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
-    )
-    .click();
-  // await page.getByRole('button', { name: 'Create' }).nth(1).click();
+      // Logic For Fail Locator
+      try {
+        await page.locator('._btns_14sej_85 > button').click();
+      } catch (error) {
+        console.log('Failed to find first locator, trying second locator');
+        await page.getByRole('button').nth(2).click();
+      }
+  await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
   await page.getByLabel('First Name*').click();
   await page.getByLabel('First Name*').fill('Automation');
@@ -848,6 +825,8 @@ test('Create Clients', async () => {
 
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
+  await page.waitForTimeout(8000);
+  await page.reload();
 });
 
 test('Create Appoinment', async () => {
@@ -880,13 +859,10 @@ test('Create Appoinment', async () => {
   await page.getByPlaceholder('Enter text here').click();
   await page.getByPlaceholder('Enter text here').fill('New every day testing');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+
   // Create Appoinment Button( top Bar)
-  // await page.getByRole('button', { name: 'Create' }).nth(1).click();
-  await page
-    .locator(
-      '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
-    )
-    .click();
+  await page.locator('._btns_14sej_85 > button').click();
+  await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByRole('option', { name: 'Automation (OT)' }).first().click();
@@ -895,7 +871,8 @@ test('Create Appoinment', async () => {
   await page.getByPlaceholder('Enter text here').click();
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(4000);
+  await page.reload();
 });
 
 test('Client File', async () => {
@@ -992,16 +969,11 @@ test('Client File', async () => {
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
   await page.getByRole('tab', { name: 'Personal' }).click();
   await page.getByText('Progress notes').click();
-  // await page.getByPlaceholder('Search').click();
+  
   // Stage
   await page.getByRole('textbox', { name: 'Search' }).click();
   await page.getByRole('textbox', { name: 'Search' }).fill('Automation');
-  // await page.getByPlaceholder('Search').fill('Automation');
-  // await page
-  //   .getByRole('dialog')
-  //   .locator('div')
-  //   .filter({ hasText: /^Automation Testing$/ })
-  //   .click();
+
     await page.locator('div').filter({ hasText: /^Automation Testing$/ }).click();
   await page.getByPlaceholder('Enter your response here').first().click();
   await page
@@ -1097,15 +1069,10 @@ test('Insurance Tab', async () => {
   await page.getByRole('button', { name: 'Select all' }).nth(1).click();
   await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
   await page.getByRole('tab', { name: 'Claims' }).click();
-  
-  try {
-    await page
-    .locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(1) > td:nth-child(8) > span > button > button > span > span._label_ns5gx_15').click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.getByRole('button', { name: 'View' }).first().click();
-
-  }
+  await page.getByRole('button', { name: 'Created' }).click();
+  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+  await page.waitForTimeout(3000);
+  await page.getByRole('button', { name: 'View' }).first().click();
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
   await page.getByPlaceholder('Start typing here').click();
   await page
@@ -1138,20 +1105,13 @@ test('Insurance Tab', async () => {
   await page.getByPlaceholder('Remarks').click();
   await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page
-    .locator(
-      '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._header_174vt_7 > span > button > svg > path'
-    )
-    .click();
+  await page.waitForTimeout(2000);
+ 
 });
 
 test('Intake tab', async () => {
-  await page
-    .locator('div')
-    .filter({ hasText: /^Referrals$/ })
-    .getByRole('img')
-    .click();
-  // await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
+  
+  await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
   await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
   await page.getByLabel('First Name*').click();
   await page.getByLabel('First Name*').fill('James');
@@ -1287,16 +1247,11 @@ await page.getByRole('button', { name: 'Task priority flag' }).click();
 await page.getByRole('menuitem', { name: 'Urgent' }).click();
 await page.getByRole('button', { name: 'Open' }).click();
 await page.getByText('InProgress').click();
-try {
-  await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
-} catch (error) {
-  console.log('Failed to find first locator, trying second locator');
-  await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div > footer > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
-}
+await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
 await page.waitForTimeout(5000);
 
   await page.getByText('Owner Automation Task').click();
-  // await page.getByRole('button', { name: 'user icon Add Subtask' }).click();
+ 
   await page.getByPlaceholder('Add comment').click();
   await page.getByPlaceholder('Add comment').fill('Hi Man How are U');
   await page.getByRole('button', { name: 'Send' }).nth(1).click();
@@ -1373,7 +1328,7 @@ test('Global search', async () => {
   await page.getByPlaceholder('Search here').press('Enter');
   await page.getByRole('heading', { name: 'Automation (OT)' }).click();
   await page.waitForTimeout(2000);
-  await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div:nth-child(2) > div > div._clientNavigationFixedTop_111x7_1 > div._clientFileHeader_111x7_10 > div._primaryHeader_111x7_15 > div._nameDetails_111x7_20 > button > svg > path').click();
+  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
 
   await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
   await page.getByText('Clinician settings').click();
@@ -1432,3 +1387,4 @@ test('DP Update and Logout', async () => {
   await page.getByRole('menuitem', { name: 'Logout' }).click();
 
 });
+

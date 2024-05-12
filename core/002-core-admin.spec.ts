@@ -52,7 +52,6 @@ await page.waitForTimeout(2000);
  await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
    });
 test('Intake tab', async () => {
-  // await page.locator('._sideBarItem_148j7_34 > img').first().click();
   await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
   await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
   await page.getByLabel('First Name*').click();
@@ -132,6 +131,8 @@ test('DP Update and Logout', async () => {
       '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
     )
     .setInputFiles('../files/ther_img.jpg');
+  // await page.getByRole('img', { name: 'image picker' }).setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
+
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   try {

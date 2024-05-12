@@ -19,6 +19,11 @@ export interface IEmail {
   billerEmail?: string;
   schedulerEmail?: string;
   intakeadminroleEmail?: string;
+  minorclient?: string;
+  guardinclient?: string;
+  couplemaleclient?: string;
+  couplefemaleclient?: string;
+  
 }
 
 export const readEmails = async (): Promise<IEmail | {}> => {

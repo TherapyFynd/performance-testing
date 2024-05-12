@@ -57,7 +57,7 @@ test('Settings Tab', async () => {
   // Associate Mangaments
   await page.getByText('Associate management').click();
   // // await page.getByRole('button', { name: 'Remove' }).nth(1).click();
-  // // await page.getByRole('button', { name: 'Remove' }).nth(1).click();
+  
   await page.getByRole('button', { name: 'Add Associate' }).nth(1).click();
   await page.getByLabel('Select team member').click();
   await page.getByText('Therapist 1').click();
@@ -68,13 +68,15 @@ test('Settings Tab', async () => {
     .locator('p')
     .filter({ hasText: /^Calendar$/ })
     .click();
-    try {
-      await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
-  
-    } catch (error) {
-      console.log('Failed to find first locator, trying second locator');
-      await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > span.MuiSwitch-thumb.css-19gndve').click();
-    }
+ 
+    
+  try {
+    await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
+ 
+   } catch (error) {
+     console.log('Failed to find first locator, trying second locator');
+     await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+   }
   await page.getByRole('button', { name: 'Edit' }).nth(1).click();
   await page.getByLabel('Monday').check();
   await page.getByLabel('Tuesday').check();
@@ -87,10 +89,12 @@ test('Settings Tab', async () => {
     .filter({ hasText: /^Calendar$/ })
     .click();
   await page.getByLabel('Monday').check();
-  await page
-    .locator(
-      '#root > div._layout_cqogi_1 > div._sideBar_14sej_1._tabSpecificSidebar_14sej_2 > div._scrollableWrapper_14sej_13 > div > div._sidebarHeader_14sej_135 > svg > path')
-    .click();
+  await page.waitForTimeout(2000);
+ //   Privacy Policy
+await page.getByText('Website Privacy Policy').click();
+await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
+await page.getByText('Terms & Conditions').click();
+await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
 });
 test('Message Tab', async () => {
   //   Messages Box
@@ -135,14 +139,14 @@ test('Create Appoinment', async () => {
   await page.getByPlaceholder('Enter text here').click();
   await page.getByPlaceholder('Enter text here').fill('New every day testing');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-
-  // Create Appoinment Button( top Bar)
-  
-  await page
-    .locator(
-      '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
-    )
-    .click();
+  // Logic For Fail Locator
+       try {
+        await page.locator('._btns_14sej_85 > button').click();
+      } catch (error) {
+        console.log('Failed to find first locator, trying second locator');
+        await page.getByRole('button').nth(2).click();
+      }
+      await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
@@ -152,6 +156,7 @@ test('Create Appoinment', async () => {
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(3000);
+  await page.reload();
 });
 
 
@@ -189,7 +194,6 @@ test('Client File', async () => {
   await page.waitForTimeout(1000);
   await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
   await page.waitForTimeout(1000);
-  // await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div:nth-child(2) > div > div._clientNavigationFixedTop_111x7_1 > div._clientFileHeader_111x7_10 > div._primaryHeader_111x7_15 > div._nameDetails_111x7_20 > button > svg > path').click();
   await page.waitForTimeout(1000);
   
     // Info and Settings
@@ -204,26 +208,21 @@ test('Client File', async () => {
     await page.getByRole('button', { name: 'Share' }).nth(1).click();
   await page.getByLabel('Select Team Member').click();
   await page.getByRole('combobox', { name: 'Select Team Member' }).fill('Own');
-  await page.getByRole('option', { name: 'icon Owner Team' }).click();
+  
+  try {
+    await page.getByText('Owner Team').click();
+  }
+  catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page.getByRole('option', { name: 'icon Owner Team' }).click();
+  }
+
+  
   await page.getByPlaceholder('Type message here').click();
   await page.getByPlaceholder('Type message here').fill('Hey Testing name');
   await page.getByRole('button', { name: 'Share' }).nth(1).click();
   await page.waitForTimeout(2000);
-    // await page.getByRole('button', { name: 'Share' }).nth(1).click();
-    // await page.getByLabel('Select Team Member').click();
-    // await page.getByRole('combobox', { name: 'Select Team Member' }).fill('Ther');
-    // await page.getByRole('option', { name: 'icon Therapist 1' }).click();
-    // await page.getByPlaceholder('Type message here').click();
-    // await page.getByPlaceholder('Type message here').fill('Hey Testing name');
-    // await page.getByRole('button', { name: 'Share' }).nth(1).click();
-    // await page.waitForTimeout(2000);
-    // await page.getByRole('button', { name: 'Share' }).nth(1).click();
-    // await page.getByLabel('Client').check();
-    // await page.getByPlaceholder('Type message here').click();
-    // await page.getByPlaceholder('Type message here').fill('Hey Name Send it ');
-    // await page.getByRole('button', { name: 'Share' }).nth(1).click();
-    // await page.locator('div').filter({ hasText: /^Basic InfoIndividual$/ }).getByRole('button').click();
-    // await page.locator('#root > div._layout_1p3av_1 > div._content_1p3av_7 > div:nth-child(2) > div > div._clientNavigationFixedTop_111x7_1 > div._clientFileHeader_111x7_10 > div._primaryHeader_111x7_15 > div._nameDetails_111x7_20 > button > svg > path').click();
+    
     await page
     .locator('div')
     .filter({ hasText: /^Basic InfoIndividual$/ })
@@ -253,9 +252,7 @@ test('Supervision Flow', async () => {
     .filter({ hasText: /^Therapist Automation Testing$/ })
     .getByRole('button')
     .click();
-  // await page.getByRole('tab', { name: 'Signed' }).click();
-  // await page.getByText('Therapist Automation Testing').first().click();
-  // await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
+  
 });
 test('TaskBoard Widget Flows', async () => {
 
@@ -277,16 +274,11 @@ test('TaskBoard Widget Flows', async () => {
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
   await page.getByRole('button', { name: 'Open' }).click();
   await page.getByText('InProgress').click();
-  try {
-    await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div > footer > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
-  }
+  await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
+ 
   await page.waitForTimeout(5000);
   
     await page.getByText('Supervisor Automation Task').click();
-    // await page.getByRole('button', { name: 'user icon Add Subtask' }).click();
     await page.getByPlaceholder('Add comment').click();
     await page.getByPlaceholder('Add comment').fill('Hi Man How are U');
     await page.getByRole('button', { name: 'Send' }).nth(1).click();
@@ -327,12 +319,11 @@ test('TaskBoard Widget Flows', async () => {
   });
   test('Supervisor  Dashboard', async () => {
     // Create Appoinment Button( top Bar)
-  await page
-  .locator(
-    '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
-  )
-  .click();
+ 
+      await page.locator('._btns_14sej_85 > button').click();
+      await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
+  
   await page.getByLabel('Select client profile*').click();
   await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
   await page.getByLabel('Select service *').click();
@@ -341,6 +332,7 @@ test('TaskBoard Widget Flows', async () => {
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(1000);
+  await page.reload();
   await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
   await page.waitForTimeout(3000);
   await page.getByText('Therapist').first().click();
@@ -357,6 +349,7 @@ test('DP Update and Logout', async () => {
     await page.locator('.MuiAvatar-img').click();
   } 
     await page.getByRole('menuitem', { name: 'Profile' }).click();
+
   await page
     .locator(
       '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
