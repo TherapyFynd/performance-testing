@@ -241,6 +241,10 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
 });
 test('Insurance Tab', async () => {
   await page.locator('div').filter({ hasText: /^Insurance$/ }).getByRole('img').click();
+  await page.waitForTimeout(3000);
+  await page.getByRole('tab', { name: 'Claims' }).click();
+  await page.getByRole('tab', { name: 'Unclaimed appointments' }).click();
+  await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Select all' }).nth(1).click();
   await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
   await page.waitForTimeout(2000);
@@ -248,7 +252,14 @@ test('Insurance Tab', async () => {
   await page.getByRole('button', { name: 'Created' }).click();
   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
   await page.waitForTimeout(3000);
+  try {
+    await page.getByRole('button', { name: 'View' }).first().click()
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page.getByRole('button', { name: 'View' }).nth(1).click();
+  }
   await page.getByRole('button', { name: 'View' }).first().click();
+  await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
   await page.getByPlaceholder('Start typing here').click();
   await page
