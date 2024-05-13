@@ -521,11 +521,7 @@ test('Insurance Tab', async () => {
   await page.waitForTimeout(3000);
   await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
   await page.getByRole('tab', { name: 'Claims' }).click();
-  // await page
-  //   .locator(
-  //     '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div:nth-child(3) > div > div._table_13e1r_16 > table > tbody > tr:nth-child(1) > td:nth-child(8) > span > button > button > span > span._label_ns5gx_15'
-  //   )
-  //   .click();
+  
   await page.getByRole('button', { name: 'Created' }).click();
   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
   await page.waitForTimeout(3000);
