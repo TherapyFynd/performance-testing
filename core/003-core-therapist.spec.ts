@@ -97,13 +97,7 @@ test('Settings Flows', async () => {
    //   Scheduler Calender 
    await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
 
-  //  try {
-  //   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
-
-  // } catch (error) {
-  //   console.log('Failed to find first locator, trying second locator');
-  //   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > span.MuiSwitch-thumb.css-19gndve').click();
-  // }
+ 
   try {
     await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
   
@@ -152,7 +146,7 @@ test('Forms Tab', async () => {
   await page
     .getByPlaceholder('Please enter a question')
     .fill('Name of Client?');
-  await page.getByLabel('Mandatory').check();
+ 
   await page
     .getByRole('button', { name: '2 Please enter a question' })
     .getByRole('button')
@@ -175,7 +169,7 @@ test('Forms Tab', async () => {
   await page
     .getByPlaceholder('Please enter a question')
     .fill('Client Date Of Birth?');
-  await page.getByLabel('Mandatory').uncheck();
+  
   await page
     .getByRole('button', { name: '4 Please enter a question' })
     .getByRole('button')
@@ -187,7 +181,7 @@ test('Forms Tab', async () => {
   await page
     .getByPlaceholder('Please enter a question')
     .fill('Please Sign Your Sing?');
-  await page.getByLabel('Mandatory').check();
+  // await page.getByLabel('Mandatory').check();
   await page.getByRole('button', { name: 'Preview' }).nth(1).click();
   await page.getByRole('button').first().click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
@@ -215,7 +209,7 @@ test('Forms Tab', async () => {
   await page
     .getByPlaceholder('Please enter a question')
     .fill('Name of Client?');
-  await page.getByLabel('Mandatory').check();
+  // await page.getByLabel('Mandatory').check();
   await page
     .getByRole('button', { name: '2 Please enter a question' })
     .getByRole('button')
