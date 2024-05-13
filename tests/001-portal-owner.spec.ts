@@ -245,6 +245,7 @@ test('Settings Flows', async () => {
   //Booking widget flows
   await page.getByText('Booking widget').click();
   await page.getByRole('button', { name: 'Generate link' }).nth(1).click();
+  await page.waitForTimeout(2000);
   const page1Promise = page.waitForEvent('popup');
   await page
     .locator(

@@ -156,6 +156,7 @@ test('Settings Tab', async () => {
 
   // Booking widget
   await page.getByText('Booking widget').click();
+  await page.waitForTimeout(2000);
   const page1Promise = page.waitForEvent('popup');
   await page
     .locator(
@@ -695,7 +696,7 @@ test('Request Booking Widget', async () => {
   await page.locator('button').filter({ hasText: 'Accept' }).nth(1).click();
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(4000);
   await page.locator('button').filter({ hasText: 'Accept' }).nth(1).click();
   await page.waitForTimeout(2000);
   await page.reload();
