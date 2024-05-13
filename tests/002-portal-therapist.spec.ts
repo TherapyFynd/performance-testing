@@ -156,6 +156,7 @@ test('Settings Tab', async () => {
 
   // Booking widget
   await page.getByText('Booking widget').click();
+  await page.waitForTimeout(2000);
   const page1Promise = page.waitForEvent('popup');
   await page
     .locator(

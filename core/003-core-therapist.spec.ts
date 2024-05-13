@@ -285,12 +285,7 @@ test('Forms Tab', async () => {
 
 });
 test('Create Clients', async () => {
-  // Create Clients
-  // await page
-  //   .locator(
-  //     '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
-  //   )
-  //   .click();
+  
   
 try {
   await page.locator('._btns_14sej_85 > button').click();
