@@ -271,11 +271,11 @@ test('Insurance Tab', async () => {
   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
   await page.waitForTimeout(3000);
   try {
-    await page.getByRole('button', { name: 'View' }).first().click()
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.getByRole('button', { name: 'View' }).nth(1).click();
-  }
+    await page.locator('td:nth-child(9)').first().click();
+   } catch (error) {
+     console.log('Failed to find first locator, trying second locator');
+     await page.getByText('ABSOLUTE TOTAL CARE').first().click();
+   }
   await page.waitForTimeout(1000);
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
   await page.getByPlaceholder('Start typing here').click();
@@ -387,13 +387,42 @@ test('TaskBoard Widget Flows', async () => {
     await page.getByRole('option', { name: 'Supervisor' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
      await page.reload();
-    await page.getByLabel('Status').click();
+     await page.locator('#mui-component-select-status').click();
     await page.getByRole('option', { name: 'Created' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'Submitted' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'Sent' }).getByRole('checkbox').check();
     await page.reload();
     
   });
+  test('Notifications Feature', async () => {
+  await page.locator('div').filter({ hasText: /^Notifications$/ }).getByRole('img').click();
+  await page.waitForTimeout(3000);
+    await page.getByText('Therapist 1 has joined your').click();
+    const page1Promise = page.waitForEvent('popup');
+    const page1 = await page1Promise;
+    await page1.getByTestId('message-input').fill('Hi Therapist 1 How are u ');
+    await page1.getByTestId('SendOutlinedIcon').click();
+    await page1.waitForTimeout(3000);
+    await page1.close();
+
+    await page.getByText('Supervisor 1 has joined your').click();
+    const page2Promise = page.waitForEvent('popup');
+    const page2 = await page2Promise;
+    await page2.getByTestId('message-input').fill('Hi Therapist 1 How are u ');
+    await page2.getByTestId('SendOutlinedIcon').click();
+    await page2.waitForTimeout(3000);
+    await page2.close();
+
+    await page.getByText('Practice 1 has joined your').click();
+    const page3Promise = page.waitForEvent('popup');
+    const page3 = await page3Promise;
+    await page3.getByTestId('message-input').fill('Hi Therapist 1 How are u ');
+    await page3.getByTestId('SendOutlinedIcon').click();
+    await page3.waitForTimeout(3000);
+    await page3.close();
+    await page.waitForTimeout(3000);
+    await page.locator('._header_1dz15_13 > button').click();
+});
   test('DP Update and Logout', async () => {
    
     try {

@@ -36,10 +36,8 @@ test('Scheduler login and  onboarding ', async ({ request }) => {
     await page.goto(data!);
   
   // Onbaording flows for Practice Manager
- 
-
 await page.getByPlaceholder('Enter first name').click();
-await page.getByPlaceholder('Enter first name').fill('Scheduler ');
+await page.getByPlaceholder('Enter first name').fill('Scheduler');
 await page.getByPlaceholder('Enter last name').click();
 await page.getByPlaceholder('Enter last name').fill('1');
 await page.getByPlaceholder('Enter phone').click();

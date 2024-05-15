@@ -32,10 +32,16 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    viewport: null,
+    viewport: { width: 685, height: 1280 },
     browserName: 'chromium',
     headless: true,
+
+    colorScheme: 'dark',
+
+    locale: 'en-US',
+    timezoneId: 'America/Los_Angeles',
     
+
     launchOptions: {
       // 1
       args: ['--start-maximized'],
