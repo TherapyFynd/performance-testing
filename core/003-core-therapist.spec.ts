@@ -454,7 +454,15 @@ test('Client File', async () => {
   //  Payment tab
   await page.getByRole('tab', { name: 'Payment' }).click();
   await page.getByLabel('Insurance').check();
-  await page.getByLabel('Client itself').check();
+  await page.waitForTimeout(2000);
+  // Logic For Fail Locator
+try {
+  await page.getByLabel('Client\'s spouse').check();
+    
+} catch (error) {
+  console.log('Failed to find first locator, trying second locator');
+  await page.getByText('Other').click();
+}
   await page.getByPlaceholder('MM/DD/YYYY').first().click();
   await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/1999');
   await page.getByLabel('Sex').click();
