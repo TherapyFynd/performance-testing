@@ -450,6 +450,7 @@ test('Client File', async () => {
   await page.getByLabel('Pronouns').click();
   await page.getByText('She/They').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  
 
   //  Payment tab
   await page.getByRole('tab', { name: 'Payment' }).click();
