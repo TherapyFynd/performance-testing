@@ -322,9 +322,10 @@ await page.getByRole('button', { name: 'Yes' }).nth(1).click();
 await page.waitForTimeout(3000);
 await page.getByLabel('Clinician').click();
 await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
-await page.locator('.MuiBackdrop-root').click();
+await page.reload();
+await page.waitForTimeout(2000);
 await page.getByRole('tab', { name: 'Clinician' }).click();
-await page.getByRole('tab', { name: 'Practice' }).click();
+  await page.getByRole('tab', { name: 'Practice' }).click();
 });
 
 test('DP Update and Logout', async () => {

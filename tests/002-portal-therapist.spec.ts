@@ -1212,8 +1212,14 @@ test('Insurance Tab', async () => {
   await page.getByRole('button', { name: 'Created' }).click();
   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
   await page.waitForTimeout(3000);
-  await page.getByRole('button', { name: 'View' }).first().click();
-
+  try {
+    await page.getByText('ABSOLUTE TOTAL CARE').first().click();
+    
+   } catch (error) {
+     console.log('Failed to find first locator, trying second locator');
+     await page.locator('td:nth-child(9)').first().click();
+   }
+   await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
   await page.getByPlaceholder('Start typing here').click();
   await page
