@@ -187,7 +187,7 @@ test('Upload Files', async () => {
   await page.getByText('Cancel').click();
 });
 
-        test('Multi-Client Flows Secondary therapist',async () =>  {
+        test('Multi-Profile Flows Secondary therapist',async () =>  {
 //  Mutile Profile Start
 await page.getByTestId('ArrowDropDownRoundedIcon').click();
 await page.getByRole('heading', { name: 'Owner Team' }).click();

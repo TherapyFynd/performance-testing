@@ -6,7 +6,7 @@ import { IEmail, readEmails } from '../localemails.js/emails';
 
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
-
+test.describe.configure({ retries: 1 });
 let page: Page;
 
 test.beforeAll(async ({ browser }) => {

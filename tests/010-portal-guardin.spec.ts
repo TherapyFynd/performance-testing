@@ -160,14 +160,14 @@ test('Personal Infomation', async () => {
   
 });
 
-test('Multi-Client Flows Secondary Therapist',async () =>  {
+test('Multi-Profile Flows Secondary Therapist',async () =>  {
   //  Mutile Profile Start
   await page.getByTestId('ArrowDropDownRoundedIcon').click();
   await page.getByRole('heading', { name: 'Shiva & Venkatesh@1' }).click();
   await page.waitForTimeout(6000);
   await page.locator('button:nth-child(1)').first().click();
         });
-        test('Booking Appoinment Therapist -02', async () => {
+        test('Booking Appoinment Therapist -2', async () => {
           //  Book Appoinment
           await page.getByRole('button', { name: 'Book appointment' }).nth(1).click();
           await page.getByLabel('Select service').click();
@@ -205,7 +205,7 @@ test('Multi-Client Flows Secondary Therapist',async () =>  {
           await page.getByRole('tab', { name: 'Past' }).click();
           await page.getByRole('tab', { name: 'Upcoming' }).click();
         });
-        test('Payment Therapist -02' ,async () => {
+        test('Payment Therapist -2' ,async () => {
           await page.locator('button:nth-child(3)').first().click();
           await page.getByRole('button', { name: 'Pending' }).click();
           await page.getByRole('button', { name: 'Paid' }).click();
@@ -214,15 +214,13 @@ test('Multi-Client Flows Secondary Therapist',async () =>  {
           await page.getByRole('button', { name: 'Credit' }).click();
           await page.getByRole('tab', { name: 'Card' }).click();
         });
-        test('Chat Therapist -02' ,async () => {
+        test('Chat Therapist -2' ,async () => {
           await page.locator('button:nth-child(4)').first().click();
           await page.waitForTimeout(3000);
           await page.getByTestId('message-input').fill('hi man how arw u');
           await page.getByTestId('SendOutlinedIcon').click();
           await page.waitForTimeout(3000);
         });
-       
-      
       test('Logout Portal', async () => {
         await page.locator('button:nth-child(5)').first().click();
         await page.getByRole('menuitem', { name: 'Logout' }).click();
