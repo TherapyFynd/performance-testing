@@ -258,14 +258,14 @@ test('Couple Session with Primary Therapist',async () =>  {
           await page.waitForTimeout(1000);
           
         });
-        test('Multi-Client Flows for Secondary Therapist Individual Client',async () =>  {
+        test('Multi-Profile Flows for Secondary Therapist Individual Client',async () =>  {
       //  Mutile Profile Start
   await page.getByTestId('ArrowDropDownRoundedIcon').click();
   await page.getByRole('heading', { name: 'Rakesh (OT)' }).click();
   await page.waitForTimeout(6000);
   await page.locator('button:nth-child(1)').first().click();
         });
-  test(' Booking Appoinment -Secondary Therapist', async () => {
+  test(' Booking Appoinment Secondary Therapist', async () => {
           // Booking Appoinment
           await page.getByRole('button', { name: 'Book appointment' }).nth(1).click();
           await page.getByLabel('Select service').click();
@@ -283,7 +283,7 @@ test('Couple Session with Primary Therapist',async () =>  {
           await page.getByRole('button', { name: 'Request appointment' }).nth(1).click();
           await page.waitForTimeout(5000);
         });
-          test('Payment tab- Secondary Therapist' ,async () => {
+          test('Payment tab Secondary Therapist' ,async () => {
             await page.locator('button:nth-child(3)').first().click();
             await page.getByRole('button', { name: 'Pending' }).click();
             await page.getByRole('button', { name: 'Paid' }).click();
@@ -292,7 +292,7 @@ test('Couple Session with Primary Therapist',async () =>  {
             await page.getByRole('button', { name: 'Credit' }).click();
             await page.getByRole('tab', { name: 'Card' }).click();
           });
-          test('Chat tab -Secondary Therapist' ,async () => {
+          test('Chat tab Secondary Therapist' ,async () => {
             await page.locator('button:nth-child(4)').first().click();
             await page.waitForTimeout(3000);
             await page.getByTestId('message-input').fill('hi man how arw u');
@@ -300,7 +300,7 @@ test('Couple Session with Primary Therapist',async () =>  {
             await page.waitForTimeout(3000);
           });
           
-          test('Personal Infomation -Secondary therapist', async () => {
+          test('Personal Infomation Secondary therapist', async () => {
             await page.locator('button:nth-child(5)').first().click();
             await page.getByRole('menuitem', { name: 'Profile' }).click();
             await page

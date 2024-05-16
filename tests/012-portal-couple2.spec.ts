@@ -79,7 +79,7 @@ test('Client Portal login and onboarding ', async ({ request }) => {
     await page.getByRole('heading', { name: 'Rakesh & Poornima (T1)' }).click();
    
    });
-        test('Couple Booking Appoinment -Primary Therapist', async () => {
+        test('Couple Booking Appoinment Primary Therapist', async () => {
           //  Book Appoinment
           await page.getByRole('button', { name: 'Book appointment' }).nth(1).click();
           await page.getByLabel('Select service').click();
@@ -157,7 +157,7 @@ test('Client Portal login and onboarding ', async ({ request }) => {
           await page.getByText('Therapist Automation Forms').click();
           await page.getByRole('button').click();
         });
-        test('Couple Payment tab -Primary Therapist' ,async () => {
+        test('Couple Payment tab Primary Therapist' ,async () => {
           await page.locator('button:nth-child(3)').first().click();
           await page.getByRole('button', { name: 'Pending' }).click();
           await page.getByRole('button', { name: 'Paid' }).click();
@@ -166,7 +166,7 @@ test('Client Portal login and onboarding ', async ({ request }) => {
           await page.getByRole('button', { name: 'Credit' }).click();
           await page.getByRole('tab', { name: 'Card' }).click();
         });
-        test('Couple Chat tab -Primary Therapist' ,async () => {
+        test('Couple Chat tab Primary Therapist' ,async () => {
           await page.locator('button:nth-child(4)').first().click();
           await page.waitForTimeout(3000);
           await page.getByTestId('message-input').fill('hi man how arw u');
@@ -174,7 +174,7 @@ test('Client Portal login and onboarding ', async ({ request }) => {
           await page.waitForTimeout(3000);
         });
         
-        test('Couple Personal Infomation -Primary Therapist', async () => {
+        test('Couple Personal Infomation Primary Therapist', async () => {
           await page.locator('button:nth-child(5)').first().click();
           await page.getByRole('menuitem', { name: 'Profile' }).click();
           await page
@@ -187,7 +187,7 @@ test('Client Portal login and onboarding ', async ({ request }) => {
           await page.locator('button:nth-child(5)').first().click();
           
         });
-          test('Upload Files-Primary Therapist', async () => {
+          test('Upload Files Primary Therapist', async () => {
     // Upload
     await page.getByRole('menuitem', { name: 'My Uploads' }).click();
     await page.getByRole('button', { name: 'Add file' }).nth(1).click();
@@ -201,14 +201,14 @@ test('Client Portal login and onboarding ', async ({ request }) => {
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.getByText('Cancel').click();
   });
-        test('Multi-Client Flows for Secondary Therapist Individual Client',async () =>  {
+        test('Multi-ProfileFlows for Secondary Therapist Individual Client',async () =>  {
           //  Mutile Profile Start
       await page.getByTestId('ArrowDropDownRoundedIcon').click();
       await page.getByRole('heading', { name: 'Poornima (OT)' }).click();
       await page.waitForTimeout(6000);
       await page.locator('button:nth-child(1)').first().click();
             });
-      test(' Booking Appoinment -Secondary Therapist', async () => {
+      test(' Booking Appoinment Secondary Therapist', async () => {
               // Booking Appoinment
               await page.getByRole('button', { name: 'Book appointment' }).nth(1).click();
               await page.getByLabel('Select service').click();
@@ -227,7 +227,7 @@ test('Client Portal login and onboarding ', async ({ request }) => {
               await page.waitForTimeout(5000);
             });
             
-              test('Payment tab- Secondary Therapist' ,async () => {
+              test('Payment tab Secondary Therapist' ,async () => {
                 await page.locator('button:nth-child(3)').first().click();
                 await page.getByRole('button', { name: 'Pending' }).click();
                 await page.getByRole('button', { name: 'Paid' }).click();
@@ -236,7 +236,7 @@ test('Client Portal login and onboarding ', async ({ request }) => {
                 await page.getByRole('button', { name: 'Credit' }).click();
                 await page.getByRole('tab', { name: 'Card' }).click();
               });
-              test('Chat tab -Secondary Therapist' ,async () => {
+              test('Chat tab Secondary Therapist' ,async () => {
                 await page.locator('button:nth-child(4)').first().click();
                 await page.waitForTimeout(3000);
                 await page.getByTestId('message-input').fill('hi man how arw u');
@@ -244,7 +244,7 @@ test('Client Portal login and onboarding ', async ({ request }) => {
                 await page.waitForTimeout(3000);
               });
               
-              test('Personal Infomation -Secondary therapist', async () => {
+              test('Personal Infomation Secondary therapist', async () => {
                 await page.locator('button:nth-child(5)').first().click();
                 await page.getByRole('menuitem', { name: 'Profile' }).click();
                 await page
