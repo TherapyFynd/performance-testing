@@ -800,7 +800,15 @@ test('Forms Tab', async () => {
      await page.getByText('invoice').click();
      await page.getByTestId('CancelIcon').click();
      await page.locator('._appointmentHeader_15uwk_6 > .MuiButtonBase-root').click()
-      
+     await page.waitForTimeout(3000);
+     // Taskboard Flows
+     await page.getByText('Intake Automation Task').click();
+     await page.getByRole('button', { name: 'InProgress' }).click();
+await page.getByText('InReview').click();
+await page.getByRole('button', { name: 'assignee icon' }).click();
+await page.locator('p').filter({ hasText: 'IntakeAdmin 1' }).click();
+await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
+await page.waitForTimeout(4000);
       });
       test('DP Update and Logout', async () => {
         try {

@@ -337,8 +337,7 @@ test('Settings Flows', async () => {
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.getByRole('tab', { name: 'Payment Methods' }).click();
   await page.getByLabel('Select accepted payment').click();
-  await page.getByRole('combobox', { name: 'Select accepted payment' }).fill('allway');
-  await page.getByText('AllWays Health Partners -').click();
+  await page.getByText('AARP - UnitedHealthcare').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.waitForTimeout(2000);
 
@@ -1324,9 +1323,17 @@ test('Owner Dashboard', async () => {
   await page.getByLabel('Clinician').click();
   await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
   await page.reload();
-  await page.waitForTimeout(2000);
-  await page.getByRole('tab', { name: 'Clinician' }).click();
-  await page.getByRole('tab', { name: 'Practice' }).click();
+  await page.waitForTimeout(3000);
+// Taskboard flows
+await page.getByText('Owner Automation Task').click();
+await page.getByRole('button', { name: 'InProgress' }).click();
+await page.getByText('InReview').click();
+await page.getByRole('button', { name: 'assignee icon' }).click();
+await page.locator('p').filter({ hasText: 'Owner Team' }).click();
+await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.getByRole('tab', { name: 'Clinician' }).click();
+await page.getByRole('tab', { name: 'Practice' }).click();
   });
 test('Global search', async () => {
   await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();

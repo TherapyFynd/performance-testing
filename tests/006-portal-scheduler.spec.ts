@@ -308,7 +308,15 @@ await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
     await page.getByText('invoice').click();
     await page.getByTestId('CancelIcon').click();
     await page.locator('._appointmentHeader_15uwk_6 > .MuiButtonBase-root').click();
-    
+    await page.waitForTimeout(3000);
+     // Taskboard Flows
+     await page.getByText('Scheduler Automation Task').click();
+     await page.getByRole('button', { name: 'InProgress' }).click();
+await page.getByText('InReview').click();
+await page.getByRole('button', { name: 'assignee icon' }).click();
+await page.locator('p').filter({ hasText: 'Scheduler 1' }).click();
+await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
+await page.waitForTimeout(4000);
 
     
     });

@@ -1360,6 +1360,16 @@ test('Insurance Tab', async () => {
       await page.getByText('Therapist').nth(1).click();
       await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
       await page.getByRole('button', { name: 'Yes' }).nth(1).click();
+      await page.waitForTimeout(3000);
+
+      // Taskboard Flows
+await page.getByText('Therapist Automation Task').click();
+await page.getByRole('button', { name: 'InProgress' }).click();
+await page.getByText('InReview').click();
+await page.getByRole('button', { name: 'assignee icon' }).click();
+await page.locator('p').filter({ hasText: 'Therapist 1' }).click();
+await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
+await page.waitForTimeout(4000);
       
       });
 test('Global search', async () => {

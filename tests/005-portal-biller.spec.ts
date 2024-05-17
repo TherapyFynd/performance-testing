@@ -393,7 +393,21 @@ test('TaskBoard Widget Flows', async () => {
     await page.getByRole('option', { name: 'Submitted' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'Sent' }).getByRole('checkbox').check();
     await page.reload();
+    await page.waitForTimeout(3000);
     
+     // Taskboard Flows
+     await page.getByText('Biller Automation Task').click();
+     await page.getByRole('button', { name: 'InProgress' }).click();
+await page.getByText('InReview').click();
+await page.getByRole('button', { name: 'assignee icon' }).click();
+await page.locator('p').filter({ hasText: 'Biller 1' }).click();
+await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
+await page.waitForTimeout(4000);
+
+// Check the insurance Eligiability
+await page.getByLabel('Leads').click();
+await page.getByRole('option', { name: 'Clients' }).click();
+await page.waitForTimeout(4000);
   });
   test('DP Update and Logout', async () => {
    

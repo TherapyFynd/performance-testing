@@ -1073,6 +1073,16 @@ test('TaskBoard Widget Flows', async () => {
   await page.getByRole('option', { name: 'Supervisor' }).getByRole('checkbox').check();
   await page.getByRole('option', { name: 'Supervisor' }).uncheck();
   await page.reload();
+  await page.waitForTimeout(3000);
+
+  // Taskboard Flows
+  await page.getByText('Practice Automation Task').click();
+  await page.getByRole('button', { name: 'InProgress' }).click();
+await page.getByText('InReview').click();
+await page.getByRole('button', { name: 'assignee icon' }).click();
+await page.locator('p').filter({ hasText: 'Practice 1' }).click();
+await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
+await page.waitForTimeout(4000);
 });
 
 test('DP Update and Logout', async () => {
