@@ -147,8 +147,10 @@ test('Intake tab', async () => {
   await page.getByRole('option', { name: 'Male', exact: true }).click();
   await page.getByPlaceholder('MM/DD/YYYY').click();
   await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
+  
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('MEDICAID');
+  await page.waitForTimeout(2000);
   await page.getByLabel('Name on Card').click();
   await page.getByLabel('Name on Card').fill('Rajesh');
   await page.getByLabel('Payer ID').click();
@@ -182,17 +184,17 @@ test('Intake tab', async () => {
   await page.getByRole('tab', { name: 'Attachments' }).click();
   await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
 
-  // await page.getByPlaceholder('Search by name').click();
-  // await page.getByPlaceholder('Search by name').fill('Alfred');
-  // await page.getByPlaceholder('Search by name').press('Enter');
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Open lead in new tab').click();
+  await page.getByPlaceholder('Search by name').click();
+  await page.getByPlaceholder('Search by name').fill('Alfred');
+  await page.getByPlaceholder('Search by name').press('Enter');
+  await page.waitForTimeout(2000);
+  await page.getByLabel('Open lead in new tab').click();
   // await page.waitForTimeout(1000);
-  // const page1Promise = page.waitForEvent('popup');
-  // const page1 = await page1Promise;
-  // await page1.getByRole('tab', { name: 'Basic Information' }).click();
-  // await page1.close();
-  // await page.waitForTimeout(2000);
+  const page1Promise  = page.waitForEvent('popup');
+  const page1 = await page1Promise;
+  await page1.getByRole('tab', { name: 'Basic Information' }).click();
+  await page1.close();
+  await page.waitForTimeout(2000);
   await page.getByPlaceholder('Search by name').click();
   await page.getByPlaceholder('Search by name').fill('Alfred');
   await page.getByPlaceholder('Search by name').press('Enter');
@@ -216,7 +218,6 @@ test('DP Update and Logout', async () => {
       '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_18vvz_1 > div > div._flexContainer_18vvz_4 > div._userNameDetailsContainer_18vvz_8 > div > div._imagePicker_18vvz_17 > input[type=file]'
     )
     .setInputFiles('../files/ther_img.jpg');
-  // await page.getByRole('img', { name: 'image picker' }).setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();

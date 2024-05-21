@@ -230,7 +230,7 @@ await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
     await page.getByRole('heading', { name: 'List View' }).click();
     await page.getByRole('button', { name: 'Add Task' }).nth(1).click();
     await page.getByPlaceholder('Task Name').click();
-    await page.getByPlaceholder('Task Name').fill(' Scheduler Automation Task');
+    await page.getByPlaceholder('Task Name').fill('Scheduler Automation Task');
     await page.locator('div').filter({ hasText: /^Task Description$/ }).click();
     await page.getByPlaceholder('Add Description').fill('Testing Taskboard with Owner role');
     await page.getByRole('button', { name: 'user icon Add Subtask' }).click();
@@ -245,9 +245,7 @@ await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
     await page.getByRole('button', { name: 'Open' }).click();
     await page.getByText('InProgress').click();
     await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
-    
     await page.waitForTimeout(5000);
-    
       await page.getByText('Scheduler Automation Task').click();
       await page.getByPlaceholder('Add comment').click();
       await page.getByPlaceholder('Add comment').fill('Hi Man How are U');

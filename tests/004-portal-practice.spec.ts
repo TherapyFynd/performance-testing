@@ -137,24 +137,6 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page.getByText('Role settings').click();
 await page.getByRole('button', { name: 'Create custom role' }).nth(1).click();
 await page.waitForTimeout(2000);
-// try {
-//     await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
-    
-//   } catch (error) {
-//     console.log('Failed to find first locator, trying second locator')
-//     await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div.MuiDialogActions-root.MuiDialogActions-spacing._actionContainer_mi6fq_8.css-14b29qc > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
-    
-//   }
-  
-//   await page.getByLabel('Therapist', { exact: true }).check();
-//   try {
-//     await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
-    
-//   } catch (error) {
-//     console.log('Failed to find first locator, trying second locator')
-//     await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div.MuiDialogActions-root.MuiDialogActions-spacing._actionContainer_mi6fq_8.css-14b29qc > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
-    
-//   }
   await page.getByLabel('Role title').clear();
   await page.waitForTimeout(2000);
   await page.getByLabel('Role title').fill('Practice Manager role');
