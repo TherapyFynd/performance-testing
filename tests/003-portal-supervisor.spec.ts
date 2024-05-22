@@ -56,7 +56,6 @@ test('Settings Tab', async () => {
     .click();
   // Associate Mangaments
   await page.getByText('Associate management').click();
-  // // await page.getByRole('button', { name: 'Remove' }).nth(1).click();
   
   await page.getByRole('button', { name: 'Add Associate' }).nth(1).click();
   await page.getByLabel('Select team member').click();
@@ -139,13 +138,8 @@ test('Create Appoinment', async () => {
   await page.getByPlaceholder('Enter text here').click();
   await page.getByPlaceholder('Enter text here').fill('New every day testing');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  // Logic For Fail Locator
-       try {
-        await page.locator('._btns_14sej_85 > button').click();
-      } catch (error) {
-        console.log('Failed to find first locator, trying second locator');
-        await page.getByRole('button').nth(2).click();
-      }
+
+  await page.waitForTimeout(2000);
       await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
   await page.getByLabel('Select client profile*').click();
@@ -156,7 +150,7 @@ test('Create Appoinment', async () => {
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(3000);
-  await page.reload();
+
 });
 
 
@@ -270,7 +264,7 @@ test('TaskBoard Widget Flows', async () => {
   await page.locator('span').filter({ hasText: 'Supervisor 1' }).getByRole('paragraph').click();
   await page.getByRole('banner').getByTestId('priority_flag_image').click();
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
-  await page.getByRole('button', { name: 'Task priority flag' }).click();
+  await page.getByRole('button', { name: 'Task None priority flag' }).click();
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
   await page.getByRole('button', { name: 'Open' }).click();
   await page.getByText('InProgress').click();
@@ -320,7 +314,7 @@ test('TaskBoard Widget Flows', async () => {
   test('Supervisor  Dashboard', async () => {
     // Create Appoinment Button( top Bar)
  
-      await page.locator('._btns_14sej_85 > button').click();
+      
       await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
   
@@ -332,13 +326,13 @@ test('TaskBoard Widget Flows', async () => {
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(1000);
-  await page.reload();
+  
   await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
   await page.waitForTimeout(3000);
   await page.getByText('Therapist').first().click();
   await page.getByText('invoice').click();
   await page.getByTestId('CancelIcon').click();
-  await page.locator('._appointmentHeader_15uwk_6 > .MuiButtonBase-root').click();
+  await page.reload();
   await page.waitForTimeout(3000);
 
   

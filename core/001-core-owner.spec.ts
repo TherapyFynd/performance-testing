@@ -56,7 +56,6 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Enter your practice name').fill('KanTime Healthcare System ');
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   
-  
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('Office name').click();
   await page.getByLabel('Office name').fill('KanTime Healthcare System ');
@@ -206,14 +205,7 @@ test('Settings Flows', async () => {
 
    //   Scheduler Calender 
    await page.getByText('Calendar').click();
-// try {
-//   // await page.getByRole('checkbox', { name: 'Currently accepting appointments' }).check(); 
-//   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
 
-//   } catch (error) {
-//     console.log('Failed to find first locator, trying second locator');
-//     // await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > span.MuiSwitch-thumb.css-19gndve').click();
-//   }
 try {
   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
 
@@ -297,14 +289,6 @@ await page.getByText('Website Privacy Policy').click();
   await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
 });
 test('Create Clients', async () => {
-
-// Logic For Fail Locator
-try {
-  await page.locator('._btns_14sej_85 > button').click();
-} catch (error) {
-  console.log('Failed to find first locator, trying second locator');
-  await page.getByRole('button').nth(2).click();
-}
 await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
 await page.getByRole('menuitem', { name: 'Create client' }).click();
 await page.getByLabel('First Name*').click();
@@ -324,7 +308,8 @@ test('Owner Dashboard', async () => {
 // Dashboard Features for Owner roles
 await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
 await page.waitForTimeout(3000);
-await page.getByRole('button', { name: 'addIcon Create Appointment' }).nth(1).click();
+await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
+await page.getByRole('menuitem', { name: 'Create Appointment' }).click();
 await page.getByLabel('Select client profile*').click();
 await page.getByText('Automation (OT)').click();
 await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
@@ -364,8 +349,8 @@ await page.getByRole('button', { name: 'user icon Assign to' }).click();
 await page.locator('span').filter({ hasText: 'Owner Team' }).getByRole('paragraph').click();
 await page.getByRole('banner').getByTestId('priority_flag_image').click();
 await page.getByRole('menuitem', { name: 'Urgent' }).click();
-await page.getByRole('button', { name: 'Task priority flag' }).click();
-await page.getByRole('menuitem', { name: 'Urgent' }).click();
+await page.getByRole('button', { name: 'Task None priority flag' }).click();
+await page.getByRole('menuitem', { name: 'High' }).click();
 await page.getByRole('button', { name: 'Open' }).click();
 await page.getByText('InProgress').click();
 await page.getByRole('button', { name: 'Create Task' }).nth(1).click();

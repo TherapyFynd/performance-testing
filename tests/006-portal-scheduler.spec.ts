@@ -135,12 +135,6 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 // Minor Client Appoinmnets (Shiva Kumar)
 
-try {
-  await page.locator('._btns_14sej_85 > button').click();
-} catch (error) {
-  console.log('Failed to find first locator, trying second locator');
-  await page.getByRole('button').nth(2).click();
-}
 await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
     await page.getByRole('menuitem', { name: 'Create appointment' }).click();
     await page.getByLabel('Select client profile*').click();
@@ -164,7 +158,7 @@ await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
         await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
         await page.waitForTimeout(3000);
-        await page.reload();
+        
   });
   test('Client File', async () => {
     await page
@@ -240,7 +234,7 @@ await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
     await page.locator('span').filter({ hasText: 'Scheduler 1' }).getByRole('paragraph').click();
     await page.getByRole('banner').getByTestId('priority_flag_image').click();
     await page.getByRole('menuitem', { name: 'Urgent' }).click();
-    await page.getByRole('button', { name: 'Task priority flag' }).click();
+    await page.getByRole('button', { name: 'Task None priority flag' }).click();
     await page.getByRole('menuitem', { name: 'Urgent' }).click();
     await page.getByRole('button', { name: 'Open' }).click();
     await page.getByText('InProgress').click();
@@ -287,7 +281,7 @@ await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
     test('Scheduler Role Dashboard', async () => {
       // Create Appoinment Button( top Bar)
     
-    await page.locator('._btns_14sej_85 > button').click();
+    
     await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
     await page.getByRole('menuitem', { name: 'Create appointment' }).click();
     
@@ -299,7 +293,7 @@ await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
     await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(1000);
-    await page.reload();
+    
     await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
     await page.waitForTimeout(3000);
     await page.getByText('Therapist').first().click();

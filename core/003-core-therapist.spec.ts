@@ -285,14 +285,6 @@ test('Forms Tab', async () => {
 
 });
 test('Create Clients', async () => {
-
-
-  try {
-    await page.locator('._btns_14sej_85 > button').click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.getByRole('button').nth(2).click();
-  }
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
   await page.getByLabel('First Name*').click();
@@ -308,7 +300,6 @@ test('Create Clients', async () => {
   console.log(myEmails);
   await page.getByLabel('Email*').fill(Bookinginbox1!);
 
-  // await page.getByLabel('Email*').fill('createtherapist+6@gmail.com');
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByLabel('Therapist Automation Forms').check();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
@@ -316,7 +307,6 @@ test('Create Clients', async () => {
   // //   Minor client
 
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
-
   await page.getByRole('menuitem', { name: 'Create client' }).click();
   await page.getByLabel('Minor').check();
   await page.getByLabel('First Name*').click();
@@ -339,7 +329,6 @@ test('Create Clients', async () => {
   const Bookinginbox3 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox3!);
 
-  // await page.getByLabel('Email*').fill('a---1@gmail.com');
   await page.getByLabel('Guardian relationship to').click();
   await page.getByLabel('Guardian relationship to').fill('Brother');
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
@@ -350,7 +339,6 @@ test('Create Clients', async () => {
   // //   Create Couple Account
 
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
-
   await page.getByRole('menuitem', { name: 'Create client' }).click();
   await page.getByLabel('Couple').check();
   await page.getByLabel('First Name*').click();
@@ -362,7 +350,6 @@ test('Create Clients', async () => {
   const Bookinginbox4 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox4!);
 
-  // await page.getByLabel('Email*').fill('pp1@gmail.com');
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('First Name*').click();
   await page.getByLabel('First Name*').fill('Poornima');
@@ -373,7 +360,6 @@ test('Create Clients', async () => {
   const Bookinginbox5 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox5!);
 
-  // await page.getByLabel('Email*').fill('pp+1@gmail.com');
   await page.getByLabel('Phone').click();
   await page.getByLabel('Phone').fill('(506) 704-23454');
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
@@ -410,12 +396,6 @@ test('Create Appoinment', async () => {
   await page.getByPlaceholder('Enter text here').fill('New every day testing');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   // Create Appoinment Button( top Bar)
-  try {
-    await page.locator('._btns_14sej_85 > button').click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.getByRole('button').nth(2).click();
-  }
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
   await page.getByLabel('Select client profile*').click();
@@ -567,12 +547,6 @@ test('Insurance Tab', async () => {
   await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
 });
 test('Therapist Dashboard', async () => {
-  try {
-    await page.locator('._btns_14sej_85 > button').click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.getByRole('button').nth(2).click();
-  }
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
   await page.getByLabel('Select client profile*').click();

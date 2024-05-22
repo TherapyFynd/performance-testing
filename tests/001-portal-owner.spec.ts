@@ -168,11 +168,11 @@ await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
 await page.getByLabel('Practice Manager').check();
 await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
 await page.getByLabel('Role title').click();
-await page.getByLabel('Role title').fill('Custom man3');
+await page.getByLabel('Role title').fill('Custom PracticeLead');
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page .waitForTimeout(8000);
 
-await page.locator('div').filter({ hasText: /^Custom man3$/ }).getByRole('button').click();
+await page.locator('div').filter({ hasText: /^Custom PracticeLead$/ }).getByRole('button').click();
 await page .waitForTimeout(2000);
 await page.getByLabel('Calendar').uncheck();
 await page.getByLabel('Calendar').check();
@@ -264,7 +264,7 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   console.log(myEmails);
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
-  await page.getByLabel('Custom man3').check();
+  await page.getByLabel('Custom PracticeLead').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
@@ -854,13 +854,7 @@ test('Request Booking Widget', async () => {
 });
 
 test('Create Clients', async () => {
-      // Logic For Fail Locator
-      try {
-        await page.locator('._btns_14sej_85 > button').click();
-      } catch (error) {
-        console.log('Failed to find first locator, trying second locator');
-        await page.getByRole('button').nth(2).click();
-      }
+  
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
   await page.getByLabel('First Name*').click();
@@ -875,7 +869,7 @@ test('Create Clients', async () => {
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
   await page.waitForTimeout(8000);
-  await page.reload();
+  
 });
 
 test('Create Appoinment', async () => {
@@ -910,7 +904,6 @@ test('Create Appoinment', async () => {
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 
   // Create Appoinment Button( top Bar)
-  await page.locator('._btns_14sej_85 > button').click();
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
   await page.getByLabel('Select client profile*').click();
@@ -921,7 +914,7 @@ test('Create Appoinment', async () => {
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(4000);
-  await page.reload();
+  
 });
 
 test('Client File', async () => {
@@ -1300,7 +1293,7 @@ await page.getByRole('button', { name: 'user icon Assign to' }).click();
 await page.locator('span').filter({ hasText: 'Owner Team' }).getByRole('paragraph').click();
 await page.getByRole('banner').getByTestId('priority_flag_image').click();
 await page.getByRole('menuitem', { name: 'Urgent' }).click();
-await page.getByRole('button', { name: 'Task priority flag' }).click();
+await page.getByRole('button', { name: 'Task None priority flag' }).click();
 await page.getByRole('menuitem', { name: 'Urgent' }).click();
 await page.getByRole('button', { name: 'Open' }).click();
 await page.getByText('InProgress').click();
