@@ -336,7 +336,7 @@ test('Create Clients', async () => {
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
 
-  // //   Create Couple Account
+  //   Create Couple Account
 
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
@@ -369,44 +369,6 @@ test('Create Clients', async () => {
   await page.reload();
 });
 
-test('Create Appoinment', async () => {
-  // Create Appoinments
-  await page.locator('div').filter({ hasText: /^Calendar$/ }).getByRole('img').click();
-  await page.getByRole('button', { name: 'Month' }).click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.locator('div').filter({ hasText: /^20$/ }).click();
-  await page.getByLabel('Select client profile*').click();
-  await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
-  await page.getByLabel('Select service *').click();
-  await page.getByText('Developmental Testing, ...').click();
-  await page.getByPlaceholder('Enter text here').click();
-  await page.getByPlaceholder('Enter text here').fill('New every day testing');
-  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-
-  // Past Date Appoinments
-  await page.getByRole('button', { name: 'Back' }).click();
-  await page.getByRole('button', { name: 'Back' }).click();
-  await page.getByRole('button', { name: 'Back' }).click();
-  await page.locator('div').filter({ hasText: /^04$/ }).click();
-  await page.getByLabel('Select client profile*').click();
-  await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
-  await page.getByLabel('Select service *').click();
-  await page.getByText('Developmental Testing, ...').click();
-  await page.getByPlaceholder('Enter text here').click();
-  await page.getByPlaceholder('Enter text here').fill('New every day testing');
-  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  // Create Appoinment Button( top Bar)
-  await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
-  await page.getByRole('menuitem', { name: 'Create appointment' }).click();
-  await page.getByLabel('Select client profile*').click();
-  await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
-  await page.getByLabel('Select service *').click();
-  await page.getByText('Family psychotherapy...').click();
-  await page.getByPlaceholder('Enter text here').click();
-  await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
-  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  await page.reload();
-});
 test('Client File', async () => {
   //  Client file
   await page
@@ -489,6 +451,43 @@ test('Client File', async () => {
     .click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(5000);
+});
+test('Create Appoinment', async () => {
+  // Create Appoinments
+  await page.locator('div').filter({ hasText: /^Calendar$/ }).getByRole('img').click();
+  await page.getByRole('button', { name: 'Month' }).click();
+  await page.getByRole('button', { name: 'Next' }).click();
+  await page.locator('div').filter({ hasText: /^20$/ }).click();
+  await page.getByLabel('Select client profile*').click();
+  await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
+  await page.getByLabel('Select service *').click();
+  await page.getByText('Developmental Testing, ...').click();
+  await page.getByPlaceholder('Enter text here').click();
+  await page.getByPlaceholder('Enter text here').fill('New every day testing');
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+
+  // Past Date Appoinments
+  await page.getByRole('button', { name: 'Back' }).click();
+  await page.getByRole('button', { name: 'Back' }).click();
+  await page.getByRole('button', { name: 'Back' }).click();
+  await page.locator('div').filter({ hasText: /^04$/ }).click();
+  await page.getByLabel('Select client profile*').click();
+  await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
+  await page.getByLabel('Select service *').click();
+  await page.getByText('Developmental Testing, ...').click();
+  await page.getByPlaceholder('Enter text here').click();
+  await page.getByPlaceholder('Enter text here').fill('New every day testing');
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  // Create Appoinment Button( top Bar)
+  await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
+  await page.getByRole('menuitem', { name: 'Create appointment' }).click();
+  await page.getByLabel('Select client profile*').click();
+  await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
+  await page.getByLabel('Select service *').click();
+  await page.getByText('Family psychotherapy...').click();
+  await page.getByPlaceholder('Enter text here').click();
+  await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 });
 test('Insurance Tab', async () => {
   await page
