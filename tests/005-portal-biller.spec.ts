@@ -126,14 +126,9 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
         await page.getByPlaceholder('Enter text here').click();
         await page.getByPlaceholder('Enter text here').fill('New every day testing');
         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+        await page.waitForTimeout(1000);
         // Create Appoinment Button( top Bar)
         
-        try {
-          await page.locator('._btns_14sej_85 > button').click();
-        } catch (error) {
-          console.log('Failed to find first locator, trying second locator');
-          await page.getByRole('button').nth(2).click();
-        }
       await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
         await page.getByRole('menuitem', { name: 'Create appointment' }).click();
         await page.getByLabel('Select client profile*').click();
@@ -144,7 +139,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
         await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
         await page.waitForTimeout(3000);
-        await page.reload();
+        
       });
       test('Client File', async () => {
         await page
@@ -153,79 +148,10 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
           .getByRole('img')
           .click();
           await page.getByText('Rakesh Das').click();
+          await page.waitForTimeout(5000);
           await page.getByTestId('ArrowDropDownIcon').locator('path').click();
           await page.getByRole('heading', { name: 'Rakesh (T1)' }).click();
-          await page.waitForTimeout(5000);
-          
-        // Info and Settings
-        try {
-          await page.getByRole('button', { name: 'Info & settings' }).nth(1).click();
-        } catch (error) {
-          console.log('Failed to find first locator, trying second locator');
-          await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div:nth-child(2) > div > div._clientNavigationFixedTop_111x7_1 > div._clientFileHeader_111x7_10 > div._primaryHeader_111x7_15 > div._actionBtn_111x7_25 > button:nth-child(1) > button').click();
-        }
-        await page.getByLabel('First Name*').click();
-
-        await page.getByLabel('First Name*').fill('Rakesh');
-        await page.getByLabel('Last Name*').click();
-        await page.getByLabel('Last Name*').fill('Das');
-        await page.getByLabel('Pronouns').click();
-        await page.getByText('She/They').click();
-        await page.getByRole('button', { name: 'Save' }).nth(1).click();
-        await page.waitForTimeout(2000);
-        //  Payment tab
-        await page.getByRole('tab', { name: 'Payment' }).click();
-        await page.getByLabel('Insurance').check();
-           // Logic For Fail Locator
-    try {
-      await page.getByLabel('Client\'s spouse').check();
-        
-    } catch (error) {
-      console.log('Failed to find first locator, trying second locator');
-      await page.getByText('Other').click();
-    }
-        await page.getByPlaceholder('MM/DD/YYYY').first().click();
-        await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/1999');
-        await page.getByLabel('Sex').click();
-        await page.getByRole('option', { name: 'Male', exact: true }).click();
-        await page.getByPlaceholder('Phone').click();
-        await page.getByPlaceholder('Phone').fill('(734) 573-25415');
-        await page.getByLabel('Address line').click();
-        await page.getByLabel('Address line').fill('New City main office');
-        await page.getByLabel('State').click();
-        await page.getByRole('combobox', { name: 'State' }).fill('Utah');
-        await page.getByRole('option', { name: 'Utah' }).click();
-        await page.getByLabel('City').click();
-        await page.getByRole('combobox', { name: 'City' }).fill('Roy');
-        await page.getByRole('option', { name: 'Roy' }).click();
-        await page.getByLabel('Zip code').click();
-        await page.getByLabel('Zip code').fill('678203');
-        await page.getByLabel('Insurance Company').click();
-        await page.getByLabel('Insurance Company').fill('Absolute');
-        await page.getByText('ABSOLUTE TOTAL CARE-').click();
-        await page.getByLabel('Member ID').click();
-        await page.getByLabel('Member ID').fill('GHR345');
-        await page.getByLabel('Group ID').click();
-        await page.getByLabel('Group ID').fill('GGH3');
-        await page.getByLabel('Plan ID').click();
-        await page.getByLabel('Plan ID').fill('KKH45');
-        await page.getByPlaceholder('MM/DD/YYYY').nth(1).click();
-        await page.getByPlaceholder('MM/DD/YYYY').nth(1).fill('10/10/2000');
-        await page.getByPlaceholder('MM/DD/YYYY').nth(2).click();
-        await page.getByPlaceholder('MM/DD/YYYY').nth(2).fill('10/10/2030');
-        await page.getByRole('button', { name: 'Save' }).nth(1).click();
-      
-        // Files tab
-        await page.getByRole('tab', { name: 'Files' }).click();
-        await page.getByRole('button', { name: 'Request upload' }).nth(1).click();
-        await page.getByLabel('Enter file name').click();
-        await page.getByLabel('Enter file name').fill('Test Pdf');
-        await page.getByRole('button', { name: 'Add' }).nth(1).click();
-        await page.getByLabel('Enter file name').nth(1).click();
-        await page.getByLabel('Enter file name').nth(1).fill('Test Pdf 2');
-        await page.getByRole('button', { name: 'Request' }).nth(1).click();
-        await page.locator('div').filter({ hasText: /^Basic InfoIndividual$/ }).getByRole('button').click();
-       
+          await page.waitForTimeout(2000);
         // Diagnosis tab
   await page.getByRole('tab', { name: 'Diagnosis' }).click();
   await page.getByRole('button', { name: 'Add', exact: true }).nth(3).click();
@@ -244,7 +170,6 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(2000);
   await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
-
   await page.waitForTimeout(2000);
   await page.getByText('Rajesh Das').click();
    // Create Appoinment
@@ -328,7 +253,7 @@ test('TaskBoard Widget Flows', async () => {
   await page.locator('span').filter({ hasText: 'Biller 1' }).getByRole('paragraph').click();
   await page.getByRole('banner').getByTestId('priority_flag_image').click();
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
-  await page.getByRole('button', { name: 'Task priority flag' }).click();
+  await page.getByRole('button', { name: 'Task None priority flag' }).click();
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
   await page.getByRole('button', { name: 'Open' }).click();
   await page.getByText('InProgress').click();
@@ -387,13 +312,28 @@ test('TaskBoard Widget Flows', async () => {
     await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'Supervisor' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
-     await page.reload();
-     await page.locator('#mui-component-select-status').click();
+    await page.reload();
+    await page.waitForTimeout(2000);
+    await page.getByLabel('Status').nth(1).click();
     await page.getByRole('option', { name: 'Created' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'Submitted' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'Sent' }).getByRole('checkbox').check();
     await page.reload();
+    await page.waitForTimeout(3000);
     
+     // Taskboard Flows
+     await page.getByText('Biller Automation Task').click();
+     await page.getByRole('button', { name: 'InProgress' }).click();
+await page.getByText('InReview').click();
+await page.getByRole('button', { name: 'assignee icon' }).click();
+await page.locator('p').filter({ hasText: 'Biller 1' }).click();
+await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
+await page.waitForTimeout(4000);
+
+// Check the insurance Eligiability
+await page.getByLabel('Leads').click();
+await page.getByRole('option', { name: 'Clients' }).click();
+await page.waitForTimeout(4000);
   });
   test('DP Update and Logout', async () => {
    

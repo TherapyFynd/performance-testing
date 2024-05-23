@@ -703,12 +703,6 @@ test('Request Booking Widget', async () => {
 });
 test('Create Clients', async () => {
 
-  try {
-    await page.locator('._btns_14sej_85 > button').click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.getByRole('button').nth(2).click();
-  }
 await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
 await page.getByRole('menuitem', { name: 'Create client' }).click();
   await page.getByLabel('First Name*').click();
@@ -856,7 +850,6 @@ test('Create Appoinment', async () => {
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   // Create Appoinment Button( top Bar)
  
-  await page.locator('._btns_14sej_85 > button').click();
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
   await page.getByLabel('Select client profile*').click();
@@ -1271,7 +1264,7 @@ test('Insurance Tab', async () => {
       await page.locator('span').filter({ hasText: 'Therapist 1' }).getByRole('paragraph').click();
       await page.getByRole('banner').getByTestId('priority_flag_image').click();
       await page.getByRole('menuitem', { name: 'Urgent' }).click();
-      await page.getByRole('button', { name: 'Task priority flag' }).click();
+      await page.getByRole('button', { name: 'Task None priority flag' }).click();
       await page.getByRole('menuitem', { name: 'Urgent' }).click();
       await page.getByRole('button', { name: 'Open' }).click();
       await page.getByText('InProgress').click();
@@ -1328,7 +1321,6 @@ test('Insurance Tab', async () => {
       });
       test('Therapist Dashboard', async () => {
 
-      await page.locator('._btns_14sej_85 > button').click();
       await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
       await page.getByRole('menuitem', { name: 'Create appointment' }).click();
       
@@ -1340,7 +1332,7 @@ test('Insurance Tab', async () => {
       await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
       await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
       await page.waitForTimeout(1000);
-      await page.reload();
+      
       await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
       await page.waitForTimeout(3000);
       await page.getByText('Therapist').first().click();
@@ -1360,6 +1352,16 @@ test('Insurance Tab', async () => {
       await page.getByText('Therapist').nth(1).click();
       await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
       await page.getByRole('button', { name: 'Yes' }).nth(1).click();
+      await page.waitForTimeout(3000);
+
+      // Taskboard Flows
+await page.getByText('Therapist Automation Task').click();
+await page.getByRole('button', { name: 'InProgress' }).click();
+await page.getByText('InReview').click();
+await page.getByRole('button', { name: 'assignee icon' }).click();
+await page.locator('p').filter({ hasText: 'Therapist 1' }).click();
+await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
+await page.waitForTimeout(4000);
       
       });
 test('Global search', async () => {

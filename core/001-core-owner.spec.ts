@@ -56,7 +56,6 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Enter your practice name').fill('KanTime Healthcare System ');
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   
-  
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('Office name').click();
   await page.getByLabel('Office name').fill('KanTime Healthcare System ');
@@ -143,7 +142,7 @@ test('Settings Flows', async () => {
   await page.getByRole('combobox', { name: 'CPT Code' }).fill('90792');
   await page.getByText('90792, Psychiatric diagnostic').click();
   await page.getByLabel('Fee *').click();
-  await page.getByLabel('Fee *').fill('50');
+  await page.getByLabel('Fee *').fill('10000');
   await page.getByLabel('Duration *').click();
   await page.getByLabel('Duration *').fill('15');
   await page.getByLabel('Make default service').check();
@@ -206,14 +205,7 @@ test('Settings Flows', async () => {
 
    //   Scheduler Calender 
    await page.getByText('Calendar').click();
-// try {
-//   // await page.getByRole('checkbox', { name: 'Currently accepting appointments' }).check(); 
-//   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
 
-//   } catch (error) {
-//     console.log('Failed to find first locator, trying second locator');
-//     // await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383 > span.MuiSwitch-thumb.css-19gndve').click();
-//   }
 try {
   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
 
@@ -234,13 +226,43 @@ try {
   // Billing sections
   await page.locator('p').filter({ hasText: 'Billing' }).click();
   await page.getByRole('tab', { name: 'Insurance' }).click();
+  await page.getByLabel('Practice name').click();
+  await page.getByLabel('Practice name').fill('KanTime Healthcare System');
+  await page.getByLabel('NPI').click();
+  await page.getByLabel('NPI').fill('1234567890');
+  await page.getByLabel('Taxonomy code').click();
+  await page.getByLabel('Taxonomy code').fill('HGXFCS33');
+  await page.getByLabel('SSN').click();
+  await page.getByLabel('SSN').fill('GGH34JH');
+  await page.getByPlaceholder('Address line').click();
+  await page.getByPlaceholder('Address line').press('CapsLock');
+  await page.getByPlaceholder('Address line').fill('New Jersy Road main Block city ');
+  await page.getByLabel('State').click();
+  await page.getByRole('combobox', { name: 'State' }).fill('Ge');
+  await page.getByRole('option', { name: 'Georgia' }).click();
+  await page.getByLabel('City').click();
+  await page.getByRole('combobox', { name: 'City' }).fill('Du');
+  await page.getByRole('option', { name: 'Dunwoody' }).click();
+  await page.getByPlaceholder('Zip code').click();
+  await page.getByPlaceholder('Zip code').fill('5672343');
+  await page.getByLabel('Include Service location in').check();
+  await page.getByLabel('Enable multiple diagnostic').check();
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
   await page.getByText('Payers').click();
   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
   await page.getByLabel('Search for insurance payers').click();
   await page
     .getByRole('combobox', { name: 'Search for insurance payers' })
     .fill('Absolute');
+    await page.waitForTimeout(2000);
   await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  await page.getByRole('button', { name: 'Add' }).nth(1).click();
+  await page.waitForTimeout(2000);
+  await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
+  await page.getByLabel('Search for insurance payers').click();
+  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('MEM');
+  await page.getByText('Maine Medicaid- MEMCD').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
 
   //   Add practice Emails Imports
@@ -267,18 +289,6 @@ await page.getByText('Website Privacy Policy').click();
   await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
 });
 test('Create Clients', async () => {
-//   await page
-// .locator(
-//   '#root > div._layout_cqogi_1 > div._sideBar_14sej_1 > div._createBtnContainer_14sej_75 > div > div > button > button > span > span._label_ns5gx_15 > span'
-// )
-// .click();
-// Logic For Fail Locator
-try {
-  await page.locator('._btns_14sej_85 > button').click();
-} catch (error) {
-  console.log('Failed to find first locator, trying second locator');
-  await page.getByRole('button').nth(2).click();
-}
 await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
 await page.getByRole('menuitem', { name: 'Create client' }).click();
 await page.getByLabel('First Name*').click();
@@ -292,12 +302,14 @@ await page.getByLabel('Email*').fill(invitesinbox2!);
 
 await page.getByRole('button', { name: 'Continue' }).nth(1).click();
 await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
+
 });
 test('Owner Dashboard', async () => {
 // Dashboard Features for Owner roles
 await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
 await page.waitForTimeout(3000);
-await page.getByRole('button', { name: 'addIcon Create Appointment' }).nth(1).click();
+await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
+await page.getByRole('menuitem', { name: 'Create Appointment' }).click();
 await page.getByLabel('Select client profile*').click();
 await page.getByText('Automation (OT)').click();
 await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
@@ -324,9 +336,43 @@ await page.getByLabel('Clinician').click();
 await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
 await page.reload();
 await page.waitForTimeout(2000);
-await page.getByRole('tab', { name: 'Clinician' }).click();
+// Taskboard view
+await page.getByRole('button', { name: 'Add Task' }).nth(1).click();
+await page.getByPlaceholder('Task Name').click();
+await page.getByPlaceholder('Task Name').fill('Owner Automation Task');
+await page.locator('div').filter({ hasText: /^Task Description$/ }).click();
+await page.getByPlaceholder('Add Description').fill('Testing Taskboard with Owner role');
+await page.getByRole('button', { name: 'user icon Add Subtask' }).click();
+await page.getByPlaceholder('Add subtask').click();
+await page.getByPlaceholder('Add subtask').fill('Owner Subtask 1');
+await page.getByRole('button', { name: 'user icon Assign to' }).click();
+await page.locator('span').filter({ hasText: 'Owner Team' }).getByRole('paragraph').click();
+await page.getByRole('banner').getByTestId('priority_flag_image').click();
+await page.getByRole('menuitem', { name: 'Urgent' }).click();
+await page.getByRole('button', { name: 'Task None priority flag' }).click();
+await page.getByRole('menuitem', { name: 'High' }).click();
+await page.getByRole('button', { name: 'Open' }).click();
+await page.getByText('InProgress').click();
+await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
+await page.waitForTimeout(6000);
+
+await page.getByText('Owner Automation Task').click();
+  await page.getByPlaceholder('Add comment').click();
+  await page.getByPlaceholder('Add comment').fill('Hi Man How are U');
+  await page.getByRole('button', { name: 'Send' }).nth(1).click();
+  await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
+  await page.waitForTimeout(5000);
+
+await page.getByText('Owner Automation Task').click();
+  await page.getByRole('button', { name: 'InProgress' }).click();
+  await page.getByText('InReview').click();
+  await page.getByRole('button', { name: 'assignee icon' }).click();
+  await page.locator('p').filter({ hasText: 'Owner Team' }).click();
+  await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
+  await page.waitForTimeout(4000);
+  await page.getByRole('tab', { name: 'Clinician' }).click();
   await page.getByRole('tab', { name: 'Practice' }).click();
-});
+  });
 
 test('DP Update and Logout', async () => {
   try {

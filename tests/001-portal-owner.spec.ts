@@ -32,7 +32,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.goto(data!);
 
   // Onboarding Flows for Owner
-  // Onboarding Flows
+ 
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Owner ');
   await page.getByPlaceholder('Enter last name').click();
@@ -44,6 +44,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Enter your practice name').fill('KanTime Healthcare System ');
   await page.getByLabel('Address Line').click();
   await page.getByLabel('Address Line').fill('New York City');
+  await page.waitForTimeout(2000);
   await page.getByPlaceholder('Street address').click();
   await page.getByPlaceholder('Street address').fill('New Area City ');
   await page.getByLabel('State').click();
@@ -160,6 +161,35 @@ test('Settings Flows', async () => {
   await page.getByPlaceholder('Enter phone').click();
   await page.getByPlaceholder('Enter phone').fill('(975) 734-53565');
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//  Custom Role Setting
+await page.getByText('Role settings').click();
+await page.getByRole('button', { name: 'Create custom role' }).nth(1).click();
+await page .waitForTimeout(4000);
+await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
+await page.getByLabel('Practice Manager').check();
+await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
+await page.getByLabel('Role title').click();
+await page.getByLabel('Role title').fill('Custom PracticeLead');
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page .waitForTimeout(8000);
+
+await page.locator('div').filter({ hasText: /^Custom PracticeLead$/ }).getByRole('button').click();
+await page .waitForTimeout(2000);
+await page.getByLabel('Calendar').uncheck();
+await page.getByLabel('Calendar').check();
+await page.getByLabel('Clients', { exact: true }).uncheck();
+await page.getByLabel('Clients', { exact: true }).check();
+await page.getByLabel('Billing', { exact: true }).uncheck();
+await page.getByLabel('Insurance', { exact: true }).uncheck();
+await page.getByLabel('Reports', { exact: true }).check();
+await page.getByLabel('Clients', { exact: true }).check();
+await page.getByLabel('Documents', { exact: true }).check()
+await page.getByLabel('Referrals', { exact: true }).uncheck();
+await page.getByLabel('Referrals', { exact: true }).check();
+await page.getByLabel('Settings', { exact: true }).uncheck();
+await page.getByLabel('Settings', { exact: true }).check();
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
 
   // Team member invites flows ( Therapist role)
   await page.getByText('Team members').first().click();
@@ -220,8 +250,26 @@ test('Settings Flows', async () => {
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
+
+  await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+  await page.getByLabel('First Name*').click();
+  await page.getByLabel('First Name*').fill('Custom');
+  await page.getByLabel('Last Name*').click();
+  await page.getByLabel('Last Name*').fill('Role');
+  await page.getByLabel('Email*').click();
+  //
+  const Bookinginbox4 = await createNewEmail();
+  await page.getByLabel('Email*').fill(Bookinginbox4!);
+  myEmails = await readEmails();
+  await setEmails({ ...myEmails, customroleEmail: Bookinginbox4! });
+  console.log(myEmails);
+
+  await page.getByRole('button', { name: 'Next' }).nth(1).click();
+  await page.getByLabel('Custom PracticeLead').check();
+  await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+  await page.waitForTimeout(4000);
+  await page.reload();
   await page.getByText('Role settings').click();
- 
   //   Scheduler Calender 
   await page.getByText('Calendar').click();
   try {
@@ -337,8 +385,7 @@ test('Settings Flows', async () => {
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.getByRole('tab', { name: 'Payment Methods' }).click();
   await page.getByLabel('Select accepted payment').click();
-  await page.getByRole('combobox', { name: 'Select accepted payment' }).fill('allway');
-  await page.getByText('AllWays Health Partners -').click();
+  await page.getByText('AARP - UnitedHealthcare').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.waitForTimeout(2000);
 
@@ -808,13 +855,7 @@ test('Request Booking Widget', async () => {
 });
 
 test('Create Clients', async () => {
-      // Logic For Fail Locator
-      try {
-        await page.locator('._btns_14sej_85 > button').click();
-      } catch (error) {
-        console.log('Failed to find first locator, trying second locator');
-        await page.getByRole('button').nth(2).click();
-      }
+  
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
   await page.getByLabel('First Name*').click();
@@ -829,7 +870,7 @@ test('Create Clients', async () => {
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
   await page.waitForTimeout(8000);
-  await page.reload();
+  
 });
 
 test('Create Appoinment', async () => {
@@ -864,7 +905,6 @@ test('Create Appoinment', async () => {
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 
   // Create Appoinment Button( top Bar)
-  await page.locator('._btns_14sej_85 > button').click();
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
   await page.getByLabel('Select client profile*').click();
@@ -875,7 +915,7 @@ test('Create Appoinment', async () => {
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(4000);
-  await page.reload();
+  
 });
 
 test('Client File', async () => {
@@ -1254,7 +1294,7 @@ await page.getByRole('button', { name: 'user icon Assign to' }).click();
 await page.locator('span').filter({ hasText: 'Owner Team' }).getByRole('paragraph').click();
 await page.getByRole('banner').getByTestId('priority_flag_image').click();
 await page.getByRole('menuitem', { name: 'Urgent' }).click();
-await page.getByRole('button', { name: 'Task priority flag' }).click();
+await page.getByRole('button', { name: 'Task None priority flag' }).click();
 await page.getByRole('menuitem', { name: 'Urgent' }).click();
 await page.getByRole('button', { name: 'Open' }).click();
 await page.getByText('InProgress').click();
@@ -1324,9 +1364,17 @@ test('Owner Dashboard', async () => {
   await page.getByLabel('Clinician').click();
   await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
   await page.reload();
-  await page.waitForTimeout(2000);
-  await page.getByRole('tab', { name: 'Clinician' }).click();
-  await page.getByRole('tab', { name: 'Practice' }).click();
+  await page.waitForTimeout(3000);
+// Taskboard flows
+await page.getByText('Owner Automation Task').click();
+await page.getByRole('button', { name: 'InProgress' }).click();
+await page.getByText('InReview').click();
+await page.getByRole('button', { name: 'assignee icon' }).click();
+await page.locator('p').filter({ hasText: 'Owner Team' }).click();
+await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.getByRole('tab', { name: 'Clinician' }).click();
+await page.getByRole('tab', { name: 'Practice' }).click();
   });
 test('Global search', async () => {
   await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();

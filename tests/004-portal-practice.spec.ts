@@ -137,24 +137,6 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page.getByText('Role settings').click();
 await page.getByRole('button', { name: 'Create custom role' }).nth(1).click();
 await page.waitForTimeout(2000);
-// try {
-//     await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
-    
-//   } catch (error) {
-//     console.log('Failed to find first locator, trying second locator')
-//     await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div.MuiDialogActions-root.MuiDialogActions-spacing._actionContainer_mi6fq_8.css-14b29qc > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
-    
-//   }
-  
-//   await page.getByLabel('Therapist', { exact: true }).check();
-//   try {
-//     await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
-    
-//   } catch (error) {
-//     console.log('Failed to find first locator, trying second locator')
-//     await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div.MuiDialogActions-root.MuiDialogActions-spacing._actionContainer_mi6fq_8.css-14b29qc > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
-    
-//   }
   await page.getByLabel('Role title').clear();
   await page.waitForTimeout(2000);
   await page.getByLabel('Role title').fill('Practice Manager role');
@@ -188,7 +170,7 @@ await page.getByRole('tab', { name: 'Insurance' }).click();
   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
   await page.getByLabel('Search for insurance payers').click();
   await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('Allway');
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(8000);
   await page.getByText('AllWays Health Partners -').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
 
@@ -680,12 +662,6 @@ test('Forms Tab', async () => {
     });
 test('Create Clients', async () => {
    
-    try {
-      await page.locator('._btns_14sej_85 > button').click();
-    } catch (error) {
-      console.log('Failed to find first locator, trying second locator');
-      await page.getByRole('button').nth(2).click();
-    }
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
     await page.getByRole('menuitem', { name: 'Create client' }).click();
     await page.getByLabel('First Name*').click();
@@ -744,7 +720,7 @@ test('Create Clients', async () => {
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     // Create Appoinment Button( top Bar)
    
-    await page.locator('._btns_14sej_85 > button').click();
+   
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
     await page.getByRole('menuitem', { name: 'Create appointment' }).click();
     await page.getByLabel('Select client profile*').click();
@@ -755,7 +731,7 @@ test('Create Clients', async () => {
     await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(3000);
-    await page.reload();
+    
   });
 
   test('Client File', async () => {
@@ -1003,7 +979,7 @@ test('TaskBoard Widget Flows', async () => {
   await page.locator('span').filter({ hasText: 'Practice 1' }).getByRole('paragraph').click();
   await page.getByRole('banner').getByTestId('priority_flag_image').click();
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
-  await page.getByRole('button', { name: 'Task priority flag' }).click();
+  await page.getByRole('button', { name: 'Task None priority flag' }).click();
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
   await page.getByRole('button', { name: 'Open' }).click();
   await page.getByText('InProgress').click();
@@ -1065,6 +1041,7 @@ test('TaskBoard Widget Flows', async () => {
   await page.getByRole('option', { name: 'Submitted' }).getByRole('checkbox').check();
   await page.getByRole('option', { name: 'Sent' }).getByRole('checkbox').check();
   await page.reload();
+  await page.waitForTimeout(2000);
   await page.getByLabel('Clinician').first().click();
   await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
   await page.getByRole('option', { name: 'Owner Team' }).uncheck();
@@ -1073,6 +1050,16 @@ test('TaskBoard Widget Flows', async () => {
   await page.getByRole('option', { name: 'Supervisor' }).getByRole('checkbox').check();
   await page.getByRole('option', { name: 'Supervisor' }).uncheck();
   await page.reload();
+  await page.waitForTimeout(3000);
+
+  // Taskboard Flows
+  await page.getByText('Practice Automation Task').click();
+  await page.getByRole('button', { name: 'InProgress' }).click();
+await page.getByText('InReview').click();
+await page.getByRole('button', { name: 'assignee icon' }).click();
+await page.locator('p').filter({ hasText: 'Practice 1' }).click();
+await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
+await page.waitForTimeout(4000);
 });
 
 test('DP Update and Logout', async () => {

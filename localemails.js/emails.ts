@@ -16,6 +16,7 @@ export interface IEmail {
   clientEmail?: string;
   intakeAdminEmail?: string;
   practiceAdminEmail?: string;
+  customroleEmail?: string;
   billerEmail?: string;
   schedulerEmail?: string;
   intakeadminroleEmail?: string;
