@@ -56,11 +56,11 @@ test('Settings Tab', async () => {
     .click();
   // Associate Mangaments
   await page.getByText('Associate management').click();
-  
   await page.getByRole('button', { name: 'Add Associate' }).nth(1).click();
   await page.getByLabel('Select team member').click();
   await page.getByText('Therapist 1').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
+  await page.waitForTimeout(4000);
 
   // Calender Day start
   await page
@@ -161,6 +161,7 @@ test('Client File', async () => {
     .filter({ hasText: /^Clients$/ })
     .getByRole('img')
     .click();
+    await page.waitForTimeout(4000);
   await page.getByText('Rajesh Das').click();
 
   // Info and Settings

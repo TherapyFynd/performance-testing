@@ -778,7 +778,7 @@ test('Forms Tab', async () => {
           .getByRole('img')
           .click();
         });
-      test('Therapist Dashboard', async () => {
+      test('IntakeAdmin Dashboard', async () => {
         // Create Appoinment Button( top Bar)
      
       await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
@@ -797,7 +797,7 @@ test('Forms Tab', async () => {
       await page.getByText('Therapist').first().click();
      await page.getByText('invoice').click();
      await page.getByTestId('CancelIcon').click();
-     await page.locator('._appointmentHeader_15uwk_6 > .MuiButtonBase-root').click()
+     await page.reload();
      await page.waitForTimeout(3000);
      // Taskboard Flows
      await page.getByText('Intake Automation Task').click();
