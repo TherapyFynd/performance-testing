@@ -147,15 +147,16 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
           .filter({ hasText: /^Clients$/ })
           .getByRole('img')
           .click();
-          await page.getByText('Poornima Das').click();
-          await page.waitForTimeout(3000);
+          await page.getByText('Rakesh Das').click();
+          await page.waitForTimeout(5000);
+          await page.getByTestId('ArrowDropDownIcon').locator('path').click();
+          await page.getByRole('heading', { name: 'Rakesh (T1)' }).click();
+          await page.waitForTimeout(1000);
           
         // Info and Settings
-        
         await page.getByRole('button', { name: 'Info & settings' }).nth(1).click();
-      
         await page.getByLabel('First Name*').click();
-        await page.getByLabel('First Name*').fill('Poornima');
+        await page.getByLabel('First Name*').fill('Rakesh');
         await page.getByLabel('Last Name*').click();
         await page.getByLabel('Last Name*').fill('Das');
         await page.getByLabel('Pronouns').click();
@@ -375,8 +376,9 @@ test('TaskBoard Widget Flows', async () => {
     await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'Supervisor' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
-     await page.reload();
-     await page.getByLabel('Status').nth(1).click();
+    await page.reload();
+    await page.waitForTimeout(2000);
+    await page.getByLabel('Status').nth(1).click();
     await page.getByRole('option', { name: 'Created' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'Submitted' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'Sent' }).getByRole('checkbox').check();

@@ -44,6 +44,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Enter your practice name').fill('KanTime Healthcare System ');
   await page.getByLabel('Address Line').click();
   await page.getByLabel('Address Line').fill('New York City');
+  await page.waitForTimeout(2000);
   await page.getByPlaceholder('Street address').click();
   await page.getByPlaceholder('Street address').fill('New Area City ');
   await page.getByLabel('State').click();

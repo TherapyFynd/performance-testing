@@ -1041,6 +1041,7 @@ test('TaskBoard Widget Flows', async () => {
   await page.getByRole('option', { name: 'Submitted' }).getByRole('checkbox').check();
   await page.getByRole('option', { name: 'Sent' }).getByRole('checkbox').check();
   await page.reload();
+  await page.waitForTimeout(2000);
   await page.getByLabel('Clinician').first().click();
   await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
   await page.getByRole('option', { name: 'Owner Team' }).uncheck();
