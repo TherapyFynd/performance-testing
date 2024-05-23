@@ -488,6 +488,7 @@ test('Client File', async () => {
     .getByRole('img')
     .click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  await page.waitForTimeout(5000);
 });
 test('Insurance Tab', async () => {
   await page
