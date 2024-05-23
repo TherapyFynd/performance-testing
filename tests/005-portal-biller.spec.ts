@@ -151,71 +151,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
           await page.waitForTimeout(5000);
           await page.getByTestId('ArrowDropDownIcon').locator('path').click();
           await page.getByRole('heading', { name: 'Rakesh (T1)' }).click();
-          await page.waitForTimeout(1000);
-          
-        // Info and Settings
-        await page.getByRole('button', { name: 'Info & settings' }).nth(1).click();
-        await page.getByLabel('First Name*').click();
-        await page.getByLabel('First Name*').fill('Rakesh');
-        await page.getByLabel('Last Name*').click();
-        await page.getByLabel('Last Name*').fill('Das');
-        await page.getByLabel('Pronouns').click();
-        await page.getByText('She/They').click();
-        await page.getByRole('button', { name: 'Save' }).nth(1).click();
-        await page.waitForTimeout(2000);
-        //  Payment tab
-        await page.getByRole('tab', { name: 'Payment' }).click();
-        await page.getByLabel('Insurance').check();
-           // Logic For Fail Locator
-    try {
-      await page.getByLabel('Client\'s spouse').check();
-        
-    } catch (error) {
-      console.log('Failed to find first locator, trying second locator');
-      await page.getByText('Other').click();
-    }
-        await page.getByPlaceholder('MM/DD/YYYY').first().click();
-        await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/1999');
-        await page.getByLabel('Sex').click();
-        await page.getByRole('option', { name: 'Male', exact: true }).click();
-        await page.getByPlaceholder('Phone').click();
-        await page.getByPlaceholder('Phone').fill('(734) 573-25415');
-        await page.getByLabel('Address line').click();
-        await page.getByLabel('Address line').fill('New City main office');
-        await page.getByLabel('State').click();
-        await page.getByRole('combobox', { name: 'State' }).fill('Utah');
-        await page.getByRole('option', { name: 'Utah' }).click();
-        await page.getByLabel('City').click();
-        await page.getByRole('combobox', { name: 'City' }).fill('Roy');
-        await page.getByRole('option', { name: 'Roy' }).click();
-        await page.getByLabel('Zip code').click();
-        await page.getByLabel('Zip code').fill('678203');
-        await page.getByLabel('Insurance Company').click();
-        await page.getByLabel('Insurance Company').fill('Absolute');
-        await page.getByText('ABSOLUTE TOTAL CARE-').click();
-        await page.getByLabel('Member ID').click();
-        await page.getByLabel('Member ID').fill('GHR345');
-        await page.getByLabel('Group ID').click();
-        await page.getByLabel('Group ID').fill('GGH3');
-        await page.getByLabel('Plan ID').click();
-        await page.getByLabel('Plan ID').fill('KKH45');
-        await page.getByPlaceholder('MM/DD/YYYY').nth(1).click();
-        await page.getByPlaceholder('MM/DD/YYYY').nth(1).fill('10/10/2000');
-        await page.getByPlaceholder('MM/DD/YYYY').nth(2).click();
-        await page.getByPlaceholder('MM/DD/YYYY').nth(2).fill('10/10/2030');
-        await page.getByRole('button', { name: 'Save' }).nth(1).click();
-      
-        // Files tab
-        await page.getByRole('tab', { name: 'Files' }).click();
-        await page.getByRole('button', { name: 'Request upload' }).nth(1).click();
-        await page.getByLabel('Enter file name').click();
-        await page.getByLabel('Enter file name').fill('Test Pdf');
-        await page.getByRole('button', { name: 'Add' }).nth(1).click();
-        await page.getByLabel('Enter file name').nth(1).click();
-        await page.getByLabel('Enter file name').nth(1).fill('Test Pdf 2');
-        await page.getByRole('button', { name: 'Request' }).nth(1).click();
-        await page.locator('div').filter({ hasText: /^Basic InfoIndividual$/ }).getByRole('button').click();
-       
+          await page.waitForTimeout(2000);
         // Diagnosis tab
   await page.getByRole('tab', { name: 'Diagnosis' }).click();
   await page.getByRole('button', { name: 'Add', exact: true }).nth(3).click();

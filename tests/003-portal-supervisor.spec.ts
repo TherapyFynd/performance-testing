@@ -66,9 +66,7 @@ test('Settings Tab', async () => {
   await page
     .locator('p')
     .filter({ hasText: /^Calendar$/ })
-    .click();
- 
-    
+    .click(); 
   try {
     await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
  
