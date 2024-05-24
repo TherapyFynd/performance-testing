@@ -164,7 +164,7 @@ test('Settings Flows', async () => {
 //  Custom Role Setting
 await page.getByText('Role settings').click();
 await page.getByRole('button', { name: 'Create custom role' }).nth(1).click();
-await page .waitForTimeout(4000);
+await page .waitForTimeout(5000);
 await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
 await page.getByLabel('Practice Manager').check();
 await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
@@ -174,7 +174,7 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page .waitForTimeout(8000);
 
 await page.locator('div').filter({ hasText: /^Custom PracticeLead$/ }).getByRole('button').click();
-await page .waitForTimeout(2000);
+await page .waitForTimeout(4000);
 await page.getByLabel('Calendar').uncheck();
 await page.getByLabel('Calendar').check();
 await page.getByLabel('Clients', { exact: true }).uncheck();
