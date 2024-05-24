@@ -22,6 +22,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
+test.describe('All TherapistRole Test case ', () => { 
 
 test('Therapist login and onboarding ', async ({ request }) => {
   const myEmails: IEmail = await readEmails();
@@ -1436,4 +1437,5 @@ test('Update and Logout Flow', async () => {
     await page.locator('.MuiAvatar-img').click();
   }
     await page.getByRole('menuitem', { name: 'Logout' }).click();
+});
 });

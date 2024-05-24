@@ -27,6 +27,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
+test.describe('All BillerRole Test case ', () => {
 test('Biller  login and  onboarding ', async ({ request }) => {
   let myEmails: IEmail = await readEmails();
     const data = await generatePasswordlessLoginLink({
@@ -315,7 +316,7 @@ test('TaskBoard Widget Flows', async () => {
     await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
     await page.reload();
     await page.waitForTimeout(3000);
-    
+
     try {
       await page.getByLabel('Status').nth(1).click();
         } 
@@ -370,3 +371,4 @@ await page.waitForTimeout(4000);
     }  
         await page.getByRole('menuitem', { name: 'Logout' }).click();
   });  
+});

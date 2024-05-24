@@ -27,6 +27,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
+test.describe('All PracticeRole Test case ', () => {
 
 test('Practice  login and  onboarding ', async ({ request }) => {
   let myEmails: IEmail = await readEmails();
@@ -1099,4 +1100,4 @@ test('DP Update and Logout', async () => {
         await page.getByRole('menuitem', { name: 'Logout' }).click();
   });
 
-
+});

@@ -19,6 +19,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
+test.describe('All CouplemaleClient Test case ', () => {
 
 test('Client Portal login and onboarding ', async ({ request }) => {
   const myEmails: IEmail = await readEmails();
@@ -391,3 +392,4 @@ test('Couple Session with Primary Therapist',async () =>  {
           await page.locator('button:nth-child(5)').first().click();
           await page.getByRole('menuitem', { name: 'Logout' }).click();
         });
+      });

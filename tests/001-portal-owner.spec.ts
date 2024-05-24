@@ -21,6 +21,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
+test.describe('All OwnerRole Test case ', () => {
 
 test('Owner login and  onboarding ', async ({ request }) => {
   const inbox = await createNewEmail();
@@ -1460,3 +1461,4 @@ test('DP Update and Logout', async () => {
 
 });
 
+});

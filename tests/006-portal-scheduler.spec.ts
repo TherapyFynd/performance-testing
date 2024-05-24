@@ -26,6 +26,8 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
+test.describe('All SchedulerRole Test case ', () => {
+
 test('Scheduler login and  onboarding ', async ({ request }) => {
   let myEmails: IEmail = await readEmails();
     const data = await generatePasswordlessLoginLink({
@@ -344,3 +346,4 @@ await page.waitForTimeout(4000);
     } 
     await page.getByRole('menuitem', { name: 'Logout' }).click();
   });
+});

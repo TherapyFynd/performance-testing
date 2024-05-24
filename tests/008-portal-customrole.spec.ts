@@ -26,6 +26,8 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
+test.describe('All CustomerRole Test case ', () => {
+
 test('CustomRole login and  onboarding ', async ({ request }) => {
     let myEmails: IEmail = await readEmails();
       const data = await generatePasswordlessLoginLink({
@@ -795,3 +797,5 @@ test('TaskBoard Widget Flows', async () => {
           await page.getByRole('menuitem', { name: 'Logout' }).click();
     });
   
+  
+});

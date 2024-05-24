@@ -26,6 +26,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
+test.describe('All IntakeAdminRole  Test case ', () => {
 
 test('Intake admin login and  onboarding ', async ({ request }) => {
   let myEmails: IEmail = await readEmails();
@@ -834,3 +835,4 @@ await page.waitForTimeout(4000);
         }  
         await page.getByRole('menuitem', { name: 'Logout' }).click();
       });
+    });
