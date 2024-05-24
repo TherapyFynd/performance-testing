@@ -96,6 +96,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
 test('Message Tab', async () => {
   //   Messages Box
   await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').click();
+  await page.waitForTimeout(5000);
   await page.getByTestId('KeyboardArrowDownIcon').click();
   await page.getByRole('menuitem', { name: 'Team' }).click();
   await page.getByTestId('message-input').fill('Hi Therapist 1 How are u ');
@@ -136,8 +137,13 @@ test('Create Appoinment', async () => {
   await page.getByPlaceholder('Enter text here').click();
   await page.getByPlaceholder('Enter text here').fill('New every day testing');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-
   await page.waitForTimeout(2000);
+  try {
+    await page.locator('._btns_14sej_85 > button').click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page.getByRole('button').nth(2).click();
+  }
       await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
   await page.getByLabel('Select client profile*').click();
@@ -148,7 +154,7 @@ test('Create Appoinment', async () => {
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(3000);
-
+ await page.reload();
 });
 
 
@@ -186,7 +192,6 @@ test('Client File', async () => {
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(1000);
   await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
-  await page.waitForTimeout(1000);
   await page.waitForTimeout(1000);
   
     // Info and Settings
@@ -263,7 +268,7 @@ test('TaskBoard Widget Flows', async () => {
   await page.locator('span').filter({ hasText: 'Supervisor 1' }).getByRole('paragraph').click();
   await page.getByRole('banner').getByTestId('priority_flag_image').click();
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
-  await page.getByRole('button', { name: 'Task None priority flag' }).click();
+  await page.getByRole('button', { name: 'Task priority flag' }).click();
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
   await page.getByRole('button', { name: 'Open' }).click();
   await page.getByText('InProgress').click();
@@ -313,8 +318,13 @@ test('TaskBoard Widget Flows', async () => {
   test('Supervisor  Dashboard', async () => {
     // Create Appoinment Button( top Bar)
  
-      
-      await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
+    try {
+      await page.locator('._btns_14sej_85 > button').click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+      await page.getByRole('button').nth(2).click();
+    }
+  await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
   
   await page.getByLabel('Select client profile*').click();
@@ -325,7 +335,7 @@ test('TaskBoard Widget Flows', async () => {
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(1000);
-  
+  await page.reload();
   await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
   await page.waitForTimeout(3000);
   await page.getByText('Therapist').first().click();

@@ -21,7 +21,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
-
+test.describe('All TherapistRole Test case ', () => {
 test('Therapist login and  onboarding ', async ({ request }) => {
   const myEmails: IEmail = await readEmails();
 
@@ -285,6 +285,13 @@ test('Forms Tab', async () => {
 
 });
 test('Create Clients', async () => {
+  // Logic For Fail Locator
+try {
+  await page.locator('._btns_14sej_85 > button').click();
+} catch (error) {
+  console.log('Failed to find first locator, trying second locator');
+  await page.getByRole('button').nth(2).click();
+}
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
   await page.getByLabel('First Name*').click();
@@ -365,10 +372,56 @@ test('Create Clients', async () => {
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
+  await page.waitForTimeout(4000);
+  await page.reload();
   await page.waitForTimeout(3000);
+
+});
+test('Create Appoinment', async () => {
+  // Create Appoinments
+  await page.locator('div').filter({ hasText: /^Calendar$/ }).getByRole('img').click();
+  await page.getByRole('button', { name: 'Month' }).click();
+  await page.getByRole('button', { name: 'Next' }).click();
+  await page.locator('div').filter({ hasText: /^20$/ }).click();
+  await page.getByLabel('Select client profile*').click();
+  await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
+  await page.getByLabel('Select service *').click();
+  await page.getByText('Developmental Testing, ...').click();
+  await page.getByPlaceholder('Enter text here').click();
+  await page.getByPlaceholder('Enter text here').fill('New every day testing');
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+
+  // Past Date Appoinments
+  await page.getByRole('button', { name: 'Back' }).click();
+  await page.getByRole('button', { name: 'Back' }).click();
+  await page.getByRole('button', { name: 'Back' }).click();
+  await page.locator('div').filter({ hasText: /^04$/ }).click();
+  await page.getByLabel('Select client profile*').click();
+  await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
+  await page.getByLabel('Select service *').click();
+  await page.getByText('Developmental Testing, ...').click();
+  await page.getByPlaceholder('Enter text here').click();
+  await page.getByPlaceholder('Enter text here').fill('New every day testing');
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  // Create Appoinment Button( top Bar)
+  // Logic For Fail Locator
+try {
+  await page.locator('._btns_14sej_85 > button').click();
+} catch (error) {
+  console.log('Failed to find first locator, trying second locator');
+  await page.getByRole('button').nth(2).click();
+}
+  await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
+  await page.getByRole('menuitem', { name: 'Create appointment' }).click();
+  await page.getByLabel('Select client profile*').click();
+  await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
+  await page.getByLabel('Select service *').click();
+  await page.getByText('Family psychotherapy...').click();
+  await page.getByPlaceholder('Enter text here').click();
+  await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.reload();
 });
-
 test('Client File', async () => {
   //  Client file
   await page
@@ -452,43 +505,7 @@ test('Client File', async () => {
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(5000);
 });
-test('Create Appoinment', async () => {
-  // Create Appoinments
-  await page.locator('div').filter({ hasText: /^Calendar$/ }).getByRole('img').click();
-  await page.getByRole('button', { name: 'Month' }).click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.locator('div').filter({ hasText: /^20$/ }).click();
-  await page.getByLabel('Select client profile*').click();
-  await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
-  await page.getByLabel('Select service *').click();
-  await page.getByText('Developmental Testing, ...').click();
-  await page.getByPlaceholder('Enter text here').click();
-  await page.getByPlaceholder('Enter text here').fill('New every day testing');
-  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 
-  // Past Date Appoinments
-  await page.getByRole('button', { name: 'Back' }).click();
-  await page.getByRole('button', { name: 'Back' }).click();
-  await page.getByRole('button', { name: 'Back' }).click();
-  await page.locator('div').filter({ hasText: /^04$/ }).click();
-  await page.getByLabel('Select client profile*').click();
-  await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
-  await page.getByLabel('Select service *').click();
-  await page.getByText('Developmental Testing, ...').click();
-  await page.getByPlaceholder('Enter text here').click();
-  await page.getByPlaceholder('Enter text here').fill('New every day testing');
-  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  // Create Appoinment Button( top Bar)
-  await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
-  await page.getByRole('menuitem', { name: 'Create appointment' }).click();
-  await page.getByLabel('Select client profile*').click();
-  await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
-  await page.getByLabel('Select service *').click();
-  await page.getByText('Family psychotherapy...').click();
-  await page.getByPlaceholder('Enter text here').click();
-  await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
-  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-});
 test('Insurance Tab', async () => {
   await page
     .locator('div')
@@ -547,6 +564,13 @@ test('Insurance Tab', async () => {
   await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
 });
 test('Therapist Dashboard', async () => {
+  // Logic For Fail Locator
+try {
+  await page.locator('._btns_14sej_85 > button').click();
+} catch (error) {
+  console.log('Failed to find first locator, trying second locator');
+  await page.getByRole('button').nth(2).click();
+}
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
   await page.getByLabel('Select client profile*').click();
@@ -557,6 +581,7 @@ test('Therapist Dashboard', async () => {
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(1000);
+  await page.reload();
   await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
   await page.waitForTimeout(3000);
   await page.getByText('Therapist').first().click();
@@ -602,4 +627,5 @@ test('Update and Logout Flow', async () => {
     await page.locator('.MuiAvatar-img').click();
   }
   await page.getByRole('menuitem', { name: 'Logout' }).click();
+});
 });

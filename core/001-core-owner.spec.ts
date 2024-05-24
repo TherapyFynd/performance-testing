@@ -16,6 +16,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
+test.describe('All owner Test case ', () => {
 
 test('Owner login and  onboarding ', async ({ request }) => {
   const inbox = await createNewEmail();
@@ -42,6 +43,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Enter your practice name').fill('KanTime Healthcare System ');
   await page.getByLabel('Address Line').click();
   await page.getByLabel('Address Line').fill('New York City');
+  await page.waitForTimeout(2000);
   await page.getByPlaceholder('Street address').click();
   await page.getByPlaceholder('Street address').fill('New Area City ');
   await page.getByLabel('State').click();
@@ -289,6 +291,13 @@ await page.getByText('Website Privacy Policy').click();
   await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
 });
 test('Create Clients', async () => {
+// Logic For Fail Locator
+try {
+  await page.locator('._btns_14sej_85 > button').click();
+} catch (error) {
+  console.log('Failed to find first locator, trying second locator');
+  await page.getByRole('button').nth(2).click();
+}
 await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
 await page.getByRole('menuitem', { name: 'Create client' }).click();
 await page.getByLabel('First Name*').click();
@@ -302,6 +311,7 @@ await page.getByLabel('Email*').fill(invitesinbox2!);
 
 await page.getByRole('button', { name: 'Continue' }).nth(1).click();
 await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
+
 
 });
 test('Owner Dashboard', async () => {
@@ -349,7 +359,7 @@ await page.getByRole('button', { name: 'user icon Assign to' }).click();
 await page.locator('span').filter({ hasText: 'Owner Team' }).getByRole('paragraph').click();
 await page.getByRole('banner').getByTestId('priority_flag_image').click();
 await page.getByRole('menuitem', { name: 'Urgent' }).click();
-await page.getByRole('button', { name: 'Task None priority flag' }).click();
+await page.getByRole('button', { name: 'Task priority flag' }).click();
 await page.getByRole('menuitem', { name: 'High' }).click();
 await page.getByRole('button', { name: 'Open' }).click();
 await page.getByText('InProgress').click();
@@ -399,4 +409,5 @@ test('DP Update and Logout', async () => {
   }
   
   await page.getByRole('menuitem', { name: 'Logout' }).click();
+});
 });

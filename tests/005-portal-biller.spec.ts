@@ -128,7 +128,12 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
         await page.waitForTimeout(1000);
         // Create Appoinment Button( top Bar)
-        
+        try {
+          await page.locator('._btns_14sej_85 > button').click();
+        } catch (error) {
+          console.log('Failed to find first locator, trying second locator');
+          await page.getByRole('button').nth(2).click();
+        }
       await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
         await page.getByRole('menuitem', { name: 'Create appointment' }).click();
         await page.getByLabel('Select client profile*').click();
@@ -139,7 +144,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
         await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
         await page.waitForTimeout(3000);
-        
+        await page.reload();
       });
       test('Client File', async () => {
         await page
@@ -181,6 +186,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
      .click();
    await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
    await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+   await page.waitForTimeout(5000);
 });
 test('Insurance Tab', async () => {
   await page.locator('div').filter({ hasText: /^Insurance$/ }).getByRole('img').click();
@@ -253,17 +259,12 @@ test('TaskBoard Widget Flows', async () => {
   await page.locator('span').filter({ hasText: 'Biller 1' }).getByRole('paragraph').click();
   await page.getByRole('banner').getByTestId('priority_flag_image').click();
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
-  await page.getByRole('button', { name: 'Task None priority flag' }).click();
+  await page.getByRole('button', { name: 'Task priority flag' }).click();
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
   await page.getByRole('button', { name: 'Open' }).click();
   await page.getByText('InProgress').click();
-  try {
-    await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.locator('body > div.MuiDialog-root.MuiModal-root.css-19er4w > div.MuiDialog-container.MuiDialog-scrollPaper.css-ekeie0 > div > div > div > div > footer > button:nth-child(2) > button > span > span._label_ns5gx_15').click();
-  }
-  await page.waitForTimeout(5000);
+  await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
+   await page.waitForTimeout(5000);
   
     await page.getByText('Biller Automation Task').click();
     // await page.getByRole('button', { name: 'user icon Add Subtask' }).click();
@@ -313,11 +314,19 @@ test('TaskBoard Widget Flows', async () => {
     await page.getByRole('option', { name: 'Supervisor' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
     await page.reload();
-    await page.waitForTimeout(2000);
-    await page.getByLabel('Status').nth(1).click();
-    await page.getByRole('option', { name: 'Created' }).getByRole('checkbox').check();
-    await page.getByRole('option', { name: 'Submitted' }).getByRole('checkbox').check();
-    await page.getByRole('option', { name: 'Sent' }).getByRole('checkbox').check();
+    await page.waitForTimeout(3000);
+    
+    try {
+      await page.getByLabel('Status').nth(1).click();
+        } 
+        catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+      await page.locator('#mui-component-select-tasksStatus').click();
+    }
+    await page.getByRole('option', { name: 'Open' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'InProgress' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'InReview' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'Completed' }).getByRole('checkbox').check();
     await page.reload();
     await page.waitForTimeout(3000);
     

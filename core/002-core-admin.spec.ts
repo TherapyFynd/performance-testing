@@ -21,7 +21,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
-
+test.describe('All AdminRole Test case ', () => {
 test('Intake admin login and  onboarding ', async ({ request }) => {
   const myEmails: IEmail = await readEmails();
 
@@ -226,4 +226,5 @@ test('DP Update and Logout', async () => {
     await page.locator('.MuiAvatar-img').click();
   }
   await page.getByRole('menuitem', { name: 'Logout' }).click();
+});
 });
