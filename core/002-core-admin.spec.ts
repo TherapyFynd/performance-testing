@@ -159,7 +159,7 @@ test('Intake tab', async () => {
   await page.getByRole('combobox', { name: 'Insurance Company' }).fill('MEM');
   await page.getByText('Maine Medicaid- MEMCD').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(6000);
   await page.locator('span').filter({ hasText: 'Current Status :Inquiry' }).locator('div').nth(2).click();
   await page.getByRole('option', { name: 'Session scheduled' }).click();
   await page.waitForTimeout(1000);
