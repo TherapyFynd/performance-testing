@@ -148,11 +148,13 @@ test('Intake tab', async () => {
   
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('MEDICAID');
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(3000);
   await page.getByLabel('Name on Card').click();
   await page.getByLabel('Name on Card').fill('Rajesh');
+  await page.waitForTimeout(2000);
   await page.getByLabel('Payer ID').click();
   await page.getByLabel('Payer ID').fill('BDJSB546');
+  await page.waitForTimeout(1000);
   await page.getByLabel('Insurance Company').click();
   await page.getByRole('combobox', { name: 'Insurance Company' }).fill('MEM');
   await page.getByText('Maine Medicaid- MEMCD').click();
