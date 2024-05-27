@@ -21,6 +21,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
+test.describe('All OwnerRole Test case ', () => {
 
 test('Owner login and  onboarding ', async ({ request }) => {
   const inbox = await createNewEmail();
@@ -164,7 +165,7 @@ test('Settings Flows', async () => {
 //  Custom Role Setting
 await page.getByText('Role settings').click();
 await page.getByRole('button', { name: 'Create custom role' }).nth(1).click();
-await page .waitForTimeout(4000);
+await page .waitForTimeout(5000);
 await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
 await page.getByLabel('Practice Manager').check();
 await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
@@ -174,7 +175,7 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page .waitForTimeout(8000);
 
 await page.locator('div').filter({ hasText: /^Custom PracticeLead$/ }).getByRole('button').click();
-await page .waitForTimeout(2000);
+await page .waitForTimeout(4000);
 await page.getByLabel('Calendar').uncheck();
 await page.getByLabel('Calendar').check();
 await page.getByLabel('Clients', { exact: true }).uncheck();
@@ -848,14 +849,19 @@ test('Request Booking Widget', async () => {
   await page.locator('button').filter({ hasText: 'Accept' }).nth(1).click();
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
-  await page.waitForTimeout(4000);
+  await page.waitForTimeout(5000);
   await page.locator('button').filter({ hasText: 'Accept' }).nth(1).click();
   await page.waitForTimeout(2000);
   await page.reload();
 });
 
 test('Create Clients', async () => {
-  
+  try {
+    await page.locator('._btns_14sej_85 > button').click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page.getByRole('button').nth(2).click();
+  }
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create client' }).click();
   await page.getByLabel('First Name*').click();
@@ -870,7 +876,7 @@ test('Create Clients', async () => {
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
   await page.waitForTimeout(8000);
-  
+  await page.reload();
 });
 
 test('Create Appoinment', async () => {
@@ -905,6 +911,12 @@ test('Create Appoinment', async () => {
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 
   // Create Appoinment Button( top Bar)
+  try {
+    await page.locator('._btns_14sej_85 > button').click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page.getByRole('button').nth(2).click();
+  }
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
   await page.getByLabel('Select client profile*').click();
@@ -914,6 +926,7 @@ test('Create Appoinment', async () => {
   await page.getByPlaceholder('Enter text here').click();
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  await page.reload();
   await page.waitForTimeout(4000);
   
 });
@@ -1100,7 +1113,7 @@ test('Client File', async () => {
     .getByRole('img')
     .click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(4000);
 });
 
 test('Insurance Tab', async () => {
@@ -1294,7 +1307,7 @@ await page.getByRole('button', { name: 'user icon Assign to' }).click();
 await page.locator('span').filter({ hasText: 'Owner Team' }).getByRole('paragraph').click();
 await page.getByRole('banner').getByTestId('priority_flag_image').click();
 await page.getByRole('menuitem', { name: 'Urgent' }).click();
-await page.getByRole('button', { name: 'Task None priority flag' }).click();
+await page.getByRole('button', { name: 'Task priority flag' }).click();
 await page.getByRole('menuitem', { name: 'Urgent' }).click();
 await page.getByRole('button', { name: 'Open' }).click();
 await page.getByText('InProgress').click();
@@ -1448,3 +1461,4 @@ test('DP Update and Logout', async () => {
 
 });
 
+});

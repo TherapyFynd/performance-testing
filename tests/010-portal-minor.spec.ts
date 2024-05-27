@@ -19,6 +19,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
+test.describe('All MinorClient Test case ', () => {
 
 test('Minor Client Portal login and onboarding ', async ({ request }) => {
   const myEmails: IEmail = await readEmails();
@@ -237,3 +238,4 @@ test('Multi-Profile Flows Secondary Therapist',async () =>  {
         await page.locator('button:nth-child(5)').first().click();
         await page.getByRole('menuitem', { name: 'Logout' }).click();
       });
+    });

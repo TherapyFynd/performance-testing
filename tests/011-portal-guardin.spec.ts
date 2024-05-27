@@ -19,6 +19,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
+test.describe('All Guardinclient Test case ', () => {
 
 test('Client Portal login and onboarding ', async ({ request }) => {
   const myEmails: IEmail = await readEmails();
@@ -226,3 +227,4 @@ test('Multi-Profile Flows Secondary Therapist',async () =>  {
         await page.getByRole('menuitem', { name: 'Logout' }).click();
       });
       
+    });

@@ -19,6 +19,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
+test.describe('All CouplemaleClient Test case ', () => {
 
 test('Client Portal login and onboarding ', async ({ request }) => {
   const myEmails: IEmail = await readEmails();
@@ -72,9 +73,7 @@ test('Client Portal login and onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Phone').click();
   await page.getByPlaceholder('Phone').fill('(736) 487-35825');
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
-  // await page.getByRole('button', { name: 'Add card' }).nth(1).click();
   await page.getByRole('button', { name: 'Submit' }).nth(1).click();
-  // Profile Select Primary client therapist 1 that clients shared with Owner Team
   await page.getByRole('heading', { name: 'Rakesh (T1)' }).click();
  });
  test('Booking Appoinment Primary Therapist Individual Couple', async () => {
@@ -391,3 +390,4 @@ test('Couple Session with Primary Therapist',async () =>  {
           await page.locator('button:nth-child(5)').first().click();
           await page.getByRole('menuitem', { name: 'Logout' }).click();
         });
+      });
