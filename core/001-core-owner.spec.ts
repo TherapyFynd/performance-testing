@@ -391,6 +391,7 @@ test('DP Update and Logout', async () => {
     console.log('Failed to find first locator, trying second locator');
      await page.getByRole('img').nth(1).click();
   }
+  
   await page.getByRole('menuitem', { name: 'Profile' }).click();
   await page
     .locator(

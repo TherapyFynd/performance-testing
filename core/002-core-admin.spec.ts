@@ -202,6 +202,8 @@ test('Intake tab', async () => {
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
   await page.waitForTimeout(1000);
 
+  await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
+  await page.waitForTimeout(4000);
 });
 test('DP Update and Logout', async () => {
   try {

@@ -682,7 +682,7 @@ test('Forms Tab', async () => {
     .filter({ hasText: /^Settings$/ })
     .getByRole('img')
     .click();
-
+  await page.reload();
 
 });
 

@@ -73,9 +73,7 @@ test('Client Portal login and onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Phone').click();
   await page.getByPlaceholder('Phone').fill('(736) 487-35825');
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
-  // await page.getByRole('button', { name: 'Add card' }).nth(1).click();
   await page.getByRole('button', { name: 'Submit' }).nth(1).click();
-  // Profile Select Primary client therapist 1 that clients shared with Owner Team
   await page.getByRole('heading', { name: 'Rakesh (T1)' }).click();
  });
  test('Booking Appoinment Primary Therapist Individual Couple', async () => {
