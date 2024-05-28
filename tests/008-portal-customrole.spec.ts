@@ -26,7 +26,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
-test.describe('All CustomerRole Test case ', () => {
+test.describe('All CustomRole Test case ', () => {
 
 test('CustomRole login and  onboarding ', async ({ request }) => {
     let myEmails: IEmail = await readEmails();
