@@ -43,7 +43,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Enter your practice name').fill('KanTime Healthcare System ');
   await page.getByLabel('Address Line').click();
   await page.getByLabel('Address Line').fill('New York City');
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(4000);
   await page.getByPlaceholder('Street address').click();
   await page.getByPlaceholder('Street address').fill('New Area City ');
   await page.getByLabel('State').click();
@@ -232,6 +232,7 @@ try {
   await page.getByLabel('Practice name').fill('KanTime Healthcare System');
   await page.getByLabel('NPI').click();
   await page.getByLabel('NPI').fill('1234567890');
+  await page.waitForTimeout(2000);
   await page.getByLabel('Taxonomy code').click();
   await page.getByLabel('Taxonomy code').fill('HGXFCS33');
   await page.getByLabel('SSN').click();
@@ -250,7 +251,7 @@ try {
   await page.getByLabel('Include Service location in').check();
   await page.getByLabel('Enable multiple diagnostic').check();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-
+  await page.waitForTimeout(5000);
   await page.getByText('Payers').click();
   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
   await page.getByLabel('Search for insurance payers').click();
