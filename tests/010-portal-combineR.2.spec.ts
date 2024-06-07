@@ -1066,8 +1066,9 @@ test('Insurance Tab', async () => {
       await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
       await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
       await page.waitForTimeout(1000);
-
-      await page.getByLabel('Clinician').first().click();
+      
+    await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
+    await page.getByLabel('Clinician').first().click();
     await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'Supervisor' }).getByRole('checkbox').check();
