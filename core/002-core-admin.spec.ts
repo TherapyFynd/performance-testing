@@ -210,21 +210,7 @@ test('Intake tab', async () => {
   await page.waitForTimeout(4000);
 });
 test('DP Update and Logout', async () => {
-  // try {
-  //   await page.getByRole('img').nth(1).click();
-  // } catch (error) {
-  //   console.log('Failed to find first locator, trying second locator');
-  //   await page.locator('.MuiAvatar-img').click();
-  // }
-  // await page.getByRole('menuitem', { name: 'Profile' }).click();
-  // await page
-  //   .locator(
-  //     '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_peqpd_1 > div > div._flexContainer_peqpd_4 > div._userNameDetailsContainer_peqpd_8 > div > div._imagePicker_peqpd_17 > input[type=file]'
-  //   )
-  //   .setInputFiles('../files/ther_img.jpg');
-
-  // await page.getByRole('button', { name: 'Done' }).nth(1).click();
-  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  
   try {
     await page.locator('.MuiAvatar-img').click();
   } catch (error) {

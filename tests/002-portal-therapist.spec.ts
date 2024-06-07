@@ -1336,14 +1336,7 @@ test('Insurance Tab', async () => {
       await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
       await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
       await page.waitForTimeout(1000);
-      // await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
-      // await page.waitForTimeout(3000);
-      // await page.getByText('Therapist').first().click();
-      // await page.locator('button').filter({ hasText: 'Add note' }).nth(1).click();
-      // await page.getByRole('button', { name: 'Add psychotherapy note' }).nth(1).click();
-      // await page.getByPlaceholder('Enter your response here').click();
-      // await page.getByPlaceholder('Enter your response here').fill('Test Data');
-      // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+      
       await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
       await page.waitForTimeout(2000);
       await page.getByText('Therapist').first().click();
@@ -1408,20 +1401,7 @@ test('Update and Logout Flow', async () => {
     console.log('Failed to find first locator, trying second locator');
     await page.locator('.MuiAvatar-img').click();
   }  
-  // await page.getByRole('menuitem', { name: 'Profile' }).click();
 
-  // await page
-  //   .locator(
-  //     '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_peqpd_1 > div > div._flexContainer_peqpd_4 > div._userNameDetailsContainer_peqpd_8 > div > div._imagePicker_peqpd_17 > input[type=file]'    )
-  //   .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
-  // await page.getByRole('button', { name: 'Done' }).nth(1).click();
-  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  // try {
-  //   await page.getByRole('img').nth(1).click();
-  // } catch (error) {
-  //   console.log('Failed to find first locator, trying second locator');
-  //   await page.locator('.MuiAvatar-img').click();
-  // }
     await page.getByRole('menuitem', { name: 'Logout' }).click();
 });
 });

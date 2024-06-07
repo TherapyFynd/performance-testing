@@ -7,7 +7,7 @@ import {
   isRunningOnLocal,
   localBaseUrl,
 } from '../localemails.js/const';
-import { IEmail, readEmails } from '../localemails.js/emails';
+import { IEmail, readEmails, setEmails } from '../localemails.js/emails';
 
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
@@ -144,6 +144,51 @@ await page.getByRole('button', { name: 'Next' }).nth(1).click();
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Therapist').check();
+  await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+  await page.waitForTimeout(4000);
+  await page.reload();
+
+//   Invite CombineRole 1
+  await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+  await page.getByLabel('First Name*').click();
+  await page.getByLabel('First Name*').fill('CombineRole');
+  await page.getByLabel('Last Name*').click();
+  await page.getByLabel('Last Name*').fill('1');
+  await page.getByLabel('Email*').click();
+
+  //
+  const Bookinginbox2 = await createNewEmail();
+  await page.getByLabel('Email*').fill(Bookinginbox2!);
+  let  myEmails = await readEmails();
+  await setEmails({ ...myEmails, combinerole1: Bookinginbox2! });
+  console.log(myEmails);
+
+  await page.getByRole('button', { name: 'Next' }).nth(1).click();
+  await page.getByLabel('Therapist').check();
+  await page.getByLabel('Scheduler').check();
+  await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+  await page.waitForTimeout(4000);
+  await page.reload();
+
+  // Invite CombineRole 2
+  await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+  await page.getByLabel('First Name*').click();
+  await page.getByLabel('First Name*').fill('CombineRole');
+  await page.getByLabel('Last Name*').click();
+  await page.getByLabel('Last Name*').fill('2');
+  await page.getByLabel('Email*').click();
+
+  //
+  const Bookinginbox3 = await createNewEmail();
+  await page.getByLabel('Email*').fill(Bookinginbox3!);
+  myEmails = await readEmails();
+  await setEmails({ ...myEmails, combinerole2: Bookinginbox3! });
+  console.log(myEmails);
+
+  await page.getByRole('button', { name: 'Next' }).nth(1).click();
+  await page.getByLabel('Therapist').check();
+  await page.getByLabel('Biller').check();
+  await page.getByLabel('Intake Admin').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
@@ -762,21 +807,6 @@ test('TaskBoard Widget Flows', async () => {
       console.log('Failed to find first locator, trying second locator');
       await page.locator('.MuiAvatar-img').click();
     }  
-      // await page.getByRole('menuitem', { name: 'Profile' }).click();
-      // await page
-      //   .locator(
-      //     '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_peqpd_1 > div > div._flexContainer_peqpd_4 > div._userNameDetailsContainer_peqpd_8 > div > div._imagePicker_peqpd_17 > input[type=file]'        )
-      //   .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
-  
-      // await page.getByRole('button', { name: 'Done' }).nth(1).click();
-      // await page.getByRole('button', { name: 'Save' }).nth(1).click();
-      
-      // try {
-      //   await page.getByRole('img').nth(1).click();
-      // } catch (error) {
-      //   console.log('Failed to find first locator, trying second locator');
-      //   await page.locator('.MuiAvatar-img').click();
-      // }  
           await page.getByRole('menuitem', { name: 'Logout' }).click();
     });
   

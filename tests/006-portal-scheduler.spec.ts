@@ -62,16 +62,13 @@ await page.waitForTimeout(2000);
     await page.getByRole('button', { name: 'Create custom role' }).nth(1).click();
     await page.getByLabel('Role title').clear();
     await page.waitForTimeout(2000);
-    await page.getByLabel('Role title').fill('Scheduler role');
+    await page.getByLabel('Role title').fill('Practice CEO');
     await page.waitForTimeout(2000);
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.waitForTimeout(1000);
   await page.getByText('HIPAA audit logs').click();
 //   Scheduler Calender 
   await page.getByText('Calendar').click();
-
- 
-  
  try {
   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
 
@@ -144,30 +141,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
   await page.getByPlaceholder('Enter text here').click();
   await page.getByPlaceholder('Enter text here').fill('New every day testing');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-// Practice Client Appoinmnets
-    // await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
-    // await page.getByRole('menuitem', { name: 'Create appointment' }).click();
-    // await page.getByLabel('Select client profile*').click();
-    // await page.getByRole('option', { name: 'Practice (T1)' }).first().click();
-    // await page.waitForTimeout(10000);
-    // await page.getByLabel('Select service *').click();
-    // await page.getByText('Developmental Testing, ...').click();
-    // await page.getByPlaceholder('Enter text here').click();
-    // await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
-    // await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-    // await page.waitForTimeout(3000);
-    // Single couple 
-    // await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
-    //     await page.getByRole('menuitem', { name: 'Create appointment' }).click();
-    //     await page.getByLabel('Select client profile*').click();
-    //     await page.getByRole('option', { name: 'Rakesh (T1)' }).click();
-    //     await page.waitForTimeout(10000);
-    //     await page.getByLabel('Select service *').click();
-    //     await page.getByText('Family psychotherapy...').click();
-    //     await page.getByPlaceholder('Enter text here').click();
-    //     await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
-    //     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-    //     await page.waitForTimeout(3000);
+
       
   });
   test('Client File', async () => {
@@ -203,33 +177,6 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(2000);
   await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
-
-//   Minor Clients
-// await page.getByText('Shiva Kumar').click();
-// // Create Appoinment
-// await page.getByRole('tab', { name: 'Sessions' }).click();
-// await page.getByRole('button', { name: 'Add' }).nth(3).click();
-// await page
-//   .getByRole('menuitem', { name: 'Appointment' })
-//   .getByRole('img')
-//   .click();
-//   await page.waitForTimeout(10000);
-// await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-// await page.waitForTimeout(2000);
-// await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
-// // Couple accounts
-// await page.getByText('Rakesh Das').click();
-// // Create Appoinment
-// await page.getByRole('tab', { name: 'Sessions' }).click();
-// await page.getByRole('button', { name: 'Add' }).nth(3).click();
-// await page
-//   .getByRole('menuitem', { name: 'Appointment' })
-//   .getByRole('img')
-//   .click();
-//   await page.waitForTimeout(10000);
-// await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-// await page.waitForTimeout(2000);
-// await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
 
   });
   test('TaskBoard Widget Flows', async () => {
@@ -293,19 +240,6 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
       await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
     });
     test('Scheduler Role Dashboard', async () => {
-      // Create Appoinment Button( top Bar)
-    // await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
-    // await page.getByRole('menuitem', { name: 'Create appointment' }).click();
-    // await page.getByLabel('Select client profile*').click();
-    // await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
-    // await page.waitForTimeout(10000);
-    // await page.getByLabel('Select service *').click();
-    // await page.getByText('Family psychotherapy...').click();
-    // await page.getByPlaceholder('Enter text here').click();
-    // await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
-    // await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-    // await page.waitForTimeout(1000);
-   
     await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
     await page.waitForTimeout(3000);
     await page.getByText('Therapist').first().click();
@@ -331,20 +265,7 @@ await page.waitForTimeout(4000);
       console.log('Failed to find first locator, trying second locator');
       await page.locator('.MuiAvatar-img').click();
     } 
-    // await page.getByRole('menuitem', { name: 'Profile' }).click();
-    // await page
-    //   .locator(
-    //     '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_peqpd_1 > div > div._flexContainer_peqpd_4 > div._userNameDetailsContainer_peqpd_8 > div > div._imagePicker_peqpd_17 > input[type=file]'      )
-    //   .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 
-    // await page.getByRole('button', { name: 'Done' }).nth(1).click();
-    // await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    // try {
-    //   await page.getByRole('img').nth(1).click();
-    // } catch (error) {
-    //   console.log('Failed to find first locator, trying second locator');
-    //   await page.locator('.MuiAvatar-img').click();
-    // } 
     await page.getByRole('menuitem', { name: 'Logout' }).click();
   });
 });
