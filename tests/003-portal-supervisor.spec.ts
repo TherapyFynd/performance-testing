@@ -190,6 +190,7 @@ test('Client File', async () => {
     await page.getByRole('button', { name: 'Verify Benefits' }).nth(1).click();
     await page.waitForTimeout(8000);
     await page.getByRole('button', { name: 'View Log' }).nth(1).click();
+    await page.waitForTimeout(2000);
     await page.reload();
     await page.waitForTimeout(2000);
     await page.getByRole('button', { name: 'Share' }).nth(1).click();
