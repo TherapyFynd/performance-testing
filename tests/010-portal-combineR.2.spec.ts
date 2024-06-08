@@ -664,6 +664,7 @@ test('Create Appoinment', async () => {
   console.log('Failed to find first locator, trying second locator');
   await page.getByText('Calendar').first().click();
 }
+  await page.reload();
   await page.getByRole('button', { name: 'Month' }).click();
   await page.getByRole('button', { name: 'Next' }).click();
   await page.locator('div').filter({ hasText: /^19$/ }).click();
