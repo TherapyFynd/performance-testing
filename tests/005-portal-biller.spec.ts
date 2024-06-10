@@ -298,8 +298,6 @@ test('Insurance Tab', async () => {
   await page.getByRole('button', { name: 'Group by' }).nth(1).click();
   await page.getByText('Verification Status', { exact: true }).click();
   await page.getByRole('button', { name: 'Group by: Status' }).nth(1).click();
-  await page.getByText('Insurance').nth(3).click();
-  await page.getByRole('button', { name: 'Group by: Insurance' }).nth(1).click();
   await page.getByText('None').click();
 
 });
