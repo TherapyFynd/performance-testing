@@ -97,11 +97,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
 });
 test('Settings Flows', async () => {
-  await page
-    .locator('div')
-    .filter({ hasText: /^Settings$/ })
-    .getByRole('img')
-    .click();
+  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
   //Clinican Settings Flows
   await page.getByText('Clinician settings').click();
   await page.getByPlaceholder('Enter first name').click();
@@ -201,9 +197,19 @@ test('Settings Flows', async () => {
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(2000);
   await page.reload();
-  // Booking widget
-  await page.getByText('Booking widget').click();
-  await page.getByRole('button', { name: 'Generate link' }).nth(1).click();
+
+  //  Custom Role Setting
+await page.getByText('Role settings').click();
+await page.getByRole('button', { name: 'Create custom role' }).nth(1).click();
+await page .waitForTimeout(5000);
+await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
+await page.getByLabel('Practice Manager').check();
+await page.getByRole('button', { name: 'Copy permissions' }).nth(1).click();
+await page.getByLabel('Role title').click();
+await page.getByLabel('Role title').fill('Own Role');
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page .waitForTimeout(8000);
+
 
    //   Scheduler Calender 
    await page.getByText('Calendar').click();
@@ -227,6 +233,41 @@ try {
    await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
    await page.getByLabel('Monday').check();
    
+     //Booking widget flows
+  await page.getByText('Booking widget').click();
+  await page.getByRole('button', { name: 'Generate link' }).nth(1).click();
+  await page.waitForTimeout(2000);
+  const page1Promise = page.waitForEvent('popup');
+  await page.locator(
+      '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._bookingWidgetWrapper_4jerd_1 > div._copyLinkContainer_4jerd_19 > div._link_4jerd_28 > p').click();
+  const page1 = await page1Promise;
+  await page1.locator('div').filter({ hasText: /^Owner TeamSelect$/ }).getByRole('button').nth(1).click();
+  await page1.locator('div').filter({ hasText: /^Psychotherapy, 45 mins- 45 mins$/ }).nth(1).click();
+  await page1.locator(
+      '#root > div._layout_cqogi_1 > div > div._bookingWidgetWrapper_tlkra_1 > div._bookingWidgetContainer_tlkra_21 > div._bookingContent_tlkra_44 > div:nth-child(2) > div > div._dateTime_142fu_33 > div > div:nth-child(2) > div > div._timeSlotsWrapper_vyf9q_11 div:first-child'
+    )
+    .click();
+  await page1.getByPlaceholder('Enter first name').click();
+  await page1.getByPlaceholder('Enter first name').fill('Booking');
+  await page1.getByPlaceholder('Enter last name').click();
+  await page1.getByPlaceholder('Enter last name').fill('Willy');
+  await page1.getByPlaceholder('Enter email').click();
+  //
+  const inviteinbox1 = await createNewEmail();
+  await page1.getByPlaceholder('Enter email').fill(inviteinbox1!);
+
+  await page1.getByPlaceholder('Enter phone').click();
+  await page1.getByPlaceholder('Enter phone').fill('(893) 553-00024');
+  await page1.getByRole('button', { name: 'Request appointment' }).nth(1).click();
+  await page1.waitForTimeout(1000);
+  await page1.close();
+
+  // Security Feature
+  await page.getByRole('link', { name: 'Security Features' }).click();
+  const page2Promise = page.waitForEvent('popup');
+  const page2 = await page2Promise;
+  await page2.close();
+
   // Billing sections
   await page.locator('p').filter({ hasText: 'Billing' }).click();
   await page.getByRole('tab', { name: 'Insurance' }).click();
@@ -269,6 +310,25 @@ try {
   await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('MEM');
   await page.getByText('Maine Medicaid- MEMCD').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
+
+  // Referal settings
+  await page.getByText('Team members').nth(1).click();
+  await page
+    .getByRole('row', { name: 'Owner Team, ALC' })
+    .getByRole('img')
+    .nth(1)
+    .click();
+  await page.getByLabel('Select your Specializations').click();
+  await page
+    .getByRole('combobox', { name: 'Select your Specializations' })
+    .fill('Abuse');
+  await page.getByRole('option', { name: 'Abuse', exact: true }).click();
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.getByRole('tab', { name: 'Payment Methods' }).click();
+  await page.getByLabel('Select accepted payment methods').click();
+  await page.getByText('AARP - UnitedHealthcare').click();
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.waitForTimeout(2000);
 
   //   Add practice Emails Imports
 await page.getByText('Practice Email Imports').click();

@@ -938,6 +938,12 @@ test('Client File', async () => {
   await page.getByLabel('Enter file name').nth(1).click();
   await page.getByLabel('Enter file name').nth(1).fill('test1');
   await page.getByRole('button', { name: 'Request' }).nth(1).click();
+
+    await page.getByRole('tab', { name: 'Insurance Eligibility' }).click();
+    await page.waitForTimeout(6000);
+    await page.getByRole('button', { name: 'Verify Benefits' }).nth(1).click();
+    await page.waitForTimeout(8000);
+
   await page
     .locator('div')
     .filter({ hasText: /^Basic InfoIndividual$/ })
@@ -1349,6 +1355,22 @@ test('Insurance Tab', async () => {
       await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
       await page.getByRole('button', { name: 'Yes' }).nth(1).click();
       await page.waitForTimeout(3000);
+
+      await page.locator('div').filter({ hasText: /^PendingStatus$/ }).getByLabel('Status').click();
+  await page.getByRole('option', { name: 'Pending' }).click();
+
+  await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+  await page.getByRole('button', { name: 'Add psychotherapy note' }).nth(1).click();
+  await page.getByPlaceholder('Enter your response here').click();
+  await page.getByPlaceholder('Enter your response here').fill('Test Add');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
+  await page.locator('div').filter({ hasText: /^PendingStatus$/ }).getByLabel('Status').click();
+  await page.getByRole('option', { name: 'To Sign' }).click();
+  await page.locator('div').filter({ hasText: /^To SignStatus$/ }).getByLabel('Status').click();
+  await page.getByRole('option', { name: 'Signed' }).click();
+  await page.reload();
+  await page.waitForTimeout(3000);
 
       // Taskboard Flows
 await page.getByText('Therapist Automation Task').click();

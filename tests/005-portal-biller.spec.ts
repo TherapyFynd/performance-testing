@@ -240,6 +240,67 @@ test('Insurance Tab', async () => {
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.waitForTimeout(2000);
  });
+
+ test('Insurance Eligibility ', async () => {
+  await page.locator('div').filter({ hasText: /^Insurance Eligibility$/ }).click();
+  await page.getByLabel('Status').click();
+  await page.getByRole('option', { name: 'Pending' }).click();
+  await page.waitForTimeout(4000);
+  await page.getByRole('combobox', { name: 'Status' }).click();
+  await page.getByLabel('Clear').click();
+
+  await page.getByRole('button', { name: 'Group by' }).nth(1).click();
+  await page.getByText('Verification Status', { exact: true }).click();
+  await page.getByRole('button', { name: 'Group by: Status' }).nth(1).click();
+  await page.getByText('Assigned To', { exact: true }).click();
+  await page.getByRole('button', { name: 'Group by: Assigned to' }).nth(1).click();
+  await page.getByText('Insurance').nth(2).click();
+  await page.getByRole('button', { name: 'Group by: Insurance' }).nth(1).click();
+  await page.getByText('None').click();
+
+  await page.getByLabel('Status').click();
+  await page.getByRole('option', { name: 'Success' }).click();
+  await page.waitForTimeout(4000);
+  await page.getByLabel('Clear').click();
+
+  await page.getByLabel('Payer').click();
+  await page.getByRole('option', { name: 'MEMCD- Maine Medicaid' }).getByRole('checkbox').check();
+  await page.waitForTimeout(4000);
+  await page.getByRole('combobox', { name: 'Payer' }).click();
+  await page.getByLabel('Clear').click();
+
+// client tabs
+  await page.getByRole('tab', { name: 'Clients' }).click();
+  await page.getByLabel('Clinician').click();
+  await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
+  await page.waitForTimeout(2000);
+  await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').uncheck();
+  await page.waitForTimeout(2000);
+  await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').check();
+  await page.waitForTimeout(2000);
+  await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').uncheck();
+  await page.waitForTimeout(2000);
+  await page.getByRole('combobox', { name: 'Clinician' }).click();
+
+  await page.getByLabel('Status').click();
+  await page.getByRole('option', { name: 'Failed' }).getByRole('checkbox').check();
+  await page.waitForTimeout(2000);
+  await page.getByRole('option', { name: 'Failed' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'Success' }).getByRole('checkbox').check();
+  await page.waitForTimeout(2000);
+  await page.getByRole('option', { name: 'Success' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'Pending' }).getByRole('checkbox').check();
+  await page.waitForTimeout(2000);
+  await page.getByRole('option', { name: 'Pending' }).getByRole('checkbox').uncheck();
+  await page.getByRole('combobox', { name: 'Status' }).click();
+
+ 
+  await page.getByRole('button', { name: 'Group by' }).nth(1).click();
+  await page.getByText('Verification Status', { exact: true }).click();
+  await page.getByRole('button', { name: 'Group by: Status' }).nth(1).click();
+  await page.getByText('None').click();
+
+});
 test('TaskBoard Widget Flows', async () => {
 
   await page.locator('div').filter({ hasText: /^Tasks$/ }).getByRole('img').click();
@@ -312,8 +373,7 @@ test('TaskBoard Widget Flows', async () => {
     await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
     await page.reload();
     await page.waitForTimeout(3000);
-
-    
+ 
     await page.getByRole('button', { name: 'Status ​', exact: true }).click();
     await page.getByRole('option', { name: 'Open' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'InProgress' }).getByRole('checkbox').check();
@@ -321,7 +381,41 @@ test('TaskBoard Widget Flows', async () => {
     await page.getByRole('option', { name: 'Completed' }).getByRole('checkbox').check();
     await page.reload();
     await page.waitForTimeout(3000);
-    
+
+    await page.locator('div').filter({ hasText: /^1 Status$/ }).click();
+    await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'All' }).getByRole('checkbox').uncheck();
+    await page.getByRole('option', { name: 'Pending' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'Pending' }).getByRole('checkbox').uncheck();
+    await page.getByRole('option', { name: 'Success' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'Success' }).getByRole('checkbox').uncheck();
+    await page.getByRole('option', { name: 'Failed' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'Failed' }).getByRole('checkbox').uncheck();
+    await page.reload();
+    await page.waitForTimeout(3000);
+
+    await page.getByLabel('Leads').click();
+    await page.getByRole('option', { name: 'Clients' }).click();
+  
+    await page.getByLabel('Status').first().click();
+    await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'All' }).getByRole('checkbox').uncheck();
+    await page.getByRole('option', { name: 'Pending' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'Pending' }).getByRole('checkbox').uncheck();
+    await page.getByRole('option', { name: 'Success' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'Success' }).getByRole('checkbox').uncheck();
+    await page.getByRole('option', { name: 'Failed' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'Failed' }).getByRole('checkbox').uncheck();
+    await page.reload();
+    await page.waitForTimeout(3000);
+    await page.getByLabel('Clinician').nth(2).click();
+   
+    await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').uncheck();
+    await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').uncheck();
+    await page.reload();
+    await page.waitForTimeout(3000);
      // Taskboard Flows
      await page.getByText('Biller Automation Task').click();
      await page.getByRole('button', { name: 'InProgress' }).click();
@@ -339,27 +433,27 @@ await page.waitForTimeout(4000);
   test('DP Update and Logout', async () => {
    
     try {
-      await page.locator('.MuiAvatar-img').click();
+      await page.getByRole('img').nth(1).click();
         } catch (error) {
       console.log('Failed to find first locator, trying second locator');
       await page.getByRole('img').nth(1).click();
+      
+    }  
+        await page.getByRole('menuitem', { name: 'Profile' }).click();
+    await page
+      .locator(
+        '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_peqpd_1 > div > div._flexContainer_peqpd_4 > div._userNameDetailsContainer_peqpd_8 > div > div._imagePicker_peqpd_17 > input[type=file]'      )
+      .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
+
+    await page.getByRole('button', { name: 'Done' }).nth(1).click();
+    await page.getByRole('button', { name: 'Save' }).nth(1).click();
+    
+    try {
+      await page.getByRole('img').nth(1).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
       await page.locator('.MuiAvatar-img').click();
     }  
-    //     await page.getByRole('menuitem', { name: 'Profile' }).click();
-    // await page
-    //   .locator(
-    //     '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_peqpd_1 > div > div._flexContainer_peqpd_4 > div._userNameDetailsContainer_peqpd_8 > div > div._imagePicker_peqpd_17 > input[type=file]'      )
-    //   .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
-
-    // await page.getByRole('button', { name: 'Done' }).nth(1).click();
-    // await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    
-    // try {
-    //   await page.getByRole('img').nth(1).click();
-    // } catch (error) {
-    //   console.log('Failed to find first locator, trying second locator');
-    //   await page.locator('.MuiAvatar-img').click();
-    // }  
         await page.getByRole('menuitem', { name: 'Logout' }).click();
   });  
 });
