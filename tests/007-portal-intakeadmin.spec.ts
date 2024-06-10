@@ -673,8 +673,12 @@ test('Forms Tab', async () => {
         await page.getByRole('tab', { name: 'Basic Information' }).click();
         await page.getByLabel('Sex').click();
         await page.getByRole('option', { name: 'Male', exact: true }).click();
+        await page.getByPlaceholder('MM/DD/YYYY').click();
+        await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
+        await page.waitForTimeout(2000);
         await page.getByLabel('Member ID').click();
         await page.getByLabel('Member ID').fill('GAH23');
+        await page.waitForTimeout(2000);
         await page.getByLabel('Name on Card').click();
         await page.getByLabel('Name on Card').fill('Rajesh');
         await page.getByLabel('Payer ID').click();
@@ -682,6 +686,9 @@ test('Forms Tab', async () => {
         await page.getByLabel('Insurance Company').click();
         await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
         await page.getByText('ABSOLUTE TOTAL CARE-').click();
+        await page.getByLabel('Member ID').click();
+        await page.getByLabel('Member ID').fill('GAH23');
+        await page.waitForTimeout(2000);
         await page.getByRole('button', { name: 'Save' }).nth(1).click();
         await page.locator('span').filter({ hasText: 'Current Status :Inquiry' }).locator('div').nth(2).click();
         await page.getByRole('option', { name: 'Initial consultation call' }).click();
@@ -700,8 +707,12 @@ test('Forms Tab', async () => {
         await page.getByLabel('Select Therapist').click();
         await page.getByRole('option', { name: 'Owner Team' }).click();
         await page.getByRole('button', { name: 'Send' }).nth(1).click();
+        await page.getByRole('tab', { name: 'Insurance' }).click();
+        await page.getByRole('button', { name: 'Verify Benefits' }).nth(1).click();
+        await page.waitForTimeout(8000);
+        await page.getByRole('tab', { name: 'Attachments' }).click();
         await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
-        await page.waitForTimeout(1000);
+        
       });
       test('TaskBoard Widget Flows', async () => {
 

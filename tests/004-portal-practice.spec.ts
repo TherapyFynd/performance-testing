@@ -664,6 +664,7 @@ test('Forms Tab', async () => {
       .click();
       await page.reload();
     });
+
 test('Create Clients', async () => {
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
     await page.getByRole('menuitem', { name: 'Create client' }).click();
@@ -819,7 +820,12 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
  await page.getByLabel('Enter file name').nth(1).click();
  await page.getByLabel('Enter file name').nth(1).fill('Test Pdf 2');
  await page.getByRole('button', { name: 'Request' }).nth(1).click();
- await page.locator('div').filter({ hasText: /^Basic InfoMinor$/ }).getByRole('button').click();
+
+    await page.getByRole('tab', { name: 'Insurance Eligibility' }).click();
+    await page.waitForTimeout(6000);
+    await page.getByRole('button', { name: 'Verify Benefits' }).nth(1).click();
+    await page.waitForTimeout(8000);
+    await page.locator('div').filter({ hasText: /^Basic InfoMinor$/ }).getByRole('button').click();
 
    // Forms Section
   await page.getByRole('tab', { name: 'Forms' }).click();

@@ -170,15 +170,6 @@ test('Client File', async () => {
     .getByRole('button')
     .click();
 
-  // Create Appoinment
-  // await page.getByRole('button', { name: 'Add' }).nth(3).click();
-  // await page
-  //   .getByRole('menuitem', { name: 'Appointment' })
-  //   .getByRole('img')
-  //   .click();
-  //   await page.waitForTimeout(10000);
-  // await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  // await page.waitForTimeout(1000);
   await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
   await page.waitForTimeout(1000);
   
@@ -191,6 +182,7 @@ test('Client File', async () => {
     await page.waitForTimeout(8000);
     await page.getByRole('button', { name: 'View Log' }).nth(1).click();
     await page.waitForTimeout(2000);
+    await page.locator('._header_1ox1a_5 > .MuiButtonBase-root').click();
     await page.reload();
     await page.waitForTimeout(2000);
     await page.getByRole('button', { name: 'Share' }).nth(1).click();
@@ -204,7 +196,6 @@ test('Client File', async () => {
     console.log('Failed to find first locator, trying second locator');
     await page.getByRole('option', { name: 'icon Owner Team' }).click();
   }
-
   
   await page.getByPlaceholder('Type message here').click();
   await page.getByPlaceholder('Type message here').fill('Hey Testing name');
