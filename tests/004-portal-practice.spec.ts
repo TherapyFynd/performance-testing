@@ -1109,7 +1109,8 @@ test('TaskBoard Widget Flows', async () => {
   await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
    await page.reload();
    await page.waitForTimeout(2000);
-   await page.locator('#mui-component-select-status').click();
+  //  await page.locator('#mui-component-select-status').click();
+   await page.getByLabel('Status').nth(1).click();
   await page.getByRole('option', { name: 'Created' }).getByRole('checkbox').check();
   await page.getByRole('option', { name: 'Submitted' }).getByRole('checkbox').check();
   await page.getByRole('option', { name: 'Sent' }).getByRole('checkbox').check();
@@ -1143,21 +1144,21 @@ test('DP Update and Logout', async () => {
     console.log('Failed to find first locator, trying second locator');
     await page.locator('.MuiAvatar-img').click();
   }  
-    //   await page.getByRole('menuitem', { name: 'Profile' }).click();
-    // await page
-    //   .locator(
-    //     '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_peqpd_1 > div > div._flexContainer_peqpd_4 > div._userNameDetailsContainer_peqpd_8 > div > div._imagePicker_peqpd_17 > input[type=file]'      )
-    //   .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
+      await page.getByRole('menuitem', { name: 'Profile' }).click();
+    await page
+      .locator(
+        '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_peqpd_1 > div > div._flexContainer_peqpd_4 > div._userNameDetailsContainer_peqpd_8 > div > div._imagePicker_peqpd_17 > input[type=file]'      )
+      .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
 
-    // await page.getByRole('button', { name: 'Done' }).nth(1).click();
-    // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+    await page.getByRole('button', { name: 'Done' }).nth(1).click();
+    await page.getByRole('button', { name: 'Save' }).nth(1).click();
     
-    // try {
-    //   await page.getByRole('img').nth(1).click();
-    // } catch (error) {
-    //   console.log('Failed to find first locator, trying second locator');
-    //   await page.locator('.MuiAvatar-img').click();
-    // }  
+    try {
+      await page.getByRole('img').nth(1).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+      await page.locator('.MuiAvatar-img').click();
+    }  
         await page.getByRole('menuitem', { name: 'Logout' }).click();
   });
 

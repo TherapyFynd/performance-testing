@@ -33,7 +33,7 @@ test('Intake admin login and  onboarding ', async ({ request }) => {
   // goto page
   await page.goto(data!);
 
-// Onbaording flows for Practice Manager
+// Onbaording flows for IntakeAdmin role
 await page.getByPlaceholder('Enter first name').click();
 await page.getByPlaceholder('Enter first name').fill('Intake');
 await page.getByPlaceholder('Enter last name').click();

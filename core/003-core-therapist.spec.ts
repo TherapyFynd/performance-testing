@@ -34,8 +34,6 @@ test('Therapist login and  onboarding ', async ({ request }) => {
   await page.goto(data!);
 
   // Onbaording flows for therapist
-
-
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Therapist ');
   await page.getByPlaceholder('Enter last name').click();
@@ -415,11 +413,7 @@ test('Create Appoinment', async () => {
 });
 test('Client File', async () => {
   //  Client file
-  await page
-    .locator('div')
-    .filter({ hasText: /^Clients$/ })
-    .getByRole('img')
-    .click();
+  await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
   try {
     await page.getByRole('cell', { name: 'icon Rajesh Das' }).click();
   } catch (error) {
@@ -499,11 +493,7 @@ test('Client File', async () => {
 });
 
 test('Insurance Tab', async () => {
-  await page
-    .locator('div')
-    .filter({ hasText: /^Insurance$/ })
-    .getByRole('img')
-    .click();
+  await page.locator('div').filter({ hasText: /^Insurance$/ }).getByRole('img').click();
   await page.getByRole('button', { name: 'Select all' }).nth(1).click();
   await page.waitForTimeout(3000);
   await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
@@ -588,21 +578,20 @@ await page.getByRole('button', { name: 'Yes' }).nth(1).click();
 
 });
 test('Update and Logout Flow', async () => {
-  // try {
-  //   await page.getByRole('img').nth(1).click();
-  // } catch (error) {
-  //   console.log('Failed to find first locator, trying second locator');
-  //   await page.locator('.MuiAvatar-img').click();
-  // }
-  // await page.getByRole('menuitem', { name: 'Profile' }).click();
-  // await page
-  //   .locator(
-  //     '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_peqpd_1 > div > div._flexContainer_peqpd_4 > div._userNameDetailsContainer_peqpd_8 > div > div._imagePicker_peqpd_17 > input[type=file]'    )
-  //   .setInputFiles('C:/Users/Rajesh/Downloads/therapist.jpg');
-  // // await page.getByRole('img', { name: 'image picker' }).setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
+  try {
+    await page.getByRole('img').nth(1).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+    await page.locator('.MuiAvatar-img').click();
+  }
+  await page.getByRole('menuitem', { name: 'Profile' }).click();
+  await page
+    .locator(
+      '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_peqpd_1 > div > div._flexContainer_peqpd_4 > div._userNameDetailsContainer_peqpd_8 > div > div._imagePicker_peqpd_17 > input[type=file]'    )
+    .setInputFiles('C:/Users/Rajesh/Downloads/therapist.jpg');
 
-  // await page.getByRole('button', { name: 'Done' }).nth(1).click();
-  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.getByRole('button', { name: 'Done' }).nth(1).click();
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
   try {
     await page.locator('.MuiAvatar-img').click();
   } catch (error) {
