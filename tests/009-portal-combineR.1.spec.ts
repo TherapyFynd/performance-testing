@@ -745,14 +745,6 @@ test('Forms Tab', async () => {
       const Clientinbox1 = await createNewEmail();
       await page.getByLabel('Email*').fill(Clientinbox1!);
     
-      // await page.getByRole('combobox', { name: 'Clinician' }).click();
-      // try {
-      //   await page.getByText('IntakeAdmin 1').click(); 
-      //      } 
-      //      catch (error) {
-      //   console.log('Failed to find first locator, trying second locator');
-      //   await page.getByRole('option', { name: 'icon IntakeAdmin 1' }).getByRole('paragraph').click();
-      // }
       await page.getByRole('button', { name: 'Continue' }).nth(1).click();
       await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
       await page.waitForTimeout(7000);
@@ -868,82 +860,6 @@ test('Client File', async () => {
       .getByRole('button')
       .click();
   
-    // // Notes Section
-    // await page.getByRole('tab', { name: 'Notes' }).click();
-    // await page.getByRole('button', { name: 'Add note' }).nth(1).click();
-    // await page.getByRole('tab', { name: 'Personal' }).click();
-    // await page.getByText('Progress notes').click();
-    
-    // // Stage
-    // await page.getByRole('textbox', { name: 'Search' }).click();
-    // await page.getByRole('textbox', { name: 'Search' }).fill('CombineRole@1 Automation');
-    
-    // await page.locator('div').filter({ hasText: /^CombineRole@1 Automation Testing$/ }).click();
-    // await page.getByPlaceholder('Enter your response here').first().click();
-    // await page
-    //   .getByPlaceholder('Enter your response here')
-    //   .first()
-    //   .fill('Rajesh');
-    // await page.getByPlaceholder('Enter your response here').nth(1).click();
-    // await page.getByPlaceholder('Enter your response here').nth(1).fill('Good');
-    // await page.getByPlaceholder('MM/DD/YYYY').click();
-    // await page.getByPlaceholder('MM/DD/YYYY').fill('10/09/1999');
-    // await page.getByRole('checkbox', { name: 'option1' }).check();
-    // await page
-    //   .locator('div')
-    //   .filter({
-    //     hasText:
-    //       /^6Client CPT code\? \*Enter your response hereEnter your response here$/,
-    //   })
-    //   .getByLabel('Enter your response here')
-    //   .click();
-    // await page
-    //   .locator('div')
-    //   .filter({
-    //     hasText:
-    //       /^6Client CPT code\? \*Enter your response hereEnter your response here$/,
-    //   })
-    //   .getByLabel('Enter your response here')
-    //   .fill('90791');
-    // await page.getByRole('option', { name: '90791 - Psychiatric' }).click();
-    // await page
-    //   .locator('div')
-    //   .filter({
-    //     hasText:
-    //       /^90791 - Psychiatric diagnostic evaluationEnter your response here$/,
-    //   })
-    //   .getByLabel('Enter your response here')
-    //   .click();
-    // await page
-    //   .locator('div')
-    //   .filter({ hasText: /^Enter your response here$/ })
-    //   .getByLabel('Enter your response here')
-    //   .click();
-    // await page
-    //   .locator('div')
-    //   .filter({ hasText: /^Enter your response here$/ })
-    //   .getByLabel('Enter your response here')
-    //   .fill('F05');
-    // await page
-    //   .getByRole('option', { name: 'F05 - Delirium due to known' })
-    //   .click();
-    // await page
-    //   .locator('div')
-    //   .filter({
-    //     hasText:
-    //       /^F05 - Delirium due to known physiological conditionEnter your response here$/,
-    //   })
-    //   .getByLabel('Enter your response here')
-    //   .click();
-    // await page
-    //   .locator('div')
-    //   .filter({ hasText: /^Sign here$/ })
-    //   .nth(2)
-    //   .click();
-    // await page.getByPlaceholder('Please type your name here').click();
-    // await page.getByPlaceholder('Please type your name here').fill('Rajesh');
-    // await page.getByRole('button', { name: 'Sign' }).nth(1).click();
-    // await page.getByRole('button', { name: 'Save' }).nth(1).click();
   
     // Diagnosis tab
     await page.getByRole('tab', { name: 'Diagnosis' }).click();
@@ -960,10 +876,21 @@ test('Client File', async () => {
       .getByRole('menuitem', { name: 'Appointment' })
       .getByRole('img')
       .click();
-      await page.waitForTimeout(11000);
+      await page.waitForTimeout(10000);
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(3000);
   
+    
+    await page.getByRole('tab', { name: 'Sessions' }).click();
+    await page.getByRole('button', { name: 'Add' }).nth(3).click();
+    await page
+      .getByRole('menuitem', { name: 'Appointment' })
+      .getByRole('img')
+      .click();
+      await page.waitForTimeout(10000);
+    await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+    await page.waitForTimeout(3000);
+
     
   });
 // Insurance Tab
