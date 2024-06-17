@@ -887,7 +887,7 @@ test('Client File', async () => {
       .getByRole('menuitem', { name: 'Appointment' })
       .getByRole('img')
       .click();
-      await page.waitForTimeout(10000);
+      await page.waitForTimeout(12000);
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(3000);
 
@@ -907,10 +907,10 @@ test('Insurance Tab', async () => {
     await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
     await page.waitForTimeout(3000);
     try {
-      await page.getByText('Aetna').click();
+      await page.getByText('Aetna').first().click();
      } catch (error) {
        console.log('Failed to find first locator, trying second locator');
-       await page.getByRole('cell', { name: 'Aetna' }).click();
+       await page.getByRole('cell', { name: 'Aetna' }).first().click();
      }
      await page.waitForTimeout(2000);
     await page.getByRole('button', { name: 'Add note' }).nth(1).click();
