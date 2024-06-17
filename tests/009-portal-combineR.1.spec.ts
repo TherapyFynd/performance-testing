@@ -887,7 +887,7 @@ test('Client File', async () => {
       .getByRole('menuitem', { name: 'Appointment' })
       .getByRole('img')
       .click();
-      await page.waitForTimeout(10000);
+      await page.waitForTimeout(12000);
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(3000);
 
