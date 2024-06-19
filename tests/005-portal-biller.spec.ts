@@ -56,8 +56,13 @@ await page.waitForTimeout(2000);
    await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
    });
    test('Settings Tab', async () => {
-    await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
-    // Invite Team Member (Therapist 1)
+    try {
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Settings').click();
+    }
+        // Invite Team Member (Therapist 1)
     await page.getByText('Team members').first().click();
     // Billing Tab
   await page.locator('p').filter({ hasText: 'Billing' }).click();
@@ -361,8 +366,12 @@ test('TaskBoard Widget Flows', async () => {
     await page.locator('._header_1k7mt_11 > button').first().click();
     await page.getByRole('menuitem', { name: 'Set Priority' }).getByRole('img').click();
     await page.getByRole('menuitem', { name: 'Urgent' }).getByRole('img').click();
-    await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
-    
+    try {
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Settings').click();
+    }    
   });
   test('Biller role Dashboard', async () => {
     await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();

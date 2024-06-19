@@ -101,11 +101,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
 });
 
 test('Settings Flows', async () => {
-  // await page
-  //   .locator('div')
-  //   .filter({ hasText: /^Settings$/ })
-  //   .getByRole('img')
-  //   .click();
+
   try {
     await page.locator('div').filter({ hasText: /^Settings$/ }).click();
   } catch (error) {
@@ -840,11 +836,12 @@ await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId(
   await page.reload();
   await page.waitForTimeout(2000);
   await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
-  await page
-    .locator('div')
-    .filter({ hasText: /^Settings$/ })
-    .getByRole('img')
-    .click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
 });
 
 test('Request Booking Widget', async () => {
@@ -1559,7 +1556,12 @@ await page.getByRole('tab', { name: 'Clinician' }).click();
 await page.getByRole('tab', { name: 'Practice' }).click();
   });
 test('Global search', async () => {
-  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
   await page.getByText('Clinician settings').click();
   await page.getByText('Practice settings').click();
   await page.getByPlaceholder('Search').click();
@@ -1572,7 +1574,12 @@ test('Global search', async () => {
   await page.waitForTimeout(2000);
   await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
 
-  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
   await page.getByText('Clinician settings').click();
   await page.getByText('Practice settings').click();
   await page.getByPlaceholder('Search').click();
@@ -1584,7 +1591,12 @@ test('Global search', async () => {
   await page.getByRole('img', { name: 'logo' }).click();
   await page.waitForTimeout(2000);
 
-  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
   await page.getByText('Clinician settings').click();
   await page.getByText('Practice settings').click();
   await page.getByPlaceholder('Search').click(); 

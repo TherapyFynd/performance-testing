@@ -56,8 +56,13 @@ await page.waitForTimeout(2000);
  await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
    });
    test('Settings Tab', async () => {
-    await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
-    // Invite Team Member (Therapist 1)
+    try {
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Settings').click();
+    }
+        // Invite Team Member (Therapist 1)
     await page.getByText('Team members').first().click();
 //     // Billing Tab
 await page.locator('p').filter({ hasText: 'Billing' }).click();
@@ -533,11 +538,12 @@ test('Forms Tab', async () => {
     await page.waitForTimeout(2000);
     // await page.getByTestId('ArrowBackRoundedIcon').click();
     await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
-    await page
-      .locator('div')
-      .filter({ hasText: /^Settings$/ })
-      .getByRole('img')
-      .click();
+    try {
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Settings').click();
+    }
     });
     test('Create Appoinment', async () => {
         // Create Appoinments
@@ -776,11 +782,12 @@ test('Forms Tab', async () => {
           await page.locator('._header_1k7mt_11 > button').first().click();
           await page.getByRole('menuitem', { name: 'Set Priority' }).getByRole('img').click();
           await page.getByRole('menuitem', { name: 'Urgent' }).getByRole('img').click();
-          await page
-          .locator('div')
-          .filter({ hasText: /^Settings$/ })
-          .getByRole('img')
-          .click();
+          try {
+            await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+          } catch (error) {
+            console.log('Failed to find first locator, trying second locator');
+             await page.getByText('Settings').click();
+          }
         });
       test('IntakeAdmin Dashboard', async () => {
         // Create Appoinment Button( top Bar)
