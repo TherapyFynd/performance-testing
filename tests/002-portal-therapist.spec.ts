@@ -85,7 +85,13 @@ test('Therapist login and onboarding ', async ({ request }) => {
 
 test('Settings Tab', async () => {
   //     Settings tab
-  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  // await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
   // Cliniacan settings
   await page.getByText('Clinician settings').click();
   await page.getByPlaceholder('Enter first name').click();
