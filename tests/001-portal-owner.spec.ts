@@ -101,11 +101,17 @@ test('Owner login and  onboarding ', async ({ request }) => {
 });
 
 test('Settings Flows', async () => {
-  await page
-    .locator('div')
-    .filter({ hasText: /^Settings$/ })
-    .getByRole('img')
-    .click();
+  // await page
+  //   .locator('div')
+  //   .filter({ hasText: /^Settings$/ })
+  //   .getByRole('img')
+  //   .click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
   //Clinican Settings Flows
   await page.getByText('Clinician settings').click();
   await page.getByPlaceholder('Enter first name').click();
@@ -1526,7 +1532,6 @@ test('Owner Dashboard', async () => {
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(3000);
-
   await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
   await page.waitForTimeout(2000);
   await page.getByText('Owner Team').first().click();

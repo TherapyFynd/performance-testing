@@ -96,8 +96,17 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByLabel('').check();
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
 });
+
 test('Settings Flows', async () => {
-  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  // await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
+  
   //Clinican Settings Flows
   await page.getByText('Clinician settings').click();
   await page.getByPlaceholder('Enter first name').click();
