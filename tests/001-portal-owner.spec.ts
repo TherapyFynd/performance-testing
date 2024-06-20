@@ -403,11 +403,12 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
 });
 
 test('Forms Tab', async () => {
-  await page
-    .locator('div')
-    .filter({ hasText: /^Documents$/ })
-    .getByRole('img')
-    .click();
+    try {
+      await page.locator('div').filter({ hasText: /^Documents$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Documents').click();
+    }
   await page.getByRole('button', { name: 'Create new' }).nth(1).click();
 
   // // Questionaries Form Code

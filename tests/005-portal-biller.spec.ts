@@ -57,10 +57,10 @@ await page.waitForTimeout(2000);
    });
    test('Settings Tab', async () => {
     try {
-      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+      await page.getByText('Settings').click();
     } catch (error) {
       console.log('Failed to find first locator, trying second locator');
-       await page.getByText('Settings').click();
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
     }
         // Invite Team Member (Therapist 1)
     await page.getByText('Team members').first().click();

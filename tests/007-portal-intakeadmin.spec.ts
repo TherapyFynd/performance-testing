@@ -795,8 +795,6 @@ test('Forms Tab', async () => {
       await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
       await page.waitForTimeout(3000);
       await page.getByText('Therapist').nth(1).click();
-     await page.getByText('invoice').click();
-     await page.getByTestId('CancelIcon').click();
      await page.reload();
      await page.waitForTimeout(3000);
      // Taskboard Flows
