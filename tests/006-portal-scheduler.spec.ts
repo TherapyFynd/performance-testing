@@ -52,14 +52,16 @@ await page.waitForTimeout(2000);
   await page.waitForTimeout(1000);
   await page.getByLabel('').check();
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+  await page.waitForTimeout(6000);
+  await page.getByRole('button', { name: 'Availability' }).nth(1).click();
    });
    test('Settings Tab', async () => {
-    try {
-      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
-    } catch (error) {
-      console.log('Failed to find first locator, trying second locator');
-       await page.getByText('Settings').click();
-    }
+    // try {
+    //   await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    // } catch (error) {
+    //   console.log('Failed to find first locator, trying second locator');
+    //    await page.getByText('Settings').click();
+    // }
         // Invite Team Member (Therapist 1)
     await page.getByText('Team members').first().click();
     // Role Management
