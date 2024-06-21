@@ -84,11 +84,12 @@ test('Therapist login and  onboarding ', async ({ request }) => {
 
 });
 test('Settings Flows', async () => {
-  await page
-    .locator('div')
-    .filter({ hasText: /^Settings$/ })
-    .getByRole('img')
-    .click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
   //Clinican Settings Flows
   await page.getByText('Clinician settings').click();
 
@@ -490,6 +491,15 @@ test('Client File', async () => {
     await page.waitForTimeout(10000);
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(5000);
+
+  await page.getByRole('button', { name: 'Add' }).nth(3).click();
+  await page
+    .getByRole('menuitem', { name: 'Appointment' })
+    .getByRole('img')
+    .click();
+    await page.waitForTimeout(12000);
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  await page.waitForTimeout(5000);
 });
 
 test('Insurance Tab', async () => {
@@ -543,7 +553,13 @@ test('Insurance Tab', async () => {
   await page.waitForTimeout(2000);
   await page.getByRole('tab', { name: 'Claim History' }).click();
   await page.waitForTimeout(2000);
-  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+
+     try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
 });
 test('Therapist Dashboard', async () => {
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();

@@ -101,11 +101,13 @@ test('Owner login and  onboarding ', async ({ request }) => {
 });
 
 test('Settings Flows', async () => {
-  await page
-    .locator('div')
-    .filter({ hasText: /^Settings$/ })
-    .getByRole('img')
-    .click();
+
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
   //Clinican Settings Flows
   await page.getByText('Clinician settings').click();
   await page.getByPlaceholder('Enter first name').click();
@@ -401,11 +403,12 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
 });
 
 test('Forms Tab', async () => {
-  await page
-    .locator('div')
-    .filter({ hasText: /^Documents$/ })
-    .getByRole('img')
-    .click();
+    try {
+      await page.locator('div').filter({ hasText: /^Documents$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Documents').click();
+    }
   await page.getByRole('button', { name: 'Create new' }).nth(1).click();
 
   // // Questionaries Form Code
@@ -834,11 +837,12 @@ await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId(
   await page.reload();
   await page.waitForTimeout(2000);
   await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
-  await page
-    .locator('div')
-    .filter({ hasText: /^Settings$/ })
-    .getByRole('img')
-    .click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
 });
 
 test('Request Booking Widget', async () => {
@@ -1526,7 +1530,6 @@ test('Owner Dashboard', async () => {
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(3000);
-
   await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
   await page.waitForTimeout(2000);
   await page.getByText('Owner Team').first().click();
@@ -1554,7 +1557,12 @@ await page.getByRole('tab', { name: 'Clinician' }).click();
 await page.getByRole('tab', { name: 'Practice' }).click();
   });
 test('Global search', async () => {
-  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
   await page.getByText('Clinician settings').click();
   await page.getByText('Practice settings').click();
   await page.getByPlaceholder('Search').click();
@@ -1567,7 +1575,12 @@ test('Global search', async () => {
   await page.waitForTimeout(2000);
   await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
 
-  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
   await page.getByText('Clinician settings').click();
   await page.getByText('Practice settings').click();
   await page.getByPlaceholder('Search').click();
@@ -1579,7 +1592,12 @@ test('Global search', async () => {
   await page.getByRole('img', { name: 'logo' }).click();
   await page.waitForTimeout(2000);
 
-  await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
   await page.getByText('Clinician settings').click();
   await page.getByText('Practice settings').click();
   await page.getByPlaceholder('Search').click(); 

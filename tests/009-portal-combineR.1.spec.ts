@@ -83,8 +83,13 @@ test('CombineRole login and onboarding ', async ({ request }) => {
 });
 test('Settings Tab', async () => {
     //     Settings tab
-    await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
-    // Cliniacan settings
+    try {
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Settings').click();
+    }
+        // Cliniacan settings
     await page.getByText('Clinician settings').click();
     await page.getByPlaceholder('Enter first name').click();
     await page.getByPlaceholder('Enter first name').fill('CombineRole');
@@ -697,11 +702,12 @@ test('Forms Tab', async () => {
     await page.reload();
     await page.waitForTimeout(2000);
     await page.getByTestId('ArrowBackRoundedIcon').click();
-    await page
-      .locator('div')
-      .filter({ hasText: /^Settings$/ })
-      .getByRole('img')
-      .click();
+    try {
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Settings').click();
+    }
   
   
   });
@@ -1006,11 +1012,12 @@ test('Insurance Tab', async () => {
           await page.locator('._header_1k7mt_11 > button').first().click();
           await page.getByRole('menuitem', { name: 'Set Priority' }).getByRole('img').click();
           await page.getByRole('menuitem', { name: 'Urgent' }).getByRole('img').click();
-          await page
-      .locator('div')
-      .filter({ hasText: /^Settings$/ })
-      .getByRole('img')
-      .click();
+          try {
+            await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+          } catch (error) {
+            console.log('Failed to find first locator, trying second locator');
+             await page.getByText('Settings').click();
+          }
           
         });
         test('CombineRole Dashboard', async () => {
@@ -1039,8 +1046,13 @@ test('Insurance Tab', async () => {
             
             });
       test('Global search', async () => {
-        await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
-        await page.getByText('Clinician settings').click();
+        try {
+          await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+        } catch (error) {
+          console.log('Failed to find first locator, trying second locator');
+           await page.getByText('Settings').click();
+        }
+                await page.getByText('Clinician settings').click();
         await page.getByText('Booking widget').click();
         await page.getByPlaceholder('Search').click();
         await page.getByPlaceholder('Search here').click();
@@ -1053,8 +1065,12 @@ test('Insurance Tab', async () => {
         await page.waitForTimeout(2000);
         await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
       
-        await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
-      
+        try {
+          await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+        } catch (error) {
+          console.log('Failed to find first locator, trying second locator');
+           await page.getByText('Settings').click();
+        }      
       });
       // Update DP and Logout Flow
       test('Update and Logout Flow', async () => {

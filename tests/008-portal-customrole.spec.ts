@@ -57,8 +57,13 @@ await page.getByRole('button', { name: 'Next' }).nth(1).click();
 
    test('Settings Tab', async () => {
     //     Settings tab
-    await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
-    // Cliniacan settings
+    try {
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Settings').click();
+    }
+        // Cliniacan settings
     await page.getByText('Clinician settings').click();
     await page.getByPlaceholder('Enter first name').click();
     await page.getByPlaceholder('Enter first name').fill('CustomRole');
@@ -642,11 +647,12 @@ await page.locator('div').filter({ hasText: /^CustomRole Automation Forms$/ }).g
   await page.reload();
   await page.waitForTimeout(2000);
   await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
-  await page
-    .locator('div')
-    .filter({ hasText: /^Settings$/ })
-    .getByRole('img')
-    .click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
 });
 test('Create Clients', async () => {
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
@@ -796,8 +802,12 @@ test('TaskBoard Widget Flows', async () => {
     await page.locator('._header_1k7mt_11 > button').first().click();
     await page.getByRole('menuitem', { name: 'Set Priority' }).getByRole('img').click();
     await page.getByRole('menuitem', { name: 'Urgent' }).getByRole('img').click();
-    await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
-    
+    try {
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Settings').click();
+    }    
   });
   test('DP Update and Logout', async () => {
     

@@ -50,11 +50,12 @@ await page.waitForTimeout(2000);
 
 });
 test('Settings Tab', async () => {
-  await page
-    .locator('div')
-    .filter({ hasText: /^Settings$/ })
-    .getByRole('img')
-    .click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
   // Associate Mangaments
   await page.getByText('Associate management').click();
   await page.getByRole('button', { name: 'Add Associate' }).nth(1).click();
