@@ -58,14 +58,6 @@ await page.waitForTimeout(2000);
    await page.getByRole('button', { name: 'Availability' }).nth(1).click();
    });
    test('Settings Tab', async () => {
-    // try {
-    //   await page.getByText('Settings').click();
-    // } catch (error) {
-    //   console.log('Failed to find first locator, trying second locator');
-    //   await page.locator('div').filter({ hasText: /^Settings$/ }).click();
-
-    // }
-
     // Invite Team Member (Therapist 1)
     await page.getByText('Team members').first().click();
     // Billing Tab
@@ -460,6 +452,8 @@ await page.waitForTimeout(4000);
 
     await page.getByRole('button', { name: 'Done' }).nth(1).click();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
+    
+    await page.waitForTimeout(4000);
     
     try {
       await page.getByRole('img').nth(1).click();

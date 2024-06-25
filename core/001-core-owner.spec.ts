@@ -97,6 +97,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
 });
 
+
 test('Settings Flows', async () => {
   // await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
   
@@ -154,6 +155,8 @@ test('Settings Flows', async () => {
   await page.getByLabel('Duration *').fill('15');
   await page.getByLabel('Make default service').check();
   await page.getByRole('button', { name: 'Add service' }).nth(1).click();
+
+
   // Practice Settings
   await page.getByText('Practice settings').click();
   await page.getByLabel('Practice Name').click();
@@ -163,6 +166,7 @@ test('Settings Flows', async () => {
   await page.getByPlaceholder('Enter phone').click();
   await page.getByPlaceholder('Enter phone').fill('(975) 734-53565');
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
 
   // Team member invites flows ( Therapist role)
   await page.getByText('Team members').first().click();
@@ -358,6 +362,20 @@ await page.getByLabel('Email Address').fill(Bookinginbox3!);
 await page.getByLabel('Choose account type').click();
 await page.getByRole('option', { name: 'Outlook' }).click();
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
+  await page.locator('p').filter({ hasText: 'Integrations' }).click();
+  await page.getByLabel('​').click();
+  await page.getByRole('option', { name: 'Billing' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'Billing' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'Communication' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'Communication' }).getByRole('checkbox').uncheck();
+
+  await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'All' }).getByRole('checkbox').uncheck();
+  await page.reload();
+  await page.getByPlaceholder('Search by name').click();
+  await page.getByPlaceholder('Search by name').fill('S');
+  
 // Privacy Policy
 await page.getByText('Website Privacy Policy').click();
   await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
