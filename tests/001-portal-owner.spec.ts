@@ -165,6 +165,83 @@ test('Settings Flows', async () => {
   await page.getByPlaceholder('Enter phone').click();
   await page.getByPlaceholder('Enter phone').fill('(975) 734-53565');
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
+  // Subscriptions Feature
+  await page.getByText('Subscription').click();
+  await page.getByText('Frontdesk').click();
+  await page .waitForTimeout(3000);
+  await page.getByText('Bundle').click();
+  await page .waitForTimeout(3000);
+  await page.getByText('EHR', { exact: true }).click();
+  await page .waitForTimeout(2000);
+  await page.getByRole('button', { name: 'Subscribe' }).nth(1).click();
+  await page .waitForTimeout(3000);
+// Add card
+  await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').click();
+  await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').fill('4000056655665556');
+  await page .waitForTimeout(5000);
+  await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').click();
+  await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').fill('08 / 31');
+  await page .waitForTimeout(5000);
+  await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').click();
+  await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').fill('2545');
+  await page .waitForTimeout(5000);
+
+    await page.getByLabel('Name on invoices').click();
+    await page.getByLabel('Name on invoices').fill('Owner Team');
+    await page.getByLabel('Email Id to send Invoices').click();
+    await page.getByLabel('Email Id to send Invoices').fill('testemails@gmail.com');
+    await page.getByLabel('Address').click();
+    await page.getByLabel('Address').fill('New Jersy city ');
+    await page.getByLabel('Street').click();
+    await page.getByLabel('Street').fill('Main city side road');
+    await page.getByLabel('State').click();
+    await page.getByRole('combobox', { name: 'State' }).fill('Lou');
+    await page.getByText('Louisiana').click();
+    await page.getByLabel('City').click();
+    await page.getByRole('combobox', { name: 'City' }).fill('Ken');
+    await page.getByText('Kenner').click();
+    await page.getByLabel('Zipcode').click();
+    await page.getByLabel('Zipcode').fill('5612012');
+    await page.getByLabel('', { exact: true }).first().check();
+    await page.getByPlaceholder('Enter coupon code').click();
+    await page.getByPlaceholder('Enter coupon code').fill('LIVE');
+    await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+    await page .waitForTimeout(6000);
+    await page.getByRole('button', { name: 'Subscribe to Ehr Plus Plan' }).nth(1).click();
+    await page .waitForTimeout(7000);
+    await page.getByRole('heading', { name: 'Update' }).first().click();
+    await page.getByRole('button', { name: 'Add new card' }).nth(1).click();
+  // Add card
+    await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').click();
+    await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').fill('4242424242424242');
+    await page .waitForTimeout(5000);
+    await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').click();
+    await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').fill('08 / 31');
+    await page .waitForTimeout(5000);
+    await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').click();
+    await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').fill('2545');
+    await page .waitForTimeout(5000);
+
+    await page.getByRole('button', { name: 'Add card' }).nth(1).click();
+    await page .waitForTimeout(3000);
+    await page.getByText('Make Primary').click();
+    await page .waitForTimeout(3000);
+    await page.getByRole('img', { name: 'cross icon' }).click();
+    await page .waitForTimeout(3000);
+    await page.getByRole('heading', { name: 'Update' }).nth(1).click();
+    await page.getByRole('button', { name: 'cancel' }).nth(1).click();
+    await page.getByRole('heading', { name: 'Update' }).nth(2).click();
+    await page.getByLabel('Make default across practice').check();
+    await page .waitForTimeout(3000);
+    await page.getByLabel('Address').clear();
+    await page.getByLabel('Address').fill('2nd Stage nagarabahvi road bangalore');
+    await page.getByRole('button', { name: 'update' }).nth(1).click();
+    await page .waitForTimeout(3000);
+    await page.getByRole('heading', { name: 'Manage members' }).click();
+    await page.getByRole('img', { name: 'cross icon' }).click();
+    await page .waitForTimeout(3000);
+
 //  Custom Role Setting
 await page.getByText('Role settings').click();
 await page.getByRole('button', { name: 'Create custom role' }).nth(1).click();
@@ -295,6 +372,95 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
   await page.getByLabel('Monday').check();
+  
+  await page.getByRole('button', { name: 'Edit' }).nth(1).click();
+
+  await page.locator('._optionalAdd_1hmqc_14').first().click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+  await page.locator('div').filter({ hasText: /^Tuesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+  await page.locator('div').filter({ hasText: /^Wednesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+ 
+  await page.locator('div').filter({ hasText: /^Thursday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+  await page.locator('div').filter({ hasText: /^Friday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+  await page.locator('div').filter({ hasText: /^Saturday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+   await page.locator('div').filter({ hasText: /^Sunday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.waitForTimeout(5000);
+
   
   //Booking widget flows
   await page.getByText('Booking widget').click();

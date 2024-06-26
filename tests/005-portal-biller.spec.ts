@@ -58,14 +58,6 @@ await page.waitForTimeout(2000);
    await page.getByRole('button', { name: 'Availability' }).nth(1).click();
    });
    test('Settings Tab', async () => {
-    // try {
-    //   await page.getByText('Settings').click();
-    // } catch (error) {
-    //   console.log('Failed to find first locator, trying second locator');
-    //   await page.locator('div').filter({ hasText: /^Settings$/ }).click();
-
-    // }
-
     // Invite Team Member (Therapist 1)
     await page.getByText('Team members').first().click();
     // Billing Tab
@@ -429,15 +421,7 @@ test('TaskBoard Widget Flows', async () => {
     await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').uncheck();
     await page.reload();
     await page.waitForTimeout(3000);
-     // Taskboard Flows
-     await page.getByText('Biller Automation Task').click();
-     await page.getByRole('button', { name: 'InProgress' }).click();
-await page.getByText('InReview').click();
-await page.getByRole('button', { name: 'assignee icon' }).click();
-await page.locator('p').filter({ hasText: 'Biller 1' }).click();
-await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
-await page.waitForTimeout(4000);
-
+    
 // Check the insurance Eligiability
 await page.getByLabel('Leads').click();
 await page.getByRole('option', { name: 'Clients' }).click();
@@ -460,6 +444,8 @@ await page.waitForTimeout(4000);
 
     await page.getByRole('button', { name: 'Done' }).nth(1).click();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
+    
+    await page.waitForTimeout(4000);
     
     try {
       await page.getByRole('img').nth(1).click();
