@@ -420,7 +420,8 @@ try {
       '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._bookingWidgetWrapper_4jerd_1 > div._copyLinkContainer_4jerd_19 > div._link_4jerd_28 > p').click();
   const page1 = await page1Promise;
   await page1.locator('div').filter({ hasText: /^Owner TeamSelect$/ }).getByRole('button').nth(1).click();
-  await page1.locator('div').filter({ hasText: /^Psychotherapy, 45 mins- 45 mins$/ }).nth(1).click();
+  await page1.locator('div').filter({ hasText: /^Psychotherapy, 30 minutes with patient- 10 mins$/ }).nth(1).click();
+  
   await page1.locator(
       '#root > div._layout_cqogi_1 > div > div._bookingWidgetWrapper_tlkra_1 > div._bookingWidgetContainer_tlkra_21 > div._bookingContent_tlkra_44 > div:nth-child(2) > div > div._dateTime_142fu_33 > div > div:nth-child(2) > div > div._timeSlotsWrapper_vyf9q_11 div:first-child'
     )
@@ -629,12 +630,12 @@ await page.getByPlaceholder('Enter your response here').click();
 await page.getByPlaceholder('Enter your response here').fill('Test Add');
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page.getByRole('button', { name: 'Month' }).click();
-await page.getByText('OT:').first().click();
+await page.getByText('OT:').nth(1).click();
 await page.locator('button').filter({ hasText: 'Edit' }).nth(1).click();
 await page.getByPlaceholder('Enter text here').click();
 await page.getByPlaceholder('Enter text here').fill('Test Updated');
 await page.getByRole('button', { name: 'Update Appointment' }).nth(1).click();
-await page.getByText('OT:').first().click();
+await page.getByText('OT:').nth(1).click();
 await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
 await page.getByRole('button', { name: 'Yes' }).nth(1).click();
 await page.waitForTimeout(3000);

@@ -472,11 +472,8 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
       '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div._bookingWidgetWrapper_4jerd_1 > div._therapistLinks_4jerd_53 > div:nth-child(1) > p')
     .click();
   const page1 = await page1Promise;
-  await page1
-    .locator('div')
-    .filter({ hasText: /^Psychotherapy, 45 mins- 45 mins$/ })
-    .nth(1)
-    .click();
+  await page1.locator('div').filter({ hasText: /^Psychotherapy, 30 minutes with patient- 10 mins$/ }).nth(1).click();
+
   await page1
     .locator(
       '#root > div._layout_cqogi_1 > div > div._bookingWidgetWrapper_tlkra_1 > div._bookingWidgetContainer_tlkra_21 > div._bookingContent_tlkra_44 > div:nth-child(2) > div > div._dateTime_142fu_33 > div > div:nth-child(2) > div > div._timeSlotsWrapper_vyf9q_11 div:first-child'
