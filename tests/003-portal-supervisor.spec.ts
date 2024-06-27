@@ -88,6 +88,95 @@ test('Settings Tab', async () => {
   await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
   await page.getByLabel('Monday').check();
   await page.waitForTimeout(2000);
+
+  await page.getByRole('button', { name: 'Edit' }).nth(1).click();
+
+  await page.locator('._optionalAdd_1hmqc_14').first().click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+  await page.locator('div').filter({ hasText: /^Tuesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+  await page.locator('div').filter({ hasText: /^Wednesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+ 
+  await page.locator('div').filter({ hasText: /^Thursday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+  await page.locator('div').filter({ hasText: /^Friday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+  await page.locator('div').filter({ hasText: /^Saturday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+   await page.locator('div').filter({ hasText: /^Sunday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.waitForTimeout(5000);
+  
  //   Privacy Policy
 await page.getByText('Website Privacy Policy').click();
 await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();

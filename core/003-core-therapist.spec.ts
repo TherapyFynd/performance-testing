@@ -81,7 +81,6 @@ test('Therapist login and  onboarding ', async ({ request }) => {
   await page.getByLabel('').check();
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
 
-
 });
 test('Settings Flows', async () => {
   try {
@@ -116,6 +115,94 @@ test('Settings Flows', async () => {
   await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
   await page.getByLabel('Monday').check();
   await page.waitForTimeout(2000);
+
+  await page.getByRole('button', { name: 'Edit' }).nth(1).click();
+
+  await page.locator('._optionalAdd_1hmqc_14').first().click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+  await page.locator('div').filter({ hasText: /^Tuesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+  await page.locator('div').filter({ hasText: /^Wednesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+ 
+  await page.locator('div').filter({ hasText: /^Thursday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+  await page.locator('div').filter({ hasText: /^Friday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+  await page.locator('div').filter({ hasText: /^Saturday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+
+   await page.locator('div').filter({ hasText: /^Sunday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('11');
+  await page.waitForTimeout(2000);
+  await page.getByRole('spinbutton').nth(1).click();
+  await page.getByRole('spinbutton').nth(1).fill('55');
+  await page.waitForTimeout(2000);
+  await page.getByText('PM', { exact: true }).click();
+  await page.getByText('OK', { exact: true }).click();
+  await page.waitForTimeout(2000);
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.waitForTimeout(5000);
 
   //   Privacy Policy
   await page.getByText('Website Privacy Policy').click();
@@ -576,19 +663,19 @@ test('Therapist Dashboard', async () => {
  
 await page.locator('div').filter({ hasText: /^Calendar$/ }).first().click();
 await page.getByRole('button', { name: 'Month' }).click();
-await page.getByText('T1:').first().click();
+await page.getByText('T1:').nth(1).click();
 await page.locator('button').filter({ hasText: 'Add note' }).nth(1).click();
 await page.getByRole('button', { name: 'Add psychotherapy note' }).nth(1).click();
 await page.getByPlaceholder('Enter your response here').click();
 await page.getByPlaceholder('Enter your response here').fill('Test Add');
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page.getByRole('button', { name: 'Month' }).click();
-await page.getByText('T1:').first().click();
+await page.getByText('T1:').nth(1).click();
 await page.locator('button').filter({ hasText: 'Edit' }).nth(1).click();
 await page.getByPlaceholder('Enter text here').click();
 await page.getByPlaceholder('Enter text here').fill('Test Updated');
 await page.getByRole('button', { name: 'Update Appointment' }).nth(1).click();
-await page.getByText('T1:').first().click();
+await page.getByText('T1:').nth(1).click();
 await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
 await page.getByRole('button', { name: 'Yes' }).nth(1).click();
 
