@@ -92,12 +92,12 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
  
-  await page.getByLabel('').check();
-  await page.waitForTimeout(2000);
+  await page.getByLabel('', { exact: true }).check();
+    await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
   await page.waitForTimeout(2000);
-  await page.getByLabel('').check();
-  await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+  await page.getByLabel('', { exact: true }).check();
+    await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
 });
 
 test('Settings Flows', async () => {
