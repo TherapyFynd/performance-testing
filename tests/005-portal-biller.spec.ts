@@ -48,11 +48,11 @@ await page.getByPlaceholder('Enter phone').click();
 await page.getByPlaceholder('Enter phone').fill('(846) 534-65833');
 await page.getByRole('button', { name: 'Continue' }).nth(1).click();
 await page.waitForTimeout(2000);
-   await page.getByLabel('').check();
+await page.getByLabel('', { exact: true }).check();
    await page.waitForTimeout(1000);
    await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
    await page.waitForTimeout(1000);
-   await page.getByLabel('').check();
+   await page.getByLabel('', { exact: true }).check();
    await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
    await page.waitForTimeout(6000);
    await page.getByRole('button', { name: 'Availability' }).nth(1).click();
@@ -429,24 +429,6 @@ await page.waitForTimeout(4000);
   });
   test('DP Update and Logout', async () => {
    
-    try {
-      await page.getByRole('img').nth(1).click();
-        } catch (error) {
-      console.log('Failed to find first locator, trying second locator');
-      await page.getByRole('img').nth(1).click();
-      
-    }  
-        await page.getByRole('menuitem', { name: 'Profile' }).click();
-    await page
-      .locator(
-        '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_peqpd_1 > div > div._flexContainer_peqpd_4 > div._userNameDetailsContainer_peqpd_8 > div > div._imagePicker_peqpd_17 > input[type=file]'      )
-      .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
-
-    await page.getByRole('button', { name: 'Done' }).nth(1).click();
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    
-    await page.waitForTimeout(4000);
-    
     try {
       await page.getByRole('img').nth(1).click();
     } catch (error) {

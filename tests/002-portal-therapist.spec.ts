@@ -65,11 +65,11 @@ test('Therapist login and onboarding ', async ({ request }) => {
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
 
-  await page.getByLabel('').check();
+  await page.getByLabel('', { exact: true }).check();
   await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
   await page.waitForTimeout(2000);
-  await page.getByLabel('').check();
+  await page.getByLabel('', { exact: true }).check();
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
 });
 
@@ -1427,13 +1427,13 @@ test('Insurance Tab', async () => {
       
       await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
       await page.waitForTimeout(2000);
-      await page.getByText('Therapist').first().click();
+      await page.getByText('Therapist').nth(1).click();
       await page.locator('button').filter({ hasText: 'Edit' }).nth(1).click();
       await page.getByPlaceholder('Enter text here').click();
       await page.getByPlaceholder('Enter text here').fill('New Date Updated');
       await page.getByRole('button', { name: 'Update Appointment' }).nth(1).click();
       await page.waitForTimeout(2000);
-      await page.getByText('Therapist').first().click();
+      await page.getByText('Therapist').nth(1).click();
       await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
       await page.getByRole('button', { name: 'Yes' }).nth(1).click();
       await page.waitForTimeout(3000);

@@ -48,11 +48,11 @@ await page.getByPlaceholder('Enter phone').click();
 await page.getByPlaceholder('Enter phone').fill('(846) 534-65836');
 await page.getByRole('button', { name: 'Continue' }).nth(1).click();
 await page.waitForTimeout(2000);
- await page.getByLabel('').check();
+await page.getByLabel('', { exact: true }).check();
  await page.waitForTimeout(1000);
  await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
  await page.waitForTimeout(1000);
- await page.getByLabel('').check();
+ await page.getByLabel('', { exact: true }).check();
  await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
    });
    test('Settings Tab', async () => {

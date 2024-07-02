@@ -89,17 +89,16 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
  
-  await page.getByLabel('').check();
+  await page.getByLabel('', { exact: true }).check();
   await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
   await page.waitForTimeout(2000);
-  await page.getByLabel('').check();
+  await page.getByLabel('', { exact: true }).check();
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
 });
 
 
 test('Settings Flows', async () => {
-  // await page.locator('div').filter({ hasText: /^Settings$/ }).getByRole('img').click();
   
   try {
     await page.locator('div').filter({ hasText: /^Settings$/ }).click();
@@ -127,7 +126,18 @@ test('Settings Flows', async () => {
   await page.getByLabel('License No.').click();
   await page.getByLabel('License No.').press('CapsLock');
   await page.getByLabel('License No.').fill('QEY355');
+
+  await page.getByLabel('Select accepted payment').click();
+  await page.getByRole('option', { name: 'SelfPay' }).click();
+  await page.getByLabel('Select your specializations').click();
+ 
+  await page.getByText('Adolescent Issues').click();
+  await page.getByLabel('Select treatment methods you').click();
+  await page.getByRole('option', { name: 'Art Therapy', exact: true }).click();
+  await page.getByLabel('Select accepted payment').click();
+  await page.getByRole('option', { name: 'Insurance' }).click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  
   await page.getByRole('tab', { name: 'Locations' }).click();
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('Office name').click();
