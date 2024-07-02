@@ -1695,13 +1695,13 @@ test('Owner Dashboard', async () => {
   await page.waitForTimeout(3000);
   await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
   await page.waitForTimeout(2000);
-  await page.getByText('Owner Team').first().click();
+  await page.getByText('Owner Team').nth(1).click();
   await page.locator('button').filter({ hasText: 'Edit' }).nth(1).click();
   await page.getByPlaceholder('Enter text here').click();
   await page.getByPlaceholder('Enter text here').fill('New Date Updated');
   await page.getByRole('button', { name: 'Update Appointment' }).nth(1).click();
   await page.waitForTimeout(2000);
-  await page.getByText('Owner Team').first().click();
+  await page.getByText('Owner Team').nth(1).click();
   await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
   await page.getByRole('button', { name: 'Yes' }).nth(1).click();
   await page.getByLabel('Clinician').click();
