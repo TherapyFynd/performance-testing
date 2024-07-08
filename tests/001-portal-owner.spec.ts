@@ -1758,6 +1758,7 @@ test('Global search', async () => {
      await page.getByText('Settings').click();
   }
   await page.getByText('Clinician settings').click();
+  await page.waitForTimeout(5000);
   await page.getByText('Practice settings').click();
   await page.getByPlaceholder('Search').click();
   await page.getByPlaceholder('Search here').click();
@@ -1776,6 +1777,7 @@ test('Global search', async () => {
      await page.getByText('Settings').click();
   }
   await page.getByText('Clinician settings').click();
+  await page.waitForTimeout(5000);
   await page.getByText('Practice settings').click();
   await page.getByPlaceholder('Search').click();
   await page.getByRole('tab', { name: 'Leads' }).click();
@@ -1793,6 +1795,7 @@ test('Global search', async () => {
      await page.getByText('Settings').click();
   }
   await page.getByText('Clinician settings').click();
+  await page.waitForTimeout(5000);
   await page.getByText('Practice settings').click();
   await page.getByPlaceholder('Search').click(); 
   await page.getByRole('tab', { name: 'Documents' }).click();

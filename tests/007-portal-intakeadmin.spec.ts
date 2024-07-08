@@ -64,6 +64,7 @@ await page.getByLabel('', { exact: true }).check();
     }
         // Invite Team Member (Therapist 1)
     await page.getByText('Team members').first().click();
+    await page.waitForTimeout(5000);
 //     // Billing Tab
 await page.locator('p').filter({ hasText: 'Billing' }).click();
 await page.getByRole('tab', { name: 'Insurance' }).click();
@@ -74,6 +75,7 @@ await page.getByRole('tab', { name: 'Insurance' }).click();
   await page.getByText('CAREPLUS- NHC04').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
     // Add practice Emails Imports
+    await page.waitForTimeout(5000);
 await page.getByText('Practice Email Imports').click();
 await page.getByRole('button', { name: 'Add New' }).nth(1).click();
 await page.getByLabel('Email Address').click();
@@ -92,7 +94,7 @@ await page.getByLabel('Email Address').fill(Bookinginbox3!);
 await page.getByLabel('Choose account type').click();
 await page.getByRole('option', { name: 'Outlook' }).click();
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
-
+await page.waitForTimeout(5000);
 //   Privacy Policy
 await page.getByText('Website Privacy Policy').click();
   await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();

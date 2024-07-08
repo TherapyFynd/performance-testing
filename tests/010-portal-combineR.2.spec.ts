@@ -1233,6 +1233,7 @@ await page.waitForTimeout(5000);
        await page.getByText('Settings').click();
     }
         await page.getByText('Clinician settings').click();
+        await page.waitForTimeout(5000);
     await page.getByText('Booking widget').click();
     await page.getByPlaceholder('Search').click();
     await page.getByPlaceholder('Search here').click();
