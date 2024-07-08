@@ -464,7 +464,7 @@ try {
   await page.getByLabel('Practice name').fill('KanTime Healthcare System');
   await page.getByLabel('NPI').click();
   await page.getByLabel('NPI').fill('1234567890');
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(5000);
   await page.getByLabel('Taxonomy code').click();
   await page.getByLabel('Taxonomy code').fill('HGXFCS33');
   await page.getByLabel('SSN').click();
@@ -612,7 +612,7 @@ await page.waitForTimeout(6000);
   await page.locator('header').filter({ hasText: 'Activity' }).getByRole('button').click();
   await page.waitForTimeout(5000);
 
-await page.getByText('Owner Automation Task').click();
+  await page.getByText('Owner Automation Task').click();
   await page.getByRole('button', { name: 'InProgress' }).click();
   await page.getByText('InReview').click();
   await page.getByRole('button', { name: 'assignee icon' }).click();
@@ -649,6 +649,29 @@ await page.getByText('OT:').nth(1).click();
 await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
 await page.getByRole('button', { name: 'Yes' }).nth(1).click();
 await page.waitForTimeout(3000);
+
+
+await page.getByLabel('Color').click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Service Code' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Appointment Status' }).click();
+
+await page.getByRole('option', { name: 'Payment Type' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.reload();
+await page.waitForTimeout(5000);
   });
 
 test('DP Update and Logout', async () => {

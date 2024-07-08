@@ -91,7 +91,7 @@ test('Settings Flows', async () => {
   }
   //Clinican Settings Flows
   await page.getByText('Clinician settings').click();
-
+  await page.waitForTimeout(5000);
   //   Scheduler Calender 
   await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
 
@@ -678,6 +678,29 @@ await page.getByRole('button', { name: 'Update Appointment' }).nth(1).click();
 await page.getByText('T1:').nth(1).click();
 await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
 await page.getByRole('button', { name: 'Yes' }).nth(1).click();
+await page.waitForTimeout(5000);
+
+await page.getByLabel('Color').click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Service Code' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Appointment Status' }).click();
+
+await page.getByRole('option', { name: 'Payment Type' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.reload();
+await page.waitForTimeout(5000);
 
 });
 test('Update and Logout Flow', async () => {

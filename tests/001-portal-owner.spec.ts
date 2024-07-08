@@ -1718,6 +1718,37 @@ await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.getByRole('tab', { name: 'Clinician' }).click();
 await page.getByRole('tab', { name: 'Practice' }).click();
+
+
+try {
+  await page.locator('div').filter({ hasText: /^Calendar$/ }).first().click();
+} catch (error) {
+console.log('Failed to find first locator, trying second locator');
+await page.getByText('Calendar').first().click();
+}
+await page.getByLabel('Color').click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Service Code' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Appointment Status' }).click();
+
+await page.getByRole('option', { name: 'Payment Type' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.reload();
+await page.waitForTimeout(5000);
+
+
   });
 test('Global search', async () => {
   try {
@@ -1777,6 +1808,7 @@ test('Global search', async () => {
   await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByRole('button').click();
   await page.waitForTimeout(2000);
   
+
 });
 
 test('DP Update and Logout', async () => {
