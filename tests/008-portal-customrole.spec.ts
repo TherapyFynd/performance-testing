@@ -110,7 +110,7 @@ await page.getByLabel('', { exact: true }).check();
     await page.getByLabel('Duration *').fill('15');
     await page.getByLabel('Make default service').check();
     await page.getByRole('button', { name: 'Add service' }).nth(1).click();
-  
+    await page.waitForTimeout(6000);
     //   Scheduler Calender 
     await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
   
@@ -896,7 +896,38 @@ test('TaskBoard Widget Flows', async () => {
     } catch (error) {
       console.log('Failed to find first locator, trying second locator');
        await page.getByText('Settings').click();
-    }    
+    }   
+    
+    
+    
+  try {
+    await page.locator('div').filter({ hasText: /^Calendar$/ }).first().click();
+} catch (error) {
+  console.log('Failed to find first locator, trying second locator');
+  await page.getByText('Calendar').first().click();
+}
+await page.getByLabel('Color').click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Service Code' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Appointment Status' }).click();
+
+await page.getByRole('option', { name: 'Payment Type' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.reload();
+await page.waitForTimeout(5000);
+
   });
   test('DP Update and Logout', async () => {
     

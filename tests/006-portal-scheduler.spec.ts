@@ -56,12 +56,7 @@ await page.getByLabel('', { exact: true }).check();
   await page.getByRole('button', { name: 'Availability' }).nth(1).click();
    });
    test('Settings Tab', async () => {
-    // try {
-    //   await page.locator('div').filter({ hasText: /^Settings$/ }).click();
-    // } catch (error) {
-    //   console.log('Failed to find first locator, trying second locator');
-    //    await page.getByText('Settings').click();
-    // }
+  
         // Invite Team Member (Therapist 1)
     await page.getByText('Team members').first().click();
     // Role Management
@@ -74,6 +69,7 @@ await page.getByLabel('', { exact: true }).check();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.waitForTimeout(1000);
   await page.getByText('HIPAA audit logs').click();
+  await page.waitForTimeout(6000);
 //   Scheduler Calender 
   await page.getByText('Calendar').click();
  try {
@@ -356,6 +352,35 @@ await page.getByRole('button', { name: 'assignee icon' }).click();
 await page.locator('p').filter({ hasText: 'Scheduler 1' }).click();
 await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
 await page.waitForTimeout(4000);
+
+
+try {
+  await page.locator('div').filter({ hasText: /^Calendar$/ }).first().click();
+} catch (error) {
+console.log('Failed to find first locator, trying second locator');
+await page.getByText('Calendar').first().click();
+}
+await page.getByLabel('Color').click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Service Code' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Appointment Status' }).click();
+
+await page.getByRole('option', { name: 'Payment Type' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.reload();
+await page.waitForTimeout(5000);
 
     
     });

@@ -64,6 +64,7 @@ await page.getByLabel('', { exact: true }).check();
     }
         // Invite Team Member (Therapist 1)
     await page.getByText('Team members').first().click();
+    await page.waitForTimeout(5000);
 //     // Billing Tab
 await page.locator('p').filter({ hasText: 'Billing' }).click();
 await page.getByRole('tab', { name: 'Insurance' }).click();
@@ -74,6 +75,7 @@ await page.getByRole('tab', { name: 'Insurance' }).click();
   await page.getByText('CAREPLUS- NHC04').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
     // Add practice Emails Imports
+    await page.waitForTimeout(5000);
 await page.getByText('Practice Email Imports').click();
 await page.getByRole('button', { name: 'Add New' }).nth(1).click();
 await page.getByLabel('Email Address').click();
@@ -92,7 +94,7 @@ await page.getByLabel('Email Address').fill(Bookinginbox3!);
 await page.getByLabel('Choose account type').click();
 await page.getByRole('option', { name: 'Outlook' }).click();
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
-
+await page.waitForTimeout(5000);
 //   Privacy Policy
 await page.getByText('Website Privacy Policy').click();
   await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
@@ -788,6 +790,36 @@ test('Forms Tab', async () => {
             console.log('Failed to find first locator, trying second locator');
              await page.getByText('Settings').click();
           }
+
+          
+  try {
+    await page.locator('div').filter({ hasText: /^Calendar$/ }).first().click();
+} catch (error) {
+  console.log('Failed to find first locator, trying second locator');
+  await page.getByText('Calendar').first().click();
+}
+await page.getByLabel('Color').click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Service Code' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Appointment Status' }).click();
+
+await page.getByRole('option', { name: 'Payment Type' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.reload();
+await page.waitForTimeout(5000);
+
         });
       test('IntakeAdmin Dashboard', async () => {
         // Create Appoinment Button( top Bar)
@@ -813,19 +845,7 @@ await page.waitForTimeout(4000);
           console.log('Failed to find first locator, trying second locator');
           await page.locator('.MuiAvatar-img').click();
         }  
-        // await page.getByRole('menuitem', { name: 'Profile' }).click();
-        // await page
-        //   .locator(
-        //     '#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._generalSettingsTab_peqpd_1 > div > div._flexContainer_peqpd_4 > div._userNameDetailsContainer_peqpd_8 > div > div._imagePicker_peqpd_17 > input[type=file]'          )
-        //   .setInputFiles(path.join(__dirname + '../files/ther_img.jpg'));
-        // await page.getByRole('button', { name: 'Done' }).nth(1).click();
-        // await page.getByRole('button', { name: 'Save' }).nth(1).click();
-        // try {
-        //   await page.getByRole('img').nth(1).click();
-        // } catch (error) {
-        //   console.log('Failed to find first locator, trying second locator');
-        //   await page.locator('.MuiAvatar-img').click();
-        // }  
+        
         await page.getByRole('menuitem', { name: 'Logout' }).click();
       });
     });
