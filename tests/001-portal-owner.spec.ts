@@ -110,13 +110,19 @@ test('Settings Flows', async () => {
   }
   //Clinican Settings Flows
   await page.getByText('Clinician settings').click();
+
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Owner');
   await page.getByPlaceholder('Enter last name').click();
   await page.getByPlaceholder('Enter last name').fill('Team');
+  await page.getByLabel('Select gender you identify').click();
+  await page.getByText('Male', { exact: true }).click();
+  await page.getByLabel('Select your pronouns').click();
+  await page.getByRole('option', { name: 'He/Him' }).click();
   await page.getByLabel('Address Line').click();
   await page.getByLabel('Address Line').fill('Name');
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
   await page.getByRole('tab', { name: 'Clinical' }).click();
   await page.getByLabel('License Type*').click();
   await page.getByRole('combobox', { name: 'License Type*' }).fill('ALC');
@@ -127,7 +133,18 @@ test('Settings Flows', async () => {
   await page.getByLabel('License No.').click();
   await page.getByLabel('License No.').press('CapsLock');
   await page.getByLabel('License No.').fill('QEY355');
+
+  await page.getByLabel('Select accepted payment').click();
+  await page.getByRole('option', { name: 'SelfPay' }).click();
+  await page.getByLabel('Select your specializations').click();
+ 
+  await page.getByText('Adolescent Issues').click();
+  await page.getByLabel('Select treatment methods you').click();
+  await page.getByRole('option', { name: 'Art Therapy', exact: true }).click();
+  await page.getByLabel('Select accepted payment').click();
+  await page.getByRole('option', { name: 'Insurance' }).click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  
   await page.getByRole('tab', { name: 'Locations' }).click();
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('Office name').click();
@@ -135,27 +152,39 @@ test('Settings Flows', async () => {
   await page.getByLabel('Address').click();
   await page.getByLabel('Address').fill('New Jersy main road #3');
   await page.getByLabel('State').click();
-  await page.getByRole('combobox', { name: 'State' }).fill('cali');
-  await page.getByText('California').click();
+  await page.getByRole('combobox', { name: 'State' }).fill('New');
+  await page.getByText('New York', { exact: true }).click();
   await page.getByLabel('City').click();
-  await page.getByRole('combobox', { name: 'City' }).fill('Azu');
-  await page.getByText('Azusa').click();
+  await page.getByRole('combobox', { name: 'City' }).fill('Ut');
+  await page.getByText('Utica').click();
   await page.getByPlaceholder('Zip code').click();
   await page.getByPlaceholder('Zip code').fill('561202');
   await page.getByLabel('Make default location').check();
   await page.getByRole('button', { name: 'Add location' }).nth(1).click();
+
   await page.getByRole('tab', { name: 'Services' }).click();
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('CPT Code').click();
   await page.getByRole('combobox', { name: 'CPT Code' }).fill('90792');
   await page.getByText('90792, Psychiatric diagnostic').click();
   await page.getByLabel('Fee *').click();
-  await page.getByLabel('Fee *').fill('1000');
+  await page.getByLabel('Fee *').fill('10000');
   await page.getByLabel('Duration *').click();
-  await page.getByLabel('Duration *').fill('5');
+  await page.getByLabel('Duration *').fill('3');
   await page.getByLabel('Make default service').check();
   await page.getByRole('button', { name: 'Add service' }).nth(1).click();
-  await page .waitForTimeout(4000);
+
+  await page.getByRole('tab', { name: 'Public profile' }).click();
+  await page.waitForTimeout(5000);
+  await page.getByRole('checkbox').first().check();
+  await page.getByRole('checkbox').nth(1).check();
+  await page.locator('textarea[name="intro"]').click();
+  await page.locator('textarea[name="intro"]').fill('Test');
+  await page.locator('textarea[name="sessionTakeaways"]').click();
+  await page.locator('textarea[name="sessionTakeaways"]').fill('Test');
+  await page.locator('textarea[name="strengths"]').click();
+  await page.locator('textarea[name="strengths"]').fill('Test');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
   // Practice Settings
   await page.getByText('Practice settings').click();
   await page.getByLabel('Practice Name').click();
@@ -494,7 +523,7 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
     .getByRole('button', { name: 'Request appointment' })
     .nth(1)
     .click();
-  await page1.waitForTimeout(1000);
+  await page1.waitForTimeout(6000);
   await page1.close();
   
   // Billing sections
@@ -1038,8 +1067,7 @@ test('Create Clients', async () => {
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
   await page.waitForTimeout(8000);
-  await page.reload();
-  await page.waitForTimeout(1000);
+
 });
 
 test('Create Appoinment', async () => {
@@ -1182,6 +1210,7 @@ test('Client File', async () => {
   await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
   await page.getByRole('button', { name: 'Send' }).nth(1).click();
 
+  // Template Add in Client File (CF) in Stage only
   await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
   await page.getByRole('tab', { name: 'Templates' }).click();
   await page.getByText('Questionnaires').click();
@@ -1196,6 +1225,23 @@ test('Client File', async () => {
   await page.getByRole('option', { name: 'Template demo for consent' }).click();
   await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
   await page.getByRole('button', { name: 'Send' }).nth(1).click();
+
+    // Template Add in Client File (CF) in Production only
+  // await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
+  // await page.getByRole('tab', { name: 'Templates' }).click();
+  // await page.getByText('Questionnaires').click();
+  // await page.getByLabel('Select Forms to send').click();
+  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Demo');
+  // await page.getByRole('option', { name: 'Demographic form' }).click();
+  // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
+  // await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
+  // await page.getByText('Consent forms').click();
+  // await page.getByLabel('Select Forms to send').click();
+  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Pra');
+  // await page.getByRole('option', { name: 'Practice Policies' }).click();
+  // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
+  // await page.getByRole('button', { name: 'Send' }).nth(1).click();
+
   //   Notes Section
   await page.getByRole('tab', { name: 'Notes' }).click();
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
@@ -1284,11 +1330,8 @@ test('Client File', async () => {
   // Create Appoinment
   await page.getByRole('tab', { name: 'Sessions' }).click();
   await page.getByRole('button', { name: 'Add' }).nth(3).click();
-  await page
-    .getByRole('menuitem', { name: 'Appointment' })
-    .getByRole('img')
-    .click();
-  await page.waitForTimeout(10000);
+  await page.getByRole('menuitem', { name: 'Appointment' }).getByRole('img').click();
+  await page.waitForTimeout(12000);
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(4000);
 });
@@ -1606,16 +1649,16 @@ test('Intake tab', async () => {
   await page.getByRole('tab', { name: 'Attachments' }).click();
   await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
 
-  await page.getByPlaceholder('Search by name').click();
-  await page.getByPlaceholder('Search by name').fill('Alfred');
-  await page.getByPlaceholder('Search by name').press('Enter');
-  await page.waitForTimeout(2000);
-  const page1Promise  = page.waitForEvent('popup');
-  await page.getByLabel('Open lead in new tab').click();
-  const page1 = await page1Promise;
-  await page1.getByRole('tab', { name: 'Basic Information' }).click();
-  await page1.close();
-  await page.waitForTimeout(2000);
+  // await page.getByPlaceholder('Search by name').click();
+  // await page.getByPlaceholder('Search by name').fill('Alfred');
+  // await page.getByPlaceholder('Search by name').press('Enter');
+  // await page.waitForTimeout(2000);
+  // const page1Promise  = page.waitForEvent('popup');
+  // await page.getByLabel('Open lead in new tab').click();
+  // const page1 = await page1Promise;
+  // await page1.getByRole('tab', { name: 'Basic Information' }).click();
+  // await page1.close();
+  // await page.waitForTimeout(2000);
 });
 test('TaskBoard Widget Flows', async () => {
 

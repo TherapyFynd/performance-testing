@@ -281,9 +281,10 @@ await page.getByText('Team members').nth(1).click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.getByRole('tab', { name: 'Payment Methods' }).click();
   await page.getByLabel('Select accepted payment methods').click();
-  await page.getByRole('combobox', { name: 'Select accepted payment methods' }).fill('allway');
-  await page.getByText('AllWays Health Partners -').click();
+  await page.getByText('AARP - UnitedHealthcare').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.waitForTimeout(2000);
+
   
   await page.waitForTimeout(2000);
     //   Add practice Emails Imports
@@ -865,6 +866,7 @@ test('Create Clients', async () => {
   
 //  Payment tab
 await page.getByRole('tab', { name: 'Payment' }).click();
+await page.waitForTimeout(3000);
 await page.getByLabel('Insurance').check();
 
 // Logic For Fail Locator
