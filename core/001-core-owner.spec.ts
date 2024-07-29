@@ -113,9 +113,14 @@ test('Settings Flows', async () => {
   await page.getByPlaceholder('Enter first name').fill('Owner');
   await page.getByPlaceholder('Enter last name').click();
   await page.getByPlaceholder('Enter last name').fill('Team');
+  await page.getByLabel('Select gender you identify').click();
+  await page.getByText('Male', { exact: true }).click();
+  await page.getByLabel('Select your pronouns').click();
+  await page.getByRole('option', { name: 'He/Him' }).click();
   await page.getByLabel('Address Line').click();
   await page.getByLabel('Address Line').fill('Name');
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
   await page.getByRole('tab', { name: 'Clinical' }).click();
   await page.getByLabel('License Type*').click();
   await page.getByRole('combobox', { name: 'License Type*' }).fill('ALC');
@@ -154,6 +159,7 @@ test('Settings Flows', async () => {
   await page.getByPlaceholder('Zip code').fill('561202');
   await page.getByLabel('Make default location').check();
   await page.getByRole('button', { name: 'Add location' }).nth(1).click();
+
   await page.getByRole('tab', { name: 'Services' }).click();
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('CPT Code').click();
@@ -165,6 +171,18 @@ test('Settings Flows', async () => {
   await page.getByLabel('Duration *').fill('3');
   await page.getByLabel('Make default service').check();
   await page.getByRole('button', { name: 'Add service' }).nth(1).click();
+
+  await page.getByRole('tab', { name: 'Public profile' }).click();
+  await page.waitForTimeout(5000);
+  await page.getByRole('checkbox').first().check();
+  await page.getByRole('checkbox').nth(1).check();
+  await page.locator('textarea[name="intro"]').click();
+  await page.locator('textarea[name="intro"]').fill('Test');
+  await page.locator('textarea[name="sessionTakeaways"]').click();
+  await page.locator('textarea[name="sessionTakeaways"]').fill('Test');
+  await page.locator('textarea[name="strengths"]').click();
+  await page.locator('textarea[name="strengths"]').fill('Test');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
 
 // Subscriptions
   await page.getByText('Subscription').click();

@@ -26,6 +26,8 @@ export interface IEmail {
   couplefemaleclient?: string;
   combinerole1?: string;
   combinerole2?: string;
+  billingsection?: string;
+  
 }
 
 export const readEmails = async (): Promise<IEmail | {}> => {

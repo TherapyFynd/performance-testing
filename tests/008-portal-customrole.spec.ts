@@ -286,6 +286,29 @@ await page.getByLabel('', { exact: true }).check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
+  
+
+  // Invite Billing section
+  await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+  await page.getByLabel('First Name*').click();
+  await page.getByLabel('First Name*').fill('Billing');
+  await page.getByLabel('Last Name*').click();
+  await page.getByLabel('Last Name*').fill('Section');
+  await page.getByLabel('Email*').click();
+
+  //
+  const Bookinginbox4 = await createNewEmail();
+  await page.getByLabel('Email*').fill(Bookinginbox4!);
+  myEmails = await readEmails();
+  await setEmails({ ...myEmails, billingsection: Bookinginbox4! });
+  console.log(myEmails);
+
+  await page.getByRole('button', { name: 'Next' }).nth(1).click();
+  await page.getByLabel('Biller').check();
+  await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+  await page.waitForTimeout(4000);
+  await page.reload();
+
 
    // Practice Settings
    await page.getByText('Practice settings').click();
@@ -817,7 +840,7 @@ test('Client File', async () => {
       .getByRole('menuitem', { name: 'Appointment' })
       .getByRole('img')
       .click();
-      await page.waitForTimeout(10000);
+      await page.waitForTimeout(12000);
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(2000);
     await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();

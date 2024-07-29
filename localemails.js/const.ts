@@ -10,7 +10,7 @@ const TYPE_OF_URLS_BACKEND = {
 };
 
 const TYPE_OF_URLS_FRONTEND = {
-  PROD: 'https://ehr.omnipractice.co',
+  PROD: 'https://ehr.getomnipractice.com',
   STAGE: 'https://leafs-ehr-web-stage-nmvorvf7ga-as.a.run.app',
   DEV: 'https://leafs-ehr-web-dev-nmvorvf7ga-uc.a.run.app',
 };
