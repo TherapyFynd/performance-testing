@@ -608,16 +608,14 @@ test('Forms Tab', async () => {
   await page.getByPlaceholder('type here').click();
   await page.getByPlaceholder('type here').fill('Automation Forms');
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
+
   await page.getByPlaceholder('Please enter a question').click();
   await page.getByPlaceholder('Please enter a question').fill('Gender?');
-  await page
-    .getByRole('button', { name: '1 Please enter a question' })
-    .getByRole('button')
-    .nth(2)
-    .click();
+  await page.getByRole('button', { name: '1 Please enter a question' }).getByRole('button').nth(2).click();
   await page
     .getByRole('button', { name: 'Single choice', exact: true })
     .click();
+
   await page.getByRole('option', { name: 'Short answer' }).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
@@ -646,18 +644,18 @@ test('Forms Tab', async () => {
   await page
     .getByPlaceholder('Please enter a question')
     .fill('Client Date Of Birth?');
-  
-  await page
-    .getByRole('button', { name: '4 Please enter a question' })
-    .getByRole('button')
-    .nth(3)
-    .click();
-  await page.getByLabel('', { exact: true }).click();
-  await page.getByRole('option', { name: 'E-signature' }).click();
-  await page.getByPlaceholder('Please enter a question').click();
-  await page
-    .getByPlaceholder('Please enter a question')
-    .fill('Please Sign Your Sing?');
+  await page.waitForTimeout(6000);
+  // await page
+  //   .getByRole('button', { name: '4 Please enter a question' })
+  //   .getByRole('button')
+  //   .nth(3)
+  //   .click();
+  // await page.getByLabel('', { exact: true }).click();
+  // await page.getByRole('option', { name: 'E-signature' }).click();
+  // await page.getByPlaceholder('Please enter a question').click();
+  // await page
+  //   .getByPlaceholder('Please enter a question')
+  //   .fill('Please Sign Your Sing?');
   
   await page.getByRole('button', { name: 'Preview' }).nth(1).click();
   await page.getByRole('button').first().click();

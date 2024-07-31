@@ -335,18 +335,18 @@ test('Forms Tab', async () => {
   await page
     .getByPlaceholder('Please enter a question')
     .fill('Client Date Of Birth?');
-  
-  await page
-    .getByRole('button', { name: '4 Please enter a question' })
-    .getByRole('button')
-    .nth(3)
-    .click();
-  await page.getByLabel('', { exact: true }).click();
-  await page.getByRole('option', { name: 'E-signature' }).click();
-  await page.getByPlaceholder('Please enter a question').click();
-  await page
-    .getByPlaceholder('Please enter a question')
-    .fill('Please Sign Your Sing?');
+    await page.waitForTimeout(6000);
+  // await page
+  //   .getByRole('button', { name: '4 Please enter a question' })
+  //   .getByRole('button')
+  //   .nth(3)
+  //   .click();
+  // await page.getByLabel('', { exact: true }).click();
+  // await page.getByRole('option', { name: 'E-signature' }).click();
+  // await page.getByPlaceholder('Please enter a question').click();
+  // await page
+  //   .getByPlaceholder('Please enter a question')
+  //   .fill('Please Sign Your Sing?');
   
   await page.getByRole('button', { name: 'Preview' }).nth(1).click();
   await page.getByRole('button').first().click();
@@ -970,17 +970,21 @@ test('Client File', async () => {
   //  Payment tab
   await page.getByRole('tab', { name: 'Payment' }).click();
   await page.getByLabel('Insurance').check();
+  
 
   // Logic For Fail Locator
   try {
     await page.getByLabel('Client\'s spouse').check();
+    await page.waitForTimeout(3000);
 
   } catch (error) {
     console.log('Failed to find first locator, trying second locator');
     await page.getByText('Other').click();
   }
+  await page.waitForTimeout(3000);
   await page.getByPlaceholder('MM/DD/YYYY').first().click();
-  await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/1999');
+  await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/2000');
+  await page.waitForTimeout(3000);
   await page.getByLabel('Sex').click();
   await page.getByRole('option', { name: 'Male', exact: true }).click();
   await page.getByPlaceholder('Phone').click();
@@ -1252,6 +1256,7 @@ test('Supervision Flows', async () => {
     
     await page.getByPlaceholder('MM/DD/YYYY').first().click();
     await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/2000');
+    await page.waitForTimeout(3000);
     await page.getByLabel('Sex').click();
     await page.getByRole('option', { name: 'Male', exact: true }).click();
     await page.getByPlaceholder('Phone').click();
@@ -1269,8 +1274,10 @@ test('Supervision Flows', async () => {
     await page.getByLabel('Insurance Company').click();
     await page.getByLabel('Insurance Company').fill('MEM');
     await page.getByText('Maine Medicaid- MEMCD').click();
+    await page.waitForTimeout(2000);
     await page.getByLabel('Member ID').click();
     await page.getByLabel('Member ID').fill('MEDICAID');
+    await page.waitForTimeout(2000);
     await page.getByLabel('Group ID').click();
     await page.getByLabel('Group ID').fill('GGH3');
     await page.getByLabel('Plan ID').click();

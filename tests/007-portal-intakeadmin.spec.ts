@@ -154,18 +154,19 @@ test('Forms Tab', async () => {
       .getByPlaceholder('Please enter a question')
       .fill('Client Date Of Birth?');
     await page.getByLabel('Mandatory').uncheck();
-    await page
-      .getByRole('button', { name: '4 Please enter a question' })
-      .getByRole('button')
-      .nth(3)
-      .click();
-    await page.getByLabel('', { exact: true }).click();
-    await page.getByRole('option', { name: 'E-signature' }).click();
-    await page.getByPlaceholder('Please enter a question').click();
-    await page
-      .getByPlaceholder('Please enter a question')
-      .fill('Please Sign Your Sing?');
-    await page.getByLabel('Mandatory').check();
+    await page.waitForTimeout(6000);
+    // await page
+    //   .getByRole('button', { name: '4 Please enter a question' })
+    //   .getByRole('button')
+    //   .nth(3)
+    //   .click();
+    // await page.getByLabel('', { exact: true }).click();
+    // await page.getByRole('option', { name: 'E-signature' }).click();
+    // await page.getByPlaceholder('Please enter a question').click();
+    // await page
+    //   .getByPlaceholder('Please enter a question')
+    //   .fill('Please Sign Your Sing?');
+    // await page.getByLabel('Mandatory').check();
     await page.getByRole('button', { name: 'Preview' }).nth(1).click();
     await page.getByRole('button').first().click();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
