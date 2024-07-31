@@ -385,24 +385,24 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
       .nth(2)
       .click();
     await page.getByLabel('', { exact: true }).click();
-    await page.getByRole('option', { name: 'Date' }).click();
-    await page.getByPlaceholder('Please enter a question').click();
-    await page
-      .getByPlaceholder('Please enter a question')
-      .fill('Client date of Brithday?');
-    await page
-      .getByRole('button', { name: '4 Please enter a question' })
-      .getByRole('button')
-      .nth(3)
-      .click();
-    await page.getByLabel('', { exact: true }).click();
+    // await page.getByRole('option', { name: 'Date' }).click();
+    // await page.getByPlaceholder('Please enter a question').click();
+    // await page
+    //   .getByPlaceholder('Please enter a question')
+    //   .fill('Client date of Brithday?');
+    // await page
+    //   .getByRole('button', { name: '4 Please enter a question' })
+    //   .getByRole('button')
+    //   .nth(3)
+    //   .click();
+    // await page.getByLabel('', { exact: true }).click();
     await page.getByRole('option', { name: 'Multiple choice' }).click();
     await page.getByPlaceholder('Please enter a question').click();
     await page
       .getByPlaceholder('Please enter a question')
       .fill('Client Symptoms?');
     await page
-      .getByRole('button', { name: '5 Please enter a question' })
+      .getByRole('button', { name: '4 Please enter a question' })
       .getByRole('button')
       .nth(2)
       .click();
@@ -415,7 +415,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
       .getByPlaceholder('Please enter a question')
       .fill('Client CPT code?');
     await page
-      .getByRole('button', { name: '6 Please enter a question CPT' })
+      .getByRole('button', { name: '5 Please enter a question CPT' })
       .getByRole('button')
       .nth(3)
       .click();
@@ -426,7 +426,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
       .getByPlaceholder('Please enter a question')
       .fill('Client Diagnosis Code?');
     await page
-      .getByRole('button', { name: '7 Please enter a question' })
+      .getByRole('button', { name: '6 Please enter a question' })
       .getByRole('button')
       .nth(3)
       .click();
@@ -484,17 +484,17 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
       .nth(2)
       .click();
     await page.getByLabel('', { exact: true }).click();
-    await page.getByRole('option', { name: 'Date' }).click();
-    await page.getByPlaceholder('Please enter a question').click();
-    await page
-      .getByPlaceholder('Please enter a question')
-      .fill('What is your Date of Birthday?');
-    await page
-      .getByRole('button', { name: '4 Please enter a question' })
-      .getByRole('button')
-      .nth(3)
-      .click();
-    await page.getByLabel('', { exact: true }).click();
+    // await page.getByRole('option', { name: 'Date' }).click();
+    // await page.getByPlaceholder('Please enter a question').click();
+    // await page
+    //   .getByPlaceholder('Please enter a question')
+    //   .fill('What is your Date of Birthday?');
+    // await page
+    //   .getByRole('button', { name: '4 Please enter a question' })
+    //   .getByRole('button')
+    //   .nth(3)
+    //   .click();
+    // await page.getByLabel('', { exact: true }).click();
     await page.getByRole('option', { name: 'Multiple choice' }).click();
     await page.getByPlaceholder('Please enter a question').click();
     await page
@@ -502,7 +502,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
       .fill('What is your Health Conditions?');
     await page.getByLabel('Mandatory').uncheck();
     await page
-      .getByRole('button', { name: '5 Please enter a question' })
+      .getByRole('button', { name: '4 Please enter a question' })
       .getByRole('button')
       .nth(2)
       .click();
@@ -516,7 +516,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
       .fill('What is your CPT code?');
     await page.getByLabel('Mandatory').check();
     await page
-      .getByRole('button', { name: '6 Please enter a question CPT' })
+      .getByRole('button', { name: '5 Please enter a question CPT' })
       .getByRole('button')
       .nth(3)
       .click();
@@ -527,7 +527,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
       .getByPlaceholder('Please enter a question')
       .fill('What is your Diagnosis code?');
     await page
-      .getByRole('button', { name: '7 Please enter a question' })
+      .getByRole('button', { name: '6 Please enter a question' })
       .getByRole('button')
       .nth(3)
       .click();
