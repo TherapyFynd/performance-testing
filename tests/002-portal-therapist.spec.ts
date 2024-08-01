@@ -336,17 +336,7 @@ test('Forms Tab', async () => {
     .getByPlaceholder('Please enter a question')
     .fill('Client Date Of Birth?');
     await page.waitForTimeout(6000);
-  // await page
-  //   .getByRole('button', { name: '4 Please enter a question' })
-  //   .getByRole('button')
-  //   .nth(3)
-  //   .click();
-  // await page.getByLabel('', { exact: true }).click();
-  // await page.getByRole('option', { name: 'E-signature' }).click();
-  // await page.getByPlaceholder('Please enter a question').click();
-  // await page
-  //   .getByPlaceholder('Please enter a question')
-  //   .fill('Please Sign Your Sing?');
+ 
   
   await page.getByRole('button', { name: 'Preview' }).nth(1).click();
   await page.getByRole('button').first().click();
@@ -923,7 +913,8 @@ test('Create Appoinment', async () => {
   // Past Date Appoinments
   await page.getByRole('button', { name: 'Back' }).click();
   await page.getByRole('button', { name: 'Back' }).click();
-  await page.locator('div').filter({ hasText: /^04$/ }).click();
+  await page.locator('div').filter({ hasText: /^05$/ }).click();
+  await page.waitForTimeout(3000);
   await page.getByLabel('Select client profile*').click();
   await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();
   await page.waitForTimeout(10000);

@@ -484,17 +484,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
       .nth(2)
       .click();
     await page.getByLabel('', { exact: true }).click();
-    // await page.getByRole('option', { name: 'Date' }).click();
-    // await page.getByPlaceholder('Please enter a question').click();
-    // await page
-    //   .getByPlaceholder('Please enter a question')
-    //   .fill('What is your Date of Birthday?');
-    // await page
-    //   .getByRole('button', { name: '4 Please enter a question' })
-    //   .getByRole('button')
-    //   .nth(3)
-    //   .click();
-    // await page.getByLabel('', { exact: true }).click();
+
     await page.getByRole('option', { name: 'Multiple choice' }).click();
     await page.getByPlaceholder('Please enter a question').click();
     await page
@@ -592,18 +582,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page
       .getByRole('button', { name: 'Multiple choice', exact: true })
       .click();
-    // await page.getByRole('option', { name: 'Date' }).click();
-    // await page.getByPlaceholder('Please enter a question').click();
-    // await page
-    //   .getByPlaceholder('Please enter a question')
-    //   .fill('What is Your Health Cerificate Date?');
-    // await page.getByLabel('Mandatory').check();
-    // await page
-    //   .getByRole('button', { name: '5 Please enter a question' })
-    //   .getByRole('button')
-    //   .nth(3)
-    //   .click();
-    // await page.getByLabel('', { exact: true }).click();
+    
     await page.getByRole('option', { name: 'CPT code' }).click();
     await page.getByPlaceholder('Please enter a question').click();
     await page
@@ -888,14 +867,13 @@ test('Client File', async () => {
     .fill('Rajesh');
   await page.getByPlaceholder('Enter your response here').nth(1).click();
   await page.getByPlaceholder('Enter your response here').nth(1).fill('Good');
-  await page.getByPlaceholder('MM/DD/YYYY').click();
-  await page.getByPlaceholder('MM/DD/YYYY').fill('10/09/1999');
+
   await page.getByRole('checkbox', { name: 'option1' }).check();
   await page
     .locator('div')
     .filter({
       hasText:
-        /^6Client CPT code\? \*Enter your response hereEnter your response here$/,
+        /^5Client CPT code\? \*Enter your response hereEnter your response here$/,
     })
     .getByLabel('Enter your response here')
     .click();
@@ -903,7 +881,7 @@ test('Client File', async () => {
     .locator('div')
     .filter({
       hasText:
-        /^6Client CPT code\? \*Enter your response hereEnter your response here$/,
+        /^5Client CPT code\? \*Enter your response hereEnter your response here$/,
     })
     .getByLabel('Enter your response here')
     .fill('90791');

@@ -917,18 +917,7 @@ await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId(
   await page
     .getByRole('button', { name: 'Multiple choice', exact: true })
     .click();
-  // await page.getByRole('option', { name: 'Date' }).click();
-  // await page.getByPlaceholder('Please enter a question').click();
-  // await page
-  //   .getByPlaceholder('Please enter a question')
-  //   .fill('What is Your Health Cerificate Date?');
-  // await page.getByLabel('Mandatory').check();
-  // await page
-  //   .getByRole('button', { name: '5 Please enter a question' })
-  //   .getByRole('button')
-  //   .nth(3)
-  //   .click();
-  // await page.getByLabel('', { exact: true }).click();
+  
   await page.getByRole('option', { name: 'CPT code' }).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
