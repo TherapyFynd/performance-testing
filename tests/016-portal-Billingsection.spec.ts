@@ -54,12 +54,16 @@ await page.getByLabel('', { exact: true }).check();
    await page.getByLabel('', { exact: true }).check();
    await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
    await page.waitForTimeout(6000);
-   await page.getByRole('button', { name: 'Availability' }).nth(1).click();
    });
 
    test('Billing Section', async () => {
 
-  await page.getByText('Billing').click();
+    try {
+      await page.getByText('Billing').click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+     await page.locator('div').filter({ hasText: /^Billing$/ }).click();
+    }
   await page.getByRole('button', { name: 'SelfPay' }).click();
   await page.waitForTimeout(3000);
   await page.getByRole('button', { name: 'All' }).click();
@@ -151,7 +155,8 @@ await page.getByLabel('', { exact: true }).check();
   await page.getByPlaceholder('Service description').fill('90832 - Psychotherapy, 30 minutes with patient and Payment type');
   await page.locator('div').filter({ hasText: /^Bill ItemsSave$/ }).getByRole('button').nth(1).click();
   await page.waitForTimeout(3000);
-  await page.getByText('Insurance', { exact: true }).click();
+
+  await page.getByText('Clients', { exact: true }).click();
   await page.waitForTimeout(3000);
   await page.getByText('Billing').click();
   await page.getByRole('button', { name: 'Insurance' }).click();

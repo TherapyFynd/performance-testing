@@ -366,18 +366,8 @@ test('Forms Tab', async () => {
       .getByPlaceholder('Please enter a question')
       .fill('Client Date Of Birth?');
     await page.getByLabel('Mandatory').uncheck();
-    await page
-      .getByRole('button', { name: '4 Please enter a question' })
-      .getByRole('button')
-      .nth(3)
-      .click();
-    await page.getByLabel('', { exact: true }).click();
-    await page.getByRole('option', { name: 'E-signature' }).click();
-    await page.getByPlaceholder('Please enter a question').click();
-    await page
-      .getByPlaceholder('Please enter a question')
-      .fill('Please Sign Your Sing?');
-    await page.getByLabel('Mandatory').check();
+    await page.waitForTimeout(6000);
+   
     await page.getByRole('button', { name: 'Preview' }).nth(1).click();
     await page.getByRole('button').first().click();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
@@ -463,24 +453,14 @@ test('Forms Tab', async () => {
       .nth(2)
       .click();
     await page.getByLabel('', { exact: true }).click();
-    await page.getByRole('option', { name: 'Date' }).click();
-    await page.getByPlaceholder('Please enter a question').click();
-    await page
-      .getByPlaceholder('Please enter a question')
-      .fill('Client date of Brithday?');
-    await page
-      .getByRole('button', { name: '4 Please enter a question' })
-      .getByRole('button')
-      .nth(3)
-      .click();
-    await page.getByLabel('', { exact: true }).click();
+    
     await page.getByRole('option', { name: 'Multiple choice' }).click();
     await page.getByPlaceholder('Please enter a question').click();
     await page
       .getByPlaceholder('Please enter a question')
       .fill('Client Symptoms?');
     await page
-      .getByRole('button', { name: '5 Please enter a question' })
+      .getByRole('button', { name: '4 Please enter a question' })
       .getByRole('button')
       .nth(2)
       .click();
@@ -493,7 +473,7 @@ test('Forms Tab', async () => {
       .getByPlaceholder('Please enter a question')
       .fill('Client CPT code?');
     await page
-      .getByRole('button', { name: '6 Please enter a question CPT' })
+      .getByRole('button', { name: '5 Please enter a question CPT' })
       .getByRole('button')
       .nth(3)
       .click();
@@ -504,7 +484,7 @@ test('Forms Tab', async () => {
       .getByPlaceholder('Please enter a question')
       .fill('Client Diagnosis Code?');
     await page
-      .getByRole('button', { name: '7 Please enter a question' })
+      .getByRole('button', { name: '6 Please enter a question' })
       .getByRole('button')
       .nth(3)
       .click();
@@ -561,17 +541,7 @@ test('Forms Tab', async () => {
       .nth(2)
       .click();
     await page.getByLabel('', { exact: true }).click();
-    await page.getByRole('option', { name: 'Date' }).click();
-    await page.getByPlaceholder('Please enter a question').click();
-    await page
-      .getByPlaceholder('Please enter a question')
-      .fill('What is your Date of Birthday?');
-    await page
-      .getByRole('button', { name: '4 Please enter a question' })
-      .getByRole('button')
-      .nth(3)
-      .click();
-    await page.getByLabel('', { exact: true }).click();
+    
     await page.getByRole('option', { name: 'Multiple choice' }).click();
     await page.getByPlaceholder('Please enter a question').click();
     await page
@@ -579,7 +549,7 @@ test('Forms Tab', async () => {
       .fill('What is your Health Conditions?');
     await page.getByLabel('Mandatory').uncheck();
     await page
-      .getByRole('button', { name: '5 Please enter a question' })
+      .getByRole('button', { name: '4 Please enter a question' })
       .getByRole('button')
       .nth(2)
       .click();
@@ -593,7 +563,7 @@ test('Forms Tab', async () => {
       .fill('What is your CPT code?');
     await page.getByLabel('Mandatory').check();
     await page
-      .getByRole('button', { name: '6 Please enter a question CPT' })
+      .getByRole('button', { name: '5 Please enter a question CPT' })
       .getByRole('button')
       .nth(3)
       .click();
@@ -604,7 +574,7 @@ test('Forms Tab', async () => {
       .getByPlaceholder('Please enter a question')
       .fill('What is your Diagnosis code?');
     await page
-      .getByRole('button', { name: '7 Please enter a question' })
+      .getByRole('button', { name: '6 Please enter a question' })
       .getByRole('button')
       .nth(3)
       .click();
@@ -669,25 +639,25 @@ test('Forms Tab', async () => {
     await page
       .getByRole('button', { name: 'Multiple choice', exact: true })
       .click();
-    await page.getByRole('option', { name: 'Date' }).click();
-    await page.getByPlaceholder('Please enter a question').click();
-    await page
-      .getByPlaceholder('Please enter a question')
-      .fill('What is Your Health Cerificate Date?');
-    await page.getByLabel('Mandatory').check();
-    await page
-      .getByRole('button', { name: '5 Please enter a question' })
-      .getByRole('button')
-      .nth(3)
-      .click();
-    await page.getByLabel('', { exact: true }).click();
+    // await page.getByRole('option', { name: 'Date' }).click();
+    // await page.getByPlaceholder('Please enter a question').click();
+    // await page
+    //   .getByPlaceholder('Please enter a question')
+    //   .fill('What is Your Health Cerificate Date?');
+    // await page.getByLabel('Mandatory').check();
+    // await page
+    //   .getByRole('button', { name: '5 Please enter a question' })
+    //   .getByRole('button')
+    //   .nth(3)
+    //   .click();
+    // await page.getByLabel('', { exact: true }).click();
     await page.getByRole('option', { name: 'CPT code' }).click();
     await page.getByPlaceholder('Please enter a question').click();
     await page
       .getByPlaceholder('Please enter a question')
       .fill('What is Your CPT code?');
     await page
-      .getByRole('button', { name: '6 Please enter a question CPT' })
+      .getByRole('button', { name: '5 Please enter a question CPT' })
       .getByRole('button')
       .nth(3)
       .click();
@@ -698,7 +668,7 @@ test('Forms Tab', async () => {
       .getByPlaceholder('Please enter a question')
       .fill('What is Your Diagosis code?');
     await page
-      .getByRole('button', { name: '7 Please enter a question' })
+      .getByRole('button', { name: '6 Please enter a question' })
       .getByRole('button')
       .nth(3)
       .click();

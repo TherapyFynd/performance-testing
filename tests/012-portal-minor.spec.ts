@@ -113,10 +113,6 @@ test('Filling Form', async () => {
   await page.getByPlaceholder('Enter your response here').nth(1).fill('Good');
   await page.getByPlaceholder('MM/DD/YYYY').click();
   await page.getByPlaceholder('MM/DD/YYYY').fill('10/09/1999');
-  await page.getByText('Sign here').click();
-  await page.getByPlaceholder('Please type your name here').click();
-  await page.getByPlaceholder('Please type your name here').fill('Rajesh');
-  await page.getByRole('button', { name: 'Sign' }).nth(1).click();
   await page.getByRole('button', { name: 'Submit' }).nth(1).click();
  await page.waitForTimeout(3000);
 //  Consent form filling

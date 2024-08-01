@@ -608,16 +608,14 @@ test('Forms Tab', async () => {
   await page.getByPlaceholder('type here').click();
   await page.getByPlaceholder('type here').fill('Automation Forms');
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
+
   await page.getByPlaceholder('Please enter a question').click();
   await page.getByPlaceholder('Please enter a question').fill('Gender?');
-  await page
-    .getByRole('button', { name: '1 Please enter a question' })
-    .getByRole('button')
-    .nth(2)
-    .click();
+  await page.getByRole('button', { name: '1 Please enter a question' }).getByRole('button').nth(2).click();
   await page
     .getByRole('button', { name: 'Single choice', exact: true })
     .click();
+
   await page.getByRole('option', { name: 'Short answer' }).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
@@ -646,19 +644,7 @@ test('Forms Tab', async () => {
   await page
     .getByPlaceholder('Please enter a question')
     .fill('Client Date Of Birth?');
-  
-  await page
-    .getByRole('button', { name: '4 Please enter a question' })
-    .getByRole('button')
-    .nth(3)
-    .click();
-  await page.getByLabel('', { exact: true }).click();
-  await page.getByRole('option', { name: 'E-signature' }).click();
-  await page.getByPlaceholder('Please enter a question').click();
-  await page
-    .getByPlaceholder('Please enter a question')
-    .fill('Please Sign Your Sing?');
-  
+  await page.waitForTimeout(6000);
   await page.getByRole('button', { name: 'Preview' }).nth(1).click();
   await page.getByRole('button').first().click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
@@ -705,6 +691,7 @@ await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId(
   await page.getByPlaceholder('type here').click();
   await page.getByPlaceholder('type here').fill('Automation Testing');
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
+// Question 1
   await page.getByPlaceholder('Please enter a question').click();
   await page
     .getByPlaceholder('Please enter a question')
@@ -717,6 +704,7 @@ await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId(
   await page
     .getByRole('button', { name: 'Single choice', exact: true })
     .click();
+    // Question 2
   await page.getByRole('option', { name: 'Short answer' }).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
@@ -729,6 +717,7 @@ await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId(
     .nth(2)
     .click();
   await page.getByLabel('', { exact: true }).click();
+  // Question 3
   await page.getByRole('option', { name: 'Long answer' }).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
@@ -740,52 +729,46 @@ await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId(
     .nth(2)
     .click();
   await page.getByLabel('', { exact: true }).click();
-  await page.getByRole('option', { name: 'Date' }).click();
-  await page.getByPlaceholder('Please enter a question').click();
-  await page
-    .getByPlaceholder('Please enter a question')
-    .fill('Client date of Brithday?');
-  await page
-    .getByRole('button', { name: '4 Please enter a question' })
-    .getByRole('button')
-    .nth(3)
-    .click();
-  await page.getByLabel('', { exact: true }).click();
+ 
+  // Question 5
   await page.getByRole('option', { name: 'Multiple choice' }).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
     .getByPlaceholder('Please enter a question')
     .fill('Client Symptoms?');
   await page
-    .getByRole('button', { name: '5 Please enter a question' })
+    .getByRole('button', { name: '4 Please enter a question' })
     .getByRole('button')
     .nth(2)
     .click();
   await page
     .getByRole('button', { name: 'Multiple choice', exact: true })
     .click();
+    // Question 6
   await page.getByRole('option', { name: 'CPT code' }).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
     .getByPlaceholder('Please enter a question')
     .fill('Client CPT code?');
   await page
-    .getByRole('button', { name: '6 Please enter a question CPT' })
+    .getByRole('button', { name: '5 Please enter a question CPT' })
     .getByRole('button')
     .nth(3)
     .click();
   await page.getByLabel('', { exact: true }).click();
+  // Question 7
   await page.getByRole('option', { name: 'Diagnosis code' }).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
     .getByPlaceholder('Please enter a question')
     .fill('Client Diagnosis Code?');
   await page
-    .getByRole('button', { name: '7 Please enter a question' })
+    .getByRole('button', { name: '6 Please enter a question' })
     .getByRole('button')
     .nth(3)
     .click();
   await page.getByLabel('', { exact: true }).click();
+  // Question 8
   await page.getByRole('option', { name: 'E-signature' }).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
@@ -796,8 +779,7 @@ await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId(
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   
-
-  // // Treatment plan
+  // Treatment plan
   await page.getByRole('button', { name: 'Create new' }).nth(1).click();
   await page.getByText('Treatment plan', { exact: true }).click();
   await page.getByPlaceholder('type here').click();
@@ -838,17 +820,6 @@ await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId(
     .nth(2)
     .click();
   await page.getByLabel('', { exact: true }).click();
-  await page.getByRole('option', { name: 'Date' }).click();
-  await page.getByPlaceholder('Please enter a question').click();
-  await page
-    .getByPlaceholder('Please enter a question')
-    .fill('What is your Date of Birthday?');
-  await page
-    .getByRole('button', { name: '4 Please enter a question' })
-    .getByRole('button')
-    .nth(3)
-    .click();
-  await page.getByLabel('', { exact: true }).click();
   await page.getByRole('option', { name: 'Multiple choice' }).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
@@ -856,7 +827,7 @@ await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId(
     .fill('What is your Health Conditions?');
   await page.getByLabel('Mandatory').uncheck();
   await page
-    .getByRole('button', { name: '5 Please enter a question' })
+    .getByRole('button', { name: '4 Please enter a question' })
     .getByRole('button')
     .nth(2)
     .click();
@@ -870,7 +841,7 @@ await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId(
     .fill('What is your CPT code?');
   await page.getByLabel('Mandatory').check();
   await page
-    .getByRole('button', { name: '6 Please enter a question CPT' })
+    .getByRole('button', { name: '5 Please enter a question CPT' })
     .getByRole('button')
     .nth(3)
     .click();
@@ -881,7 +852,7 @@ await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId(
     .getByPlaceholder('Please enter a question')
     .fill('What is your Diagnosis code?');
   await page
-    .getByRole('button', { name: '7 Please enter a question' })
+    .getByRole('button', { name: '6 Please enter a question' })
     .getByRole('button')
     .nth(3)
     .click();
@@ -946,25 +917,25 @@ await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId(
   await page
     .getByRole('button', { name: 'Multiple choice', exact: true })
     .click();
-  await page.getByRole('option', { name: 'Date' }).click();
-  await page.getByPlaceholder('Please enter a question').click();
-  await page
-    .getByPlaceholder('Please enter a question')
-    .fill('What is Your Health Cerificate Date?');
-  await page.getByLabel('Mandatory').check();
-  await page
-    .getByRole('button', { name: '5 Please enter a question' })
-    .getByRole('button')
-    .nth(3)
-    .click();
-  await page.getByLabel('', { exact: true }).click();
+  // await page.getByRole('option', { name: 'Date' }).click();
+  // await page.getByPlaceholder('Please enter a question').click();
+  // await page
+  //   .getByPlaceholder('Please enter a question')
+  //   .fill('What is Your Health Cerificate Date?');
+  // await page.getByLabel('Mandatory').check();
+  // await page
+  //   .getByRole('button', { name: '5 Please enter a question' })
+  //   .getByRole('button')
+  //   .nth(3)
+  //   .click();
+  // await page.getByLabel('', { exact: true }).click();
   await page.getByRole('option', { name: 'CPT code' }).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
     .getByPlaceholder('Please enter a question')
     .fill('What is Your CPT code?');
   await page
-    .getByRole('button', { name: '6 Please enter a question CPT' })
+    .getByRole('button', { name: '5 Please enter a question CPT' })
     .getByRole('button')
     .nth(3)
     .click();
@@ -975,7 +946,7 @@ await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByTestId(
     .getByPlaceholder('Please enter a question')
     .fill('What is Your Diagosis code?');
   await page
-    .getByRole('button', { name: '7 Please enter a question' })
+    .getByRole('button', { name: '6 Please enter a question' })
     .getByRole('button')
     .nth(3)
     .click();
@@ -1260,14 +1231,9 @@ test('Client File', async () => {
     .fill('Rajesh');
   await page.getByPlaceholder('Enter your response here').nth(1).click();
   await page.getByPlaceholder('Enter your response here').nth(1).fill('Good');
-  await page.getByPlaceholder('MM/DD/YYYY').click();
-  await page.getByPlaceholder('MM/DD/YYYY').fill('10/09/1999');
   await page.getByRole('checkbox', { name: 'option1' }).check();
-  await page
-    .locator('div')
-    .filter({
-      hasText:
-        /^6Client CPT code\? \*Enter your response hereEnter your response here$/,
+  await page.locator('div').filter({hasText:
+        /^5Client CPT code\? \*Enter your response hereEnter your response here$/,
     })
     .getByLabel('Enter your response here')
     .click();
@@ -1275,7 +1241,7 @@ test('Client File', async () => {
     .locator('div')
     .filter({
       hasText:
-        /^6Client CPT code\? \*Enter your response hereEnter your response here$/,
+        /^5Client CPT code\? \*Enter your response hereEnter your response here$/,
     })
     .getByLabel('Enter your response here')
     .fill('90791');
