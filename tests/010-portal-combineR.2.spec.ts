@@ -592,25 +592,25 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page
       .getByRole('button', { name: 'Multiple choice', exact: true })
       .click();
-    await page.getByRole('option', { name: 'Date' }).click();
-    await page.getByPlaceholder('Please enter a question').click();
-    await page
-      .getByPlaceholder('Please enter a question')
-      .fill('What is Your Health Cerificate Date?');
-    await page.getByLabel('Mandatory').check();
-    await page
-      .getByRole('button', { name: '5 Please enter a question' })
-      .getByRole('button')
-      .nth(3)
-      .click();
-    await page.getByLabel('', { exact: true }).click();
+    // await page.getByRole('option', { name: 'Date' }).click();
+    // await page.getByPlaceholder('Please enter a question').click();
+    // await page
+    //   .getByPlaceholder('Please enter a question')
+    //   .fill('What is Your Health Cerificate Date?');
+    // await page.getByLabel('Mandatory').check();
+    // await page
+    //   .getByRole('button', { name: '5 Please enter a question' })
+    //   .getByRole('button')
+    //   .nth(3)
+    //   .click();
+    // await page.getByLabel('', { exact: true }).click();
     await page.getByRole('option', { name: 'CPT code' }).click();
     await page.getByPlaceholder('Please enter a question').click();
     await page
       .getByPlaceholder('Please enter a question')
       .fill('What is Your CPT code?');
     await page
-      .getByRole('button', { name: '6 Please enter a question CPT' })
+      .getByRole('button', { name: '5 Please enter a question CPT' })
       .getByRole('button')
       .nth(3)
       .click();
@@ -621,7 +621,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
       .getByPlaceholder('Please enter a question')
       .fill('What is Your Diagosis code?');
     await page
-      .getByRole('button', { name: '7 Please enter a question' })
+      .getByRole('button', { name: '6 Please enter a question' })
       .getByRole('button')
       .nth(3)
       .click();
