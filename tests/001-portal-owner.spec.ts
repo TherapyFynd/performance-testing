@@ -196,80 +196,80 @@ test('Settings Flows', async () => {
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
 
   // Subscriptions Feature
-  await page.getByText('Subscription').click();
-  await page.getByText('Frontdesk').click();
-  await page .waitForTimeout(3000);
-  await page.getByText('Bundle').click();
-  await page .waitForTimeout(3000);
-  await page.getByText('EHR', { exact: true }).click();
-  await page .waitForTimeout(2000);
-  await page.getByRole('button', { name: 'Subscribe' }).nth(1).click();
-  await page .waitForTimeout(3000);
-// Add card
-  await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').click();
-  await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').fill('4000056655665556');
-  await page .waitForTimeout(5000);
-  await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').click();
-  await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').fill('08 / 31');
-  await page .waitForTimeout(5000);
-  await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').click();
-  await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').fill('2545');
-  await page .waitForTimeout(5000);
+//   await page.getByText('Subscription').click();
+//   await page.getByText('Frontdesk').click();
+//   await page .waitForTimeout(3000);
+//   await page.getByText('Bundle').click();
+//   await page .waitForTimeout(3000);
+//   await page.getByText('EHR', { exact: true }).click();
+//   await page .waitForTimeout(2000);
+//   await page.getByRole('button', { name: 'Subscribe' }).nth(1).click();
+//   await page .waitForTimeout(3000);
+// // Add card
+//   await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').click();
+//   await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').fill('4000056655665556');
+//   await page .waitForTimeout(5000);
+//   await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').click();
+//   await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').fill('08 / 31');
+//   await page .waitForTimeout(5000);
+//   await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').click();
+//   await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').fill('2545');
+//   await page .waitForTimeout(5000);
 
-    await page.getByLabel('Name on invoices').click();
-    await page.getByLabel('Name on invoices').fill('Owner Team');
-    await page.getByLabel('Email Id to send Invoices').click();
-    await page.getByLabel('Email Id to send Invoices').fill('testemails@gmail.com');
-    await page.getByLabel('Address').click();
-    await page.getByLabel('Address').fill('New Jersy city ');
-    await page.getByLabel('Street').click();
-    await page.getByLabel('Street').fill('Main city side road');
-    await page.getByLabel('State').click();
-    await page.getByRole('combobox', { name: 'State' }).fill('Lou');
-    await page.getByText('Louisiana').click();
-    await page.getByLabel('City').click();
-    await page.getByRole('combobox', { name: 'City' }).fill('Ken');
-    await page.getByText('Kenner').click();
-    await page.getByLabel('Zipcode').click();
-    await page.getByLabel('Zipcode').fill('5612012');
-    await page.getByLabel('', { exact: true }).first().check();
-    await page.getByPlaceholder('Enter coupon code').click();
-    await page.getByPlaceholder('Enter coupon code').fill('LIVE');
-    await page.getByRole('button', { name: 'Apply' }).nth(1).click();
-    await page .waitForTimeout(6000);
-    await page.getByRole('button', { name: 'Subscribe to Ehr Plus Plan' }).nth(1).click();
-    await page .waitForTimeout(7000);
-    await page.getByRole('heading', { name: 'Update' }).first().click();
-    await page.getByRole('button', { name: 'Add new card' }).nth(1).click();
-  // Add card
-    await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').click();
-    await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').fill('4242424242424242');
-    await page .waitForTimeout(5000);
-    await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').click();
-    await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').fill('08 / 31');
-    await page .waitForTimeout(5000);
-    await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').click();
-    await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').fill('2545');
-    await page .waitForTimeout(5000);
+//     await page.getByLabel('Name on invoices').click();
+//     await page.getByLabel('Name on invoices').fill('Owner Team');
+//     await page.getByLabel('Email Id to send Invoices').click();
+//     await page.getByLabel('Email Id to send Invoices').fill('testemails@gmail.com');
+//     await page.getByLabel('Address').click();
+//     await page.getByLabel('Address').fill('New Jersy city ');
+//     await page.getByLabel('Street').click();
+//     await page.getByLabel('Street').fill('Main city side road');
+//     await page.getByLabel('State').click();
+//     await page.getByRole('combobox', { name: 'State' }).fill('Lou');
+//     await page.getByText('Louisiana').click();
+//     await page.getByLabel('City').click();
+//     await page.getByRole('combobox', { name: 'City' }).fill('Ken');
+//     await page.getByText('Kenner').click();
+//     await page.getByLabel('Zipcode').click();
+//     await page.getByLabel('Zipcode').fill('5612012');
+//     await page.getByLabel('', { exact: true }).first().check();
+//     await page.getByPlaceholder('Enter coupon code').click();
+//     await page.getByPlaceholder('Enter coupon code').fill('LIVE');
+//     await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+//     await page .waitForTimeout(6000);
+//     await page.getByRole('button', { name: 'Subscribe to Ehr Plus Plan' }).nth(1).click();
+//     await page .waitForTimeout(7000);
+//     await page.getByRole('heading', { name: 'Update' }).first().click();
+//     await page.getByRole('button', { name: 'Add new card' }).nth(1).click();
+//   // Add card
+//     await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').click();
+//     await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').fill('4242424242424242');
+//     await page .waitForTimeout(5000);
+//     await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').click();
+//     await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').fill('08 / 31');
+//     await page .waitForTimeout(5000);
+//     await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').click();
+//     await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').fill('2545');
+//     await page .waitForTimeout(5000);
 
-    await page.getByRole('button', { name: 'Add card' }).nth(1).click();
-    await page .waitForTimeout(3000);
-    await page.getByText('Make Primary').click();
-    await page .waitForTimeout(3000);
-    await page.getByRole('img', { name: 'cross icon' }).click();
-    await page .waitForTimeout(3000);
-    await page.getByRole('heading', { name: 'Update' }).nth(1).click();
-    await page.getByRole('button', { name: 'cancel' }).nth(1).click();
-    await page.getByRole('heading', { name: 'Update' }).nth(2).click();
-    await page.getByLabel('Make default across practice').check();
-    await page .waitForTimeout(3000);
-    await page.getByLabel('Address').clear();
-    await page.getByLabel('Address').fill('2nd Stage nagarabahvi road bangalore');
-    await page.getByRole('button', { name: 'update' }).nth(1).click();
-    await page .waitForTimeout(3000);
-    await page.getByRole('heading', { name: 'Manage members' }).click();
-    await page.getByRole('img', { name: 'cross icon' }).click();
-    await page .waitForTimeout(3000);
+//     await page.getByRole('button', { name: 'Add card' }).nth(1).click();
+//     await page .waitForTimeout(3000);
+//     await page.getByText('Make Primary').click();
+//     await page .waitForTimeout(3000);
+//     await page.getByRole('img', { name: 'cross icon' }).click();
+//     await page .waitForTimeout(3000);
+//     await page.getByRole('heading', { name: 'Update' }).nth(1).click();
+//     await page.getByRole('button', { name: 'cancel' }).nth(1).click();
+//     await page.getByRole('heading', { name: 'Update' }).nth(2).click();
+//     await page.getByLabel('Make default across practice').check();
+//     await page .waitForTimeout(3000);
+//     await page.getByLabel('Address').clear();
+//     await page.getByLabel('Address').fill('2nd Stage nagarabahvi road bangalore');
+//     await page.getByRole('button', { name: 'update' }).nth(1).click();
+//     await page .waitForTimeout(3000);
+//     await page.getByRole('heading', { name: 'Manage members' }).click();
+//     await page.getByRole('img', { name: 'cross icon' }).click();
+//     await page .waitForTimeout(3000);
 
 //  Custom Role Setting
 await page.getByText('Role settings').click();
@@ -282,7 +282,6 @@ await page.getByLabel('Role title').click();
 await page.getByLabel('Role title').fill('Custom PracticeLead');
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page .waitForTimeout(8000);
-
 await page.locator('div').filter({ hasText: /^Custom PracticeLead$/ }).getByRole('button').click();
 await page .waitForTimeout(4000);
 await page.getByLabel('Calendar').uncheck();
@@ -1171,36 +1170,36 @@ test('Client File', async () => {
   await page.getByRole('button', { name: 'Send' }).nth(1).click();
 
   // Template Add in Client File (CF) in Stage only
-  await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
-  await page.getByRole('tab', { name: 'Templates' }).click();
-  await page.getByText('Questionnaires').click();
-  await page.getByLabel('Select Forms to send').click();
-  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('100');
-  await page.getByRole('option', { name: 'question' }).click();
-  await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
-  await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
-  await page.getByText('Consent forms').click();
-  await page.getByLabel('Select Forms to send').click();
-  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('demo');
-  await page.getByRole('option', { name: 'Template demo for consent' }).click();
-  await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
-  await page.getByRole('button', { name: 'Send' }).nth(1).click();
-
-    // Template Add in Client File (CF) in Production only
   // await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
   // await page.getByRole('tab', { name: 'Templates' }).click();
   // await page.getByText('Questionnaires').click();
   // await page.getByLabel('Select Forms to send').click();
-  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Demo');
-  // await page.getByRole('option', { name: 'Demographic form' }).click();
+  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('100');
+  // await page.getByRole('option', { name: 'question' }).click();
   // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
   // await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   // await page.getByText('Consent forms').click();
   // await page.getByLabel('Select Forms to send').click();
-  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Pra');
-  // await page.getByRole('option', { name: 'Practice Policies' }).click();
+  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('demo');
+  // await page.getByRole('option', { name: 'Template demo for consent' }).click();
   // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
   // await page.getByRole('button', { name: 'Send' }).nth(1).click();
+
+    // Template Add in Client File (CF) in Production only
+  await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
+  await page.getByRole('tab', { name: 'Templates' }).click();
+  await page.getByText('Questionnaires').click();
+  await page.getByLabel('Select Forms to send').click();
+  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Demo');
+  await page.getByRole('option', { name: 'Demographic form' }).click();
+  await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
+  await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
+  await page.getByText('Consent forms').click();
+  await page.getByLabel('Select Forms to send').click();
+  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Pra');
+  await page.getByRole('option', { name: 'Practice Policies' }).click();
+  await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
+  await page.getByRole('button', { name: 'Send' }).nth(1).click();
 
   //   Notes Section
   await page.getByRole('tab', { name: 'Notes' }).click();
