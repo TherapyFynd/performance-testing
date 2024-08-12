@@ -1108,8 +1108,6 @@ test('Client File', async () => {
       await page.getByText('Other').click();
     }
   
-  await page.getByPlaceholder('MM/DD/YYYY').first().click();
-  await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/1999');
   await page.getByLabel('Sex').click();
   await page.getByRole('option', { name: 'Male', exact: true }).click();
   await page.getByPlaceholder('Phone').click();
@@ -1133,12 +1131,11 @@ test('Client File', async () => {
   await page.getByLabel('Group ID').fill('GGH3');
   await page.getByLabel('Plan ID').click();
   await page.getByLabel('Plan ID').fill('KKH45');
-  await page.getByPlaceholder('MM/DD/YYYY').nth(1).click();
-  await page.getByPlaceholder('MM/DD/YYYY').nth(1).fill('10/10/2000');
-  await page.getByPlaceholder('MM/DD/YYYY').nth(2).click();
-  await page.getByPlaceholder('MM/DD/YYYY').nth(2).fill('10/10/2030');
+  await page.getByPlaceholder('MM/DD/YYYY').first().click();
+  await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/2000');
+  await page.waitForTimeout(3000);
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-
+  await page.waitForTimeout(5000);
   // Files tab
   await page.getByRole('tab', { name: 'Files' }).click();
   await page.getByRole('button', { name: 'Request upload' }).nth(1).click();

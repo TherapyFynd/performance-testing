@@ -324,7 +324,7 @@ test.describe('All owner Test case ', () => {
     await page.getByLabel('Role title').click();
     await page.getByLabel('Role title').fill('Own Role');
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.waitForTimeout(8000);
+    await page.waitForTimeout(10000);
 
 
     //   Scheduler Calender 

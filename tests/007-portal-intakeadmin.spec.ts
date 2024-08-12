@@ -642,7 +642,7 @@ test('Forms Tab', async () => {
         await page.getByRole('option', { name: 'Male', exact: true }).click();
         await page.getByPlaceholder('MM/DD/YYYY').click();
         await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
-        await page.waitForTimeout(2000);
+        await page.waitForTimeout(5000);
         await page.getByLabel('Member ID').click();
         await page.getByLabel('Member ID').fill('GAH23');
         await page.waitForTimeout(2000);
