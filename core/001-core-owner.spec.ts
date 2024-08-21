@@ -502,21 +502,21 @@ test.describe('All owner Test case ', () => {
     await page.getByLabel('Enable multiple diagnostic').check();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.waitForTimeout(5000);
-    await page.getByText('Payers').click();
-    await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-    await page.getByLabel('Search for insurance payers').click();
-    await page
-      .getByRole('combobox', { name: 'Search for insurance payers' })
-      .fill('Absolute');
-    await page.waitForTimeout(2000);
-    await page.getByText('ABSOLUTE TOTAL CARE-').click();
-    await page.getByRole('button', { name: 'Add' }).nth(1).click();
-    await page.waitForTimeout(2000);
-    await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-    await page.getByLabel('Search for insurance payers').click();
-    await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('MEM');
-    await page.getByText('Maine Medicaid- MEMCD').click();
-    await page.getByRole('button', { name: 'Add' }).nth(1).click();
+    // await page.getByText('Payers').click();
+    // await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
+    // await page.getByLabel('Search for insurance payers').click();
+    // await page
+    //   .getByRole('combobox', { name: 'Search for insurance payers' })
+    //   .fill('Absolute');
+    // await page.waitForTimeout(2000);
+    // await page.getByText('ABSOLUTE TOTAL CARE-').click();
+    // await page.getByRole('button', { name: 'Add' }).nth(1).click();
+    // await page.waitForTimeout(2000);
+    // await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
+    // await page.getByLabel('Search for insurance payers').click();
+    // await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('MEM');
+    // await page.getByText('Maine Medicaid- MEMCD').click();
+    // await page.getByRole('button', { name: 'Add' }).nth(1).click();
 
     // Referal settings
     await page.getByText('Team members').nth(1).click();

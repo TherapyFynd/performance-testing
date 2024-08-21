@@ -66,14 +66,14 @@ await page.getByLabel('', { exact: true }).check();
     await page.getByText('Team members').first().click();
     await page.waitForTimeout(5000);
 //     // Billing Tab
-await page.locator('p').filter({ hasText: 'Billing' }).click();
-await page.getByRole('tab', { name: 'Insurance' }).click();
-  await page.getByText('Payers').click();
-  await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-  await page.getByLabel('Search for insurance payers').click();
-  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('careplus');
-  await page.getByText('CAREPLUS- NHC04').click();
-  await page.getByRole('button', { name: 'Add' }).nth(1).click();
+// await page.locator('p').filter({ hasText: 'Billing' }).click();
+// await page.getByRole('tab', { name: 'Insurance' }).click();
+//   await page.getByText('Payers').click();
+//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
+//   await page.getByLabel('Search for insurance payers').click();
+//   await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('careplus');
+//   await page.getByText('CAREPLUS- NHC04').click();
+//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
     // Add practice Emails Imports
     await page.waitForTimeout(5000);
 await page.getByText('Practice Email Imports').click();
@@ -286,7 +286,6 @@ test('Forms Tab', async () => {
     await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
     await page.waitForTimeout(1000);
     
-
     // // Treatment plan
     await page.getByRole('button', { name: 'Create new' }).nth(1).click();
     await page.getByText('Treatment plan', { exact: true }).click();

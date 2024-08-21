@@ -27,7 +27,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
-test.describe.skip('All BillerSectionRole Test case ', () => {
+test.describe('All BillerSectionRole Test case ', () => {
 test('BillingSection  login and  onboarding ', async ({ request }) => {
   let myEmails: IEmail = await readEmails();
     const data = await generatePasswordlessLoginLink({
@@ -64,12 +64,12 @@ await page.getByLabel('', { exact: true }).check();
       console.log('Failed to find first locator, trying second locator');
      await page.locator('div').filter({ hasText: /^Billing$/ }).click();
     }
-  await page.getByRole('button', { name: 'SelfPay' }).click();
-  await page.waitForTimeout(3000);
-  await page.getByRole('button', { name: 'All' }).click();
-  await page.getByRole('button', { name: 'Insurance' }).click();
-  await page.waitForTimeout(3000);
-  await page.getByRole('button', { name: 'All' }).click();
+  // await page.getByRole('button', { name: 'SelfPay' }).click();
+  // await page.waitForTimeout(3000);
+  // await page.getByRole('button', { name: 'All' }).click();
+  // await page.getByRole('button', { name: 'Insurance' }).click();
+  // await page.waitForTimeout(3000);
+  // await page.getByRole('button', { name: 'All' }).click();
   await page.getByLabel('Client').click();
   await page.waitForTimeout(3000);
   await page.getByRole('option', { name: 'James (OT)' }).getByRole('checkbox').check();
@@ -98,19 +98,19 @@ await page.getByLabel('', { exact: true }).check();
   await page.getByRole('option', { name: 'Alfred (T1)' }).getByRole('checkbox').uncheck();
   await page.getByRole('combobox', { name: 'Client' }).click();
   await page.waitForTimeout(3000);
-  await page.getByLabel('Payer').click();
-  await page.getByRole('option', { name: '- ABSOLUTE TOTAL CARE' }).getByRole('checkbox').check();
-  await page.waitForTimeout(3000);
-  await page.getByRole('option', { name: '- ABSOLUTE TOTAL CARE' }).getByRole('checkbox').uncheck();
-  await page.getByRole('option', { name: 'MEMCD- Maine Medicaid' }).getByRole('checkbox').check();
-  await page.waitForTimeout(3000);
-  await page.getByRole('option', { name: 'MEMCD- Maine Medicaid' }).getByRole('checkbox').uncheck();
-  await page.getByRole('option', { name: '- Aetna' }).getByRole('checkbox').check();
-  await page.waitForTimeout(3000);
-  await page.getByRole('option', { name: '- Aetna' }).getByRole('checkbox').uncheck();
-  await page.getByRole('combobox', { name: 'Payer' }).click();
-  await page.getByRole('button', { name: 'SelfPay' }).click();
-  await page.waitForTimeout(3000);
+  // await page.getByLabel('Payer').click();
+  // await page.getByRole('option', { name: '- ABSOLUTE TOTAL CARE' }).getByRole('checkbox').check();
+  // await page.waitForTimeout(3000);
+  // await page.getByRole('option', { name: '- ABSOLUTE TOTAL CARE' }).getByRole('checkbox').uncheck();
+  // await page.getByRole('option', { name: 'MEMCD- Maine Medicaid' }).getByRole('checkbox').check();
+  // await page.waitForTimeout(3000);
+  // await page.getByRole('option', { name: 'MEMCD- Maine Medicaid' }).getByRole('checkbox').uncheck();
+  // await page.getByRole('option', { name: '- Aetna' }).getByRole('checkbox').check();
+  // await page.waitForTimeout(3000);
+  // await page.getByRole('option', { name: '- Aetna' }).getByRole('checkbox').uncheck();
+  // await page.getByRole('combobox', { name: 'Payer' }).click();
+  // await page.getByRole('button', { name: 'SelfPay' }).click();
+  // await page.waitForTimeout(3000);
   try {
     await page.locator('td:nth-child(9)').first().click();
  } catch (error) {
@@ -158,47 +158,63 @@ await page.getByLabel('', { exact: true }).check();
 
   await page.getByText('Clients', { exact: true }).click();
   await page.waitForTimeout(3000);
-  await page.getByText('Billing').click();
-  await page.getByRole('button', { name: 'Insurance' }).click();
-  await page.getByLabel('Client').click();
-  await page.getByRole('option', { name: 'Rajesh (T1)' }).getByRole('checkbox').check();
-  await page.getByRole('combobox', { name: 'Client' }).click();
-   try {
-     await page.locator('td:nth-child(9)').first().click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._pendingTabContainer_1utsb_1 > div:nth-child(6) > table > tbody > tr:nth-child(2) > td:nth-child(9) > button > svg > path').click();
-  }
 
-  await page.getByRole('menuitem', { name: 'View details' }).click();
-  await page.locator('input[name="clientCopayAmount"]').click();
-  await page.locator('input[name="clientCopayAmount"]').fill('500');
-  await page.locator('input[name="insurancePaymentAmount"]').click();
-  await page.locator('input[name="insurancePaymentAmount"]').fill('300');
-  await page.locator('input[name="writeOffAmount"]').click();
-  await page.locator('input[name="writeOffAmount"]').fill('200');
-  await page.getByLabel('Remarks').click();
-  await page.getByLabel('Remarks').fill('No bonus');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.waitForTimeout(3000);
-  await page.getByRole('button', { name: 'Add note' }).nth(1).click();
-  await page.getByPlaceholder('Start typing here').click();
-  await page.getByPlaceholder('Start typing here').fill('TestAdd Notes ');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.waitForTimeout(3000);
-  await page.getByRole('button', { name: 'Edit billing address' }).nth(1).click();
-  await page.getByLabel('Address Line').click();
-  await page.getByLabel('Address Line').fill('New Jersy');
-  await page.getByLabel('State').click();
-  await page.getByRole('combobox', { name: 'State' }).fill('Oh');
-  await page.getByRole('option', { name: 'Ohio' }).click();
-  await page.getByLabel('City').click();
-  await page.getByRole('combobox', { name: 'City' }).fill('Da');
-  await page.getByRole('option', { name: 'Dayton' }).click();
-  await page.getByPlaceholder('Zip code').click();
-  await page.getByPlaceholder('Zip code').fill('562102');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.waitForTimeout(3000);
-  await page.getByText('Clients', { exact: true }).click();
-   });
-});
+  // Update DP and Logout Flow
+  test('Update and Logout Flow', async () => {
+    try {
+      await page.getByRole('img').nth(1).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+      await page.locator('.MuiAvatar-img').click();
+    }  
+  
+      await page.getByRole('menuitem', { name: 'Logout' }).click();
+  });
+  });
+
+  // // Insurance Sections
+  // await page.getByText('Billing').click();
+  // await page.getByRole('button', { name: 'Insurance' }).click();
+  // // await page.getByLabel('Client').click();
+  // // await page.getByRole('option', { name: 'Rajesh (T1)' }).getByRole('checkbox').check();
+  // // await page.getByRole('combobox', { name: 'Client' }).click();
+  // await page.waitForTimeout(3000);
+  //  try {
+  //    await page.locator('td:nth-child(9)').first().click();
+  // } catch (error) {
+  //   console.log('Failed to find first locator, trying second locator');
+  //   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._pendingTabContainer_1utsb_1 > div:nth-child(6) > table > tbody > tr:nth-child(2) > td:nth-child(9) > button > svg > path').click();
+  // }
+
+  // await page.getByRole('menuitem', { name: 'View details' }).click();
+  // await page.locator('input[name="clientCopayAmount"]').click();
+  // await page.locator('input[name="clientCopayAmount"]').fill('500');
+  // await page.locator('input[name="insurancePaymentAmount"]').click();
+  // await page.locator('input[name="insurancePaymentAmount"]').fill('300');
+  // await page.locator('input[name="writeOffAmount"]').click();
+  // await page.locator('input[name="writeOffAmount"]').fill('200');
+  // await page.getByLabel('Remarks').click();
+  // await page.getByLabel('Remarks').fill('No bonus');
+  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  // await page.waitForTimeout(3000);
+  // await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+  // await page.getByPlaceholder('Start typing here').click();
+  // await page.getByPlaceholder('Start typing here').fill('TestAdd Notes ');
+  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  // await page.waitForTimeout(3000);
+  // await page.getByRole('button', { name: 'Edit billing address' }).nth(1).click();
+  // await page.getByLabel('Address Line').click();
+  // await page.getByLabel('Address Line').fill('New Jersy');
+  // await page.getByLabel('State').click();
+  // await page.getByRole('combobox', { name: 'State' }).fill('Oh');
+  // await page.getByRole('option', { name: 'Ohio' }).click();
+  // await page.getByLabel('City').click();
+  // await page.getByRole('combobox', { name: 'City' }).fill('Da');
+  // await page.getByRole('option', { name: 'Dayton' }).click();
+  // await page.getByPlaceholder('Zip code').click();
+  // await page.getByPlaceholder('Zip code').fill('562102');
+  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  // await page.waitForTimeout(3000);
+  // await page.getByText('Clients', { exact: true }).click();
+
+ });

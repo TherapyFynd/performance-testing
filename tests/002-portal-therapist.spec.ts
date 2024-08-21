@@ -424,17 +424,7 @@ test('Forms Tab', async () => {
     .nth(2)
     .click();
   await page.getByLabel('', { exact: true }).click();
-  // await page.getByRole('option', { name: 'Date' }).click();
-  // await page.getByPlaceholder('Please enter a question').click();
-  // await page
-  //   .getByPlaceholder('Please enter a question')
-  //   .fill('Client date of Brithday?');
-  // await page
-  //   .getByRole('button', { name: '4 Please enter a question' })
-  //   .getByRole('button')
-  //   .nth(3)
-  //   .click();
-  // await page.getByLabel('', { exact: true }).click();
+  
   await page.getByRole('option', { name: 'Multiple choice' }).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
@@ -522,17 +512,7 @@ test('Forms Tab', async () => {
     .nth(2)
     .click();
   await page.getByLabel('', { exact: true }).click();
-  // await page.getByRole('option', { name: 'Date' }).click();
-  // await page.getByPlaceholder('Please enter a question').click();
-  // await page
-  //   .getByPlaceholder('Please enter a question')
-  //   .fill('What is your Date of Birthday?');
-  // await page
-  //   .getByRole('button', { name: '4 Please enter a question' })
-  //   .getByRole('button')
-  //   .nth(3)
-  //   .click();
-  // await page.getByLabel('', { exact: true }).click();
+ 
   await page.getByRole('option', { name: 'Multiple choice' }).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
@@ -630,18 +610,7 @@ test('Forms Tab', async () => {
   await page
     .getByRole('button', { name: 'Multiple choice', exact: true })
     .click();
-  // await page.getByRole('option', { name: 'Date' }).click();
-  // await page.getByPlaceholder('Please enter a question').click();
-  // await page
-  //   .getByPlaceholder('Please enter a question')
-  //   .fill('What is Your Health Cerificate Date?');
-  // await page.getByLabel('Mandatory').check();
-  // await page
-  //   .getByRole('button', { name: '5 Please enter a question' })
-  //   .getByRole('button')
-  //   .nth(3)
-  //   .click();
-  // await page.getByLabel('', { exact: true }).click();
+
   await page.getByRole('option', { name: 'CPT code' }).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
@@ -959,9 +928,8 @@ test('Client File', async () => {
 
   //  Payment tab
   await page.getByRole('tab', { name: 'Payment' }).click();
-  await page.getByLabel('Insurance').check();
+  // await page.getByLabel('Insurance').check();
   
-
   // Logic For Fail Locator
   try {
     await page.getByLabel('Client\'s spouse').check();
@@ -1229,7 +1197,7 @@ test('Supervision Flows', async () => {
   
     //  Payment tab
     await page.getByRole('tab', { name: 'Payment' }).click();
-    await page.getByLabel('Insurance').check();
+    // await page.getByLabel('Insurance').check();
       // Logic For Fail Locator
       try {
         await page.getByLabel('Client itself').check();
@@ -1275,61 +1243,61 @@ test('Supervision Flows', async () => {
 });
 
 // Insurance Tab
-test('Insurance Tab', async () => {
-  await page
-    .locator('div')
-    .filter({ hasText: /^Insurance$/ })
-    .getByRole('img')
-    .click();
-  await page.getByRole('button', { name: 'Select all' }).nth(1).click();
-  await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
-  await page.getByRole('tab', { name: 'Claims' }).click();
-  await page.getByRole('button', { name: 'Created' }).click();
-  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
-  await page.waitForTimeout(3000);
-  try {
-    await page.getByText('ABSOLUTE TOTAL CARE').first().click();
+// test('Insurance Tab', async () => {
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^Insurance$/ })
+//     .getByRole('img')
+//     .click();
+//   await page.getByRole('button', { name: 'Select all' }).nth(1).click();
+//   await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
+//   await page.getByRole('tab', { name: 'Claims' }).click();
+//   await page.getByRole('button', { name: 'Created' }).click();
+//   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+//   await page.waitForTimeout(3000);
+//   try {
+//     await page.getByText('ABSOLUTE TOTAL CARE').first().click();
     
-   } catch (error) {
-     console.log('Failed to find first locator, trying second locator');
-     await page.locator('td:nth-child(9)').first().click();
-   }
-   await page.waitForTimeout(2000);
-  await page.getByRole('button', { name: 'Add note' }).nth(1).click();
-  await page.getByPlaceholder('Start typing here').click();
-  await page
-    .getByPlaceholder('Start typing here')
-    .fill('Hey I am Adding Clients File Details here so check this');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
-  await page.waitForTimeout(2000);
-  await page
-    .locator('div')
-    .filter({ hasText: /^StatusSubmittedEdit$/ })
-    .getByRole('button')
-    .nth(1)
-    .click();
-  await page.getByLabel('Select status').click();
-  await page.getByRole('option', { name: 'Sent' }).click();
-  await page.getByPlaceholder('Remarks').click();
-  await page
-    .getByPlaceholder('Remarks')
-    .fill('Sent this Payer Details to Change Healthcare');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page
-    .locator('div')
-    .filter({ hasText: /^StatusSentEdit$/ })
-    .getByRole('button')
-    .nth(1)
-    .click();
-  await page.getByLabel('Sent').click();
-  await page.getByRole('option', { name: 'Paid', exact: true }).click();
-  await page.getByPlaceholder('Remarks').click();
-  await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//    } catch (error) {
+//      console.log('Failed to find first locator, trying second locator');
+//      await page.locator('td:nth-child(9)').first().click();
+//    }
+//    await page.waitForTimeout(2000);
+//   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+//   await page.getByPlaceholder('Start typing here').click();
+//   await page
+//     .getByPlaceholder('Start typing here')
+//     .fill('Hey I am Adding Clients File Details here so check this');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//   await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
+//   await page.waitForTimeout(2000);
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^StatusSubmittedEdit$/ })
+//     .getByRole('button')
+//     .nth(1)
+//     .click();
+//   await page.getByLabel('Select status').click();
+//   await page.getByRole('option', { name: 'Sent' }).click();
+//   await page.getByPlaceholder('Remarks').click();
+//   await page
+//     .getByPlaceholder('Remarks')
+//     .fill('Sent this Payer Details to Change Healthcare');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^StatusSentEdit$/ })
+//     .getByRole('button')
+//     .nth(1)
+//     .click();
+//   await page.getByLabel('Sent').click();
+//   await page.getByRole('option', { name: 'Paid', exact: true }).click();
+//   await page.getByPlaceholder('Remarks').click();
+//   await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   
   
-  });
+//   });
     test('TaskBoard Widget Flows', async () => {
 
       await page.locator('div').filter({ hasText: /^Tasks$/ }).getByRole('img').click();

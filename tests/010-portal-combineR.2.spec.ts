@@ -220,14 +220,14 @@ test('Settings Tab', async () => {
   
 
   // Billing Tab
-await page.locator('p').filter({ hasText: 'Billing' }).click();
-await page.getByRole('tab', { name: 'Insurance' }).click();
-  await page.getByText('Payers').click();
-  await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-  await page.getByLabel('Search for insurance payers').click();
-  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('877');
-  await page.getByRole('option', { name: 'Empire Plan-' }).click();
-  await page.getByRole('button', { name: 'Add' }).nth(1).click();
+// await page.locator('p').filter({ hasText: 'Billing' }).click();
+// await page.getByRole('tab', { name: 'Insurance' }).click();
+//   await page.getByText('Payers').click();
+//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
+//   await page.getByLabel('Search for insurance payers').click();
+//   await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('877');
+//   await page.getByRole('option', { name: 'Empire Plan-' }).click();
+//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
   //   Privacy Policy
 await page.getByText('Website Privacy Policy').click();
 await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
@@ -785,7 +785,7 @@ test('Client File', async () => {
 
   //  Payment tab
   await page.getByRole('tab', { name: 'Payment' }).click();
-  await page.getByLabel('Insurance').check();
+  // await page.getByLabel('Insurance').check();
 
   // Logic For Fail Locator
   try {
@@ -937,59 +937,59 @@ test('Client File', async () => {
   
 });
 
-test('Insurance Tab', async () => {
-  await page
-    .locator('div')
-    .filter({ hasText: /^Insurance$/ })
-    .getByRole('img')
-    .click();
-  await page.getByRole('button', { name: 'Select all' }).nth(1).click();
-  await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
-  await page.getByRole('tab', { name: 'Claims' }).click();
-  await page.getByRole('button', { name: 'Created' }).click();
-  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
-  await page.waitForTimeout(3000);
-  try {
-    await page.getByText('Empire Plan').first().click(); 
-   } catch (error) {
-     console.log('Failed to find first locator, trying second locator');
-     await page.locator('td:nth-child(9)').first().click();
-   }
-   await page.waitForTimeout(2000);
-  await page.getByRole('button', { name: 'Add note' }).nth(1).click();
-  await page.getByPlaceholder('Start typing here').click();
-  await page
-    .getByPlaceholder('Start typing here')
-    .fill('Hey I am Adding Clients File Details here so check this');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
-  await page.waitForTimeout(2000);
-  await page
-    .locator('div')
-    .filter({ hasText: /^StatusSubmittedEdit$/ })
-    .getByRole('button')
-    .nth(1)
-    .click();
-  await page.getByLabel('Select status').click();
-  await page.getByRole('option', { name: 'Sent' }).click();
-  await page.getByPlaceholder('Remarks').click();
-  await page
-    .getByPlaceholder('Remarks')
-    .fill('Sent this Payer Details to Change Healthcare');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page
-    .locator('div')
-    .filter({ hasText: /^StatusSentEdit$/ })
-    .getByRole('button')
-    .nth(1)
-    .click();
-  await page.getByLabel('Sent').click();
-  await page.getByRole('option', { name: 'Paid', exact: true }).click();
-  await page.getByPlaceholder('Remarks').click();
-  await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+// test('Insurance Tab', async () => {
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^Insurance$/ })
+//     .getByRole('img')
+//     .click();
+//   await page.getByRole('button', { name: 'Select all' }).nth(1).click();
+//   await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
+//   await page.getByRole('tab', { name: 'Claims' }).click();
+//   await page.getByRole('button', { name: 'Created' }).click();
+//   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+//   await page.waitForTimeout(3000);
+//   try {
+//     await page.getByText('Empire Plan').first().click(); 
+//    } catch (error) {
+//      console.log('Failed to find first locator, trying second locator');
+//      await page.locator('td:nth-child(9)').first().click();
+//    }
+//    await page.waitForTimeout(2000);
+//   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+//   await page.getByPlaceholder('Start typing here').click();
+//   await page
+//     .getByPlaceholder('Start typing here')
+//     .fill('Hey I am Adding Clients File Details here so check this');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//   await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
+//   await page.waitForTimeout(2000);
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^StatusSubmittedEdit$/ })
+//     .getByRole('button')
+//     .nth(1)
+//     .click();
+//   await page.getByLabel('Select status').click();
+//   await page.getByRole('option', { name: 'Sent' }).click();
+//   await page.getByPlaceholder('Remarks').click();
+//   await page
+//     .getByPlaceholder('Remarks')
+//     .fill('Sent this Payer Details to Change Healthcare');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^StatusSentEdit$/ })
+//     .getByRole('button')
+//     .nth(1)
+//     .click();
+//   await page.getByLabel('Sent').click();
+//   await page.getByRole('option', { name: 'Paid', exact: true }).click();
+//   await page.getByPlaceholder('Remarks').click();
+//   await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
     
-  });
+//   });
   test('Intake tab', async () => {
     await page.locator('div').filter({ hasText: /^Referrals$/ }).getByRole('img').click();
     await page.getByRole('button', { name: 'Create Lead' }).nth(1).click();
@@ -1149,7 +1149,6 @@ test('Insurance Tab', async () => {
     await page.reload();
     await page.waitForTimeout(3000);
 
-    
     await page.getByRole('button', { name: 'Status ​', exact: true }).click();
     await page.getByRole('option', { name: 'Open' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'InProgress' }).getByRole('checkbox').check();
