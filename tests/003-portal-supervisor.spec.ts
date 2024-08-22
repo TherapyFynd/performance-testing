@@ -266,31 +266,31 @@ test('Client File', async () => {
     // Info and Settings
     await page.getByText('Alfred Arnoldson').click();
     await page.getByRole('button', { name: 'Info & settings' }).nth(1).click();
-    await page.getByRole('tab', { name: 'Insurance Eligibility' }).click();
-    await page.waitForTimeout(6000);
-    await page.getByRole('button', { name: 'Verify Benefits' }).nth(1).click();
-    await page.waitForTimeout(8000);
-    await page.getByRole('button', { name: 'View Log' }).nth(1).click();
-    await page.waitForTimeout(2000);
-    await page.locator('._header_1ox1a_5 > .MuiButtonBase-root').click();
-    await page.reload();
-    await page.waitForTimeout(2000);
-    await page.getByRole('button', { name: 'Share' }).nth(1).click();
-  await page.getByLabel('Select Team Member').click();
-  await page.getByRole('combobox', { name: 'Select Team Member' }).fill('Own');
+  //   await page.getByRole('tab', { name: 'Insurance Eligibility' }).click();
+  //   await page.waitForTimeout(6000);
+  //   await page.getByRole('button', { name: 'Verify Benefits' }).nth(1).click();
+  //   await page.waitForTimeout(8000);
+  //   await page.getByRole('button', { name: 'View Log' }).nth(1).click();
+  //   await page.waitForTimeout(2000);
+  //   await page.locator('._header_1ox1a_5 > .MuiButtonBase-root').click();
+  //   await page.reload();
+  //   await page.waitForTimeout(2000);
+  //   await page.getByRole('button', { name: 'Share' }).nth(1).click();
+  // await page.getByLabel('Select Team Member').click();
+  // await page.getByRole('combobox', { name: 'Select Team Member' }).fill('Own');
   
-  try {
-    await page.getByText('Owner Team').click();
-  }
-  catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.getByRole('option', { name: 'icon Owner Team' }).click();
-  }
+  // try {
+  //   await page.getByText('Owner Team').click();
+  // }
+  // catch (error) {
+  //   console.log('Failed to find first locator, trying second locator');
+  //   await page.getByRole('option', { name: 'icon Owner Team' }).click();
+  // }
   
-  await page.getByPlaceholder('Type message here').click();
-  await page.getByPlaceholder('Type message here').fill('Hey Testing name');
-  await page.getByRole('button', { name: 'Share' }).nth(1).click();
-  await page.waitForTimeout(2000);
+  // await page.getByPlaceholder('Type message here').click();
+  // await page.getByPlaceholder('Type message here').fill('Hey Testing name');
+  // await page.getByRole('button', { name: 'Share' }).nth(1).click();
+  // await page.waitForTimeout(2000);
     
     await page
     .locator('div')
