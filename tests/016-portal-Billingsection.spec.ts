@@ -154,13 +154,9 @@ await page.getByLabel('', { exact: true }).check();
   await page.getByPlaceholder('Service description').click();
   await page.getByPlaceholder('Service description').fill('90832 - Psychotherapy, 30 minutes with patient and Payment type');
   await page.locator('div').filter({ hasText: /^Bill ItemsSave$/ }).getByRole('button').nth(1).click();
-  await page.waitForTimeout(3000);
-
-  await page.getByText('Clients', { exact: true }).click();
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(6000);
 
   // Update DP and Logout Flow
-  test('Update and Logout Flow', async () => {
     try {
       await page.getByRole('img').nth(1).click();
     } catch (error) {
@@ -217,4 +213,3 @@ await page.getByLabel('', { exact: true }).check();
   // await page.waitForTimeout(3000);
   // await page.getByText('Clients', { exact: true }).click();
 
- });
