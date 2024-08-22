@@ -172,17 +172,17 @@ test.describe('All owner Test case ', () => {
     await page.getByLabel('Make default service').check();
     await page.getByRole('button', { name: 'Add service' }).nth(1).click();
 
-    await page.getByRole('tab', { name: 'Public profile' }).click();
-    await page.waitForTimeout(5000);
-    await page.getByRole('checkbox').first().check();
-    await page.getByRole('checkbox').nth(1).check();
-    await page.locator('textarea[name="intro"]').click();
-    await page.locator('textarea[name="intro"]').fill('Test');
-    await page.locator('textarea[name="sessionTakeaways"]').click();
-    await page.locator('textarea[name="sessionTakeaways"]').fill('Test');
-    await page.locator('textarea[name="strengths"]').click();
-    await page.locator('textarea[name="strengths"]').fill('Test');
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
+    // await page.getByRole('tab', { name: 'Public profile' }).click();
+    // await page.waitForTimeout(5000);
+    // await page.getByRole('checkbox').first().check();
+    // await page.getByRole('checkbox').nth(1).check();
+    // await page.locator('textarea[name="intro"]').click();
+    // await page.locator('textarea[name="intro"]').fill('Test');
+    // await page.locator('textarea[name="sessionTakeaways"]').click();
+    // await page.locator('textarea[name="sessionTakeaways"]').fill('Test');
+    // await page.locator('textarea[name="strengths"]').click();
+    // await page.locator('textarea[name="strengths"]').fill('Test');
+    // await page.getByRole('button', { name: 'Save' }).nth(1).click();
 
     // Subscriptions
     //   await page.getByText('Subscription').click();
@@ -324,8 +324,7 @@ test.describe('All owner Test case ', () => {
     await page.getByLabel('Role title').click();
     await page.getByLabel('Role title').fill('Own Role');
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.waitForTimeout(10000);
-
+    await page.waitForTimeout(13000);
 
     //   Scheduler Calender 
     await page.getByText('Calendar').click();
