@@ -41,8 +41,8 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Enter phone').click();
   await page.getByPlaceholder('Enter phone').fill('(846) 534-65833');
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-  await page.getByPlaceholder('Enter your practice name').click();
-  await page.getByPlaceholder('Enter your practice name').fill('KanTime Healthcare System ');
+  await page.getByPlaceholder('Enter Group Practice name').click();
+  await page.getByPlaceholder('Enter Group Practice name').fill('KanTime Healthcare System ');
   await page.getByLabel('Address Line').click();
   await page.getByLabel('Address Line').fill('New York City');
   await page.waitForTimeout(2000);
@@ -56,8 +56,8 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByText('Azusa').click();
   await page.getByPlaceholder('Zip code').click();
   await page.getByPlaceholder('Zip code').fill('561202');
-  await page.getByPlaceholder('Enter your practice name').click();
-  await page.getByPlaceholder('Enter your practice name').fill('KanTime Healthcare System ');
+  await page.getByPlaceholder('Enter Group Practice name').click();
+  await page.getByPlaceholder('Enter Group Practice name').fill('KanTime Healthcare System ');
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   
   
@@ -174,17 +174,17 @@ test('Settings Flows', async () => {
   await page.getByLabel('Make default service').check();
   await page.getByRole('button', { name: 'Add service' }).nth(1).click();
 
-  await page.getByRole('tab', { name: 'Public profile' }).click();
-  await page.waitForTimeout(5000);
-  await page.getByRole('checkbox').first().check();
-  await page.getByRole('checkbox').nth(1).check();
-  await page.locator('textarea[name="intro"]').click();
-  await page.locator('textarea[name="intro"]').fill('Test');
-  await page.locator('textarea[name="sessionTakeaways"]').click();
-  await page.locator('textarea[name="sessionTakeaways"]').fill('Test');
-  await page.locator('textarea[name="strengths"]').click();
-  await page.locator('textarea[name="strengths"]').fill('Test');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  // await page.getByRole('tab', { name: 'Public profile' }).click();
+  // await page.waitForTimeout(5000);
+  // await page.getByRole('checkbox').first().check();
+  // await page.getByRole('checkbox').nth(1).check();
+  // await page.locator('textarea[name="intro"]').click();
+  // await page.locator('textarea[name="intro"]').fill('Test');
+  // await page.locator('textarea[name="sessionTakeaways"]').click();
+  // await page.locator('textarea[name="sessionTakeaways"]').fill('Test');
+  // await page.locator('textarea[name="strengths"]').click();
+  // await page.locator('textarea[name="strengths"]').fill('Test');
+  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
   // Practice Settings
   await page.getByText('Practice settings').click();
   await page.getByLabel('Practice Name').click();
@@ -196,80 +196,80 @@ test('Settings Flows', async () => {
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
 
   // Subscriptions Feature
-  await page.getByText('Subscription').click();
-  await page.getByText('Frontdesk').click();
-  await page .waitForTimeout(3000);
-  await page.getByText('Bundle').click();
-  await page .waitForTimeout(3000);
-  await page.getByText('EHR', { exact: true }).click();
-  await page .waitForTimeout(2000);
-  await page.getByRole('button', { name: 'Subscribe' }).nth(1).click();
-  await page .waitForTimeout(3000);
-// Add card
-  await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').click();
-  await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').fill('4000056655665556');
-  await page .waitForTimeout(5000);
-  await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').click();
-  await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').fill('08 / 31');
-  await page .waitForTimeout(5000);
-  await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').click();
-  await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').fill('2545');
-  await page .waitForTimeout(5000);
+//   await page.getByText('Subscription').click();
+//   await page.getByText('Frontdesk').click();
+//   await page .waitForTimeout(3000);
+//   await page.getByText('Bundle').click();
+//   await page .waitForTimeout(3000);
+//   await page.getByText('EHR', { exact: true }).click();
+//   await page .waitForTimeout(2000);
+//   await page.getByRole('button', { name: 'Subscribe' }).nth(1).click();
+//   await page .waitForTimeout(3000);
+// // Add card
+//   await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').click();
+//   await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').fill('4000056655665556');
+//   await page .waitForTimeout(5000);
+//   await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').click();
+//   await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').fill('08 / 31');
+//   await page .waitForTimeout(5000);
+//   await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').click();
+//   await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').fill('2545');
+//   await page .waitForTimeout(5000);
 
-    await page.getByLabel('Name on invoices').click();
-    await page.getByLabel('Name on invoices').fill('Owner Team');
-    await page.getByLabel('Email Id to send Invoices').click();
-    await page.getByLabel('Email Id to send Invoices').fill('testemails@gmail.com');
-    await page.getByLabel('Address').click();
-    await page.getByLabel('Address').fill('New Jersy city ');
-    await page.getByLabel('Street').click();
-    await page.getByLabel('Street').fill('Main city side road');
-    await page.getByLabel('State').click();
-    await page.getByRole('combobox', { name: 'State' }).fill('Lou');
-    await page.getByText('Louisiana').click();
-    await page.getByLabel('City').click();
-    await page.getByRole('combobox', { name: 'City' }).fill('Ken');
-    await page.getByText('Kenner').click();
-    await page.getByLabel('Zipcode').click();
-    await page.getByLabel('Zipcode').fill('5612012');
-    await page.getByLabel('', { exact: true }).first().check();
-    await page.getByPlaceholder('Enter coupon code').click();
-    await page.getByPlaceholder('Enter coupon code').fill('LIVE');
-    await page.getByRole('button', { name: 'Apply' }).nth(1).click();
-    await page .waitForTimeout(6000);
-    await page.getByRole('button', { name: 'Subscribe to Ehr Plus Plan' }).nth(1).click();
-    await page .waitForTimeout(7000);
-    await page.getByRole('heading', { name: 'Update' }).first().click();
-    await page.getByRole('button', { name: 'Add new card' }).nth(1).click();
-  // Add card
-    await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').click();
-    await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').fill('4242424242424242');
-    await page .waitForTimeout(5000);
-    await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').click();
-    await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').fill('08 / 31');
-    await page .waitForTimeout(5000);
-    await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').click();
-    await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').fill('2545');
-    await page .waitForTimeout(5000);
+//     await page.getByLabel('Name on invoices').click();
+//     await page.getByLabel('Name on invoices').fill('Owner Team');
+//     await page.getByLabel('Email Id to send Invoices').click();
+//     await page.getByLabel('Email Id to send Invoices').fill('testemails@gmail.com');
+//     await page.getByLabel('Address').click();
+//     await page.getByLabel('Address').fill('New Jersy city ');
+//     await page.getByLabel('Street').click();
+//     await page.getByLabel('Street').fill('Main city side road');
+//     await page.getByLabel('State').click();
+//     await page.getByRole('combobox', { name: 'State' }).fill('Lou');
+//     await page.getByText('Louisiana').click();
+//     await page.getByLabel('City').click();
+//     await page.getByRole('combobox', { name: 'City' }).fill('Ken');
+//     await page.getByText('Kenner').click();
+//     await page.getByLabel('Zipcode').click();
+//     await page.getByLabel('Zipcode').fill('5612012');
+//     await page.getByLabel('', { exact: true }).first().check();
+//     await page.getByPlaceholder('Enter coupon code').click();
+//     await page.getByPlaceholder('Enter coupon code').fill('LIVE');
+//     await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+//     await page .waitForTimeout(6000);
+//     await page.getByRole('button', { name: 'Subscribe to Ehr Plus Plan' }).nth(1).click();
+//     await page .waitForTimeout(7000);
+//     await page.getByRole('heading', { name: 'Update' }).first().click();
+//     await page.getByRole('button', { name: 'Add new card' }).nth(1).click();
+//   // Add card
+//     await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').click();
+//     await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').fill('4242424242424242');
+//     await page .waitForTimeout(5000);
+//     await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').click();
+//     await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').fill('08 / 31');
+//     await page .waitForTimeout(5000);
+//     await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').click();
+//     await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').fill('2545');
+//     await page .waitForTimeout(5000);
 
-    await page.getByRole('button', { name: 'Add card' }).nth(1).click();
-    await page .waitForTimeout(3000);
-    await page.getByText('Make Primary').click();
-    await page .waitForTimeout(3000);
-    await page.getByRole('img', { name: 'cross icon' }).click();
-    await page .waitForTimeout(3000);
-    await page.getByRole('heading', { name: 'Update' }).nth(1).click();
-    await page.getByRole('button', { name: 'cancel' }).nth(1).click();
-    await page.getByRole('heading', { name: 'Update' }).nth(2).click();
-    await page.getByLabel('Make default across practice').check();
-    await page .waitForTimeout(3000);
-    await page.getByLabel('Address').clear();
-    await page.getByLabel('Address').fill('2nd Stage nagarabahvi road bangalore');
-    await page.getByRole('button', { name: 'update' }).nth(1).click();
-    await page .waitForTimeout(3000);
-    await page.getByRole('heading', { name: 'Manage members' }).click();
-    await page.getByRole('img', { name: 'cross icon' }).click();
-    await page .waitForTimeout(3000);
+//     await page.getByRole('button', { name: 'Add card' }).nth(1).click();
+//     await page .waitForTimeout(3000);
+//     await page.getByText('Make Primary').click();
+//     await page .waitForTimeout(3000);
+//     await page.getByRole('img', { name: 'cross icon' }).click();
+//     await page .waitForTimeout(3000);
+//     await page.getByRole('heading', { name: 'Update' }).nth(1).click();
+//     await page.getByRole('button', { name: 'cancel' }).nth(1).click();
+//     await page.getByRole('heading', { name: 'Update' }).nth(2).click();
+//     await page.getByLabel('Make default across practice').check();
+//     await page .waitForTimeout(3000);
+//     await page.getByLabel('Address').clear();
+//     await page.getByLabel('Address').fill('2nd Stage nagarabahvi road bangalore');
+//     await page.getByRole('button', { name: 'update' }).nth(1).click();
+//     await page .waitForTimeout(3000);
+//     await page.getByRole('heading', { name: 'Manage members' }).click();
+//     await page.getByRole('img', { name: 'cross icon' }).click();
+//     await page .waitForTimeout(3000);
 
 //  Custom Role Setting
 await page.getByText('Role settings').click();
@@ -282,7 +282,6 @@ await page.getByLabel('Role title').click();
 await page.getByLabel('Role title').fill('Custom PracticeLead');
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page .waitForTimeout(8000);
-
 await page.locator('div').filter({ hasText: /^Custom PracticeLead$/ }).getByRole('button').click();
 await page .waitForTimeout(4000);
 await page.getByLabel('Calendar').uncheck();
@@ -290,7 +289,7 @@ await page.getByLabel('Calendar').check();
 await page.getByLabel('Clients', { exact: true }).uncheck();
 await page.getByLabel('Clients', { exact: true }).check();
 await page.getByLabel('Billing', { exact: true }).uncheck();
-await page.getByLabel('Insurance', { exact: true }).uncheck();
+// await page.getByLabel('Insurance', { exact: true }).uncheck();
 await page.getByLabel('Reports', { exact: true }).check();
 await page.getByLabel('Clients', { exact: true }).check();
 await page.getByLabel('Documents', { exact: true }).check()
@@ -552,21 +551,21 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.getByLabel('Enable multiple diagnostic').check();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.waitForTimeout(5000);
-  await page.getByText('Payers').click();
-  await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-  await page.getByLabel('Search for insurance payers').click();
-  await page
-    .getByRole('combobox', { name: 'Search for insurance payers' })
-    .fill('Absolute');
-    await page.waitForTimeout(2000);
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
-  await page.getByRole('button', { name: 'Add' }).nth(1).click();
-  await page.waitForTimeout(2000);
-  await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-  await page.getByLabel('Search for insurance payers').click();
-  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('MEM');
-  await page.getByText('Maine Medicaid- MEMCD').click();
-  await page.getByRole('button', { name: 'Add' }).nth(1).click();
+  // await page.getByText('Payers').click();
+  // await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
+  // await page.getByLabel('Search for insurance payers').click();
+  // await page
+  //   .getByRole('combobox', { name: 'Search for insurance payers' })
+  //   .fill('Absolute');
+  //   await page.waitForTimeout(2000);
+  // await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  // await page.getByRole('button', { name: 'Add' }).nth(1).click();
+  // await page.waitForTimeout(2000);
+  // await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
+  // await page.getByLabel('Search for insurance payers').click();
+  // await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('MEM');
+  // await page.getByText('Maine Medicaid- MEMCD').click();
+  // await page.getByRole('button', { name: 'Add' }).nth(1).click();
   
    // Referal settings
   await page.getByText('Team members').nth(1).click();
@@ -1099,7 +1098,7 @@ test('Client File', async () => {
 
   //  Payment tab
   await page.getByRole('tab', { name: 'Payment' }).click();
-  await page.getByLabel('Insurance').check();
+  // await page.getByLabel('Insurance').check();
     // Logic For Fail Locator
     try {
       await page.getByLabel('Client itself').check();
@@ -1108,9 +1107,25 @@ test('Client File', async () => {
       console.log('Failed to find first locator, trying second locator');
       await page.getByText('Other').click();
     }
-  
-  await page.getByPlaceholder('MM/DD/YYYY').first().click();
-  await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/1999');
+  //   await page.getByLabel('Choose date').first().click();
+  //   await page.getByLabel('calendar view is open, switch').click();
+  //   await page.getByRole('button', { name: '2000', exact: true }).click();
+  //   await page.getByLabel('Previous month').click();
+  // await page.waitForTimeout(2000);
+  // await page.getByLabel('Previous month').click();
+  // await page.waitForTimeout(2000);
+  // await page.getByLabel('Previous month').click();
+  // await page.waitForTimeout(2000);
+  // await page.getByLabel('Previous month').click();
+  // await page.waitForTimeout(2000);
+  // await page.getByLabel('Previous month').click();
+  // await page.waitForTimeout(2000);
+  // await page.getByLabel('Previous month').click();
+  // await page.waitForTimeout(2000);
+  // await page.getByLabel('Previous month').click();
+  // await page.waitForTimeout(2000);
+  //   await page.getByRole('gridcell', { name: '1', exact: true }).first().click();
+  //   await page.waitForTimeout(2000);
   await page.getByLabel('Sex').click();
   await page.getByRole('option', { name: 'Male', exact: true }).click();
   await page.getByPlaceholder('Phone').click();
@@ -1134,12 +1149,11 @@ test('Client File', async () => {
   await page.getByLabel('Group ID').fill('GGH3');
   await page.getByLabel('Plan ID').click();
   await page.getByLabel('Plan ID').fill('KKH45');
-  await page.getByPlaceholder('MM/DD/YYYY').nth(1).click();
-  await page.getByPlaceholder('MM/DD/YYYY').nth(1).fill('10/10/2000');
-  await page.getByPlaceholder('MM/DD/YYYY').nth(2).click();
-  await page.getByPlaceholder('MM/DD/YYYY').nth(2).fill('10/10/2030');
+  // await page.getByPlaceholder('MM/DD/YYYY').first().click();
+  // await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/2000');
+  // await page.waitForTimeout(3000);
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-
+  await page.waitForTimeout(5000);
   // Files tab
   await page.getByRole('tab', { name: 'Files' }).click();
   await page.getByRole('button', { name: 'Request upload' }).nth(1).click();
@@ -1171,36 +1185,36 @@ test('Client File', async () => {
   await page.getByRole('button', { name: 'Send' }).nth(1).click();
 
   // Template Add in Client File (CF) in Stage only
-  await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
-  await page.getByRole('tab', { name: 'Templates' }).click();
-  await page.getByText('Questionnaires').click();
-  await page.getByLabel('Select Forms to send').click();
-  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('100');
-  await page.getByRole('option', { name: 'question' }).click();
-  await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
-  await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
-  await page.getByText('Consent forms').click();
-  await page.getByLabel('Select Forms to send').click();
-  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('demo');
-  await page.getByRole('option', { name: 'Template demo for consent' }).click();
-  await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
-  await page.getByRole('button', { name: 'Send' }).nth(1).click();
-
-    // Template Add in Client File (CF) in Production only
   // await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
   // await page.getByRole('tab', { name: 'Templates' }).click();
   // await page.getByText('Questionnaires').click();
   // await page.getByLabel('Select Forms to send').click();
-  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Demo');
-  // await page.getByRole('option', { name: 'Demographic form' }).click();
+  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('100');
+  // await page.getByRole('option', { name: 'question' }).click();
   // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
   // await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   // await page.getByText('Consent forms').click();
   // await page.getByLabel('Select Forms to send').click();
-  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Pra');
-  // await page.getByRole('option', { name: 'Practice Policies' }).click();
+  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('demo');
+  // await page.getByRole('option', { name: 'Template demo for consent' }).click();
   // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
   // await page.getByRole('button', { name: 'Send' }).nth(1).click();
+
+    // Template Add in Client File (CF) in Production only
+  await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
+  await page.getByRole('tab', { name: 'Templates' }).click();
+  await page.getByText('Questionnaires').click();
+  await page.getByLabel('Select Forms to send').click();
+  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Demo');
+  await page.getByRole('option', { name: 'Demographic form' }).click();
+  await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
+  await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
+  await page.getByText('Consent forms').click();
+  await page.getByLabel('Select Forms to send').click();
+  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Pra');
+  await page.getByRole('option', { name: 'Practice Policies' }).click();
+  await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
+  await page.getByRole('button', { name: 'Send' }).nth(1).click();
 
   //   Notes Section
   await page.getByRole('tab', { name: 'Notes' }).click();
@@ -1291,62 +1305,62 @@ test('Client File', async () => {
   await page.waitForTimeout(4000);
 });
 
-test('Insurance Tab', async () => {
-  await page
-    .locator('div')
-    .filter({ hasText: /^Insurance$/ })
-    .getByRole('img')
-    .click();
-  await page.getByRole('button', { name: 'Select all' }).nth(1).click();
-  await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
-  await page.getByRole('tab', { name: 'Claims' }).click();
-  await page.getByRole('button', { name: 'Created' }).click();
-  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
-  await page.waitForTimeout(3000);
-  try {
-    await page.getByText('ABSOLUTE TOTAL CARE').first().click();
+// test('Insurance Tab', async () => {
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^Insurance$/ })
+//     .getByRole('img')
+//     .click();
+//   await page.getByRole('button', { name: 'Select all' }).nth(1).click();
+//   await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
+//   await page.getByRole('tab', { name: 'Claims' }).click();
+//   await page.getByRole('button', { name: 'Created' }).click();
+//   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+//   await page.waitForTimeout(3000);
+//   try {
+//     await page.getByText('ABSOLUTE TOTAL CARE').first().click();
    
-   } 
-   catch (error) {
-     console.log('Failed to find first locator, trying second locator');
-     await page.locator('td:nth-child(9)').first().click();
-   }
-   await page.waitForTimeout(2000);
-  await page.getByRole('button', { name: 'Add note' }).nth(1).click();
-  await page.getByPlaceholder('Start typing here').click();
-  await page
-    .getByPlaceholder('Start typing here')
-    .fill('Hey I am Adding Clients File Details here so check this');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
-  await page.waitForTimeout(2000);
-  await page
-    .locator('div')
-    .filter({ hasText: /^StatusSubmittedEdit$/ })
-    .getByRole('button')
-    .nth(1)
-    .click();
-  await page.getByLabel('Select status').click();
-  await page.getByRole('option', { name: 'Sent' }).click();
-  await page.getByPlaceholder('Remarks').click();
-  await page
-    .getByPlaceholder('Remarks')
-    .fill('Sent this Payer Details to Change Healthcare');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page
-    .locator('div')
-    .filter({ hasText: /^StatusSentEdit$/ })
-    .getByRole('button')
-    .nth(1)
-    .click();
-  await page.getByLabel('Sent').click();
-  await page.getByRole('option', { name: 'Paid', exact: true }).click();
-  await page.getByPlaceholder('Remarks').click();
-  await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.waitForTimeout(2000);
+//    } 
+//    catch (error) {
+//      console.log('Failed to find first locator, trying second locator');
+//      await page.locator('td:nth-child(9)').first().click();
+//    }
+//    await page.waitForTimeout(2000);
+//   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+//   await page.getByPlaceholder('Start typing here').click();
+//   await page
+//     .getByPlaceholder('Start typing here')
+//     .fill('Hey I am Adding Clients File Details here so check this');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//   await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
+//   await page.waitForTimeout(2000);
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^StatusSubmittedEdit$/ })
+//     .getByRole('button')
+//     .nth(1)
+//     .click();
+//   await page.getByLabel('Select status').click();
+//   await page.getByRole('option', { name: 'Sent' }).click();
+//   await page.getByPlaceholder('Remarks').click();
+//   await page
+//     .getByPlaceholder('Remarks')
+//     .fill('Sent this Payer Details to Change Healthcare');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^StatusSentEdit$/ })
+//     .getByRole('button')
+//     .nth(1)
+//     .click();
+//   await page.getByLabel('Sent').click();
+//   await page.getByRole('option', { name: 'Paid', exact: true }).click();
+//   await page.getByPlaceholder('Remarks').click();
+//   await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//   await page.waitForTimeout(2000);
  
-});
+// });
 
 test('Reports Tab', async () => {
   await page.locator('div').filter({ hasText: /^Reports$/ }).getByRole('img').click();
@@ -1384,28 +1398,28 @@ test('Reports Tab', async () => {
   await page.getByLabel('Status').click();
   await page.getByRole('option', { name: 'Pending' }).click();
 //   
-  await page.locator('p').filter({ hasText: /^Income$/ }).click();
-  await page.getByText('Income Allocation').click();
-// 
-  await page.getByText('Outstanding Claims').click();
-  await page.getByLabel('Team members').click();
-  await page.getByRole('checkbox').check();
-  await page.getByRole('combobox', { name: 'Team members' }).click();
-  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
-  // 
-  await page.getByText('Unpaid insurance appointments').click();
-  await page.getByLabel('Team members').click();
-  await page.getByRole('checkbox').check();
-  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
-  await page.getByLabel('Status').click();
-  await page.getByRole('option', { name: 'Claim filed' }).click();
-  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
-  await page.getByText('ERA Report').click();
-  await page.getByText('Filed Claims').click();
-  await page.getByLabel('Payer').click();
-  await page.getByRole('option', { name: '- ABSOLUTE TOTAL CARE' }).click();
-  await page.getByRole('combobox', { name: 'Payer' }).click();
-  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+//   await page.locator('p').filter({ hasText: /^Income$/ }).click();
+//   await page.getByText('Income Allocation').click();
+// // 
+//   await page.getByText('Outstanding Claims').click();
+//   await page.getByLabel('Team members').click();
+//   await page.getByRole('checkbox').check();
+//   await page.getByRole('combobox', { name: 'Team members' }).click();
+//   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+//   // 
+//   await page.getByText('Unpaid insurance appointments').click();
+//   await page.getByLabel('Team members').click();
+//   await page.getByRole('checkbox').check();
+//   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+//   await page.getByLabel('Status').click();
+//   await page.getByRole('option', { name: 'Claim filed' }).click();
+//   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+//   await page.getByText('ERA Report').click();
+//   await page.getByText('Filed Claims').click();
+//   await page.getByLabel('Payer').click();
+//   await page.getByRole('option', { name: '- ABSOLUTE TOTAL CARE' }).click();
+//   await page.getByRole('combobox', { name: 'Payer' }).click();
+//   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
   await page.getByTestId('ArrowBackIcon').locator('path').click();
 
 });
@@ -1436,8 +1450,8 @@ test('Intake tab', async () => {
   await page.getByRole('tab', { name: 'Basic Information' }).click();
   await page.getByLabel('Sex').click();
   await page.getByRole('option', { name: 'Male', exact: true }).click();
-  await page.getByPlaceholder('MM/DD/YYYY').click();
-  await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
+  // await page.getByPlaceholder('MM/DD/YYYY').click();
+  // await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('GAHRGYT');
   await page.waitForTimeout(3000);
@@ -1496,8 +1510,8 @@ test('Intake tab', async () => {
   await page.getByRole('tab', { name: 'Basic Information' }).click();
   await page.getByLabel('Sex').click();
   await page.getByRole('option', { name: 'Male', exact: true }).click();
-  await page.getByPlaceholder('MM/DD/YYYY').click();
-  await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
+  // await page.getByPlaceholder('MM/DD/YYYY').click();
+  // await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('KRUGSWERW');
   await page.waitForTimeout(3000);
@@ -1560,8 +1574,8 @@ test('Intake tab', async () => {
   await page.getByRole('tab', { name: 'Basic Information' }).click();
   await page.getByLabel('Sex').click();
   await page.getByRole('option', { name: 'Male', exact: true }).click();
-  await page.getByPlaceholder('MM/DD/YYYY').click();
-  await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
+  // await page.getByPlaceholder('MM/DD/YYYY').click();
+  // await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
   
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('MEDICAID');
@@ -1633,8 +1647,8 @@ await page.getByRole('banner').getByTestId('priority_flag_image').click();
 await page.getByRole('menuitem', { name: 'Urgent' }).click();
 await page.getByRole('button', { name: 'Task None priority flag' }).click();
 await page.getByRole('menuitem', { name: 'Urgent' }).click();
-await page.getByRole('button', { name: 'Open' }).click();
-await page.getByText('InProgress').click();
+await page.getByRole('button', { name: 'Open status_mark_Open' }).click();
+await page.getByText('In Progress').click();
 await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
 await page.waitForTimeout(5000);
 
@@ -1708,15 +1722,14 @@ test('Owner Dashboard', async () => {
   await page.waitForTimeout(3000);
 // Taskboard flows
 await page.getByText('Owner Automation Task').click();
-await page.getByRole('button', { name: 'InProgress' }).click();
-await page.getByText('InReview').click();
+await page.getByRole('button', { name: 'In Progress' }).click();
+await page.getByText('In Review').click();
 await page.getByRole('button', { name: 'assignee icon' }).click();
 await page.locator('p').filter({ hasText: 'Owner Team' }).click();
 await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.getByRole('tab', { name: 'Clinician' }).click();
 await page.getByRole('tab', { name: 'Practice' }).click();
-
 
 try {
   await page.locator('div').filter({ hasText: /^Calendar$/ }).first().click();

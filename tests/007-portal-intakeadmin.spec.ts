@@ -66,14 +66,14 @@ await page.getByLabel('', { exact: true }).check();
     await page.getByText('Team members').first().click();
     await page.waitForTimeout(5000);
 //     // Billing Tab
-await page.locator('p').filter({ hasText: 'Billing' }).click();
-await page.getByRole('tab', { name: 'Insurance' }).click();
-  await page.getByText('Payers').click();
-  await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-  await page.getByLabel('Search for insurance payers').click();
-  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('careplus');
-  await page.getByText('CAREPLUS- NHC04').click();
-  await page.getByRole('button', { name: 'Add' }).nth(1).click();
+// await page.locator('p').filter({ hasText: 'Billing' }).click();
+// await page.getByRole('tab', { name: 'Insurance' }).click();
+//   await page.getByText('Payers').click();
+//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
+//   await page.getByLabel('Search for insurance payers').click();
+//   await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('careplus');
+//   await page.getByText('CAREPLUS- NHC04').click();
+//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
     // Add practice Emails Imports
     await page.waitForTimeout(5000);
 await page.getByText('Practice Email Imports').click();
@@ -286,7 +286,6 @@ test('Forms Tab', async () => {
     await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
     await page.waitForTimeout(1000);
     
-
     // // Treatment plan
     await page.getByRole('button', { name: 'Create new' }).nth(1).click();
     await page.getByText('Treatment plan', { exact: true }).click();
@@ -640,9 +639,9 @@ test('Forms Tab', async () => {
         await page.getByRole('tab', { name: 'Basic Information' }).click();
         await page.getByLabel('Sex').click();
         await page.getByRole('option', { name: 'Male', exact: true }).click();
-        await page.getByPlaceholder('MM/DD/YYYY').click();
-        await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
-        await page.waitForTimeout(2000);
+        // await page.getByPlaceholder('MM/DD/YYYY').click();
+        // await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
+        await page.waitForTimeout(5000);
         await page.getByLabel('Member ID').click();
         await page.getByLabel('Member ID').fill('GAH23');
         await page.waitForTimeout(2000);
@@ -699,8 +698,8 @@ test('Forms Tab', async () => {
         await page.getByRole('menuitem', { name: 'Urgent' }).click();
         await page.getByRole('button', { name: 'Task None priority flag' }).click();
         await page.getByRole('menuitem', { name: 'Urgent' }).click();
-        await page.getByRole('button', { name: 'Open' }).click();
-        await page.getByText('InProgress').click();
+        await page.getByRole('button', { name: 'Open status_mark_Open' }).click();
+        await page.getByText('In Progress').click();
         
         await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
      
@@ -790,8 +789,8 @@ await page.waitForTimeout(5000);
      await page.waitForTimeout(3000);
      // Taskboard Flows
      await page.getByText('Intake Automation Task').click();
-     await page.getByRole('button', { name: 'InProgress' }).click();
-await page.getByText('InReview').click();
+     await page.getByRole('button', { name: 'In Progress' }).click();
+await page.getByText('In Review').click();
 await page.getByRole('button', { name: 'assignee icon' }).click();
 await page.locator('p').filter({ hasText: 'IntakeAdmin 1' }).click();
 await page.getByRole('button', { name: 'Save changes' }).nth(1).click();

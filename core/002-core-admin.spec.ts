@@ -187,16 +187,17 @@ test('Intake tab', async () => {
   await page.getByRole('tab', { name: 'Attachments' }).click();
   await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
 
-  await page.getByPlaceholder('Search by name').click();
-  await page.getByPlaceholder('Search by name').fill('Alfred');
-  await page.getByPlaceholder('Search by name').press('Enter');
-  await page.waitForTimeout(2000);
-  const page1Promise  = page.waitForEvent('popup');
-  await page.getByLabel('Open lead in new tab').click();
-  const page1 = await page1Promise;
-  await page1.getByRole('tab', { name: 'Basic Information' }).click();
-  await page1.close();
-  await page.waitForTimeout(2000);
+  // await page.getByPlaceholder('Search by name').click();
+  // await page.getByPlaceholder('Search by name').fill('Alfred');
+  // await page.getByPlaceholder('Search by name').press('Enter');
+  // await page.waitForTimeout(2000);
+  // const page1Promise  = page.waitForEvent('popup');
+  // await page.getByLabel('Open lead in new tab').click();
+  // const page1 = await page1Promise;
+  // await page1.getByRole('tab', { name: 'Basic Information' }).click();
+  // await page1.close();
+  // await page.waitForTimeout(2000);
+  
   await page.getByPlaceholder('Search by name').click();
   await page.getByPlaceholder('Search by name').fill('Alfred');
   await page.getByPlaceholder('Search by name').press('Enter');

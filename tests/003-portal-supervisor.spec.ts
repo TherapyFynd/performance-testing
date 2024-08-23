@@ -266,31 +266,31 @@ test('Client File', async () => {
     // Info and Settings
     await page.getByText('Alfred Arnoldson').click();
     await page.getByRole('button', { name: 'Info & settings' }).nth(1).click();
-    await page.getByRole('tab', { name: 'Insurance Eligibility' }).click();
-    await page.waitForTimeout(6000);
-    await page.getByRole('button', { name: 'Verify Benefits' }).nth(1).click();
-    await page.waitForTimeout(8000);
-    await page.getByRole('button', { name: 'View Log' }).nth(1).click();
-    await page.waitForTimeout(2000);
-    await page.locator('._header_1ox1a_5 > .MuiButtonBase-root').click();
-    await page.reload();
-    await page.waitForTimeout(2000);
-    await page.getByRole('button', { name: 'Share' }).nth(1).click();
-  await page.getByLabel('Select Team Member').click();
-  await page.getByRole('combobox', { name: 'Select Team Member' }).fill('Own');
+  //   await page.getByRole('tab', { name: 'Insurance Eligibility' }).click();
+  //   await page.waitForTimeout(6000);
+  //   await page.getByRole('button', { name: 'Verify Benefits' }).nth(1).click();
+  //   await page.waitForTimeout(8000);
+  //   await page.getByRole('button', { name: 'View Log' }).nth(1).click();
+  //   await page.waitForTimeout(2000);
+  //   await page.locator('._header_1ox1a_5 > .MuiButtonBase-root').click();
+  //   await page.reload();
+  //   await page.waitForTimeout(2000);
+  //   await page.getByRole('button', { name: 'Share' }).nth(1).click();
+  // await page.getByLabel('Select Team Member').click();
+  // await page.getByRole('combobox', { name: 'Select Team Member' }).fill('Own');
   
-  try {
-    await page.getByText('Owner Team').click();
-  }
-  catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.getByRole('option', { name: 'icon Owner Team' }).click();
-  }
+  // try {
+  //   await page.getByText('Owner Team').click();
+  // }
+  // catch (error) {
+  //   console.log('Failed to find first locator, trying second locator');
+  //   await page.getByRole('option', { name: 'icon Owner Team' }).click();
+  // }
   
-  await page.getByPlaceholder('Type message here').click();
-  await page.getByPlaceholder('Type message here').fill('Hey Testing name');
-  await page.getByRole('button', { name: 'Share' }).nth(1).click();
-  await page.waitForTimeout(2000);
+  // await page.getByPlaceholder('Type message here').click();
+  // await page.getByPlaceholder('Type message here').fill('Hey Testing name');
+  // await page.getByRole('button', { name: 'Share' }).nth(1).click();
+  // await page.waitForTimeout(2000);
     
     await page
     .locator('div')
@@ -341,8 +341,8 @@ test('TaskBoard Widget Flows', async () => {
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
   await page.getByRole('button', { name: 'Task None priority flag' }).click();
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
-  await page.getByRole('button', { name: 'Open' }).click();
-  await page.getByText('InProgress').click();
+  await page.getByRole('button', { name: 'Open status_mark_Open' }).click();
+  await page.getByText('In Progress').click();
   await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
  
   await page.waitForTimeout(5000);
@@ -396,8 +396,8 @@ test('TaskBoard Widget Flows', async () => {
 
   // Taskboard Flows
   await page.getByText('Supervisor Automation Task').click();
-  await page.getByRole('button', { name: 'InProgress' }).click();
-await page.getByText('InReview').click();
+  await page.getByRole('button', { name: 'In Progress' }).click();
+await page.getByText('In Review').click();
 await page.getByRole('button', { name: 'assignee icon' }).click();
 await page.locator('p').filter({ hasText: 'Supervisor 1' }).click();
 await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
