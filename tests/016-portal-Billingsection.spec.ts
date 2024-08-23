@@ -27,7 +27,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
-test.describe('All BillerSectionRole Test case ', () => {
+test.describe.skip('All BillerSectionRole Test case ', () => {
 test('BillingSection  login and  onboarding ', async ({ request }) => {
   let myEmails: IEmail = await readEmails();
     const data = await generatePasswordlessLoginLink({

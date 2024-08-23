@@ -39,8 +39,8 @@ test.describe('All owner Test case ', () => {
     await page.getByPlaceholder('Enter phone').click();
     await page.getByPlaceholder('Enter phone').fill('(846) 534-65833');
     await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-    await page.getByPlaceholder('Enter your practice name').click();
-    await page.getByPlaceholder('Enter your practice name').fill('KanTime Healthcare System ');
+    await page.getByPlaceholder('Enter Group Practice name').click();
+    await page.getByPlaceholder('Enter Group Practice name').fill('KanTime Healthcare System ');
     await page.getByLabel('Address Line').click();
     await page.getByLabel('Address Line').fill('New York City');
     await page.waitForTimeout(4000);
@@ -54,8 +54,8 @@ test.describe('All owner Test case ', () => {
     await page.getByText('Azusa').click();
     await page.getByPlaceholder('Zip code').click();
     await page.getByPlaceholder('Zip code').fill('561202');
-    await page.getByPlaceholder('Enter your practice name').click();
-    await page.getByPlaceholder('Enter your practice name').fill('KanTime Healthcare System ');
+    await page.getByPlaceholder('Enter Group Practice name').click();
+    await page.getByPlaceholder('Enter Group Practice name').fill('KanTime Healthcare System ');
     await page.getByRole('button', { name: 'Next' }).nth(1).click();
 
     await page.getByRole('button', { name: 'Add new' }).nth(1).click();
@@ -617,8 +617,8 @@ test.describe('All owner Test case ', () => {
     await page.getByRole('menuitem', { name: 'Urgent' }).click();
     await page.getByRole('button', { name: 'Task None priority flag' }).click();
     await page.getByRole('menuitem', { name: 'High' }).click();
-    await page.getByRole('button', { name: 'Open' }).click();
-    await page.getByText('InProgress').click();
+    await page.getByRole('button', { name: 'Open status_mark_Open' }).click();
+    await page.getByText('In Progress').click();
     await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
     await page.waitForTimeout(6000);
 
@@ -630,8 +630,8 @@ test.describe('All owner Test case ', () => {
     await page.waitForTimeout(5000);
 
     await page.getByText('Owner Automation Task').click();
-    await page.getByRole('button', { name: 'InProgress' }).click();
-    await page.getByText('InReview').click();
+    await page.getByRole('button', { name: 'In Progress' }).click();
+    await page.getByText('In Review').click();
     await page.getByRole('button', { name: 'assignee icon' }).click();
     await page.locator('p').filter({ hasText: 'Owner Team' }).click();
     await page.getByRole('button', { name: 'Save changes' }).nth(1).click();

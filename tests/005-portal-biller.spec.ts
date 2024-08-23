@@ -314,8 +314,8 @@ test('TaskBoard Widget Flows', async () => {
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
   await page.getByRole('button', { name: 'Task None priority flag' }).click();
   await page.getByRole('menuitem', { name: 'Urgent' }).click();
-  await page.getByRole('button', { name: 'Open' }).click();
-  await page.getByText('InProgress').click();
+  await page.getByRole('button', { name: 'Open status_mark_Open' }).click();
+  await page.getByText('In Progress').click();
   await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
    await page.waitForTimeout(5000);
   
@@ -375,8 +375,8 @@ test('TaskBoard Widget Flows', async () => {
  
     await page.getByRole('button', { name: 'Status ​', exact: true }).click();
     await page.getByRole('option', { name: 'Open' }).getByRole('checkbox').check();
-    await page.getByRole('option', { name: 'InProgress' }).getByRole('checkbox').check();
-    await page.getByRole('option', { name: 'InReview' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'In Progress' }).getByRole('checkbox').check();
+    await page.getByRole('option', { name: 'In Review' }).getByRole('checkbox').check();
     await page.getByRole('option', { name: 'Completed' }).getByRole('checkbox').check();
     await page.reload();
     await page.waitForTimeout(3000);

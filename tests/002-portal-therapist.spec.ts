@@ -1352,8 +1352,8 @@ test('Supervision Flows', async () => {
       await page.getByRole('menuitem', { name: 'Urgent' }).click();
       await page.getByRole('button', { name: 'Task None priority flag' }).click();
       await page.getByRole('menuitem', { name: 'Urgent' }).click();
-      await page.getByRole('button', { name: 'Open' }).click();
-      await page.getByText('InProgress').click();
+      await page.getByRole('button', { name: 'Open status_mark_Open' }).click();
+      await page.getByText('In Progress').click();
       try {
         await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
       } catch (error) {
@@ -1450,8 +1450,8 @@ test('Supervision Flows', async () => {
 
       // Taskboard Flows
 await page.getByText('Therapist Automation Task').click();
-await page.getByRole('button', { name: 'InProgress' }).click();
-await page.getByText('InReview').click();
+await page.getByRole('button', { name: 'In Progress' }).click();
+await page.getByText('In Review').click();
 await page.getByRole('button', { name: 'assignee icon' }).click();
 await page.locator('p').filter({ hasText: 'Therapist 1' }).click();
 await page.getByRole('button', { name: 'Save changes' }).nth(1).click();

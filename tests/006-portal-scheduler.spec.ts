@@ -289,8 +289,8 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.getByRole('menuitem', { name: 'Urgent' }).click();
     await page.getByRole('button', { name: 'Task None priority flag' }).click();
     await page.getByRole('menuitem', { name: 'Urgent' }).click();
-    await page.getByRole('button', { name: 'Open' }).click();
-    await page.getByText('InProgress').click();
+    await page.getByRole('button', { name: 'Open status_mark_Open' }).click();
+    await page.getByText('In Progress').click();
     await page.getByRole('button', { name: 'Create Task' }).nth(1).click();
     await page.waitForTimeout(5000);
       await page.getByText('Scheduler Automation Task').click();
@@ -346,8 +346,8 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.waitForTimeout(3000);
      // Taskboard Flows
      await page.getByText('Scheduler Automation Task').click();
-     await page.getByRole('button', { name: 'InProgress' }).click();
-await page.getByText('InReview').click();
+     await page.getByRole('button', { name: 'In Progress' }).click();
+await page.getByText('In Review').click();
 await page.getByRole('button', { name: 'assignee icon' }).click();
 await page.locator('p').filter({ hasText: 'Scheduler 1' }).click();
 await page.getByRole('button', { name: 'Save changes' }).nth(1).click();
