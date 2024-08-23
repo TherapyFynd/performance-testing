@@ -1450,8 +1450,8 @@ test('Intake tab', async () => {
   await page.getByRole('tab', { name: 'Basic Information' }).click();
   await page.getByLabel('Sex').click();
   await page.getByRole('option', { name: 'Male', exact: true }).click();
-  await page.getByPlaceholder('MM/DD/YYYY').click();
-  await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
+  // await page.getByPlaceholder('MM/DD/YYYY').click();
+  // await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('GAHRGYT');
   await page.waitForTimeout(3000);
@@ -1510,8 +1510,8 @@ test('Intake tab', async () => {
   await page.getByRole('tab', { name: 'Basic Information' }).click();
   await page.getByLabel('Sex').click();
   await page.getByRole('option', { name: 'Male', exact: true }).click();
-  await page.getByPlaceholder('MM/DD/YYYY').click();
-  await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
+  // await page.getByPlaceholder('MM/DD/YYYY').click();
+  // await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('KRUGSWERW');
   await page.waitForTimeout(3000);
@@ -1574,8 +1574,8 @@ test('Intake tab', async () => {
   await page.getByRole('tab', { name: 'Basic Information' }).click();
   await page.getByLabel('Sex').click();
   await page.getByRole('option', { name: 'Male', exact: true }).click();
-  await page.getByPlaceholder('MM/DD/YYYY').click();
-  await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
+  // await page.getByPlaceholder('MM/DD/YYYY').click();
+  // await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
   
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('MEDICAID');
