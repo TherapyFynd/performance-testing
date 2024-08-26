@@ -1484,6 +1484,7 @@ test('Intake tab', async () => {
   await page.getByRole('tab', { name: 'Insurance' }).click();
   await page.getByRole('button', { name: 'Verify Benefits' }).nth(1).click();
   await page.waitForTimeout(8000);
+  await page.getByRole('button', { name: 'Cancel' }).nth(1).click();
   await page.getByRole('tab', { name: 'Attachments' }).click();
   await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
 // // Second Lead.
@@ -1544,6 +1545,7 @@ test('Intake tab', async () => {
   await page.getByRole('tab', { name: 'Insurance' }).click();
   await page.getByRole('button', { name: 'Verify Benefits' }).nth(1).click();
   await page.waitForTimeout(8000);
+  await page.getByRole('button', { name: 'Cancel' }).nth(1).click();
   await page.getByRole('tab', { name: 'Attachments' }).click();
   await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
 
@@ -1615,6 +1617,7 @@ test('Intake tab', async () => {
   await page.getByRole('tab', { name: 'Insurance' }).click();
   await page.getByRole('button', { name: 'Verify Benefits' }).nth(1).click();
   await page.waitForTimeout(8000);
+  await page.getByRole('button', { name: 'Cancel' }).nth(1).click();
   await page.getByRole('tab', { name: 'Attachments' }).click();
   await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
 
