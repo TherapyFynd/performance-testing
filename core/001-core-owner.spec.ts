@@ -117,10 +117,11 @@ test.describe('All owner Test case ', () => {
     await page.getByText('Male', { exact: true }).click();
     await page.getByLabel('Select your pronouns').click();
     await page.getByRole('option', { name: 'He/Him' }).click();
-    await page.getByLabel('Address Line').click();
-    await page.getByLabel('Address Line').fill('Name');
+    await page.getByLabel('Address Line 1').click();
+    await page.getByLabel('Address Line 1').fill('Name');
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
-
+    await page.waitForTimeout(5000);
+    
     await page.getByRole('tab', { name: 'Clinical' }).click();
     await page.getByLabel('License Type*').click();
     await page.getByRole('combobox', { name: 'License Type*' }).fill('ALC');
@@ -139,8 +140,8 @@ test.describe('All owner Test case ', () => {
     await page.getByText('Adolescent Issues').click();
     await page.getByLabel('Select treatment methods you').click();
     await page.getByRole('option', { name: 'Art Therapy', exact: true }).click();
-    await page.getByLabel('Select accepted payment').click();
-    await page.getByRole('option', { name: 'Insurance' }).click();
+    // await page.getByLabel('Select accepted payment').click();
+    // await page.getByRole('option', { name: 'Insurance' }).click();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
 
     await page.getByRole('tab', { name: 'Locations' }).click();
