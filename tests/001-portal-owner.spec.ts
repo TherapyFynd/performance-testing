@@ -135,7 +135,7 @@ test('Settings Flows', async () => {
   await page.getByLabel('License No.').fill('QEY355');
 
   await page.getByLabel('Select accepted payment').click();
-  await page.getByRole('option', { name: 'SelfPay' }).click();
+  await page.getByRole('option', { name: 'Self Pay' }).click();
   await page.getByLabel('Select your specializations').click();
  
   await page.getByText('Adolescent Issues').click();

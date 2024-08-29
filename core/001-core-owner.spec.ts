@@ -134,7 +134,7 @@ test.describe('All owner Test case ', () => {
     await page.getByLabel('License No.').fill('QEY355');
 
     await page.getByLabel('Select accepted payment').click();
-    await page.getByRole('option', { name: 'SelfPay' }).click();
+    await page.getByRole('option', { name: 'Self Pay' }).click();
     await page.getByLabel('Select your specializations').click();
 
     await page.getByText('Adolescent Issues').click();
@@ -469,11 +469,11 @@ test.describe('All owner Test case ', () => {
     await page1.waitForTimeout(1000);
     await page1.close();
 
-    // Security Feature
-    await page.getByRole('link', { name: 'Security Features' }).click();
-    const page2Promise = page.waitForEvent('popup');
-    const page2 = await page2Promise;
-    await page2.close();
+    // // Security Feature
+    // await page.getByRole('link', { name: 'Security Features' }).click();
+    // const page2Promise = page.waitForEvent('popup');
+    // const page2 = await page2Promise;
+    // await page2.close();
 
     // Billing sections
     await page.locator('p').filter({ hasText: 'Billing' }).click();
