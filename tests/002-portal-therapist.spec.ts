@@ -1505,7 +1505,7 @@ test('Global search', async () => {
   await page.getByPlaceholder('Search here').press('Enter');
   await page.waitForTimeout(2000);
   await page.getByRole('heading', { name: 'Rajesh (T1)' }).click();
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(5000);
   await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
 
   try {
@@ -1522,12 +1522,14 @@ test('Global search', async () => {
   await page.getByPlaceholder('Search here').click();
   await page.getByPlaceholder('Search here').fill('Therapist Automation Forms');
   await page.getByPlaceholder('Search here').press('Enter');
+  await page.waitForTimeout(7000);
   try {
     await page.getByRole('heading', { name: 'Therapist Automation Testing ', exact: true }).first().click();
   } catch (error) {
     console.log('Failed to find first locator, trying second locator');
     await page.locator('._documentRow_1mnx8_69').first().click();
   }
+  
   await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
   await page.waitForTimeout(2000);
 

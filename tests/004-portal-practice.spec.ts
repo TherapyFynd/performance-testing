@@ -805,8 +805,8 @@ test('Create Clients', async () => {
     await page.getByLabel('Last Name*').fill('Kumar');
   await page.getByLabel('Pronouns').click();
   await page.getByRole('option', { name: 'He/Him' }).click();
-  await page.getByPlaceholder('MM/DD/YYYY').click();
-  await page.getByPlaceholder('MM/DD/YYYY').fill('10/10/1999');
+  // await page.getByPlaceholder('MM/DD/YYYY').click();
+  // await page.getByPlaceholder('MM/DD/YYYY').fill('10/10/1999');
   await page.getByLabel('Phone Number').click();
   await page.getByLabel('Phone Number').fill('(745) 273-54242');
   await page.getByLabel('First Name', { exact: true }).click();

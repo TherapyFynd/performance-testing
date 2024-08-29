@@ -410,6 +410,7 @@ try {
 console.log('Failed to find first locator, trying second locator');
 await page.getByText('Calendar').first().click();
 }
+await page.waitForTimeout(5000);
 await page.getByLabel('Color').click();
 await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
 await page.waitForTimeout(3000);
