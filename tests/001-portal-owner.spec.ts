@@ -68,7 +68,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByLabel('Address').fill('New area City');
   await page.getByLabel('State').click();
   await page.getByRole('combobox', { name: 'State' }).fill('New york');
-  await page.getByText('New York').click();
+  // await page.getByText('New York').click();
   await page.getByLabel('City').click();
   await page.getByRole('combobox', { name: 'City' }).fill('Fre');
   await page.getByText('Freeport').click();
@@ -1134,10 +1134,10 @@ test('Client File', async () => {
   await page.getByLabel('Address line').fill('New City main office');
   await page.getByLabel('State').click();
   await page.getByRole('combobox', { name: 'State' }).fill('Utah');
-  await page.getByRole('option', { name: 'Utah' }).click();
+  // await page.getByRole('option', { name: 'Utah' }).click();
   await page.getByLabel('City').click();
   await page.getByRole('combobox', { name: 'City' }).fill('Roy');
-  await page.getByRole('option', { name: 'Roy' }).click();
+  // await page.getByRole('option', { name: 'Roy' }).click();
   await page.getByLabel('Zip code').click();
   await page.getByLabel('Zip code').fill('678203');
   await page.getByLabel('Insurance Company').click();
@@ -1185,36 +1185,36 @@ test('Client File', async () => {
   await page.getByRole('button', { name: 'Send' }).nth(1).click();
 
   // Template Add in Client File (CF) in Stage only
-  // await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
-  // await page.getByRole('tab', { name: 'Templates' }).click();
-  // await page.getByText('Questionnaires').click();
-  // await page.getByLabel('Select Forms to send').click();
-  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('100');
-  // await page.getByRole('option', { name: 'question' }).click();
-  // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
-  // await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
-  // await page.getByText('Consent forms').click();
-  // await page.getByLabel('Select Forms to send').click();
-  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('demo');
-  // await page.getByRole('option', { name: 'Template demo for consent' }).click();
-  // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
-  // await page.getByRole('button', { name: 'Send' }).nth(1).click();
-
-    // Template Add in Client File (CF) in Production only
   await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
   await page.getByRole('tab', { name: 'Templates' }).click();
   await page.getByText('Questionnaires').click();
   await page.getByLabel('Select Forms to send').click();
-  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Demo');
-  await page.getByRole('option', { name: 'Demographic form' }).click();
+  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('100');
+  await page.getByRole('option', { name: 'question' }).click();
   await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
   await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.getByText('Consent forms').click();
   await page.getByLabel('Select Forms to send').click();
-  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Pra');
-  await page.getByRole('option', { name: 'Practice Policies' }).click();
+  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('demo');
+  await page.getByRole('option', { name: 'Template demo for consent' }).click();
   await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
   await page.getByRole('button', { name: 'Send' }).nth(1).click();
+
+    // Template Add in Client File (CF) in Production only
+  // await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
+  // await page.getByRole('tab', { name: 'Templates' }).click();
+  // await page.getByText('Questionnaires').click();
+  // await page.getByLabel('Select Forms to send').click();
+  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Demo');
+  // await page.getByRole('option', { name: 'Demographic form' }).click();
+  // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
+  // await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
+  // await page.getByText('Consent forms').click();
+  // await page.getByLabel('Select Forms to send').click();
+  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Pra');
+  // await page.getByRole('option', { name: 'Practice Policies' }).click();
+  // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
+  // await page.getByRole('button', { name: 'Send' }).nth(1).click();
 
   //   Notes Section
   await page.getByRole('tab', { name: 'Notes' }).click();

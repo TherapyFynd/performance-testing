@@ -46,6 +46,7 @@ test.describe('All owner Test case ', () => {
     await page.waitForTimeout(4000);
     await page.getByPlaceholder('Street address').click();
     await page.getByPlaceholder('Street address').fill('New Area City ');
+ 
     await page.getByLabel('State').click();
     await page.getByRole('combobox', { name: 'State' }).fill('cali');
     await page.getByText('California').click();
@@ -64,11 +65,10 @@ test.describe('All owner Test case ', () => {
     await page.getByLabel('Address').click();
     await page.getByLabel('Address').fill('New area City');
     await page.getByLabel('State').click();
-    await page.getByRole('combobox', { name: 'State' }).fill('New york');
-    await page.getByText('New York').click();
+    await page.getByRole('combobox', { name: 'State' }).fill('Haw');
+    await page.getByRole('option', { name: 'Hawaii' }).click();
     await page.getByLabel('City').click();
-    await page.getByRole('combobox', { name: 'City' }).fill('Fre');
-    await page.getByText('Freeport').click();
+    await page.getByRole('option', { name: 'Honolulu' }).click();
     await page.getByPlaceholder('Zip code').click();
     await page.getByPlaceholder('Zip code').fill('56192');
     await page.getByLabel('Make default location').check();
