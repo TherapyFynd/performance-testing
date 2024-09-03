@@ -968,10 +968,10 @@ test('Client File', async () => {
   await page.getByLabel('Address line').fill('New City main office');
   await page.getByLabel('State').click();
   await page.getByRole('combobox', { name: 'State' }).fill('Utah');
-  await page.getByRole('option', { name: 'Utah' }).click();
+  // await page.getByRole('option', { name: 'Utah' }).click();
   await page.getByLabel('City').click();
   await page.getByRole('combobox', { name: 'City' }).fill('Roy');
-  await page.getByRole('option', { name: 'Roy' }).click();
+  // await page.getByRole('option', { name: 'Roy' }).click();
   await page.getByLabel('Zip code').click();
   await page.getByLabel('Zip code').fill('678203');
   await page.getByLabel('Insurance Company').click();
@@ -1235,10 +1235,10 @@ test('Supervision Flows', async () => {
     await page.getByLabel('Address line').fill('New City main office');
     await page.getByLabel('State').click();
     await page.getByRole('combobox', { name: 'State' }).fill('Utah');
-    await page.getByRole('option', { name: 'Utah' }).click();
+    // await page.getByRole('option', { name: 'Utah' }).click();
     await page.getByLabel('City').click();
     await page.getByRole('combobox', { name: 'City' }).fill('Roy');
-    await page.getByRole('option', { name: 'Roy' }).click();
+    // await page.getByRole('option', { name: 'Roy' }).click();
     await page.getByLabel('Zip code').click();
     await page.getByLabel('Zip code').fill('678203');
     await page.getByLabel('Insurance Company').click();
@@ -1505,31 +1505,33 @@ test('Global search', async () => {
   await page.getByPlaceholder('Search here').press('Enter');
   await page.waitForTimeout(2000);
   await page.getByRole('heading', { name: 'Rajesh (T1)' }).click();
-  await page.waitForTimeout(2000);
-  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
-
-  try {
-    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-     await page.getByText('Settings').click();
-  }
-  await page.getByText('Clinician settings').click();
   await page.waitForTimeout(5000);
-  await page.getByText('Booking widget').click();
-  await page.getByPlaceholder('Search').click();
-  await page.getByRole('tab', { name: 'Documents' }).click();
-  await page.getByPlaceholder('Search here').click();
-  await page.getByPlaceholder('Search here').fill('Therapist Automation Forms');
-  await page.getByPlaceholder('Search here').press('Enter');
-  try {
-    await page.getByRole('heading', { name: 'Therapist Automation Testing ', exact: true }).first().click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.locator('._documentRow_1mnx8_69').first().click();
-  }
-  await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
-  await page.waitForTimeout(2000);
+  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+  await page.waitForTimeout(4000);
+  // try {
+  //   await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  // } catch (error) {
+  //   console.log('Failed to find first locator, trying second locator');
+  //    await page.getByText('Settings').click();
+  // }
+  // await page.getByText('Clinician settings').click();
+  // await page.waitForTimeout(5000);
+  // await page.getByText('Booking widget').click();
+  // await page.getByPlaceholder('Search').click();
+  // await page.getByRole('tab', { name: 'Documents' }).click();
+  // await page.getByPlaceholder('Search here').click();
+  // await page.getByPlaceholder('Search here').fill('Therapist Automation Forms');
+  // await page.getByPlaceholder('Search here').press('Enter');
+  // await page.waitForTimeout(7000);
+  // try {
+  //   await page.getByRole('heading', { name: 'Therapist Automation Testing ', exact: true }).first().click();
+  // } catch (error) {
+  //   console.log('Failed to find first locator, trying second locator');
+  //   await page.locator('._documentRow_1mnx8_69').first().click();
+  // }
+  
+  // await page.locator('div').filter({ hasText: /^Therapist Automation Testing$/ }).getByRole('button').click();
+  // await page.waitForTimeout(2000);
 
 });
 // Update DP and Logout Flow

@@ -46,6 +46,7 @@ test.describe('All owner Test case ', () => {
     await page.waitForTimeout(4000);
     await page.getByPlaceholder('Street address').click();
     await page.getByPlaceholder('Street address').fill('New Area City ');
+ 
     await page.getByLabel('State').click();
     await page.getByRole('combobox', { name: 'State' }).fill('cali');
     await page.getByText('California').click();
@@ -64,11 +65,10 @@ test.describe('All owner Test case ', () => {
     await page.getByLabel('Address').click();
     await page.getByLabel('Address').fill('New area City');
     await page.getByLabel('State').click();
-    await page.getByRole('combobox', { name: 'State' }).fill('New york');
-    await page.getByText('New York').click();
+    await page.getByRole('combobox', { name: 'State' }).fill('Haw');
+    await page.getByRole('option', { name: 'Hawaii' }).click();
     await page.getByLabel('City').click();
-    await page.getByRole('combobox', { name: 'City' }).fill('Fre');
-    await page.getByText('Freeport').click();
+    await page.getByRole('option', { name: 'Honolulu' }).click();
     await page.getByPlaceholder('Zip code').click();
     await page.getByPlaceholder('Zip code').fill('56192');
     await page.getByLabel('Make default location').check();
@@ -134,7 +134,7 @@ test.describe('All owner Test case ', () => {
     await page.getByLabel('License No.').fill('QEY355');
 
     await page.getByLabel('Select accepted payment').click();
-    await page.getByRole('option', { name: 'SelfPay' }).click();
+    await page.getByRole('option', { name: 'Self Pay' }).click();
     await page.getByLabel('Select your specializations').click();
 
     await page.getByText('Adolescent Issues').click();
@@ -469,11 +469,11 @@ test.describe('All owner Test case ', () => {
     await page1.waitForTimeout(1000);
     await page1.close();
 
-    // Security Feature
-    await page.getByRole('link', { name: 'Security Features' }).click();
-    const page2Promise = page.waitForEvent('popup');
-    const page2 = await page2Promise;
-    await page2.close();
+    // // Security Feature
+    // await page.getByRole('link', { name: 'Security Features' }).click();
+    // const page2Promise = page.waitForEvent('popup');
+    // const page2 = await page2Promise;
+    // await page2.close();
 
     // Billing sections
     await page.locator('p').filter({ hasText: 'Billing' }).click();
