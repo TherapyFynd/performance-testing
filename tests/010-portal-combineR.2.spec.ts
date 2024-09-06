@@ -1238,7 +1238,7 @@ await page.waitForTimeout(5000);
     await page.waitForTimeout(2000);
     await page.getByRole('heading', { name: 'Rajesh (T1)' }).click();
     await page.waitForTimeout(2000);
-    await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+    // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
     try {
       await page.locator('div').filter({ hasText: /^Settings$/ }).click();
     } catch (error) {

@@ -260,8 +260,18 @@ test('Client File', async () => {
     .getByRole('button')
     .click();
 
-  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
-  await page.waitForTimeout(1000);
+    try {
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Settings').click();
+    }
+
+    await page
+    .locator('div')
+    .filter({ hasText: /^Clients$/ })
+    .getByRole('img')
+    .click();
   
     // Info and Settings
     await page.getByText('Alfred Arnoldson').click();
@@ -297,7 +307,7 @@ test('Client File', async () => {
     .filter({ hasText: /^Basic InfoIndividual$/ })
     .getByRole('button')
     .click();
-    await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+    // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
 });
 
 test('Supervision Flow', async () => {

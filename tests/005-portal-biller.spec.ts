@@ -171,7 +171,12 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.waitForTimeout(11000);
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(2000);
-  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+  await page.getByText('Dashboard').click();
+  await page
+  .locator('div')
+  .filter({ hasText: /^Clients$/ })
+  .getByRole('img')
+  .click();
   await page.waitForTimeout(2000);
   await page.getByText('Rajesh Das').click();
    // Create Appoinment
@@ -183,8 +188,8 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
      .click();
      await page.waitForTimeout(10000);
    await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-   await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
-   await page.waitForTimeout(5000);
+  //  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+  //  await page.waitForTimeout(5000);
 });
 // test('Insurance Tab', async () => {
 //   await page.locator('div').filter({ hasText: /^Insurance$/ }).getByRole('img').click();

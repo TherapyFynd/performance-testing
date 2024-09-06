@@ -802,7 +802,7 @@ test('Client File', async () => {
       await page.waitForTimeout(12000);
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(2000);
-    await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+    // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
 });
 test('Message Tab', async () => {
   //   Messages Box
