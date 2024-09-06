@@ -268,7 +268,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.waitForTimeout(10000);
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(2000);
-  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+  // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
 
   });
   test('TaskBoard Widget Flows', async () => {

@@ -1109,7 +1109,7 @@ test('Client File', async () => {
 test('Supervision Flows', async () => {
  
   // Supervision Flows
-  await page.getByText('Upcoming').click();
+  await page.locator('p').filter({ hasText: 'Upcoming' }).click();
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
   await page.getByRole('tab', { name: 'Personal' }).click();
   await page.getByText('Progress notes').click();
@@ -1186,7 +1186,8 @@ test('Supervision Flows', async () => {
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.waitForTimeout(1000);
   await page.getByRole('tab', { name: 'Sessions' }).click();
-  await page.getByText('Upcoming').click();
+
+ await page.locator('p').filter({ hasText: 'Upcoming' }).click();
   await page.waitForTimeout(4000);
   await page.getByText('Therapist Automation Testing').click();
   await page.getByRole('button', { name: 'Sign & Lock' }).nth(1).click();
@@ -1198,7 +1199,20 @@ test('Supervision Flows', async () => {
     .filter({ hasText: /^Therapist Automation Testing$/ })
     .getByRole('button')
     .click();
-    await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+    // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+
+    try {
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Settings').click();
+    }
+
+    await page
+    .locator('div')
+    .filter({ hasText: /^Clients$/ })
+    .getByRole('img')
+    .click();
 
     // Back Button
     await page.waitForTimeout(3000);
@@ -1275,7 +1289,8 @@ test('Supervision Flows', async () => {
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.waitForTimeout(3000);
     await page.locator('div').filter({ hasText: /^Basic InfoIndividual$/ }).getByRole('button').click();
-    await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+    // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+
 });
 
 // Insurance Tab
@@ -1506,8 +1521,8 @@ test('Global search', async () => {
   await page.waitForTimeout(2000);
   await page.getByRole('heading', { name: 'Rajesh (T1)' }).click();
   await page.waitForTimeout(5000);
-  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
-  await page.waitForTimeout(4000);
+  // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+  // await page.waitForTimeout(4000);
   // try {
   //   await page.locator('div').filter({ hasText: /^Settings$/ }).click();
   // } catch (error) {

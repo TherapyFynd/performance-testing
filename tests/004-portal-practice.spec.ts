@@ -943,7 +943,18 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.waitForTimeout(10000);
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(2000);
-  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
+
+  await page
+  .locator('div')
+  .filter({ hasText: /^Clients$/ })
+  .getByRole('img')
+  .click(); 
    // Multi Client Flows
     await page.getByText('Rajesh Das').click();
     await page.getByRole('button', { name: 'Profile & Clinician' }).nth(1).click();
@@ -953,8 +964,20 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.getByRole('textbox').click();
     await page.getByRole('textbox').fill('Rajesh@1');
     await page.getByRole('button', { name: 'Create' }).nth(1).click();
-    await page.locator('._cliniciansHeader_111x7_56 > .MuiButtonBase-root').click();
-    await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+    await page.locator('._cliniciansHeader_1glpc_60 > .MuiButtonBase-root').click();
+
+   try {
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Settings').click();
+    }
+
+    await page
+    .locator('div')
+    .filter({ hasText: /^Clients$/ })
+    .getByRole('img')
+    .click();
    // Minor 
   await page.getByText('Shiva Kumar').click();
   await page.getByRole('button', { name: 'Profile & Clinician' }).nth(1).click();
@@ -967,8 +990,20 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.getByRole('textbox').click();
   await page.getByRole('textbox').fill('Shiva & Venkatesh@1');
   await page.getByRole('button', { name: 'Create' }).nth(1).click();
-  await page.locator('._cliniciansHeader_111x7_56 > .MuiButtonBase-root').click();
-    await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+  await page.locator('._cliniciansHeader_1glpc_60 > .MuiButtonBase-root').click();
+
+   try {
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Settings').click();
+    }
+
+    await page
+    .locator('div')
+    .filter({ hasText: /^Clients$/ })
+    .getByRole('img')
+    .click();
   // Couple 
   await page.getByText('Rakesh Das').click();
   await page.getByRole('button', { name: 'Profile & Clinician' }).nth(1).click();
@@ -981,8 +1016,20 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.getByRole('textbox').click();
   await page.getByRole('textbox').fill('Rakesh & Poornima@1');
   await page.getByRole('button', { name: 'Create' }).nth(1).click();
-  await page.locator('._cliniciansHeader_111x7_56 > .MuiButtonBase-root').click();
-  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+  await page.locator('._cliniciansHeader_1glpc_60 > .MuiButtonBase-root').click();
+
+ try {
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Settings').click();
+    }
+
+    await page
+    .locator('div')
+    .filter({ hasText: /^Clients$/ })
+    .getByRole('img')
+    .click();
    
   await page.getByText('Rajesh Das').click();
   await page.getByRole('tab', { name: 'Sessions' }).click();
@@ -996,8 +1043,9 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.waitForTimeout(10000);
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(7000);
-  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
-  await page.waitForTimeout(5000);
+
+  // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+  // await page.waitForTimeout(5000);
 
 });
 // test('Insurance Tab', async () => {

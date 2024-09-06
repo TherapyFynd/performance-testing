@@ -1226,7 +1226,7 @@ test('Client File', async () => {
   await page.getByRole('textbox', { name: 'Search' }).click();
   await page.getByRole('textbox', { name: 'Search' }).fill('Automation');
 
-    await page.locator('div').filter({ hasText: /^Automation Testing$/ }).click();
+  await page.locator('div').filter({ hasText: /^Automation Testing$/ }).click();
   await page.getByPlaceholder('Enter your response here').first().click();
   await page
     .getByPlaceholder('Enter your response here')
@@ -1782,7 +1782,7 @@ test('Global search', async () => {
   await page.getByPlaceholder('Search here').press('Enter');
   await page.getByRole('heading', { name: 'Automation (OT)' }).click();
   await page.waitForTimeout(2000);
-  await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
+  // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
 
   try {
     await page.locator('div').filter({ hasText: /^Settings$/ }).click();
