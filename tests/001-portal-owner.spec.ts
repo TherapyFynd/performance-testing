@@ -404,7 +404,7 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.getByRole('button', { name: 'Edit' }).nth(1).click();
 
   await page.locator('._optionalAdd_1hmqc_14').first().click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -416,7 +416,7 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.waitForTimeout(2000);
 
   await page.locator('div').filter({ hasText: /^Tuesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -428,7 +428,7 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.waitForTimeout(2000);
 
   await page.locator('div').filter({ hasText: /^Wednesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -440,7 +440,7 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.waitForTimeout(2000);
  
   await page.locator('div').filter({ hasText: /^Thursday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -452,7 +452,7 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.waitForTimeout(2000);
 
   await page.locator('div').filter({ hasText: /^Friday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -464,7 +464,7 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.waitForTimeout(2000);
 
   await page.locator('div').filter({ hasText: /^Saturday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -476,8 +476,8 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.waitForTimeout(2000);
 
    await page.locator('div').filter({ hasText: /^Sunday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
-  await page.getByRole('spinbutton').first().click();
+   await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
+   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
   await page.getByRole('spinbutton').nth(1).click();
@@ -1376,6 +1376,21 @@ test('Reports Tab', async () => {
   await page.getByPlaceholder('Enter your response here').click();
   await page.getByPlaceholder('Enter your response here').fill('Test Noted adding here');
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
+  await page.getByLabel('Status').click();
+  await page.getByRole('option', { name: 'All' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'Completed notes' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+  await page.waitForTimeout(5000);
+  await page.getByLabel('Status').click();
+  await page.getByRole('option', { name: 'Completed notes' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'Pending notes' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+  await page.waitForTimeout(5000);
+  await page.getByLabel('Status').click();
+  await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+
   try {
     await page.getByTestId('KeyboardArrowDownIcon').click();
  } catch (error) {
@@ -1396,8 +1411,15 @@ test('Reports Tab', async () => {
   await page.getByLabel('Clients').click();
   await page.getByRole('button', { name: 'Apply' }).nth(1).click();
   await page.getByLabel('Status').click();
+  await page.getByRole('option', { name: 'Paid' }).click();
+  await page.waitForTimeout(5000);
+  await page.getByLabel('Status').click();
   await page.getByRole('option', { name: 'Pending' }).click();
-//   
+  await page.waitForTimeout(5000);
+  await page.getByLabel('Status').click();
+  await page.getByRole('option', { name: 'Failed' }).click();
+   
+
 //   await page.locator('p').filter({ hasText: /^Income$/ }).click();
 //   await page.getByText('Income Allocation').click();
 // // 
@@ -1825,7 +1847,6 @@ test('Global search', async () => {
   await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByRole('button').click();
   await page.waitForTimeout(2000);
   
-
 });
 
 test('DP Update and Logout', async () => {

@@ -118,7 +118,7 @@ test('Settings Flows', async () => {
   await page.getByRole('button', { name: 'Edit' }).nth(1).click();
 
   await page.locator('._optionalAdd_1hmqc_14').first().click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -130,7 +130,7 @@ test('Settings Flows', async () => {
   await page.waitForTimeout(2000);
 
   await page.locator('div').filter({ hasText: /^Tuesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -142,7 +142,7 @@ test('Settings Flows', async () => {
   await page.waitForTimeout(2000);
 
   await page.locator('div').filter({ hasText: /^Wednesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -154,7 +154,7 @@ test('Settings Flows', async () => {
   await page.waitForTimeout(2000);
  
   await page.locator('div').filter({ hasText: /^Thursday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -166,7 +166,7 @@ test('Settings Flows', async () => {
   await page.waitForTimeout(2000);
 
   await page.locator('div').filter({ hasText: /^Friday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -178,7 +178,7 @@ test('Settings Flows', async () => {
   await page.waitForTimeout(2000);
 
   await page.locator('div').filter({ hasText: /^Saturday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -190,8 +190,8 @@ test('Settings Flows', async () => {
   await page.waitForTimeout(2000);
 
    await page.locator('div').filter({ hasText: /^Sunday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
-  await page.getByRole('spinbutton').first().click();
+   await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
+   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
   await page.getByRole('spinbutton').nth(1).click();
@@ -501,6 +501,11 @@ test('Create Appoinment', async () => {
 test('Client File', async () => {
   //  Client file
   await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
+  await page.getByPlaceholder('Search client').click();
+  await page.getByPlaceholder('Search client').fill('Raje');
+  await page.getByPlaceholder('Search client').press('Enter');
+  await page.waitForTimeout(5000);
+
   try {
     await page.getByRole('cell', { name: 'icon Rajesh Das' }).click();
   } catch (error) {
@@ -523,6 +528,18 @@ test('Client File', async () => {
   await page.getByRole('tab', { name: 'Payment' }).click();
   // await page.getByLabel('Insurance').check();
   // await page.waitForTimeout(2000);
+  // Add card
+      // await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').click();
+      // await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').fill('4000056655665556');
+      // await page .waitForTimeout(5000);
+      // await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').click();
+      // await page.frameLocator("iframe[title='Secure expiration date input frame']").getByPlaceholder('Expiry date (MM/YY)').fill('08 / 31');
+      // await page .waitForTimeout(5000);
+      // await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').click();
+      // await page.frameLocator("iframe[title='Secure CVC input frame']").getByPlaceholder('CVV').fill('2545');
+      // await page .waitForTimeout(5000);
+      // await page.getByRole('button', { name: 'Add card' }).nth(1).click();
+      // await page .waitForTimeout(5000);
   // Logic For Fail Locator
   try {
     await page.getByLabel('Client\'s spouse').check();
@@ -531,27 +548,6 @@ test('Client File', async () => {
     console.log('Failed to find first locator, trying second locator');
     await page.getByText('Other').click();
   }
-  // await page.getByPlaceholder('MM/DD/YYYY').first().click();
-  // await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/1999');
-  // await page.getByLabel('Choose date').first().click();
-  // await page.getByLabel('calendar view is open, switch').click();
-  // await page.getByRole('button', { name: '2000', exact: true }).click();
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByRole('gridcell', { name: '1', exact: true }).first().click();
-  // await page.waitForTimeout(2000);
   await page.getByLabel('Sex').click();
   await page.getByRole('option', { name: 'Male', exact: true }).click();
   await page.getByPlaceholder('Phone').click();
@@ -581,12 +577,34 @@ test('Client File', async () => {
   // await page.getByPlaceholder('MM/DD/YYYY').nth(2).fill('10/10/2030');
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.waitForTimeout(5000);
+  await page.getByRole('tab', { name: 'Documents' }).click();
+  await page.getByText('SimplePractice').click();
+  await page.getByTestId('ArrowBackRoundedIcon').click();
   await page
     .locator('div')
     .filter({ hasText: /^Basic InfoIndividual$/ })
     .getByRole('button')
     .click();
+    await page.waitForTimeout(2000);
 
+    await page.getByRole('tab', { name: 'Scored Measures' }).click();
+    await page.getByRole('button', { name: 'Send measure' }).nth(1).click();
+    await page.getByRole('heading', { name: 'PHQ-' }).click();
+    await page.waitForTimeout(5000);
+    await page.getByRole('button', { name: 'Send measure' }).nth(1).click();
+    await page.getByRole('heading', { name: 'GAD-' }).click();
+    await page.waitForTimeout(5000);
+
+  await page.getByRole('tab', { name: 'Bills' }).click();
+  await page.getByLabel('Status').click();
+  await page.getByRole('option', { name: 'Paid' }).click();
+  await page.waitForTimeout(3000);
+  await page.getByLabel('Status').click();
+  await page.getByRole('option', { name: 'Pending' }).click();
+  await page.waitForTimeout(3000);
+  await page.getByLabel('Status').click();
+  await page.getByRole('option', { name: 'Settled' }).click();
+  await page.waitForTimeout(3000);
   // Create Appoinment
 
   await page.getByRole('button', { name: 'Add' }).nth(3).click();
