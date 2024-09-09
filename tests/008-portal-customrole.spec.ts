@@ -137,7 +137,7 @@ await page.getByLabel('', { exact: true }).check();
     await page.getByRole('button', { name: 'Edit' }).nth(1).click();
 
   await page.locator('._optionalAdd_1hmqc_14').first().click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -149,7 +149,7 @@ await page.getByLabel('', { exact: true }).check();
   await page.waitForTimeout(2000);
 
   await page.locator('div').filter({ hasText: /^Tuesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -161,7 +161,7 @@ await page.getByLabel('', { exact: true }).check();
   await page.waitForTimeout(2000);
 
   await page.locator('div').filter({ hasText: /^Wednesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -173,7 +173,7 @@ await page.getByLabel('', { exact: true }).check();
   await page.waitForTimeout(2000);
  
   await page.locator('div').filter({ hasText: /^Thursday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -185,7 +185,7 @@ await page.getByLabel('', { exact: true }).check();
   await page.waitForTimeout(2000);
 
   await page.locator('div').filter({ hasText: /^Friday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -197,7 +197,7 @@ await page.getByLabel('', { exact: true }).check();
   await page.waitForTimeout(2000);
 
   await page.locator('div').filter({ hasText: /^Saturday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
+  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
@@ -209,8 +209,8 @@ await page.getByLabel('', { exact: true }).check();
   await page.waitForTimeout(2000);
 
    await page.locator('div').filter({ hasText: /^Sunday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^Enter a value$/ }).getByTestId('KeyboardArrowDownIcon').click();
-  await page.getByRole('spinbutton').first().click();
+   await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
+   await page.getByRole('spinbutton').first().click();
   await page.getByRole('spinbutton').first().fill('11');
   await page.waitForTimeout(2000);
   await page.getByRole('spinbutton').nth(1).click();
