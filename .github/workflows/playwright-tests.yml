@@ -58,7 +58,7 @@ jobs:
 
       # Step to upload artifact
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: html-report
           path: html-report.zip
