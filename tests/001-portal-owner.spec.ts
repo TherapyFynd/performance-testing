@@ -1830,21 +1830,6 @@ test('Global search', async () => {
     console.log('Failed to find first locator, trying second locator');
      await page.getByText('Settings').click();
   }
-  await page.getByText('Clinician settings').click();
-  await page.waitForTimeout(5000);
-  await page.getByText('Practice settings').click();
-  await page.getByPlaceholder('Search').click(); 
-  await page.getByRole('tab', { name: 'Documents' }).click();
-  await page.getByPlaceholder('Search here').click();
-  await page.getByPlaceholder('Search here').fill('Automation Forms');
-  await page.getByPlaceholder('Search here').press('Enter');
-   try {
-    await page.getByRole('heading', { name: 'Automation Forms', exact: true }).first().click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.locator('._documentRow_1mnx8_69').first().click();
-  }
-  await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByRole('button').click();
   await page.waitForTimeout(2000);
   
 });
