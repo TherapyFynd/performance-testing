@@ -516,13 +516,13 @@ test('Forms Tab', async () => {
 
       await page.getByRole('button', { name: 'Availability' }).nth(1).click();
          
-          try {
-            await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
+          // try {
+          //   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
          
-           } catch (error) {
-             console.log('Failed to find first locator, trying second locator');
-             await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
-           }
+          //  } catch (error) {
+          //    console.log('Failed to find first locator, trying second locator');
+          //    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+          //  }
            
             await page.waitForTimeout(2000);
             await page.getByLabel('Monday').check();
