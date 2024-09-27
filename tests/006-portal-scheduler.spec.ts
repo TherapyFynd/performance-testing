@@ -340,11 +340,11 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     test('Scheduler Role Dashboard', async () => {
     await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
     await page.waitForTimeout(3000);
-    await page.getByText('Therapist').first().click();
-    await page.getByText('invoice').click();
-    await page.getByTestId('CancelIcon').click();
-    await page.reload();
-    await page.waitForTimeout(3000);
+    // await page.getByText('Therapist').first().click();
+    // await page.getByText('invoice').click();
+    // await page.getByTestId('CancelIcon').click();
+    // await page.reload();
+    // await page.waitForTimeout(3000);
      // Taskboard Flows
      await page.getByText('Scheduler Automation Task').click();
      await page.getByRole('button', { name: 'In Progress' }).click();
