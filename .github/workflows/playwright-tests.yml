@@ -14,12 +14,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses:
-          actions/checkout@v4
-
-          # Install system dependencies manually
-      - name: Install dependencies
-        run: sudo apt-get install -y libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libxcomposite1 libxrandr2 libxdamage1 libdrm2 libgbm1 libasound2 libpangocairo-1.0-0 libpangoft2-1.0-0 libcairo2
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
