@@ -1,4 +1,5 @@
 // if true redirect to localhost , when it false it redirect to stage or dev. , prod.
+//
 export const isRunningOnLocal: boolean = false;
 export const localPort: string = '3000';
 export const localBaseUrl = `http:/localhost:${localPort}`;
