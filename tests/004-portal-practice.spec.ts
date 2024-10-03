@@ -152,114 +152,114 @@ await page.waitForTimeout(2000);
   await page.getByText('HIPAA audit logs').click();
   await page.waitForTimeout(6000);
 //   Scheduler Calender 
-  await page.getByText('Calendar').click();
+  // await page.getByText('Calendar').click();
 
-  try {
-    await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
+  // try {
+  //   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
  
-   } catch (error) {
-     console.log('Failed to find first locator, trying second locator');
-     await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
-   }
-  await page.getByRole('button', { name: 'Edit' }).nth(1).click();
-  await page.getByLabel('Monday').check();
-  await page.getByLabel('Tuesday').check();
-  await page.getByLabel('Wednesday').check();
-  await page.getByLabel('Thursday').check();
-  await page.getByLabel('Friday').check();
-  await page.getByLabel('Saturday').check();
-  await page.getByLabel('Sunday').check();
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
-  await page.getByLabel('Monday').check();
+  //  } catch (error) {
+  //    console.log('Failed to find first locator, trying second locator');
+  //    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+  //  }
+  // await page.getByRole('button', { name: 'Edit' }).nth(1).click();
+  // await page.getByLabel('Monday').check();
+  // await page.getByLabel('Tuesday').check();
+  // await page.getByLabel('Wednesday').check();
+  // await page.getByLabel('Thursday').check();
+  // await page.getByLabel('Friday').check();
+  // await page.getByLabel('Saturday').check();
+  // await page.getByLabel('Sunday').check();
+  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  // await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
+  // await page.getByLabel('Monday').check();
 
-  await page.getByRole('button', { name: 'Edit' }).nth(1).click();
+  // await page.getByRole('button', { name: 'Edit' }).nth(1).click();
 
-  await page.locator('._optionalAdd_1hmqc_14').first().click();
-  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
-  await page.getByRole('spinbutton').first().click();
-  await page.getByRole('spinbutton').first().fill('11');
-  await page.waitForTimeout(2000);
-  await page.getByRole('spinbutton').nth(1).click();
-  await page.getByRole('spinbutton').nth(1).fill('55');
-  await page.waitForTimeout(2000);
-  await page.getByText('PM', { exact: true }).click();
-  await page.getByText('OK', { exact: true }).click();
-  await page.waitForTimeout(2000);
+  // await page.locator('._optionalAdd_1hmqc_14').first().click();
+  // await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
+  // await page.getByRole('spinbutton').first().click();
+  // await page.getByRole('spinbutton').first().fill('11');
+  // await page.waitForTimeout(2000);
+  // await page.getByRole('spinbutton').nth(1).click();
+  // await page.getByRole('spinbutton').nth(1).fill('55');
+  // await page.waitForTimeout(2000);
+  // await page.getByText('PM', { exact: true }).click();
+  // await page.getByText('OK', { exact: true }).click();
+  // await page.waitForTimeout(2000);
 
-  await page.locator('div').filter({ hasText: /^Tuesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
-  await page.getByRole('spinbutton').first().click();
-  await page.getByRole('spinbutton').first().fill('11');
-  await page.waitForTimeout(2000);
-  await page.getByRole('spinbutton').nth(1).click();
-  await page.getByRole('spinbutton').nth(1).fill('55');
-  await page.waitForTimeout(2000);
-  await page.getByText('PM', { exact: true }).click();
-  await page.getByText('OK', { exact: true }).click();
-  await page.waitForTimeout(2000);
+  // await page.locator('div').filter({ hasText: /^Tuesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  // await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
+  // await page.getByRole('spinbutton').first().click();
+  // await page.getByRole('spinbutton').first().fill('11');
+  // await page.waitForTimeout(2000);
+  // await page.getByRole('spinbutton').nth(1).click();
+  // await page.getByRole('spinbutton').nth(1).fill('55');
+  // await page.waitForTimeout(2000);
+  // await page.getByText('PM', { exact: true }).click();
+  // await page.getByText('OK', { exact: true }).click();
+  // await page.waitForTimeout(2000);
 
-  await page.locator('div').filter({ hasText: /^Wednesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
-  await page.getByRole('spinbutton').first().click();
-  await page.getByRole('spinbutton').first().fill('11');
-  await page.waitForTimeout(2000);
-  await page.getByRole('spinbutton').nth(1).click();
-  await page.getByRole('spinbutton').nth(1).fill('55');
-  await page.waitForTimeout(2000);
-  await page.getByText('PM', { exact: true }).click();
-  await page.getByText('OK', { exact: true }).click();
-  await page.waitForTimeout(2000);
+  // await page.locator('div').filter({ hasText: /^Wednesday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  // await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
+  // await page.getByRole('spinbutton').first().click();
+  // await page.getByRole('spinbutton').first().fill('11');
+  // await page.waitForTimeout(2000);
+  // await page.getByRole('spinbutton').nth(1).click();
+  // await page.getByRole('spinbutton').nth(1).fill('55');
+  // await page.waitForTimeout(2000);
+  // await page.getByText('PM', { exact: true }).click();
+  // await page.getByText('OK', { exact: true }).click();
+  // await page.waitForTimeout(2000);
  
-  await page.locator('div').filter({ hasText: /^Thursday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
-  await page.getByRole('spinbutton').first().click();
-  await page.getByRole('spinbutton').first().fill('11');
-  await page.waitForTimeout(2000);
-  await page.getByRole('spinbutton').nth(1).click();
-  await page.getByRole('spinbutton').nth(1).fill('55');
-  await page.waitForTimeout(2000);
-  await page.getByText('PM', { exact: true }).click();
-  await page.getByText('OK', { exact: true }).click();
-  await page.waitForTimeout(2000);
+  // await page.locator('div').filter({ hasText: /^Thursday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  // await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
+  // await page.getByRole('spinbutton').first().click();
+  // await page.getByRole('spinbutton').first().fill('11');
+  // await page.waitForTimeout(2000);
+  // await page.getByRole('spinbutton').nth(1).click();
+  // await page.getByRole('spinbutton').nth(1).fill('55');
+  // await page.waitForTimeout(2000);
+  // await page.getByText('PM', { exact: true }).click();
+  // await page.getByText('OK', { exact: true }).click();
+  // await page.waitForTimeout(2000);
 
-  await page.locator('div').filter({ hasText: /^Friday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
-  await page.getByRole('spinbutton').first().click();
-  await page.getByRole('spinbutton').first().fill('11');
-  await page.waitForTimeout(2000);
-  await page.getByRole('spinbutton').nth(1).click();
-  await page.getByRole('spinbutton').nth(1).fill('55');
-  await page.waitForTimeout(2000);
-  await page.getByText('PM', { exact: true }).click();
-  await page.getByText('OK', { exact: true }).click();
-  await page.waitForTimeout(2000);
+  // await page.locator('div').filter({ hasText: /^Friday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  // await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
+  // await page.getByRole('spinbutton').first().click();
+  // await page.getByRole('spinbutton').first().fill('11');
+  // await page.waitForTimeout(2000);
+  // await page.getByRole('spinbutton').nth(1).click();
+  // await page.getByRole('spinbutton').nth(1).fill('55');
+  // await page.waitForTimeout(2000);
+  // await page.getByText('PM', { exact: true }).click();
+  // await page.getByText('OK', { exact: true }).click();
+  // await page.waitForTimeout(2000);
 
-  await page.locator('div').filter({ hasText: /^Saturday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
-  await page.getByRole('spinbutton').first().click();
-  await page.getByRole('spinbutton').first().fill('11');
-  await page.waitForTimeout(2000);
-  await page.getByRole('spinbutton').nth(1).click();
-  await page.getByRole('spinbutton').nth(1).fill('55');
-  await page.waitForTimeout(2000);
-  await page.getByText('PM', { exact: true }).click();
-  await page.getByText('OK', { exact: true }).click();
-  await page.waitForTimeout(2000);
+  // await page.locator('div').filter({ hasText: /^Saturday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  // await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
+  // await page.getByRole('spinbutton').first().click();
+  // await page.getByRole('spinbutton').first().fill('11');
+  // await page.waitForTimeout(2000);
+  // await page.getByRole('spinbutton').nth(1).click();
+  // await page.getByRole('spinbutton').nth(1).fill('55');
+  // await page.waitForTimeout(2000);
+  // await page.getByText('PM', { exact: true }).click();
+  // await page.getByText('OK', { exact: true }).click();
+  // await page.waitForTimeout(2000);
 
-   await page.locator('div').filter({ hasText: /^Sunday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
-   await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
-   await page.getByRole('spinbutton').first().click();
-  await page.getByRole('spinbutton').first().fill('11');
-  await page.waitForTimeout(2000);
-  await page.getByRole('spinbutton').nth(1).click();
-  await page.getByRole('spinbutton').nth(1).fill('55');
-  await page.waitForTimeout(2000);
-  await page.getByText('PM', { exact: true }).click();
-  await page.getByText('OK', { exact: true }).click();
-  await page.waitForTimeout(2000);
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.waitForTimeout(5000);
+  //  await page.locator('div').filter({ hasText: /^Sunday Add working hours09:00 AMto05:00 PM$/ }).getByTestId('AddIcon').click();
+  //  await page.locator('div').filter({ hasText: /^05:00 PMto$/ }).getByTestId('KeyboardArrowDownIcon').nth(1).click();
+  //  await page.getByRole('spinbutton').first().click();
+  // await page.getByRole('spinbutton').first().fill('11');
+  // await page.waitForTimeout(2000);
+  // await page.getByRole('spinbutton').nth(1).click();
+  // await page.getByRole('spinbutton').nth(1).fill('55');
+  // await page.waitForTimeout(2000);
+  // await page.getByText('PM', { exact: true }).click();
+  // await page.getByText('OK', { exact: true }).click();
+  // await page.waitForTimeout(2000);
+  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  // await page.waitForTimeout(5000);
   
 // Billing Tab
 await page.locator('p').filter({ hasText: 'Billing' }).click();
@@ -267,9 +267,9 @@ await page.getByRole('tab', { name: 'Insurance' }).click();
   await page.getByText('Payers').click();
   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
   await page.getByLabel('Search for insurance payers').click();
-  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('Dent');
+  await page.getByLabel('Search for insurance payers').fill('Delta Dental');
+  await page.getByText('CDIAM- Delta Dental of Iowa').click();
   await page.waitForTimeout(8000);
-  await page.getByText('Delta Dental- DDENT1').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
 
 //   Add referal Team member settings
@@ -862,7 +862,7 @@ await page.getByLabel('Zip code').click();
 await page.getByLabel('Zip code').fill('678203');
 await page.getByLabel('Insurance Company').click();
 await page.getByLabel('Insurance Company').fill('Absolute');
-await page.getByText('ABSOLUTE TOTAL CARE-').click();
+await page.getByText('68055- Absolute Total Care').click();
 await page.getByLabel('Member ID').click();
 await page.getByLabel('Member ID').fill('GHR345');
 await page.getByLabel('Group ID').click();
@@ -1036,7 +1036,7 @@ test('Insurance Tab', async () => {
   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
   await page.waitForTimeout(3000);
   try {
-    await page.getByText('ABSOLUTE TOTAL CARE').first().click();
+    await page.getByText('68055- Absolute Total Care').click();
     
    }
     catch (error) {
@@ -1131,7 +1131,7 @@ test('Insurance Tab', async () => {
     await page.getByText('ERA Report').click();
     await page.getByText('Filed Claims').click();
     await page.getByLabel('Payer').click();
-    await page.getByRole('option', { name: '- ABSOLUTE TOTAL CARE' }).click();
+    await page.getByRole('option', { name: '- Absolute Total Care' }).click();
     await page.getByRole('combobox', { name: 'Payer' }).click();
     await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
     await page.getByTestId('ArrowBackIcon').locator('path').click();

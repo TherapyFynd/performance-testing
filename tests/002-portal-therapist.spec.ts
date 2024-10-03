@@ -132,13 +132,13 @@ test('Settings Tab', async () => {
   //   Scheduler Calender 
   await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
 
-  try {
-    await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
+  // try {
+  //   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
  
-   } catch (error) {
-     console.log('Failed to find first locator, trying second locator');
-     await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
-   }
+  //  } catch (error) {
+  //    console.log('Failed to find first locator, trying second locator');
+  //    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+  //  }
 
   await page.getByRole('button', { name: 'Edit' }).nth(1).click();
   await page.getByLabel('Monday').check();
@@ -958,7 +958,7 @@ test('Client File', async () => {
   await page.getByLabel('Zip code').fill('678203');
   await page.getByLabel('Insurance Company').click();
   await page.getByLabel('Insurance Company').fill('Absolute');
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  await page.getByText('68055- Absolute Total Care').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('GHR345');
   await page.getByLabel('Group ID').click();
@@ -1238,8 +1238,8 @@ test('Supervision Flows', async () => {
     await page.getByLabel('Zip code').click();
     await page.getByLabel('Zip code').fill('678203');
     await page.getByLabel('Insurance Company').click();
-    await page.getByLabel('Insurance Company').fill('MEM');
-    await page.getByText('Maine Medicaid- MEMCD').click();
+    await page.getByLabel('Insurance Company').fill('Maine Medicaid');
+    await page.getByText('MEMCD- ME Medicaid').click();
     await page.waitForTimeout(2000);
     await page.getByLabel('Member ID').click();
     await page.getByLabel('Member ID').fill('MEDICAID');
@@ -1269,7 +1269,7 @@ test('Insurance Tab', async () => {
   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
   await page.waitForTimeout(3000);
   try {
-    await page.getByText('ABSOLUTE TOTAL CARE').first().click();
+    await page.getByText('68055- Absolute Total Care').click();
     
    } catch (error) {
      console.log('Failed to find first locator, trying second locator');

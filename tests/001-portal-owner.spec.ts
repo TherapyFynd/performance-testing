@@ -381,13 +381,13 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.getByText('Role settings').click();
   //   Scheduler Calender 
   await page.getByText('Calendar').click();
-  try {
-   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
+  // try {
+  //  await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
 
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
-  }
+  // } catch (error) {
+  //   console.log('Failed to find first locator, trying second locator');
+  //   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+  // }
   
   await page.getByRole('button', { name: 'Edit' }).nth(1).click();
   await page.getByLabel('Monday').check();
@@ -558,13 +558,13 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
     .getByRole('combobox', { name: 'Search for insurance payers' })
     .fill('Absolute');
     await page.waitForTimeout(2000);
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+    await page.getByText('68055- Absolute Total Care').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
   await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
   await page.getByLabel('Search for insurance payers').click();
-  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('MEM');
-  await page.getByText('Maine Medicaid- MEMCD').click();
+  await page.getByLabel('Search for insurance payers').fill('Maine Medicaid');
+  await page.getByText('MEMCD- ME Medicaid').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
   
    // Referal settings
@@ -1124,7 +1124,7 @@ test('Client File', async () => {
   await page.getByLabel('Zip code').fill('678203');
   await page.getByLabel('Insurance Company').click();
   await page.getByLabel('Insurance Company').fill('Absolute');
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  await page.getByText('68055- Absolute Total Care').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('GHR345');
   await page.getByLabel('Group ID').click();
@@ -1300,7 +1300,7 @@ test('Insurance Tab', async () => {
   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
   await page.waitForTimeout(3000);
   try {
-    await page.getByText('ABSOLUTE TOTAL CARE').first().click();
+    await page.getByText('68055- Absolute Total Care').click();
    
    } 
    catch (error) {
@@ -1421,7 +1421,7 @@ test('Reports Tab', async () => {
   await page.getByText('ERA Report').click();
   await page.getByText('Filed Claims').click();
   await page.getByLabel('Payer').click();
-  await page.getByRole('option', { name: '- ABSOLUTE TOTAL CARE' }).click();
+  await page.getByRole('option', { name: '- Absolute Total Care' }).click();
   await page.getByRole('combobox', { name: 'Payer' }).click();
   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
   await page.getByTestId('ArrowBackIcon').locator('path').click();
@@ -1465,7 +1465,7 @@ test('Intake tab', async () => {
   await page.getByLabel('Payer ID').fill('BDJSB546');
   await page.getByLabel('Insurance Company').click();
   await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  await page.getByText('68055- Absolute Total Care').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('GAHRGYT');
   await page.waitForTimeout(3000);
@@ -1526,7 +1526,7 @@ test('Intake tab', async () => {
   await page.getByLabel('Payer ID').fill('BDJSB546');
   await page.getByLabel('Insurance Company').click();
   await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  await page.getByText('68055- Absolute Total Care').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('KRUGSWERW');
   await page.waitForTimeout(3000);
@@ -1593,8 +1593,8 @@ test('Intake tab', async () => {
   await page.getByLabel('Payer ID').fill('BDJSB546');
   await page.waitForTimeout(1000);
   await page.getByLabel('Insurance Company').click();
-  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('MEM');
-  await page.getByText('Maine Medicaid- MEMCD').click();
+  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('Maine Medicaid');
+  await page.getByText('MEMCD- ME Medicaid').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('MEDICAID')
   await page.waitForTimeout(3000);

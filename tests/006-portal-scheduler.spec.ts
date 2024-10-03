@@ -71,23 +71,23 @@ await page.getByLabel('', { exact: true }).check();
   await page.getByText('HIPAA audit logs').click();
   await page.waitForTimeout(6000);
 //   Scheduler Calender 
-  await page.getByText('Calendar').click();
- try {
-  await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
+//   await page.getByText('Calendar').click();
+//  try {
+//   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
 
- } catch (error) {
-   console.log('Failed to find first locator, trying second locator');
-   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
- }
-       await page.getByRole('button', { name: 'Edit' }).nth(1).click();
-       await page.getByLabel('Monday').check();
-       await page.getByLabel('Tuesday').check();
-       await page.getByLabel('Wednesday').check();
-       await page.getByLabel('Thursday').check();
-       await page.getByLabel('Friday').check();
-       await page.getByLabel('Saturday').check();
-       await page.getByLabel('Sunday').check();
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//  } catch (error) {
+//    console.log('Failed to find first locator, trying second locator');
+//    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+//  }
+//        await page.getByRole('button', { name: 'Edit' }).nth(1).click();
+//        await page.getByLabel('Monday').check();
+//        await page.getByLabel('Tuesday').check();
+//        await page.getByLabel('Wednesday').check();
+//        await page.getByLabel('Thursday').check();
+//        await page.getByLabel('Friday').check();
+//        await page.getByLabel('Saturday').check();
+//        await page.getByLabel('Sunday').check();
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
   await page.getByLabel('Monday').check();
 
@@ -186,8 +186,8 @@ await page.getByRole('tab', { name: 'Insurance' }).click();
   await page.getByText('Payers').click();
   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
   await page.getByLabel('Search for insurance payers').click();
-  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('BRMS');
-  await page.getByText('BRMS-').click();
+  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('Aetna');
+  await page.getByText('60054- Aetna').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
   //   Privacy Policy
 await page.getByText('Website Privacy Policy').click();

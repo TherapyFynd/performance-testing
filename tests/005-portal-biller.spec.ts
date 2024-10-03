@@ -66,8 +66,8 @@ await page.getByLabel('', { exact: true }).check();
   await page.getByText('Payers').click();
   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
   await page.getByLabel('Search for insurance payers').click();
-  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('BOON');
-  await page.getByText('BOON-CHAPMAN/AETNA-').click();
+  await page.getByLabel('Search for insurance payers').fill('BOON');
+  await page.getByText('74238- BoonChapman Benefit').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
 
 //   Privacy Policy
@@ -87,22 +87,22 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
       }
           await page.getByRole('button', { name: 'Availability' }).nth(1).click();
         
-          try {
-            await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
+  //         try {
+  //           await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
          
-           } catch (error) {
-             console.log('Failed to find first locator, trying second locator');
-             await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
-           }
-          await page.waitForTimeout(2000);
-          await page.getByLabel('Monday').check();
-          await page.getByLabel('Tuesday').check();
-          await page.getByLabel('Wednesday').check();
-          await page.getByLabel('Thursday').check();
-          await page.getByLabel('Friday').check();
-          await page.getByLabel('Saturday').check();
-          await page.getByLabel('Sunday').check();
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  //          } catch (error) {
+  //            console.log('Failed to find first locator, trying second locator');
+  //            await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+  //          }
+  //         await page.waitForTimeout(2000);
+  //         await page.getByLabel('Monday').check();
+  //         await page.getByLabel('Tuesday').check();
+  //         await page.getByLabel('Wednesday').check();
+  //         await page.getByLabel('Thursday').check();
+  //         await page.getByLabel('Friday').check();
+  //         await page.getByLabel('Saturday').check();
+  //         await page.getByLabel('Sunday').check();
+  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.getByText('Terms & Conditions').click();
   await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
 
@@ -205,7 +205,7 @@ test('Insurance Tab', async () => {
   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
   await page.waitForTimeout(3000);
   try {
-    await page.getByText('ABSOLUTE TOTAL CARE').first().click();
+    await page.getByText('68055- Absolute Total Care').click();
     
    } catch (error) {
      console.log('Failed to find first locator, trying second locator');

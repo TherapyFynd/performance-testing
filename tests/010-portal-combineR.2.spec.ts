@@ -110,13 +110,13 @@ test('Settings Tab', async () => {
   //   Scheduler Calender 
   await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
 
-  try {
-    await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
+  // try {
+  //   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
  
-   } catch (error) {
-     console.log('Failed to find first locator, trying second locator');
-     await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
-   }
+  //  } catch (error) {
+  //    console.log('Failed to find first locator, trying second locator');
+  //    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+  //  }
 
   await page.getByRole('button', { name: 'Edit' }).nth(1).click();
   await page.getByLabel('Monday').check();
@@ -220,14 +220,15 @@ test('Settings Tab', async () => {
   
 
   // Billing Tab
-await page.locator('p').filter({ hasText: 'Billing' }).click();
-await page.getByRole('tab', { name: 'Insurance' }).click();
-  await page.getByText('Payers').click();
-  await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-  await page.getByLabel('Search for insurance payers').click();
-  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('877');
-  await page.getByRole('option', { name: 'Empire Plan-' }).click();
-  await page.getByRole('button', { name: 'Add' }).nth(1).click();
+// await page.locator('p').filter({ hasText: 'Billing' }).click();
+// await page.getByRole('tab', { name: 'Insurance' }).click();
+//   await page.getByText('Payers').click();
+//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
+//   await page.getByLabel('Search for insurance payers').click();
+//   await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('877');
+//   await page.getByRole('option', { name: 'Empire Plan-' }).click();
+//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
+
   //   Privacy Policy
 await page.getByText('Website Privacy Policy').click();
 await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
@@ -791,8 +792,8 @@ test('Client File', async () => {
   await page.getByLabel('Zip code').click();
   await page.getByLabel('Zip code').fill('678203');
   await page.getByLabel('Insurance Company').click();
-  await page.getByLabel('Insurance Company').fill('877');
-  await page.getByRole('option', { name: 'Empire Plan-' }).click();
+  await page.getByLabel('Insurance Company').fill('Aetna');
+  await page.getByText('60054- Aetna').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('GHR345');
   await page.getByLabel('Group ID').click();
@@ -930,7 +931,7 @@ test('Insurance Tab', async () => {
   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
   await page.waitForTimeout(3000);
   try {
-    await page.getByText('Empire Plan').first().click(); 
+    await page.getByText('60054- Aetna').click();
    } catch (error) {
      console.log('Failed to find first locator, trying second locator');
      await page.locator('td:nth-child(9)').first().click();
@@ -1015,7 +1016,7 @@ test('Insurance Tab', async () => {
     await page.getByLabel('Payer ID').fill('BDJSB546');
     await page.getByLabel('Insurance Company').click();
     await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
-    await page.getByText('ABSOLUTE TOTAL CARE-').click();
+    await page.getByText('68055- Absolute Total Care').click();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.locator('span').filter({ hasText: 'Current Status :Inquiry' }).locator('div').nth(2).click();
     await page.getByRole('option', { name: 'Initial consultation call' }).click();

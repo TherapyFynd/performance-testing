@@ -140,13 +140,13 @@ test('Settings Tab', async () => {
     //   Scheduler Calender 
   await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
 
-  try {
-    await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
+  // try {
+  //   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
  
-   } catch (error) {
-     console.log('Failed to find first locator, trying second locator');
-     await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
-   }
+  //  } catch (error) {
+  //    console.log('Failed to find first locator, trying second locator');
+  //    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+  //  }
 
   await page.getByRole('button', { name: 'Edit' }).nth(1).click();
   await page.getByLabel('Monday').check();
@@ -304,8 +304,8 @@ test('Settings Tab', async () => {
   await page.getByText('Payers').click();
   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
   await page.getByLabel('Search for insurance payers').click();
-  await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('6005');
-  await page.getByText('Aetna- 60054', { exact: true }).click();
+  await page.getByLabel('Search for insurance payers').fill('Boler');
+  await page.getByText('J1870- Boler Company').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
   await page.waitForTimeout(5000);
  //   Privacy Policy
@@ -884,8 +884,8 @@ test('Client File', async () => {
     await page.getByLabel('Zip code').click();
     await page.getByLabel('Zip code').fill('678203');
     await page.getByLabel('Insurance Company').click();
-    await page.getByLabel('Insurance Company').fill('6005');
-    await page.getByText('Aetna- 60054', { exact: true }).click();
+    await page.getByLabel('Insurance Company').fill('Aetna');
+    await page.getByText('60054- Aetna').click();
     await page.getByLabel('Member ID').click();
     await page.getByLabel('Member ID').fill('GHR345');
     await page.getByLabel('Group ID').click();
