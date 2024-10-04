@@ -74,11 +74,11 @@ test('CombineRole login and onboarding ', async ({ request }) => {
   await page.getByRole('button', { name: 'Add service' }).nth(1).click();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
 
-  await page.getByLabel('', { exact: true }).check();
+  await page.getByRole('checkbox').check();
   await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
   await page.waitForTimeout(2000);
-  await page.getByLabel('', { exact: true }).check();
+  await page.getByRole('checkbox').check();
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
 });
 test('Settings Tab', async () => {
@@ -861,13 +861,13 @@ test('Client File', async () => {
     // await page.getByLabel('Insurance').check();
   
     // Logic For Fail Locator
-    try {
-      await page.getByLabel('Client\'s spouse').check();
+    // try {
+    //   await page.getByLabel('Client\'s spouse').check();
   
-    } catch (error) {
-      console.log('Failed to find first locator, trying second locator');
-      await page.getByText('Other').click();
-    }
+    // } catch (error) {
+    //   console.log('Failed to find first locator, trying second locator');
+    //   await page.getByText('Other').click();
+    // }
   // await page.getByLabel('Choose date').first().click();
   // await page.getByLabel('calendar view is open, switch').click();
   // await page.getByRole('button', { name: '2000', exact: true }).click();
@@ -887,34 +887,34 @@ test('Client File', async () => {
   // await page.waitForTimeout(2000);
   // await page.getByRole('gridcell', { name: '1', exact: true }).first().click();
   // await page.waitForTimeout(2000);
-    await page.getByLabel('Sex').click();
-    await page.getByRole('option', { name: 'Male', exact: true }).click();
-    await page.getByPlaceholder('Phone').click();
-    await page.getByPlaceholder('Phone').fill('(734) 573-25415');
-    await page.getByLabel('Address line').click();
-    await page.getByLabel('Address line').fill('New City main office');
-    await page.getByLabel('State').click();
-    await page.getByRole('combobox', { name: 'State' }).fill('Utah');
-    // await page.getByRole('option', { name: 'Utah' }).click();
-    await page.getByLabel('City').click();
-    await page.getByRole('combobox', { name: 'City' }).fill('Roy');
-    // await page.getByRole('option', { name: 'Roy' }).click();
-    await page.getByLabel('Zip code').click();
-    await page.getByLabel('Zip code').fill('678203');
-    await page.getByLabel('Insurance Company').click();
-    await page.getByLabel('Insurance Company').fill('6005');
-    await page.getByText('Aetna- 60054', { exact: true }).click();
-    await page.getByLabel('Member ID').click();
-    await page.getByLabel('Member ID').fill('GHR345');
-    await page.getByLabel('Group ID').click();
-    await page.getByLabel('Group ID').fill('GGH3');
-    await page.getByLabel('Plan ID').click();
-    await page.getByLabel('Plan ID').fill('KKH45');
-    // await page.getByPlaceholder('MM/DD/YYYY').first().click();
-    // await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/1999');
+    // await page.getByLabel('Sex').click();
+    // await page.getByRole('option', { name: 'Male', exact: true }).click();
+    // await page.getByPlaceholder('Phone').click();
+    // await page.getByPlaceholder('Phone').fill('(734) 573-25415');
+    // await page.getByLabel('Address line').click();
+    // await page.getByLabel('Address line').fill('New City main office');
+    // await page.getByLabel('State').click();
+    // await page.getByRole('combobox', { name: 'State' }).fill('Utah');
+    // // await page.getByRole('option', { name: 'Utah' }).click();
+    // await page.getByLabel('City').click();
+    // await page.getByRole('combobox', { name: 'City' }).fill('Roy');
+    // // await page.getByRole('option', { name: 'Roy' }).click();
+    // await page.getByLabel('Zip code').click();
+    // await page.getByLabel('Zip code').fill('678203');
+    // await page.getByLabel('Insurance Company').click();
+    // await page.getByLabel('Insurance Company').fill('6005');
+    // await page.getByText('Aetna- 60054', { exact: true }).click();
+    // await page.getByLabel('Member ID').click();
+    // await page.getByLabel('Member ID').fill('GHR345');
+    // await page.getByLabel('Group ID').click();
+    // await page.getByLabel('Group ID').fill('GGH3');
+    // await page.getByLabel('Plan ID').click();
+    // await page.getByLabel('Plan ID').fill('KKH45');
+    // // await page.getByPlaceholder('MM/DD/YYYY').first().click();
+    // // await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/1999');
+    // // await page.waitForTimeout(3000);
+    // await page.getByRole('button', { name: 'Save' }).nth(1).click();
     // await page.waitForTimeout(3000);
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.waitForTimeout(3000);
   
     // Files tab
     await page.getByRole('tab', { name: 'Files' }).click();

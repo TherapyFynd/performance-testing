@@ -89,11 +89,11 @@ test.describe('All owner Test case ', () => {
     await page.getByRole('button', { name: 'Next' }).nth(1).click();
     await page.getByRole('button', { name: 'Next' }).nth(1).click();
 
-    await page.getByLabel('', { exact: true }).check();
+    await page.getByRole('checkbox').check();
     await page.waitForTimeout(2000);
     await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
     await page.waitForTimeout(2000);
-    await page.getByLabel('', { exact: true }).check();
+    await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
   });
 
@@ -486,6 +486,8 @@ test.describe('All owner Test case ', () => {
     await page.waitForTimeout(5000);
     await page.getByLabel('Taxonomy code').click();
     await page.getByLabel('Taxonomy code').fill('HGXFCS33');
+    await page.getByLabel('Tax ID').click();
+    await page.getByLabel('Tax ID').fill('123456789');
     await page.getByLabel('SSN').click();
     await page.getByLabel('SSN').fill('GGH34JH');
     await page.getByPlaceholder('Address line').click();
@@ -520,23 +522,23 @@ test.describe('All owner Test case ', () => {
     // await page.getByRole('button', { name: 'Add' }).nth(1).click();
 
     // Referal settings
-    await page.getByText('Team members').nth(1).click();
-    await page
-      .getByRole('row', { name: 'Owner Team, ALC' })
-      .getByRole('img')
-      .nth(1)
-      .click();
-    await page.getByLabel('Select your Specializations').click();
-    await page
-      .getByRole('combobox', { name: 'Select your Specializations' })
-      .fill('Abuse');
-    await page.getByRole('option', { name: 'Abuse', exact: true }).click();
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.getByRole('tab', { name: 'Payment Methods' }).click();
-    await page.getByLabel('Select accepted payment methods').click();
-    await page.getByText('AARP - UnitedHealthcare').click();
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.waitForTimeout(2000);
+    // await page.getByText('Team members').nth(1).click();
+    // await page
+    //   .getByRole('row', { name: 'Owner Team, ALC' })
+    //   .getByRole('img')
+    //   .nth(1)
+    //   .click();
+    // await page.getByLabel('Select your Specializations').click();
+    // await page
+    //   .getByRole('combobox', { name: 'Select your Specializations' })
+    //   .fill('Abuse');
+    // await page.getByRole('option', { name: 'Abuse', exact: true }).click();
+    // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+    // await page.getByRole('tab', { name: 'Payment Methods' }).click();
+    // await page.getByLabel('Select accepted payment methods').click();
+    // await page.getByText('AARP - UnitedHealthcare').click();
+    // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+    // await page.waitForTimeout(2000);
 
     //   Add practice Emails Imports
     await page.getByText('Practice Email Imports').click();

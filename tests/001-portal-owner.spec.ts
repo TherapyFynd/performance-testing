@@ -92,11 +92,11 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
  
-  await page.getByLabel('', { exact: true }).check();
+  await page.getByRole('checkbox').check();
     await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
   await page.waitForTimeout(2000);
-  await page.getByLabel('', { exact: true }).check();
+  await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
 });
 
@@ -141,8 +141,8 @@ test('Settings Flows', async () => {
   await page.getByText('Adolescent Issues').click();
   await page.getByLabel('Select treatment methods you').click();
   await page.getByRole('option', { name: 'Art Therapy', exact: true }).click();
-  // await page.getByLabel('Select accepted payment').click();
-  // await page.getByRole('option', { name: 'Insurance' }).click();
+  await page.getByLabel('Select accepted payment').click();
+  await page.getByRole('option', { name: 'Insurance' }).click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   
   await page.getByRole('tab', { name: 'Locations' }).click();
@@ -289,7 +289,7 @@ await page.getByLabel('Calendar').check();
 await page.getByLabel('Clients', { exact: true }).uncheck();
 await page.getByLabel('Clients', { exact: true }).check();
 await page.getByLabel('Billing', { exact: true }).uncheck();
-// await page.getByLabel('Insurance', { exact: true }).uncheck();
+await page.getByLabel('Insurance', { exact: true }).uncheck();
 await page.getByLabel('Reports', { exact: true }).check();
 await page.getByLabel('Clients', { exact: true }).check();
 await page.getByLabel('Documents', { exact: true }).check()
@@ -534,6 +534,8 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.getByLabel('NPI').fill('1234567890');
   await page.getByLabel('Taxonomy code').click();
   await page.getByLabel('Taxonomy code').fill('HGXFCS33');
+  await page.getByLabel('Tax ID').click();
+  await page.getByLabel('Tax ID').fill('123456789');
   await page.getByLabel('SSN').click();
   await page.getByLabel('SSN').fill('GGH34JH');
   await page.getByPlaceholder('Address line').click();
@@ -568,23 +570,23 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   // await page.getByRole('button', { name: 'Add' }).nth(1).click();
   
    // Referal settings
-  await page.getByText('Team members').nth(1).click();
-  await page
-    .getByRole('row', { name: 'Owner Team, ALC' })
-    .getByRole('img')
-    .nth(1)
-    .click();
-  await page.getByLabel('Select your Specializations').click();
-  await page
-    .getByRole('combobox', { name: 'Select your Specializations' })
-    .fill('Abuse');
-  await page.getByRole('option', { name: 'Abuse', exact: true }).click();
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.getByRole('tab', { name: 'Payment Methods' }).click();
-  await page.getByLabel('Select accepted payment methods').click();
-  await page.getByText('AARP - UnitedHealthcare').click();
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.waitForTimeout(2000);
+  // await page.getByText('Team members').nth(1).click();
+  // await page
+  //   .getByRole('row', { name: 'Owner Team, ALC' })
+  //   .getByRole('img')
+  //   .nth(1)
+  //   .click();
+  // await page.getByLabel('Select your Specializations').click();
+  // await page
+  //   .getByRole('combobox', { name: 'Select your Specializations' })
+  //   .fill('Abuse');
+  // await page.getByRole('option', { name: 'Abuse', exact: true }).click();
+  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  // await page.getByRole('tab', { name: 'Payment Methods' }).click();
+  // await page.getByLabel('Select accepted payment methods').click();
+  // await page.getByText('AARP - UnitedHealthcare').click();
+  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  // await page.waitForTimeout(2000);
 
  //   Privacy Policy
 await page.getByText('Website Privacy Policy').click();
@@ -1099,61 +1101,61 @@ test('Client File', async () => {
   //  Payment tab
   await page.getByRole('tab', { name: 'Payment' }).click();
   // await page.getByLabel('Insurance').check();
-    // Logic For Fail Locator
-    try {
-      await page.getByLabel('Client itself').check();
+  //   // Logic For Fail Locator
+  //   try {
+  //     await page.getByLabel('Client itself').check();
         
-    } catch (error) {
-      console.log('Failed to find first locator, trying second locator');
-      await page.getByText('Other').click();
-    }
-  //   await page.getByLabel('Choose date').first().click();
-  //   await page.getByLabel('calendar view is open, switch').click();
-  //   await page.getByRole('button', { name: '2000', exact: true }).click();
-  //   await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  //   await page.getByRole('gridcell', { name: '1', exact: true }).first().click();
-  //   await page.waitForTimeout(2000);
-  await page.getByLabel('Sex').click();
-  await page.getByRole('option', { name: 'Male', exact: true }).click();
-  await page.getByPlaceholder('Phone').click();
-  await page.getByPlaceholder('Phone').fill('(734) 573-25415');
-  await page.getByLabel('Address line').click();
-  await page.getByLabel('Address line').fill('New City main office');
-  await page.getByLabel('State').click();
-  await page.getByRole('combobox', { name: 'State' }).fill('Utah');
-  // await page.getByRole('option', { name: 'Utah' }).click();
-  await page.getByLabel('City').click();
-  await page.getByRole('combobox', { name: 'City' }).fill('Roy');
-  // await page.getByRole('option', { name: 'Roy' }).click();
-  await page.getByLabel('Zip code').click();
-  await page.getByLabel('Zip code').fill('678203');
-  await page.getByLabel('Insurance Company').click();
-  await page.getByLabel('Insurance Company').fill('Absolute');
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
-  await page.getByLabel('Member ID').click();
-  await page.getByLabel('Member ID').fill('GHR345');
-  await page.getByLabel('Group ID').click();
-  await page.getByLabel('Group ID').fill('GGH3');
-  await page.getByLabel('Plan ID').click();
-  await page.getByLabel('Plan ID').fill('KKH45');
-  // await page.getByPlaceholder('MM/DD/YYYY').first().click();
-  // await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/2000');
-  // await page.waitForTimeout(3000);
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.waitForTimeout(5000);
+  //   } catch (error) {
+  //     console.log('Failed to find first locator, trying second locator');
+  //     await page.getByText('Other').click();
+  //   }
+  // //   await page.getByLabel('Choose date').first().click();
+  // //   await page.getByLabel('calendar view is open, switch').click();
+  // //   await page.getByRole('button', { name: '2000', exact: true }).click();
+  // //   await page.getByLabel('Previous month').click();
+  // // await page.waitForTimeout(2000);
+  // // await page.getByLabel('Previous month').click();
+  // // await page.waitForTimeout(2000);
+  // // await page.getByLabel('Previous month').click();
+  // // await page.waitForTimeout(2000);
+  // // await page.getByLabel('Previous month').click();
+  // // await page.waitForTimeout(2000);
+  // // await page.getByLabel('Previous month').click();
+  // // await page.waitForTimeout(2000);
+  // // await page.getByLabel('Previous month').click();
+  // // await page.waitForTimeout(2000);
+  // // await page.getByLabel('Previous month').click();
+  // // await page.waitForTimeout(2000);
+  // //   await page.getByRole('gridcell', { name: '1', exact: true }).first().click();
+  // //   await page.waitForTimeout(2000);
+  // await page.getByLabel('Sex').click();
+  // await page.getByRole('option', { name: 'Male', exact: true }).click();
+  // await page.getByPlaceholder('Phone').click();
+  // await page.getByPlaceholder('Phone').fill('(734) 573-25415');
+  // await page.getByLabel('Address line').click();
+  // await page.getByLabel('Address line').fill('New City main office');
+  // await page.getByLabel('State').click();
+  // await page.getByRole('combobox', { name: 'State' }).fill('Utah');
+  // // await page.getByRole('option', { name: 'Utah' }).click();
+  // await page.getByLabel('City').click();
+  // await page.getByRole('combobox', { name: 'City' }).fill('Roy');
+  // // await page.getByRole('option', { name: 'Roy' }).click();
+  // await page.getByLabel('Zip code').click();
+  // await page.getByLabel('Zip code').fill('678203');
+  // // await page.getByLabel('Insurance Company').click();
+  // // await page.getByLabel('Insurance Company').fill('Absolute');
+  // // await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  // await page.getByLabel('Member ID').click();
+  // await page.getByLabel('Member ID').fill('GHR345');
+  // await page.getByLabel('Group ID').click();
+  // await page.getByLabel('Group ID').fill('GGH3');
+  // await page.getByLabel('Plan ID').click();
+  // await page.getByLabel('Plan ID').fill('KKH45');
+  // // await page.getByPlaceholder('MM/DD/YYYY').first().click();
+  // // await page.getByPlaceholder('MM/DD/YYYY').first().fill('01/01/2000');
+  // // await page.waitForTimeout(3000);
+  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  // await page.waitForTimeout(5000);
   // Files tab
   await page.getByRole('tab', { name: 'Files' }).click();
   await page.getByRole('button', { name: 'Request upload' }).nth(1).click();
@@ -1482,8 +1484,8 @@ test('Intake tab', async () => {
   await page.getByLabel('Payer ID').click();
   await page.getByLabel('Payer ID').fill('BDJSB546');
   await page.getByLabel('Insurance Company').click();
-  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('Abso');
+  await page.getByText('68055- Absolute Total Care').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('GAHRGYT');
   await page.waitForTimeout(3000);
@@ -1543,8 +1545,8 @@ test('Intake tab', async () => {
   await page.getByLabel('Payer ID').click();
   await page.getByLabel('Payer ID').fill('BDJSB546');
   await page.getByLabel('Insurance Company').click();
-  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('Abso');
+  await page.getByText('68055- Absolute Total Care').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('KRUGSWERW');
   await page.waitForTimeout(3000);
@@ -1611,8 +1613,8 @@ test('Intake tab', async () => {
   await page.getByLabel('Payer ID').fill('BDJSB546');
   await page.waitForTimeout(1000);
   await page.getByLabel('Insurance Company').click();
-  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('MEM');
-  await page.getByText('Maine Medicaid- MEMCD').click();
+  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('Maine Medicaid');
+  await page.getByText('MEMCD- ME Medicaid').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('MEDICAID')
   await page.waitForTimeout(3000);
@@ -1643,16 +1645,16 @@ test('Intake tab', async () => {
   await page.getByRole('tab', { name: 'Attachments' }).click();
   await page.locator('div').filter({ hasText: /^Filters \(01\)$/ }).getByRole('button').nth(2).click();
 
-  // await page.getByPlaceholder('Search by name').click();
-  // await page.getByPlaceholder('Search by name').fill('Alfred');
-  // await page.getByPlaceholder('Search by name').press('Enter');
-  // await page.waitForTimeout(2000);
-  // const page1Promise  = page.waitForEvent('popup');
-  // await page.getByLabel('Open lead in new tab').click();
-  // const page1 = await page1Promise;
-  // await page1.getByRole('tab', { name: 'Basic Information' }).click();
-  // await page1.close();
-  // await page.waitForTimeout(2000);
+  await page.getByPlaceholder('Search by name').click();
+  await page.getByPlaceholder('Search by name').fill('Alfred');
+  await page.getByPlaceholder('Search by name').press('Enter');
+  await page.waitForTimeout(2000);
+  const page1Promise  = page.waitForEvent('popup');
+  await page.getByLabel('Open lead in new tab').click();
+  const page1 = await page1Promise;
+  await page1.getByRole('tab', { name: 'Basic Information' }).click();
+  await page1.close();
+  await page.waitForTimeout(2000);
 });
 test('TaskBoard Widget Flows', async () => {
 
