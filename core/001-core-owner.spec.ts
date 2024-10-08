@@ -479,6 +479,8 @@ test.describe('All owner Test case ', () => {
     await page.waitForTimeout(5000);
     await page.getByLabel('Taxonomy code').click();
     await page.getByLabel('Taxonomy code').fill('HGXFCS33');
+    await page.getByLabel('Tax ID').click();
+    await page.getByLabel('Tax ID').fill('1234567890')
     await page.getByLabel('SSN').click();
     await page.getByLabel('SSN').fill('GGH34JH');
     await page.getByPlaceholder('Address line').click();
@@ -495,7 +497,7 @@ test.describe('All owner Test case ', () => {
     await page.getByLabel('Include Service location in').check();
     await page.getByLabel('Enable multiple diagnostic').check();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(8000);
     await page.getByText('Payers').click();
     await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
     await page.getByLabel('Search for insurance payers').click();
@@ -527,7 +529,7 @@ test.describe('All owner Test case ', () => {
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.getByRole('tab', { name: 'Payment Methods' }).click();
     await page.getByLabel('Select accepted payment methods').click();
-    await page.getByText('AARP - UnitedHealthcare').click();
+    await page.getByText('68055- Absolute Total Care').click();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.waitForTimeout(2000);
 

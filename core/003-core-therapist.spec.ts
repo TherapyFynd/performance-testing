@@ -595,16 +595,16 @@ test('Client File', async () => {
     await page.getByRole('heading', { name: 'GAD-' }).click();
     await page.waitForTimeout(5000);
 
-  // await page.getByRole('tab', { name: 'Bills' }).click();
-  // await page.getByLabel('Status').click();
-  // await page.getByRole('option', { name: 'Paid' }).click();
-  // await page.waitForTimeout(3000);
-  // await page.getByLabel('Status').click();
-  // await page.getByRole('option', { name: 'Pending' }).click();
-  // await page.waitForTimeout(3000);
-  // await page.getByLabel('Status').click();
-  // await page.getByRole('option', { name: 'Settled' }).click();
-  // await page.waitForTimeout(3000);
+  await page.getByRole('tab', { name: 'Bills' }).click();
+  await page.getByLabel('Status').click();
+  await page.getByRole('option', { name: 'Paid' }).click();
+  await page.waitForTimeout(3000);
+  await page.getByLabel('Status').click();
+  await page.getByRole('option', { name: 'Pending' }).click();
+  await page.waitForTimeout(3000);
+  await page.getByLabel('Status').click();
+  await page.getByRole('option', { name: 'Settled' }).click();
+  await page.waitForTimeout(3000);
   
   // Create Appoinment
 

@@ -93,8 +93,8 @@ test('Intake tab', async () => {
   await page.getByLabel('Payer ID').click();
   await page.getByLabel('Payer ID').fill('BDJSB546');
   await page.getByLabel('Insurance Company').click();
-  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('Abso');
+  await page.getByText('68055- Absolute Total Care').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.locator('span').filter({ hasText: 'Current Status :Inquiry' }).locator('div').nth(2).click();
   await page.getByRole('option', { name: 'Initial consultation call' }).click();
@@ -156,8 +156,8 @@ test('Intake tab', async () => {
   await page.getByLabel('Payer ID').fill('BDJSB546');
   await page.waitForTimeout(1000);
   await page.getByLabel('Insurance Company').click();
-  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('MEM');
-  await page.getByText('Maine Medicaid- MEMCD').click();
+  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('Maine Medicaid');
+  await page.getByText('MEMCD- ME Medicaid').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('MEDICAID')
   await page.waitForTimeout(3000);
