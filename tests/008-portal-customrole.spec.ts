@@ -763,7 +763,7 @@ test('Create Appoinment', async () => {
   await page.getByRole('button', { name: 'Month' }).click();
   await page.getByRole('button', { name: 'Next' }).click();
   await page.getByRole('button', { name: 'Next' }).click();
-  await page.locator('div').filter({ hasText: /^25$/ }).click();
+  await page.locator('div').filter({ hasText: /07$/ }).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByRole('option', { name: 'Shiva & Venkatesh (T1)' }).first().click();
   await page.waitForTimeout(10000);

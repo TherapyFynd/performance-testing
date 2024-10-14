@@ -882,7 +882,7 @@ test('Create Appoinment', async () => {
   // Past Date Appoinments
   await page.getByRole('button', { name: 'Back' }).click();
   await page.getByRole('button', { name: 'Back' }).click();
-  await page.locator('div').filter({ hasText: /^05$/ }).click();
+  await page.locator('div').filter({ hasText: /^07$/ }).click();
   await page.waitForTimeout(3000);
   await page.getByLabel('Select client profile*').click();
   await page.getByRole('option', { name: 'Rajesh (T1)' }).first().click();

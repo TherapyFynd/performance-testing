@@ -783,7 +783,7 @@ test('Create Clients', async () => {
     await page.getByRole('button', { name: 'Back' }).click();
     await page.getByRole('button', { name: 'Back' }).click();
     await page.getByRole('button', { name: 'Back' }).click();
-    await page.locator('div').filter({ hasText: /^06$/ }).click();
+    await page.locator('div').filter({ hasText: /^07$/ }).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByRole('option', { name: 'Shiva & Venkatesh (T1)' }).first().click();
     await page.waitForTimeout(10000);
