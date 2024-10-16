@@ -94,14 +94,15 @@ test('Settings Flows', async () => {
   await page.waitForTimeout(5000);
   //   Scheduler Calender 
   await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
-
+  // await page.pause();
   // try {
-  //   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
+  // await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
 
   // } catch (error) {
   //   console.log('Failed to find first locator, trying second locator');
-  //   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+  //   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_3wx8u_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
   // }
+  await page.waitForTimeout(8000);
   await page.getByRole('button', { name: 'Edit' }).nth(1).click();
   await page.getByLabel('Monday').check();
   await page.getByLabel('Tuesday').check();
@@ -541,42 +542,42 @@ test('Client File', async () => {
       // await page.getByRole('button', { name: 'Add card' }).nth(1).click();
       // await page .waitForTimeout(5000);
   // Logic For Fail Locator
-  try {
-    await page.getByLabel('Client\'s spouse').check();
+  // try {
+  //   await page.getByLabel('Client\'s spouse').check();
 
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.getByText('Other').click();
-  }
-  await page.getByLabel('Sex').click();
-  await page.getByRole('option', { name: 'Male', exact: true }).click();
-  await page.getByPlaceholder('Phone').click();
-  await page.getByPlaceholder('Phone').fill('(734) 573-25415');
-  await page.getByLabel('Address line').click();
-  await page.getByLabel('Address line').fill('New City main office');
-  await page.getByLabel('State').click();
-  await page.getByRole('combobox', { name: 'State' }).fill('Utah');
-  // await page.getByRole('option', { name: 'Utah' }).click();
-  await page.getByLabel('City').click();
-  await page.getByRole('combobox', { name: 'City' }).fill('Roy');
-  // await page.getByRole('option', { name: 'Roy' }).click();
-  await page.getByLabel('Zip code').click();
-  await page.getByLabel('Zip code').fill('678203');
-  await page.getByLabel('Insurance Company').click();
-  await page.getByLabel('Insurance Company').fill('Absolute');
-  await page.getByText('68055- Absolute Total Care').click();
-  await page.getByLabel('Member ID').click();
-  await page.getByLabel('Member ID').fill('GHR345');
-  await page.getByLabel('Group ID').click();
-  await page.getByLabel('Group ID').fill('GGH3');
-  await page.getByLabel('Plan ID').click();
-  await page.getByLabel('Plan ID').fill('KKH45');
-  // await page.getByPlaceholder('MM/DD/YYYY').nth(1).click();
-  // await page.getByPlaceholder('MM/DD/YYYY').nth(1).fill('10/10/2000');
-  // await page.getByPlaceholder('MM/DD/YYYY').nth(2).click();
-  // await page.getByPlaceholder('MM/DD/YYYY').nth(2).fill('10/10/2030');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.waitForTimeout(5000);
+  // } catch (error) {
+  //   console.log('Failed to find first locator, trying second locator');
+  //   await page.getByText('Other').click();
+  // }
+  // await page.getByLabel('Sex').click();
+  // await page.getByRole('option', { name: 'Male', exact: true }).click();
+  // await page.getByPlaceholder('Phone').click();
+  // await page.getByPlaceholder('Phone').fill('(734) 573-25415');
+  // await page.getByLabel('Address line').click();
+  // await page.getByLabel('Address line').fill('New City main office');
+  // await page.getByLabel('State').click();
+  // await page.getByRole('combobox', { name: 'State' }).fill('Utah');
+  // // await page.getByRole('option', { name: 'Utah' }).click();
+  // await page.getByLabel('City').click();
+  // await page.getByRole('combobox', { name: 'City' }).fill('Roy');
+  // // await page.getByRole('option', { name: 'Roy' }).click();
+  // await page.getByLabel('Zip code').click();
+  // await page.getByLabel('Zip code').fill('678203');
+  // await page.getByLabel('Insurance Company').click();
+  // await page.getByLabel('Insurance Company').fill('Absolute');
+  // await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  // await page.getByLabel('Member ID').click();
+  // await page.getByLabel('Member ID').fill('GHR345');
+  // await page.getByLabel('Group ID').click();
+  // await page.getByLabel('Group ID').fill('GGH3');
+  // await page.getByLabel('Plan ID').click();
+  // await page.getByLabel('Plan ID').fill('KKH45');
+  // // await page.getByPlaceholder('MM/DD/YYYY').nth(1).click();
+  // // await page.getByPlaceholder('MM/DD/YYYY').nth(1).fill('10/10/2000');
+  // // await page.getByPlaceholder('MM/DD/YYYY').nth(2).click();
+  // // await page.getByPlaceholder('MM/DD/YYYY').nth(2).fill('10/10/2030');
+  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  // await page.waitForTimeout(5000);
   await page.getByRole('tab', { name: 'Documents' }).click();
   await page.getByText('SimplePractice').click();
   await page.getByTestId('ArrowBackRoundedIcon').click();

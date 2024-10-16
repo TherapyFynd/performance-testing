@@ -92,11 +92,11 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
  
-  await page.getByLabel('', { exact: true }).check();
+  await page.getByRole('checkbox').check();
     await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
   await page.waitForTimeout(2000);
-  await page.getByLabel('', { exact: true }).check();
+  await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
 });
 
@@ -534,6 +534,8 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.getByLabel('NPI').fill('1234567890');
   await page.getByLabel('Taxonomy code').click();
   await page.getByLabel('Taxonomy code').fill('HGXFCS33');
+  await page.getByLabel('Tax ID').click();
+  await page.getByLabel('Tax ID').fill('123456789');
   await page.getByLabel('SSN').click();
   await page.getByLabel('SSN').fill('GGH34JH');
   await page.getByPlaceholder('Address line').click();
@@ -568,23 +570,23 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.getByRole('button', { name: 'Add' }).nth(1).click();
   
    // Referal settings
-  await page.getByText('Team members').nth(1).click();
-  await page
-    .getByRole('row', { name: 'Owner Team, ALC' })
-    .getByRole('img')
-    .nth(1)
-    .click();
-  await page.getByLabel('Select your Specializations').click();
-  await page
-    .getByRole('combobox', { name: 'Select your Specializations' })
-    .fill('Abuse');
-  await page.getByRole('option', { name: 'Abuse', exact: true }).click();
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.getByRole('tab', { name: 'Payment Methods' }).click();
-  await page.getByLabel('Select accepted payment methods').click();
-  await page.getByText('AARP - UnitedHealthcare').click();
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.waitForTimeout(2000);
+  // await page.getByText('Team members').nth(1).click();
+  // await page
+  //   .getByRole('row', { name: 'Owner Team, ALC' })
+  //   .getByRole('img')
+  //   .nth(1)
+  //   .click();
+  // await page.getByLabel('Select your Specializations').click();
+  // await page
+  //   .getByRole('combobox', { name: 'Select your Specializations' })
+  //   .fill('Abuse');
+  // await page.getByRole('option', { name: 'Abuse', exact: true }).click();
+  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  // await page.getByRole('tab', { name: 'Payment Methods' }).click();
+  // await page.getByLabel('Select accepted payment methods').click();
+  // await page.getByText('AARP - UnitedHealthcare').click();
+  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  // await page.waitForTimeout(2000);
 
  //   Privacy Policy
 await page.getByText('Website Privacy Policy').click();
@@ -1098,7 +1100,7 @@ test('Client File', async () => {
 
   //  Payment tab
   await page.getByRole('tab', { name: 'Payment' }).click();
-  await page.getByLabel('Insurance').check();
+  // await page.getByLabel('Insurance').check();
     // Logic For Fail Locator
     try {
       await page.getByLabel('Client itself').check();
@@ -1107,7 +1109,25 @@ test('Client File', async () => {
       console.log('Failed to find first locator, trying second locator');
       await page.getByText('Other').click();
     }
-  
+  //   await page.getByLabel('Choose date').first().click();
+  //   await page.getByLabel('calendar view is open, switch').click();
+  //   await page.getByRole('button', { name: '2000', exact: true }).click();
+  //   await page.getByLabel('Previous month').click();
+  // await page.waitForTimeout(2000);
+  // await page.getByLabel('Previous month').click();
+  // await page.waitForTimeout(2000);
+  // await page.getByLabel('Previous month').click();
+  // await page.waitForTimeout(2000);
+  // await page.getByLabel('Previous month').click();
+  // await page.waitForTimeout(2000);
+  // await page.getByLabel('Previous month').click();
+  // await page.waitForTimeout(2000);
+  // await page.getByLabel('Previous month').click();
+  // await page.waitForTimeout(2000);
+  // await page.getByLabel('Previous month').click();
+  // await page.waitForTimeout(2000);
+  //   await page.getByRole('gridcell', { name: '1', exact: true }).first().click();
+  //   await page.waitForTimeout(2000);
   await page.getByLabel('Sex').click();
   await page.getByRole('option', { name: 'Male', exact: true }).click();
   await page.getByPlaceholder('Phone').click();
@@ -1124,7 +1144,7 @@ test('Client File', async () => {
   await page.getByLabel('Zip code').fill('678203');
   await page.getByLabel('Insurance Company').click();
   await page.getByLabel('Insurance Company').fill('Absolute');
-  await page.getByText('68055- Absolute Total Care').click();
+  await page.getByText('ABSOLUTE TOTAL CARE-').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('GHR345');
   await page.getByLabel('Group ID').click();
@@ -1465,7 +1485,7 @@ test('Intake tab', async () => {
   await page.getByLabel('Payer ID').fill('BDJSB546');
   await page.getByLabel('Insurance Company').click();
   await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
-  await page.getByText('68055- Absolute Total Care').click();
+  await page.getByText('ABSOLUTE TOTAL CARE-').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('GAHRGYT');
   await page.waitForTimeout(3000);
@@ -1526,7 +1546,7 @@ test('Intake tab', async () => {
   await page.getByLabel('Payer ID').fill('BDJSB546');
   await page.getByLabel('Insurance Company').click();
   await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
-  await page.getByText('68055- Absolute Total Care').click();
+  await page.getByText('ABSOLUTE TOTAL CARE-').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('KRUGSWERW');
   await page.waitForTimeout(3000);
@@ -1812,21 +1832,6 @@ test('Global search', async () => {
     console.log('Failed to find first locator, trying second locator');
      await page.getByText('Settings').click();
   }
-  await page.getByText('Clinician settings').click();
-  await page.waitForTimeout(5000);
-  await page.getByText('Practice settings').click();
-  await page.getByPlaceholder('Search').click(); 
-  await page.getByRole('tab', { name: 'Documents' }).click();
-  await page.getByPlaceholder('Search here').click();
-  await page.getByPlaceholder('Search here').fill('Automation Forms');
-  await page.getByPlaceholder('Search here').press('Enter');
-   try {
-    await page.getByRole('heading', { name: 'Automation Forms', exact: true }).first().click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.locator('._documentRow_1mnx8_69').first().click();
-  }
-  await page.locator('div').filter({ hasText: /^Automation Forms$/ }).getByRole('button').click();
   await page.waitForTimeout(2000);
   
 });

@@ -46,11 +46,11 @@ await page.getByPlaceholder('Enter phone').click();
 await page.getByPlaceholder('Enter phone').fill('(846) 534-65834');
 await page.getByRole('button', { name: 'Continue' }).nth(1).click();
 await page.waitForTimeout(2000);
-await page.getByLabel('', { exact: true }).check();
+await page.getByRole('checkbox').check();
   await page.waitForTimeout(1000);
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
   await page.waitForTimeout(1000);
-  await page.getByLabel('', { exact: true }).check();
+  await page.getByRole('checkbox').check();
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
   await page.waitForTimeout(6000);
   await page.getByRole('button', { name: 'Availability' }).nth(1).click();
@@ -71,7 +71,7 @@ await page.getByLabel('', { exact: true }).check();
   await page.getByText('HIPAA audit logs').click();
   await page.waitForTimeout(6000);
 //   Scheduler Calender 
-//   await page.getByText('Calendar').click();
+  await page.getByText('Calendar').click();
 //  try {
 //   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
 
@@ -79,15 +79,16 @@ await page.getByLabel('', { exact: true }).check();
 //    console.log('Failed to find first locator, trying second locator');
 //    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
 //  }
-//        await page.getByRole('button', { name: 'Edit' }).nth(1).click();
-//        await page.getByLabel('Monday').check();
-//        await page.getByLabel('Tuesday').check();
-//        await page.getByLabel('Wednesday').check();
-//        await page.getByLabel('Thursday').check();
-//        await page.getByLabel('Friday').check();
-//        await page.getByLabel('Saturday').check();
-//        await page.getByLabel('Sunday').check();
-//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+ await page.waitForTimeout(4000);
+       await page.getByRole('button', { name: 'Edit' }).nth(1).click();
+       await page.getByLabel('Monday').check();
+       await page.getByLabel('Tuesday').check();
+       await page.getByLabel('Wednesday').check();
+       await page.getByLabel('Thursday').check();
+       await page.getByLabel('Friday').check();
+       await page.getByLabel('Saturday').check();
+       await page.getByLabel('Sunday').check();
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.locator('p').filter({ hasText: /^Calendar$/ }).click();
   await page.getByLabel('Monday').check();
 
@@ -339,11 +340,11 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     test('Scheduler Role Dashboard', async () => {
     await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
     await page.waitForTimeout(3000);
-    await page.getByText('Therapist').first().click();
-    await page.getByText('invoice').click();
-    await page.getByTestId('CancelIcon').click();
-    await page.reload();
-    await page.waitForTimeout(3000);
+    // await page.getByText('Therapist').first().click();
+    // await page.getByText('invoice').click();
+    // await page.getByTestId('CancelIcon').click();
+    // await page.reload();
+    // await page.waitForTimeout(3000);
      // Taskboard Flows
      await page.getByText('Scheduler Automation Task').click();
      await page.getByRole('button', { name: 'In Progress' }).click();

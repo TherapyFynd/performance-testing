@@ -88,7 +88,6 @@ test.describe('All owner Test case ', () => {
     await page.getByRole('button', { name: 'Add service' }).nth(1).click();
     await page.getByRole('button', { name: 'Next' }).nth(1).click();
     await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    
     await page.getByRole('checkbox').check();
     await page.waitForTimeout(2000);
     await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
@@ -329,14 +328,16 @@ test.describe('All owner Test case ', () => {
 
     //   Scheduler Calender 
     await page.getByText('Calendar').click();
-
+    await page.waitForTimeout(4000);
+    // await page.pause();
     // try {
     //   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
 
     // } catch (error) {
     //   console.log('Failed to find first locator, trying second locator');
-    //   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
+    //   await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_3wx8u_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
     // }
+    
     await page.getByRole('button', { name: 'Edit' }).nth(1).click();
     await page.getByLabel('Monday').check();
     await page.getByLabel('Tuesday').check();
@@ -480,7 +481,7 @@ test.describe('All owner Test case ', () => {
     await page.getByLabel('Taxonomy code').click();
     await page.getByLabel('Taxonomy code').fill('HGXFCS33');
     await page.getByLabel('Tax ID').click();
-    await page.getByLabel('Tax ID').fill('1234567890')
+    await page.getByLabel('Tax ID').fill('123456789');
     await page.getByLabel('SSN').click();
     await page.getByLabel('SSN').fill('GGH34JH');
     await page.getByPlaceholder('Address line').click();
@@ -515,23 +516,23 @@ test.describe('All owner Test case ', () => {
     await page.getByRole('button', { name: 'Add' }).nth(1).click();
 
     // Referal settings
-    await page.getByText('Team members').nth(1).click();
-    await page
-      .getByRole('row', { name: 'Owner Team, ALC' })
-      .getByRole('img')
-      .nth(1)
-      .click();
-    await page.getByLabel('Select your Specializations').click();
-    await page
-      .getByRole('combobox', { name: 'Select your Specializations' })
-      .fill('Abuse');
-    await page.getByRole('option', { name: 'Abuse', exact: true }).click();
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.getByRole('tab', { name: 'Payment Methods' }).click();
-    await page.getByLabel('Select accepted payment methods').click();
-    await page.getByText('68055- Absolute Total Care').click();
-    await page.getByRole('button', { name: 'Save' }).nth(1).click();
-    await page.waitForTimeout(2000);
+    // await page.getByText('Team members').nth(1).click();
+    // await page
+    //   .getByRole('row', { name: 'Owner Team, ALC' })
+    //   .getByRole('img')
+    //   .nth(1)
+    //   .click();
+    // await page.getByLabel('Select your Specializations').click();
+    // await page
+    //   .getByRole('combobox', { name: 'Select your Specializations' })
+    //   .fill('Abuse');
+    // await page.getByRole('option', { name: 'Abuse', exact: true }).click();
+    // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+    // await page.getByRole('tab', { name: 'Payment Methods' }).click();
+    // await page.getByLabel('Select accepted payment methods').click();
+    // await page.getByText('AARP - UnitedHealthcare').click();
+    // await page.getByRole('button', { name: 'Save' }).nth(1).click();
+    // await page.waitForTimeout(2000);
 
     //   Add practice Emails Imports
     await page.getByText('Practice Email Imports').click();

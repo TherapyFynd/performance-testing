@@ -47,11 +47,11 @@ await page.getByRole('button', { name: 'Continue' }).nth(1).click();
 await page.waitForTimeout(2000);
 await page.getByRole('button', { name: 'Next' }).nth(1).click();
 await page.getByRole('button', { name: 'Next' }).nth(1).click();
-await page.getByLabel('', { exact: true }).check();
+await page.getByRole('checkbox').check();
   await page.waitForTimeout(1000);
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
   await page.waitForTimeout(1000);
-  await page.getByLabel('', { exact: true }).check();
+  await page.getByRole('checkbox').check();
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
    });
 
@@ -121,7 +121,7 @@ await page.getByLabel('', { exact: true }).check();
     //    console.log('Failed to find first locator, trying second locator');
     //    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
     //  }
-  
+     await page.waitForTimeout(4000);
     await page.getByRole('button', { name: 'Edit' }).nth(1).click();
     await page.getByLabel('Monday').check();
     await page.getByLabel('Tuesday').check();
@@ -763,7 +763,7 @@ test('Create Appoinment', async () => {
   await page.getByRole('button', { name: 'Month' }).click();
   await page.getByRole('button', { name: 'Next' }).click();
   await page.getByRole('button', { name: 'Next' }).click();
-  await page.locator('div').filter({ hasText: /^25$/ }).click();
+  await page.locator('div').filter({ hasText: /07$/ }).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByRole('option', { name: 'Shiva & Venkatesh (T1)' }).first().click();
   await page.waitForTimeout(10000);

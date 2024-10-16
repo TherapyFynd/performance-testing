@@ -93,7 +93,7 @@ test('Intake tab', async () => {
   await page.getByLabel('Payer ID').click();
   await page.getByLabel('Payer ID').fill('BDJSB546');
   await page.getByLabel('Insurance Company').click();
-  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('Abso');
+  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
   await page.getByText('68055- Absolute Total Care').click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.locator('span').filter({ hasText: 'Current Status :Inquiry' }).locator('div').nth(2).click();
