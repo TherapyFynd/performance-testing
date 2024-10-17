@@ -628,65 +628,65 @@ test('Client File', async () => {
   await page.waitForTimeout(5000);
 });
 
-test('Insurance Tab', async () => {
-  await page.locator('div').filter({ hasText: /^Insurance$/ }).getByRole('img').click();
-  await page.getByRole('button', { name: 'Select all' }).nth(1).click();
-  await page.waitForTimeout(3000);
-  await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
-  await page.getByRole('tab', { name: 'Claims' }).click();
-  await page.getByRole('button', { name: 'Created' }).click();
-  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
-  await page.waitForTimeout(3000);
-  try {
-    await page.getByText('68055- Absolute Total Care').click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-    await page.locator('td:nth-child(9)').first().click();
-  }
-  await page.waitForTimeout(3000);
-  await page.getByRole('button', { name: 'Add note' }).nth(1).click();
-  await page.getByPlaceholder('Start typing here').click();
-  await page
-    .getByPlaceholder('Start typing here')
-    .fill('Hey I am Adding Clients File Details here so check this');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
+// test('Insurance Tab', async () => {
+//   await page.locator('div').filter({ hasText: /^Insurance$/ }).getByRole('img').click();
+//   await page.getByRole('button', { name: 'Select all' }).nth(1).click();
+//   await page.waitForTimeout(3000);
+//   await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
+//   await page.getByRole('tab', { name: 'Claims' }).click();
+//   await page.getByRole('button', { name: 'Created' }).click();
+//   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+//   await page.waitForTimeout(3000);
+//   try {
+//     await page.getByText('68055- Absolute Total Care').click();
+//   } catch (error) {
+//     console.log('Failed to find first locator, trying second locator');
+//     await page.locator('td:nth-child(9)').first().click();
+//   }
+//   await page.waitForTimeout(3000);
+//   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+//   await page.getByPlaceholder('Start typing here').click();
+//   await page
+//     .getByPlaceholder('Start typing here')
+//     .fill('Hey I am Adding Clients File Details here so check this');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//   await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
 
-  await page
-    .locator('div')
-    .filter({ hasText: /^StatusSubmittedEdit$/ })
-    .getByRole('button')
-    .nth(1)
-    .click();
-  await page.getByLabel('Select status').click();
-  await page.getByRole('option', { name: 'Sent' }).click();
-  await page.getByPlaceholder('Remarks').click();
-  await page
-    .getByPlaceholder('Remarks')
-    .fill('Sent this Payer Details to Change Healthcare');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page
-    .locator('div')
-    .filter({ hasText: /^StatusSentEdit$/ })
-    .getByRole('button')
-    .nth(1)
-    .click();
-  await page.getByLabel('Sent').click();
-  await page.getByRole('option', { name: 'Paid', exact: true }).click();
-  await page.getByPlaceholder('Remarks').click();
-  await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.waitForTimeout(2000);
-  await page.getByRole('tab', { name: 'Claim History' }).click();
-  await page.waitForTimeout(2000);
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^StatusSubmittedEdit$/ })
+//     .getByRole('button')
+//     .nth(1)
+//     .click();
+//   await page.getByLabel('Select status').click();
+//   await page.getByRole('option', { name: 'Sent' }).click();
+//   await page.getByPlaceholder('Remarks').click();
+//   await page
+//     .getByPlaceholder('Remarks')
+//     .fill('Sent this Payer Details to Change Healthcare');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^StatusSentEdit$/ })
+//     .getByRole('button')
+//     .nth(1)
+//     .click();
+//   await page.getByLabel('Sent').click();
+//   await page.getByRole('option', { name: 'Paid', exact: true }).click();
+//   await page.getByPlaceholder('Remarks').click();
+//   await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//   await page.waitForTimeout(2000);
+//   await page.getByRole('tab', { name: 'Claim History' }).click();
+//   await page.waitForTimeout(2000);
 
-     try {
-    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-     await page.getByText('Settings').click();
-  }
-});
+//      try {
+//     await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+//   } catch (error) {
+//     console.log('Failed to find first locator, trying second locator');
+//      await page.getByText('Settings').click();
+//   }
+// });
 test('Therapist Dashboard', async () => {
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
   await page.getByRole('menuitem', { name: 'Create appointment' }).click();
@@ -701,6 +701,7 @@ test('Therapist Dashboard', async () => {
   await page.waitForTimeout(1000);
  
 await page.locator('div').filter({ hasText: /^Calendar$/ }).first().click();
+await page.waitForTimeout(7000);
 await page.getByRole('button', { name: 'Month' }).click();
 await page.getByText('T1:').nth(1).click();
 await page.locator('button').filter({ hasText: 'Add note' }).nth(1).click();

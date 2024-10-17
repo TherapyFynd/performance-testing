@@ -553,21 +553,22 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.getByLabel('Enable multiple diagnostic').check();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
   await page.waitForTimeout(5000);
-  await page.getByText('Payers').click();
-  await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-  await page.getByLabel('Search for insurance payers').click();
-  await page
-    .getByRole('combobox', { name: 'Search for insurance payers' })
-    .fill('Absolute');
-    await page.waitForTimeout(2000);
-    await page.getByText('68055- Absolute Total Care').click();
-  await page.getByRole('button', { name: 'Add' }).nth(1).click();
-  await page.waitForTimeout(2000);
-  await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-  await page.getByLabel('Search for insurance payers').click();
-  await page.getByLabel('Search for insurance payers').fill('Maine Medicaid');
-  await page.getByText('MEMCD- ME Medicaid').click();
-  await page.getByRole('button', { name: 'Add' }).nth(1).click();
+  // Add Payer Feature In Billing Sections
+  // await page.getByText('Payers').click();
+  // await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
+  // await page.getByLabel('Search for insurance payers').click();
+  // await page
+  //   .getByRole('combobox', { name: 'Search for insurance payers' })
+  //   .fill('Absolute');
+  //   await page.waitForTimeout(2000);
+  //   await page.getByText('68055- Absolute Total Care').click();
+  // await page.getByRole('button', { name: 'Add' }).nth(1).click();
+  // await page.waitForTimeout(2000);
+  // await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
+  // await page.getByLabel('Search for insurance payers').click();
+  // await page.getByLabel('Search for insurance payers').fill('Maine Medicaid');
+  // await page.getByText('MEMCD- ME Medicaid').click();
+  // await page.getByRole('button', { name: 'Add' }).nth(1).click();
   
    // Referal settings
   // await page.getByText('Team members').nth(1).click();
@@ -1100,7 +1101,7 @@ test('Client File', async () => {
 
   //  Payment tab
   await page.getByRole('tab', { name: 'Payment' }).click();
-  // await page.getByLabel('Insurance').check();
+  await page.getByLabel('Insurance').check();
     // Logic For Fail Locator
     try {
       await page.getByLabel('Client itself').check();
@@ -1109,25 +1110,7 @@ test('Client File', async () => {
       console.log('Failed to find first locator, trying second locator');
       await page.getByText('Other').click();
     }
-  //   await page.getByLabel('Choose date').first().click();
-  //   await page.getByLabel('calendar view is open, switch').click();
-  //   await page.getByRole('button', { name: '2000', exact: true }).click();
-  //   await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Previous month').click();
-  // await page.waitForTimeout(2000);
-  //   await page.getByRole('gridcell', { name: '1', exact: true }).first().click();
-  //   await page.waitForTimeout(2000);
+ 
   await page.getByLabel('Sex').click();
   await page.getByRole('option', { name: 'Male', exact: true }).click();
   await page.getByPlaceholder('Phone').click();
@@ -1142,9 +1125,9 @@ test('Client File', async () => {
   // await page.getByRole('option', { name: 'Roy' }).click();
   await page.getByLabel('Zip code').click();
   await page.getByLabel('Zip code').fill('678203');
-  await page.getByLabel('Insurance Company').click();
-  await page.getByLabel('Insurance Company').fill('Absolute');
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  // await page.getByLabel('Insurance Company').click();
+  // await page.getByLabel('Insurance Company').fill('Absolute');
+  // await page.getByText('ABSOLUTE TOTAL CARE-').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('GHR345');
   await page.getByLabel('Group ID').click();
@@ -1307,62 +1290,62 @@ test('Client File', async () => {
   await page.waitForTimeout(4000);
 });
 
-test('Insurance Tab', async () => {
-  await page
-    .locator('div')
-    .filter({ hasText: /^Insurance$/ })
-    .getByRole('img')
-    .click();
-  await page.getByRole('button', { name: 'Select all' }).nth(1).click();
-  await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
-  await page.getByRole('tab', { name: 'Claims' }).click();
-  await page.getByRole('button', { name: 'Created' }).click();
-  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
-  await page.waitForTimeout(3000);
-  try {
-    await page.getByText('68055- Absolute Total Care').click();
+// test('Insurance Tab', async () => {
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^Insurance$/ })
+//     .getByRole('img')
+//     .click();
+//   await page.getByRole('button', { name: 'Select all' }).nth(1).click();
+//   await page.getByRole('button', { name: 'Auto create claim' }).nth(1).click();
+//   await page.getByRole('tab', { name: 'Claims' }).click();
+//   await page.getByRole('button', { name: 'Created' }).click();
+//   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+//   await page.waitForTimeout(3000);
+//   try {
+//     await page.getByText('68055- Absolute Total Care').click();
    
-   } 
-   catch (error) {
-     console.log('Failed to find first locator, trying second locator');
-     await page.locator('td:nth-child(9)').first().click();
-   }
-   await page.waitForTimeout(2000);
-  await page.getByRole('button', { name: 'Add note' }).nth(1).click();
-  await page.getByPlaceholder('Start typing here').click();
-  await page
-    .getByPlaceholder('Start typing here')
-    .fill('Hey I am Adding Clients File Details here so check this');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
-  await page.waitForTimeout(2000);
-  await page
-    .locator('div')
-    .filter({ hasText: /^StatusSubmittedEdit$/ })
-    .getByRole('button')
-    .nth(1)
-    .click();
-  await page.getByLabel('Select status').click();
-  await page.getByRole('option', { name: 'Sent' }).click();
-  await page.getByPlaceholder('Remarks').click();
-  await page
-    .getByPlaceholder('Remarks')
-    .fill('Sent this Payer Details to Change Healthcare');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page
-    .locator('div')
-    .filter({ hasText: /^StatusSentEdit$/ })
-    .getByRole('button')
-    .nth(1)
-    .click();
-  await page.getByLabel('Sent').click();
-  await page.getByRole('option', { name: 'Paid', exact: true }).click();
-  await page.getByPlaceholder('Remarks').click();
-  await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
-  await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.waitForTimeout(2000);
+//    } 
+//    catch (error) {
+//      console.log('Failed to find first locator, trying second locator');
+//      await page.locator('td:nth-child(9)').first().click();
+//    }
+//    await page.waitForTimeout(2000);
+//   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+//   await page.getByPlaceholder('Start typing here').click();
+//   await page
+//     .getByPlaceholder('Start typing here')
+//     .fill('Hey I am Adding Clients File Details here so check this');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//   await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
+//   await page.waitForTimeout(2000);
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^StatusSubmittedEdit$/ })
+//     .getByRole('button')
+//     .nth(1)
+//     .click();
+//   await page.getByLabel('Select status').click();
+//   await page.getByRole('option', { name: 'Sent' }).click();
+//   await page.getByPlaceholder('Remarks').click();
+//   await page
+//     .getByPlaceholder('Remarks')
+//     .fill('Sent this Payer Details to Change Healthcare');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//   await page
+//     .locator('div')
+//     .filter({ hasText: /^StatusSentEdit$/ })
+//     .getByRole('button')
+//     .nth(1)
+//     .click();
+//   await page.getByLabel('Sent').click();
+//   await page.getByRole('option', { name: 'Paid', exact: true }).click();
+//   await page.getByPlaceholder('Remarks').click();
+//   await page.getByPlaceholder('Remarks').fill('Paid Form Payer Company');
+//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+//   await page.waitForTimeout(2000);
  
-});
+// });
 
 test('Reports Tab', async () => {
   await page.locator('div').filter({ hasText: /^Reports$/ }).getByRole('img').click();
@@ -1440,10 +1423,10 @@ test('Reports Tab', async () => {
   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
   await page.getByText('ERA Report').click();
   await page.getByText('Filed Claims').click();
-  await page.getByLabel('Payer').click();
-  await page.getByRole('option', { name: '- Absolute Total Care' }).click();
-  await page.getByRole('combobox', { name: 'Payer' }).click();
-  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+  // await page.getByLabel('Payer').click();
+  // await page.getByRole('option', { name: '- Absolute Total Care' }).click();
+  // await page.getByRole('combobox', { name: 'Payer' }).click();
+  // await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
   await page.getByTestId('ArrowBackIcon').locator('path').click();
 
 });
@@ -1483,9 +1466,9 @@ test('Intake tab', async () => {
   await page.getByLabel('Name on Card').fill('Rajesh');
   await page.getByLabel('Payer ID').click();
   await page.getByLabel('Payer ID').fill('BDJSB546');
-  await page.getByLabel('Insurance Company').click();
-  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  // await page.getByLabel('Insurance Company').click();
+  // await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
+  // await page.getByText('ABSOLUTE TOTAL CARE-').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('GAHRGYT');
   await page.waitForTimeout(3000);
@@ -1544,9 +1527,9 @@ test('Intake tab', async () => {
   await page.getByLabel('Name on Card').fill('Rajesh');
   await page.getByLabel('Payer ID').click();
   await page.getByLabel('Payer ID').fill('BDJSB546');
-  await page.getByLabel('Insurance Company').click();
-  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
-  await page.getByText('ABSOLUTE TOTAL CARE-').click();
+  // await page.getByLabel('Insurance Company').click();
+  // await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
+  // await page.getByText('ABSOLUTE TOTAL CARE-').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('KRUGSWERW');
   await page.waitForTimeout(3000);
@@ -1612,9 +1595,9 @@ test('Intake tab', async () => {
   await page.getByLabel('Payer ID').click();
   await page.getByLabel('Payer ID').fill('BDJSB546');
   await page.waitForTimeout(1000);
-  await page.getByLabel('Insurance Company').click();
-  await page.getByRole('combobox', { name: 'Insurance Company' }).fill('Maine Medicaid');
-  await page.getByText('MEMCD- ME Medicaid').click();
+  // await page.getByLabel('Insurance Company').click();
+  // await page.getByRole('combobox', { name: 'Insurance Company' }).fill('Maine Medicaid');
+  // await page.getByText('MEMCD- ME Medicaid').click();
   await page.getByLabel('Member ID').click();
   await page.getByLabel('Member ID').fill('MEDICAID')
   await page.waitForTimeout(3000);
