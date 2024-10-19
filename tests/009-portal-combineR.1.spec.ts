@@ -304,10 +304,10 @@ test('Settings Tab', async () => {
   // await page.getByText('Payers').click();
   // await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
   // await page.getByLabel('Search for insurance payers').click();
-  // await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('6005');
-  // await page.getByText('Aetna- 60054', { exact: true }).click();
+  // await page.getByLabel('Search for insurance payers').fill('Boler');
+  // await page.getByText('J1870- Boler Company').click();
   // await page.getByRole('button', { name: 'Add' }).nth(1).click();
-  await page.waitForTimeout(5000);
+  // await page.waitForTimeout(5000);
  //   Privacy Policy
 await page.getByText('Website Privacy Policy').click();
 await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();

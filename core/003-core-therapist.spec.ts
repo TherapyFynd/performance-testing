@@ -527,8 +527,8 @@ test('Client File', async () => {
 
   //  Payment tab
   await page.getByRole('tab', { name: 'Payment' }).click();
-  // await page.getByLabel('Insurance').check();
-  // await page.waitForTimeout(2000);
+  await page.getByLabel('Insurance').check();
+  await page.waitForTimeout(2000);
   // Add card
       // await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').click();
       // await page.frameLocator("iframe[title='Secure card number input frame']").getByPlaceholder('Card number').fill('4000056655665556');
@@ -606,6 +606,7 @@ test('Client File', async () => {
   await page.getByLabel('Status').click();
   await page.getByRole('option', { name: 'Settled' }).click();
   await page.waitForTimeout(3000);
+  
   // Create Appoinment
 
   await page.getByRole('button', { name: 'Add' }).nth(3).click();
@@ -637,7 +638,7 @@ test('Client File', async () => {
 //   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
 //   await page.waitForTimeout(3000);
 //   try {
-//     await page.getByText('ABSOLUTE TOTAL CARE').first().click();
+//     await page.getByText('68055- Absolute Total Care').click();
 //   } catch (error) {
 //     console.log('Failed to find first locator, trying second locator');
 //     await page.locator('td:nth-child(9)').first().click();
@@ -700,6 +701,7 @@ test('Therapist Dashboard', async () => {
   await page.waitForTimeout(1000);
  
 await page.locator('div').filter({ hasText: /^Calendar$/ }).first().click();
+await page.waitForTimeout(7000);
 await page.getByRole('button', { name: 'Month' }).click();
 await page.getByText('T1:').nth(1).click();
 await page.locator('button').filter({ hasText: 'Add note' }).nth(1).click();

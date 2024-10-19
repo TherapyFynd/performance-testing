@@ -228,6 +228,7 @@ test('Settings Tab', async () => {
 //   await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('877');
 //   await page.getByRole('option', { name: 'Empire Plan-' }).click();
 //   await page.getByRole('button', { name: 'Add' }).nth(1).click();
+
   //   Privacy Policy
 await page.getByText('Website Privacy Policy').click();
 await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
@@ -287,17 +288,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
       .getByPlaceholder('Please enter a question')
       .fill('Client Date Of Birth?');
       await page.waitForTimeout(6000);
-    // await page
-    //   .getByRole('button', { name: '4 Please enter a question' })
-    //   .getByRole('button')
-    //   .nth(3)
-    //   .click();
-    // await page.getByLabel('', { exact: true }).click();
-    // await page.getByRole('option', { name: 'E-signature' }).click();
-    // await page.getByPlaceholder('Please enter a question').click();
-    // await page
-    //   .getByPlaceholder('Please enter a question')
-    //   .fill('Please Sign Your Sing?');
+ 
     
     await page.getByRole('button', { name: 'Preview' }).nth(1).click();
     await page.getByRole('button').first().click();
@@ -385,17 +376,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
       .nth(2)
       .click();
     await page.getByLabel('', { exact: true }).click();
-    // await page.getByRole('option', { name: 'Date' }).click();
-    // await page.getByPlaceholder('Please enter a question').click();
-    // await page
-    //   .getByPlaceholder('Please enter a question')
-    //   .fill('Client date of Brithday?');
-    // await page
-    //   .getByRole('button', { name: '4 Please enter a question' })
-    //   .getByRole('button')
-    //   .nth(3)
-    //   .click();
-    // await page.getByLabel('', { exact: true }).click();
+    
     await page.getByRole('option', { name: 'Multiple choice' }).click();
     await page.getByPlaceholder('Please enter a question').click();
     await page
@@ -968,7 +949,7 @@ test('Client File', async () => {
 //   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
 //   await page.waitForTimeout(3000);
 //   try {
-//     await page.getByText('Empire Plan').first().click(); 
+//     await page.getByText('60054- Aetna').click();
 //    } catch (error) {
 //      console.log('Failed to find first locator, trying second locator');
 //      await page.locator('td:nth-child(9)').first().click();
@@ -1051,9 +1032,9 @@ test('Client File', async () => {
     await page.getByLabel('Name on Card').fill('Rajesh');
     await page.getByLabel('Payer ID').click();
     await page.getByLabel('Payer ID').fill('BDJSB546');
-    await page.getByLabel('Insurance Company').click();
-    await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
-    await page.getByText('68055- Absolute Total Care').click();
+    // await page.getByLabel('Insurance Company').click();
+    // await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
+    // await page.getByText('68055- Absolute Total Care').click();
     await page.getByRole('button', { name: 'Save' }).nth(1).click();
     await page.locator('span').filter({ hasText: 'Current Status :Inquiry' }).locator('div').nth(2).click();
     await page.getByRole('option', { name: 'Initial consultation call' }).click();

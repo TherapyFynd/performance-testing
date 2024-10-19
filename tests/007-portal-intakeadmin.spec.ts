@@ -71,8 +71,8 @@ await page.getByRole('checkbox').check();
 //   await page.getByText('Payers').click();
 //   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
 //   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('careplus');
-//   await page.getByText('CAREPLUS- NHC04').click();
+//   await page.getByLabel('Search for insurance payers').fill('Careplus');
+//   await page.getByText('- CarePlus Health Plans Inc').click();
 //   await page.getByRole('button', { name: 'Add' }).nth(1).click();
     // Add practice Emails Imports
     await page.waitForTimeout(5000);
@@ -649,9 +649,9 @@ test('Forms Tab', async () => {
         await page.getByLabel('Name on Card').fill('Rajesh');
         await page.getByLabel('Payer ID').click();
         await page.getByLabel('Payer ID').fill('BDJSB546');
-        await page.getByLabel('Insurance Company').click();
-        await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
-        await page.getByText('68055- Absolute Total Care').click();
+        // await page.getByLabel('Insurance Company').click();
+        // await page.getByRole('combobox', { name: 'Insurance Company' }).fill('abso');
+        // await page.getByText('68055- Absolute Total Care').click();
         await page.getByLabel('Member ID').click();
         await page.getByLabel('Member ID').fill('GAH23');
         await page.waitForTimeout(2000);

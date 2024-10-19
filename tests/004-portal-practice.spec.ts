@@ -151,16 +151,9 @@ await page.waitForTimeout(2000);
   await page.waitForTimeout(4000);
   await page.getByText('HIPAA audit logs').click();
   await page.waitForTimeout(6000);
+
 //   Scheduler Calender 
   await page.getByText('Calendar').click();
-
-  // try {
-  //   await page.locator('div').filter({ hasText: /^Currently accepting appointments$/ }).getByRole('checkbox').click();
- 
-  //  } catch (error) {
-  //    console.log('Failed to find first locator, trying second locator');
-  //    await page.locator('#root > div._layout_cqogi_1 > div._content_cqogi_7 > div > div._acceptingAppointmentsSwitch_ml86x_17 > span > span.MuiButtonBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.PrivateSwitchBase-root.MuiSwitch-switchBase.MuiSwitch-colorPrimary.css-ink383').click();
-  //  }
   await page.waitForTimeout(4000);
   await page.getByRole('button', { name: 'Edit' }).nth(1).click();
   await page.getByLabel('Monday').check();
@@ -268,9 +261,9 @@ await page.waitForTimeout(2000);
 //   await page.getByText('Payers').click();
 //   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
 //   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('Dent');
+//   await page.getByLabel('Search for insurance payers').fill('Delta Dental');
+//   await page.getByText('CDIAM- Delta Dental of Iowa').click();
 //   await page.waitForTimeout(8000);
-//   await page.getByText('Delta Dental- DDENT1').click();
 //   await page.getByRole('button', { name: 'Add' }).nth(1).click();
 
 //   Add referal Team member settings
@@ -1038,7 +1031,7 @@ await page.getByRole('tab', { name: 'Payment' }).click();
 //   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
 //   await page.waitForTimeout(3000);
 //   try {
-//     await page.getByText('ABSOLUTE TOTAL CARE').first().click();
+//     await page.getByText('68055- Absolute Total Care').click();
     
 //    }
 //     catch (error) {
@@ -1117,25 +1110,25 @@ await page.getByRole('tab', { name: 'Payment' }).click();
     await page.getByLabel('Status').click();
     await page.getByRole('option', { name: 'Pending' }).click();
   //   
-  //   await page.locator('p').filter({ hasText: /^Income$/ }).click();
-  //   await page.getByText('Income Allocation').click();
-  // // 
-  //   await page.getByText('Outstanding Claims').click();
+    await page.locator('p').filter({ hasText: /^Income$/ }).click();
+    await page.getByText('Income Allocation').click();
+  // 
+    await page.getByText('Outstanding Claims').click();
    
-  //   // 
-  //   await page.getByText('Unpaid insurance appointments').click();
-  //   // await page.getByLabel('Team members').click();
-  //   // await page.getByRole('checkbox').check();
-  //   // await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
-  //   await page.getByLabel('Status').click();
-  //   await page.getByRole('option', { name: 'Claim filed' }).click();
-  //   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
-  //   await page.getByText('ERA Report').click();
-  //   await page.getByText('Filed Claims').click();
-  //   await page.getByLabel('Payer').click();
-  //   await page.getByRole('option', { name: '- ABSOLUTE TOTAL CARE' }).click();
-  //   await page.getByRole('combobox', { name: 'Payer' }).click();
-  //   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+    // 
+    await page.getByText('Unpaid insurance appointments').click();
+    // await page.getByLabel('Team members').click();
+    // await page.getByRole('checkbox').check();
+    // await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+    await page.getByLabel('Status').click();
+    await page.getByRole('option', { name: 'Claim filed' }).click();
+    await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+    await page.getByText('ERA Report').click();
+    await page.getByText('Filed Claims').click();
+    // await page.getByLabel('Payer').click();
+    // await page.getByRole('option', { name: '- Absolute Total Care' }).click();
+    // await page.getByRole('combobox', { name: 'Payer' }).click();
+    // await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
     await page.getByTestId('ArrowBackIcon').locator('path').click();
   
   });
@@ -1227,20 +1220,20 @@ test('TaskBoard Widget Flows', async () => {
   await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
    await page.reload();
    await page.waitForTimeout(2000);
-  //  await page.locator('#mui-component-select-status').click();
-  //  await page.getByLabel('Status').nth(1).click();
-  // await page.getByRole('option', { name: 'Created' }).getByRole('checkbox').check();
-  // await page.getByRole('option', { name: 'Submitted' }).getByRole('checkbox').check();
-  // await page.getByRole('option', { name: 'Sent' }).getByRole('checkbox').check();
-  // await page.reload();
-  // await page.waitForTimeout(2000);
-  // await page.getByLabel('Clinician').first().click();
-  // await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
-  // await page.getByRole('option', { name: 'Owner Team' }).uncheck();
-  // await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').check();
-  // await page.getByRole('option', { name: 'Therapist' }).uncheck();
-  // await page.getByRole('option', { name: 'Supervisor' }).getByRole('checkbox').check();
-  // await page.getByRole('option', { name: 'Supervisor' }).uncheck();
+   await page.locator('#mui-component-select-status').click();
+   await page.getByLabel('Status').nth(1).click();
+  await page.getByRole('option', { name: 'Created' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'Submitted' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'Sent' }).getByRole('checkbox').check();
+  await page.reload();
+  await page.waitForTimeout(2000);
+  await page.getByLabel('Clinician').first().click();
+  await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'Owner Team' }).uncheck();
+  await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'Therapist' }).uncheck();
+  await page.getByRole('option', { name: 'Supervisor' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'Supervisor' }).uncheck();
   await page.reload();
   await page.waitForTimeout(3000);
 

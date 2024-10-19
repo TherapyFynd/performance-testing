@@ -928,7 +928,7 @@ test('Client File', async () => {
 
   //  Payment tab
   await page.getByRole('tab', { name: 'Payment' }).click();
-  // await page.getByLabel('Insurance').check();
+  await page.getByLabel('Insurance').check();
   
   // Logic For Fail Locator
   // try {
@@ -1211,7 +1211,7 @@ test('Supervision Flows', async () => {
   
     //  Payment tab
   //   await page.getByRole('tab', { name: 'Payment' }).click();
-  //   // await page.getByLabel('Insurance').check();
+    // await page.getByLabel('Insurance').check();
   //     // Logic For Fail Locator
   //     try {
   //       await page.getByLabel('Client itself').check();
@@ -1270,7 +1270,7 @@ test('Supervision Flows', async () => {
 //   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
 //   await page.waitForTimeout(3000);
 //   try {
-//     await page.getByText('ABSOLUTE TOTAL CARE').first().click();
+//     await page.getByText('68055- Absolute Total Care').click();
     
 //    } catch (error) {
 //      console.log('Failed to find first locator, trying second locator');

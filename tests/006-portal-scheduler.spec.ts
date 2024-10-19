@@ -187,9 +187,10 @@ await page.getByRole('checkbox').check();
 //   await page.getByText('Payers').click();
 //   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
 //   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('BRMS');
-//   await page.getByText('BRMS-').click();
+//   await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('Aetna');
+//   await page.getByText('60054- Aetna').click();
 //   await page.getByRole('button', { name: 'Add' }).nth(1).click();
+
   //   Privacy Policy
 await page.getByText('Website Privacy Policy').click();
 await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();

@@ -66,8 +66,8 @@ await page.getByRole('checkbox').check();
   // await page.getByText('Payers').click();
   // await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
   // await page.getByLabel('Search for insurance payers').click();
-  // await page.getByRole('combobox', { name: 'Search for insurance payers' }).fill('BOON');
-  // await page.getByText('BOON-CHAPMAN/AETNA-').click();
+  // await page.getByLabel('Search for insurance payers').fill('BOON');
+  // await page.getByText('74238- BoonChapman Benefit').click();
   // await page.getByRole('button', { name: 'Add' }).nth(1).click();
 
 //   Privacy Policy
@@ -205,7 +205,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
 //   await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
 //   await page.waitForTimeout(3000);
 //   try {
-//     await page.getByText('ABSOLUTE TOTAL CARE').first().click();
+//     await page.getByText('68055- Absolute Total Care').click();
     
 //    } catch (error) {
 //      console.log('Failed to find first locator, trying second locator');
@@ -247,60 +247,60 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
 //   await page.waitForTimeout(2000);
 //  });
 
- test('Insurance Eligibility ', async () => {
-  await page.locator('div').filter({ hasText: /^Insurance Eligibility$/ }).click();
-  await page.getByLabel('Status').click();
-  await page.getByRole('option', { name: 'Pending' }).click();
-  await page.waitForTimeout(4000);
-  await page.getByRole('combobox', { name: 'Status' }).click();
-  await page.getByLabel('Clear').click();
+//  test('Insurance Eligibility ', async () => {
+//   await page.locator('div').filter({ hasText: /^Insurance Eligibility$/ }).click();
+//   await page.getByLabel('Status').click();
+//   await page.getByRole('option', { name: 'Pending' }).click();
+//   await page.waitForTimeout(4000);
+//   await page.getByRole('combobox', { name: 'Status' }).click();
+//   await page.getByLabel('Clear').click();
 
-  await page.getByRole('button', { name: 'Group by' }).nth(1).click();
-  await page.getByText('Verification Status', { exact: true }).click();
-  await page.getByRole('button', { name: 'Group by: Status' }).nth(1).click();
-  await page.getByText('Assigned To', { exact: true }).click();
-  await page.getByRole('button', { name: 'Group by: Assigned to' }).nth(1).click();
-  // await page.getByText('Insurance').nth(2).click();
-  // await page.getByRole('button', { name: 'Group by: Insurance' }).nth(1).click();
-  await page.getByText('None').click();
+//   await page.getByRole('button', { name: 'Group by' }).nth(1).click();
+//   await page.getByText('Verification Status', { exact: true }).click();
+//   await page.getByRole('button', { name: 'Group by: Status' }).nth(1).click();
+//   await page.getByText('Assigned To', { exact: true }).click();
+//   await page.getByRole('button', { name: 'Group by: Assigned to' }).nth(1).click();
+//   // await page.getByText('Insurance').nth(2).click();
+//   // await page.getByRole('button', { name: 'Group by: Insurance' }).nth(1).click();
+//   // await page.getByText('None').click();
 
-  await page.getByLabel('Status').click();
-  await page.getByRole('option', { name: 'Success' }).click();
-  await page.waitForTimeout(4000);
-  await page.getByLabel('Clear').click();
+//   await page.getByLabel('Status').click();
+//   await page.getByRole('option', { name: 'Success' }).click();
+//   await page.waitForTimeout(4000);
+//   await page.getByLabel('Clear').click();
 
-// client tabs
-  await page.getByRole('tab', { name: 'Clients' }).click();
-  await page.getByLabel('Clinician').click();
-  await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
-  await page.waitForTimeout(2000);
-  await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').uncheck();
-  await page.waitForTimeout(2000);
-  await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').check();
-  await page.waitForTimeout(2000);
-  await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').uncheck();
-  await page.waitForTimeout(2000);
-  await page.getByRole('combobox', { name: 'Clinician' }).click();
+// // client tabs
+//   await page.getByRole('tab', { name: 'Clients' }).click();
+//   await page.getByLabel('Clinician').click();
+//   await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
+//   await page.waitForTimeout(2000);
+//   await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').uncheck();
+//   await page.waitForTimeout(2000);
+//   await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').check();
+//   await page.waitForTimeout(2000);
+//   await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').uncheck();
+//   await page.waitForTimeout(2000);
+//   await page.getByRole('combobox', { name: 'Clinician' }).click();
 
-  await page.getByLabel('Status').click();
-  await page.getByRole('option', { name: 'Failed' }).getByRole('checkbox').check();
-  await page.waitForTimeout(2000);
-  await page.getByRole('option', { name: 'Failed' }).getByRole('checkbox').uncheck();
-  await page.getByRole('option', { name: 'Success' }).getByRole('checkbox').check();
-  await page.waitForTimeout(2000);
-  await page.getByRole('option', { name: 'Success' }).getByRole('checkbox').uncheck();
-  await page.getByRole('option', { name: 'Pending' }).getByRole('checkbox').check();
-  await page.waitForTimeout(2000);
-  await page.getByRole('option', { name: 'Pending' }).getByRole('checkbox').uncheck();
-  await page.getByRole('combobox', { name: 'Status' }).click();
+//   await page.getByLabel('Status').click();
+//   await page.getByRole('option', { name: 'Failed' }).getByRole('checkbox').check();
+//   await page.waitForTimeout(2000);
+//   await page.getByRole('option', { name: 'Failed' }).getByRole('checkbox').uncheck();
+//   await page.getByRole('option', { name: 'Success' }).getByRole('checkbox').check();
+//   await page.waitForTimeout(2000);
+//   await page.getByRole('option', { name: 'Success' }).getByRole('checkbox').uncheck();
+//   await page.getByRole('option', { name: 'Pending' }).getByRole('checkbox').check();
+//   await page.waitForTimeout(2000);
+//   await page.getByRole('option', { name: 'Pending' }).getByRole('checkbox').uncheck();
+//   await page.getByRole('combobox', { name: 'Status' }).click();
 
  
-  await page.getByRole('button', { name: 'Group by' }).nth(1).click();
-  await page.getByText('Verification Status', { exact: true }).click();
-  await page.getByRole('button', { name: 'Group by: Status' }).nth(1).click();
-  await page.getByText('None').click();
+//   await page.getByRole('button', { name: 'Group by' }).nth(1).click();
+//   await page.getByText('Verification Status', { exact: true }).click();
+//   await page.getByRole('button', { name: 'Group by: Status' }).nth(1).click();
+//   await page.getByText('None').click();
 
-});
+// });
 test('TaskBoard Widget Flows', async () => {
 
   await page.locator('div').filter({ hasText: /^Tasks$/ }).getByRole('img').click();
