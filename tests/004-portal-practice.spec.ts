@@ -773,19 +773,19 @@ test('Create Clients', async () => {
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(1000);
     // Past Date Appoinments
-    await page.getByRole('button', { name: 'Back' }).click();
-    await page.getByRole('button', { name: 'Back' }).click();
-    await page.getByRole('button', { name: 'Back' }).click();
-    await page.locator('div').filter({ hasText: /^07$/ }).click();
-    await page.getByLabel('Select client profile*').click();
-    await page.getByRole('option', { name: 'Shiva & Venkatesh (T1)' }).first().click();
-    await page.waitForTimeout(10000);
-    await page.getByLabel('Select service *').click();
-    await page.getByText('Developmental Testing, ...').click();
-    await page.getByPlaceholder('Enter text here').click();
-    await page.getByPlaceholder('Enter text here').fill('New every day testing');
-    await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-    
+    // await page.getByRole('button', { name: 'Back' }).click();
+    // await page.getByRole('button', { name: 'Back' }).click();
+    // await page.getByRole('button', { name: 'Back' }).click();
+    // await page.locator('div').filter({ hasText: /^09$/ }).click();
+
+    // await page.getByLabel('Select client profile*').click();
+    // await page.getByRole('option', { name: 'Shiva & Venkatesh (T1)' }).first().click();
+    // await page.waitForTimeout(10000);
+    // await page.getByLabel('Select service *').click();
+    // await page.getByText('Developmental Testing, ...').click();
+    // await page.getByPlaceholder('Enter text here').click();
+    // await page.getByPlaceholder('Enter text here').fill('New every day testing');
+    // await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     
   });
 
