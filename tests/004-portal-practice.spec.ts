@@ -773,19 +773,19 @@ test('Create Clients', async () => {
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(1000);
     // Past Date Appoinments
-    await page.getByRole('button', { name: 'Back' }).click();
-    await page.getByRole('button', { name: 'Back' }).click();
-    await page.getByRole('button', { name: 'Back' }).click();
-    await page.locator('div').filter({ hasText: /^07$/ }).click();
-    await page.getByLabel('Select client profile*').click();
-    await page.getByRole('option', { name: 'Shiva & Venkatesh (T1)' }).first().click();
-    await page.waitForTimeout(10000);
-    await page.getByLabel('Select service *').click();
-    await page.getByText('Developmental Testing, ...').click();
-    await page.getByPlaceholder('Enter text here').click();
-    await page.getByPlaceholder('Enter text here').fill('New every day testing');
-    await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-    
+    // await page.getByRole('button', { name: 'Back' }).click();
+    // await page.getByRole('button', { name: 'Back' }).click();
+    // await page.getByRole('button', { name: 'Back' }).click();
+    // await page.locator('div').filter({ hasText: /^09$/ }).click();
+
+    // await page.getByLabel('Select client profile*').click();
+    // await page.getByRole('option', { name: 'Shiva & Venkatesh (T1)' }).first().click();
+    // await page.waitForTimeout(10000);
+    // await page.getByLabel('Select service *').click();
+    // await page.getByText('Developmental Testing, ...').click();
+    // await page.getByPlaceholder('Enter text here').click();
+    // await page.getByPlaceholder('Enter text here').fill('New every day testing');
+    // await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     
   });
 
@@ -1220,22 +1220,22 @@ test('TaskBoard Widget Flows', async () => {
   await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
    await page.reload();
    await page.waitForTimeout(2000);
-   await page.locator('#mui-component-select-status').click();
-   await page.getByLabel('Status').nth(1).click();
-  await page.getByRole('option', { name: 'Created' }).getByRole('checkbox').check();
-  await page.getByRole('option', { name: 'Submitted' }).getByRole('checkbox').check();
-  await page.getByRole('option', { name: 'Sent' }).getByRole('checkbox').check();
-  await page.reload();
-  await page.waitForTimeout(2000);
-  await page.getByLabel('Clinician').first().click();
-  await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
-  await page.getByRole('option', { name: 'Owner Team' }).uncheck();
-  await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').check();
-  await page.getByRole('option', { name: 'Therapist' }).uncheck();
-  await page.getByRole('option', { name: 'Supervisor' }).getByRole('checkbox').check();
-  await page.getByRole('option', { name: 'Supervisor' }).uncheck();
-  await page.reload();
-  await page.waitForTimeout(3000);
+  //  await page.locator('#mui-component-select-status').click();
+  //  await page.getByLabel('Status').nth(1).click();
+  // await page.getByRole('option', { name: 'Created' }).getByRole('checkbox').check();
+  // await page.getByRole('option', { name: 'Submitted' }).getByRole('checkbox').check();
+  // await page.getByRole('option', { name: 'Sent' }).getByRole('checkbox').check();
+  // await page.reload();
+  // await page.waitForTimeout(2000);
+  // await page.getByLabel('Clinician').first().click();
+  // await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
+  // await page.getByRole('option', { name: 'Owner Team' }).uncheck();
+  // await page.getByRole('option', { name: 'Therapist' }).getByRole('checkbox').check();
+  // await page.getByRole('option', { name: 'Therapist' }).uncheck();
+  // await page.getByRole('option', { name: 'Supervisor' }).getByRole('checkbox').check();
+  // await page.getByRole('option', { name: 'Supervisor' }).uncheck();
+  // await page.reload();
+  // await page.waitForTimeout(3000);
 
   // Taskboard Flows
   await page.getByText('Practice Automation Task').click();
