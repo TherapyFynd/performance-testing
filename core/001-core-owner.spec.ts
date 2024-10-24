@@ -105,7 +105,7 @@ test.describe('All owner Test case ', () => {
       console.log('Failed to find first locator, trying second locator');
       await page.getByText('Settings').click();
     }
-
+  
     //Clinican Settings Flows
     await page.getByText('Clinician settings').click();
     await page.getByPlaceholder('Enter first name').click();
