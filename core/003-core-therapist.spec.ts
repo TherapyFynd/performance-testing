@@ -702,19 +702,25 @@ test('Therapist Dashboard', async () => {
  
 await page.locator('div').filter({ hasText: /^Calendar$/ }).first().click();
 await page.waitForTimeout(7000);
-await page.getByRole('button', { name: 'Month' }).click();
+// await page.getByRole('button', { name: 'Month' }).click();
+await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
+await page.locator('div').filter({ hasText: /^Calendar$/ }).first().click();
 await page.getByText('T1:').nth(1).click();
 await page.locator('button').filter({ hasText: 'Add note' }).nth(1).click();
 await page.getByRole('button', { name: 'Add psychotherapy note' }).nth(1).click();
 await page.getByPlaceholder('Enter your response here').click();
 await page.getByPlaceholder('Enter your response here').fill('Test Add');
 await page.getByRole('button', { name: 'Save' }).nth(1).click();
-await page.getByRole('button', { name: 'Month' }).click();
+// await page.getByRole('button', { name: 'Month' }).click();
+await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
+await page.locator('div').filter({ hasText: /^Calendar$/ }).first().click();
 await page.getByText('T1:').nth(1).click();
 await page.locator('button').filter({ hasText: 'Edit' }).nth(1).click();
 await page.getByPlaceholder('Enter text here').click();
 await page.getByPlaceholder('Enter text here').fill('Test Updated');
 await page.getByRole('button', { name: 'Update Appointment' }).nth(1).click();
+await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
+await page.locator('div').filter({ hasText: /^Calendar$/ }).first().click();
 await page.getByText('T1:').nth(1).click();
 await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
 await page.getByRole('button', { name: 'Yes' }).nth(1).click();
