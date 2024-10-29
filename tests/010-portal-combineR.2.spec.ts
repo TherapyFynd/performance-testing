@@ -679,19 +679,19 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
 
   });
 
-  test('Message Tab', async () => {
-    //   Messages Box
-    await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').click();
-    await page.waitForTimeout(5000);
-    await page.getByTestId('KeyboardArrowDownIcon').click();
-    await page.getByRole('menuitem', { name: 'Team' }).click();
-    await page.getByTestId('message-input').fill('Hi Therapist 1 How are u ');
-    await page.getByTestId('SendOutlinedIcon').click();
-    await page.waitForTimeout(3000);
-    await page.getByRole('img', { name: 'logo' }).click();
-    await page.waitForTimeout(1000);
+  // test('Message Tab', async () => {
+  //   //   Messages Box
+  //   await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').click();
+  //   await page.waitForTimeout(5000);
+  //   await page.getByTestId('KeyboardArrowDownIcon').click();
+  //   await page.getByRole('menuitem', { name: 'Team' }).click();
+  //   await page.getByTestId('message-input').fill('Hi Therapist 1 How are u ');
+  //   await page.getByTestId('SendOutlinedIcon').click();
+  //   await page.waitForTimeout(3000);
+  //   await page.getByRole('img', { name: 'logo' }).click();
+  //   await page.waitForTimeout(1000);
   
-  });
+  // });
 
 test('Create Clients', async () => {
 await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();

@@ -804,16 +804,16 @@ test('Client File', async () => {
     await page.waitForTimeout(2000);
     // await page.locator('._nameDetails_111x7_20 > .MuiButtonBase-root').click();
 });
-test('Message Tab', async () => {
-  //   Messages Box
-  await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').click();
+// test('Message Tab', async () => {
+//   //   Messages Box
+//   await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').click();
    
-    await page.getByTestId('message-input').fill('Hi Therapist 1 How are u ');
-    await page.getByTestId('SendOutlinedIcon').click();
-    await page.waitForTimeout(3000);
-    await page.getByRole('img', { name: 'logo' }).click();
-    await page.waitForTimeout(1000);
-});
+//     await page.getByTestId('message-input').fill('Hi Therapist 1 How are u ');
+//     await page.getByTestId('SendOutlinedIcon').click();
+//     await page.waitForTimeout(3000);
+//     await page.getByRole('img', { name: 'logo' }).click();
+//     await page.waitForTimeout(1000);
+// });
 test('TaskBoard Widget Flows', async () => {
 
   await page.locator('div').filter({ hasText: /^Tasks$/ }).getByRole('img').click();

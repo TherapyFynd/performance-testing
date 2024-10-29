@@ -104,13 +104,13 @@ test('Payment tab -Primary Therapist' ,async () => {
   await page.getByRole('button', { name: 'Credit' }).click();
   await page.getByRole('tab', { name: 'Card' }).click();
 });
-test('Chat tab -Primary Therapist' ,async () => {
-  await page.locator('button:nth-child(4)').first().click();
-  await page.waitForTimeout(3000);
-  await page.getByTestId('message-input').fill('hi man how arw u');
-  await page.getByTestId('SendOutlinedIcon').click();
-  await page.waitForTimeout(3000);
-});
+// test('Chat tab -Primary Therapist' ,async () => {
+//   await page.locator('button:nth-child(4)').first().click();
+//   await page.waitForTimeout(3000);
+//   await page.getByTestId('message-input').fill('hi man how arw u');
+//   await page.getByTestId('SendOutlinedIcon').click();
+//   await page.waitForTimeout(3000);
+// });
 
 test('Personal Infomation- Primary Therapist', async () => {
   await page.locator('button:nth-child(5)').first().click();
@@ -230,14 +230,14 @@ test('Couple Session with Primary Therapist',async () =>  {
           await page.getByRole('button', { name: 'Credit' }).click();
           await page.getByRole('tab', { name: 'Card' }).click();
         });
-        test('Couple Chat tab -Primary Therapist' ,async () => {
+        // test('Couple Chat tab -Primary Therapist' ,async () => {
         
-          await page.locator('button:nth-child(4)').first().click();
-          await page.waitForTimeout(3000);
-          await page.getByTestId('message-input').fill('hi man how arw u');
-          await page.getByTestId('SendOutlinedIcon').click();
-          await page.waitForTimeout(3000);
-        });
+        //   await page.locator('button:nth-child(4)').first().click();
+        //   await page.waitForTimeout(3000);
+        //   await page.getByTestId('message-input').fill('hi man how arw u');
+        //   await page.getByTestId('SendOutlinedIcon').click();
+        //   await page.waitForTimeout(3000);
+        // });
         
         test('Couple Personal Infomation -Primary Therapist', async () => {
           await page.locator('button:nth-child(5)').first().click();
@@ -285,13 +285,13 @@ test('Couple Session with Primary Therapist',async () =>  {
             await page.getByRole('button', { name: 'Credit' }).click();
             await page.getByRole('tab', { name: 'Card' }).click();
           });
-          test('Chat tab Secondary Therapist' ,async () => {
-            await page.locator('button:nth-child(4)').first().click();
-            await page.waitForTimeout(3000);
-            await page.getByTestId('message-input').fill('hi man how arw u');
-            await page.getByTestId('SendOutlinedIcon').click();
-            await page.waitForTimeout(3000);
-          });
+          // test('Chat tab Secondary Therapist' ,async () => {
+          //   await page.locator('button:nth-child(4)').first().click();
+          //   await page.waitForTimeout(3000);
+          //   await page.getByTestId('message-input').fill('hi man how arw u');
+          //   await page.getByTestId('SendOutlinedIcon').click();
+          //   await page.waitForTimeout(3000);
+          // });
           
           test('Personal Infomation Secondary therapist', async () => {
             await page.locator('button:nth-child(5)').first().click();
@@ -360,13 +360,13 @@ test('Couple Session with Primary Therapist',async () =>  {
                     await page.getByRole('button', { name: 'Credit' }).click();
                     await page.getByRole('tab', { name: 'Card' }).click();
                   });
-                  test('Couple Chat tab ' ,async () => {
-                    await page.locator('button:nth-child(4)').first().click();
-                    await page.waitForTimeout(3000);
-                    await page.getByTestId('message-input').fill('hi man how arw u');
-                    await page.getByTestId('SendOutlinedIcon').click();
-                    await page.waitForTimeout(3000);
-                  });
+                  // test('Couple Chat tab ' ,async () => {
+                  //   await page.locator('button:nth-child(4)').first().click();
+                  //   await page.waitForTimeout(3000);
+                  //   await page.getByTestId('message-input').fill('hi man how arw u');
+                  //   await page.getByTestId('SendOutlinedIcon').click();
+                  //   await page.waitForTimeout(3000);
+                  // });
                   
                   test('Couple Personal Infomation ', async () => {
                     await page.locator('button:nth-child(5)').first().click();

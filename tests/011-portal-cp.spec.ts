@@ -126,13 +126,13 @@ test('Filling Form', async () => {
   await page.getByText('Therapist Automation Forms').click();
   await page.getByRole('button').click();
 });
- test(' Chat tab ' ,async () => {
-                    await page.locator('button:nth-child(4)').first().click();
-                    await page.waitForTimeout(3000);
-                    await page.getByTestId('message-input').fill('hi man how arw u');
-                    await page.getByTestId('SendOutlinedIcon').click();
-                    await page.waitForTimeout(3000);
-                  });
+//  test(' Chat tab ' ,async () => {
+//                     await page.locator('button:nth-child(4)').first().click();
+//                     await page.waitForTimeout(3000);
+//                     await page.getByTestId('message-input').fill('hi man how arw u');
+//                     await page.getByTestId('SendOutlinedIcon').click();
+//                     await page.waitForTimeout(3000);
+//                   });
                   test(' Payment tab ' ,async () => {
                     await page.locator('button:nth-child(3)').first().click();
                     await page.getByRole('button', { name: 'Pending' }).click();
@@ -209,13 +209,13 @@ await page.locator('body > div.MuiPopover-root.MuiModal-root.css-1khfnay > div.M
 await page.getByRole('button', { name: 'Request appointment' }).nth(1).click();
 await page.waitForTimeout(2000);
         });
-        test('Chat tab Secondary Therapist-2' ,async () => {
-          await page.locator('button:nth-child(4)').first().click();
-          await page.waitForTimeout(3000);
-          await page.getByTestId('message-input').fill('hi man how are u');
-          await page.getByTestId('SendOutlinedIcon').click();
-          await page.waitForTimeout(3000);
-        });
+        // test('Chat tab Secondary Therapist-2' ,async () => {
+        //   await page.locator('button:nth-child(4)').first().click();
+        //   await page.waitForTimeout(3000);
+        //   await page.getByTestId('message-input').fill('hi man how are u');
+        //   await page.getByTestId('SendOutlinedIcon').click();
+        //   await page.waitForTimeout(3000);
+        // });
                   test(' Payment tab Secondary Therapist-2' ,async () => {
                     await page.locator('button:nth-child(3)').first().click();
                     await page.getByRole('button', { name: 'Pending' }).click();

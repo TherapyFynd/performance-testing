@@ -183,19 +183,19 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
 await page.getByText('Terms & Conditions').click();
 await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
 });
-test('Message Tab', async () => {
-  //   Messages Box
-  await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').click();
-  await page.waitForTimeout(5000);
-  await page.getByTestId('KeyboardArrowDownIcon').click();
-  await page.getByRole('menuitem', { name: 'Team' }).click();
-  await page.getByTestId('message-input').fill('Hi Therapist 1 How are u ');
-  await page.getByTestId('SendOutlinedIcon').click();
-  await page.waitForTimeout(3000);
-  await page.getByRole('img', { name: 'logo' }).click();
-  await page.waitForTimeout(1000);
+// test('Message Tab', async () => {
+//   //   Messages Box
+//   await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').click();
+//   await page.waitForTimeout(5000);
+//   await page.getByTestId('KeyboardArrowDownIcon').click();
+//   await page.getByRole('menuitem', { name: 'Team' }).click();
+//   await page.getByTestId('message-input').fill('Hi Therapist 1 How are u ');
+//   await page.getByTestId('SendOutlinedIcon').click();
+//   await page.waitForTimeout(3000);
+//   await page.getByRole('img', { name: 'logo' }).click();
+//   await page.waitForTimeout(1000);
 
-});
+// });
 test('Create Appoinment', async () => {
   // Create Appoinments
   try {

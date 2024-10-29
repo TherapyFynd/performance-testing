@@ -90,7 +90,9 @@
 //   await page.getByPlaceholder('Zip code').click();
 //   await page.getByPlaceholder('Zip code').fill('45700');
 //   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-//   await page.getByText('Payers').click();
+//   
+
+// await page.getByText('Payers').click();
 //   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
 //   await page.getByLabel('Search for insurance payers').click();
 //   await page.getByLabel('Search for insurance payers').fill('Cenpatico Kan');

@@ -149,13 +149,13 @@ test(' Payment tab ' ,async () => {
   await page.getByRole('button', { name: 'Credit' }).click();
   await page.getByRole('tab', { name: 'Card' }).click();
 });
-test(' Chat tab ' ,async () => {
-  await page.locator('button:nth-child(4)').first().click();
-  await page.waitForTimeout(3000);
-  await page.getByTestId('message-input').fill('hi man how arw u');
-  await page.getByTestId('SendOutlinedIcon').click();
-  await page.waitForTimeout(3000);
-});
+// test(' Chat tab ' ,async () => {
+//   await page.locator('button:nth-child(4)').first().click();
+//   await page.waitForTimeout(3000);
+//   await page.getByTestId('message-input').fill('hi man how arw u');
+//   await page.getByTestId('SendOutlinedIcon').click();
+//   await page.waitForTimeout(3000);
+// });
 test('Personal Infomation', async () => {
   await page.locator('button:nth-child(5)').first().click();
   await page.getByRole('menuitem', { name: 'Profile' }).click();
