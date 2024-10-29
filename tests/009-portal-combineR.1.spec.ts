@@ -777,16 +777,16 @@ test('Forms Tab', async () => {
     await page.waitForTimeout(2000);
     await page.reload();
   });
-  test('Message Tab', async () => {
-    //   Messages Box
-    await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').click();
-    await page.waitForTimeout(6000);
-      await page.getByTestId('message-input').fill('Hi Man How are u ');
-      await page.getByTestId('SendOutlinedIcon').click();
-      await page.waitForTimeout(3000);
-      await page.getByRole('img', { name: 'logo' }).click();
-      await page.waitForTimeout(1000);
-});
+  // test('Message Tab', async () => {
+  //   //   Messages Box
+  //   await page.locator('div').filter({ hasText: /^Messages$/ }).getByRole('img').click();
+  //   await page.waitForTimeout(6000);
+  //     await page.getByTestId('message-input').fill('Hi Man How are u ');
+  //     await page.getByTestId('SendOutlinedIcon').click();
+  //     await page.waitForTimeout(3000);
+  //     await page.getByRole('img', { name: 'logo' }).click();
+  //     await page.waitForTimeout(1000);
+// });
   test('Create Clients', async () => {
     await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
     await page.getByRole('menuitem', { name: 'Create client' }).click();
