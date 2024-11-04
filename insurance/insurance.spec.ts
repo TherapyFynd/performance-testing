@@ -342,7 +342,9 @@ test('Create Clients', async () => {
     await page.getByLabel('Pronouns').click();
   await page.getByText('He/Him').click();
   await page.getByPlaceholder('MM/DD/YYYY').click();
+  await page.waitForTimeout(4000)
   await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
+  await page.waitForTimeout(4000)
   await page.getByLabel('Phone Number').click();
   await page.getByLabel('Phone Number').fill('(764) 873-64868');
   await page.getByLabel('First Name', { exact: true }).click();
@@ -386,6 +388,10 @@ test('Create Clients', async () => {
     await page.getByRole('option', { name: 'Male', exact: true }).click();
     await page.getByPlaceholder('Phone').click();
     await page.getByPlaceholder('Phone').fill('(734) 573-25415');
+    await page.getByPlaceholder('MM/DD/YYYY').first().click();
+  await page.waitForTimeout(2000);
+  await page.getByPlaceholder('MM/DD/YYYY').first().fill('02/02/1999');
+  await page.waitForTimeout(2000);
     await page.getByLabel('Address line').click();
   await page.getByLabel('Address line').fill('New Insurance locations added');
   await page.getByLabel('State').click();
@@ -439,7 +445,9 @@ test('Create Clients', async () => {
     await page.getByLabel('Pronouns').click();
   await page.getByText('He/Him').click();
   await page.getByPlaceholder('MM/DD/YYYY').click();
+  await page.waitForTimeout(4000)
   await page.getByPlaceholder('MM/DD/YYYY').fill('01/01/2000');
+  await page.waitForTimeout(4000)
   await page.getByLabel('Phone Number').click();
   await page.getByLabel('Phone Number').fill('(764) 873-64868');
   await page.getByLabel('First Name', { exact: true }).click();
@@ -480,6 +488,7 @@ test('Create Clients', async () => {
   await page.getByLabel('Middle initial').click();
   await page.getByLabel('Middle initial').fill('M');
   await page.getByPlaceholder('MM/DD/YYYY').first().click();
+  await page.waitForTimeout(2000);
   await page.getByPlaceholder('MM/DD/YYYY').first().fill('02/02/1999');
   await page.waitForTimeout(2000);
   await page.getByLabel('Sex').click();
@@ -528,37 +537,43 @@ test('Create Clients', async () => {
 
   await page.getByText('Calendar').first().click();
   await page.getByRole('button', { name: 'Month' }).click();
-  await page.getByRole('button', { name: 'Next' }).click();
   await page.getByRole('button', { name: 'Back' }).click();
-  await page.getByRole('cell', { name: '01' }).first().click();
+
+  await page.getByRole('cell', { name: '28' }).first().click();
   await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByRole('option', { name: 'Rajesh (OT)' }).click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  await page.waitForTimeout(4000);
-  await page.getByRole('cell', { name: '02' }).first().click();
+  await page.waitForTimeout(6000);
+
+  
+  await page.getByRole('cell', { name: '25' }).first().click();
   await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByRole('option', { name: 'Rajesh (OT)' }).click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  await page.waitForTimeout(4000);
-  await page.locator('div').filter({ hasText: /^03$/ }).click();
+  await page.waitForTimeout(6000);
+  
+  await page.getByRole('cell', { name: '26' }).first().click();
   await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByText('Shiva (OT)').click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  await page.waitForTimeout(4000);
-  await page.locator('div').filter({ hasText: /^04$/ }).click();
+  await page.waitForTimeout(6000);
+
+  await page.getByRole('cell', { name: '31' }).first().click();
   await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByRole('option', { name: 'Shiva (OT)' }).click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-  await page.waitForTimeout(4000);
-  await page.getByText('Insurance').click();
+  await page.waitForTimeout(6000);
+  
 });
 
 test('Insurance Tab', async () => {
 
+//  STATUS: Create Claims and Submit Claims
+await page.waitForTimeout(4000);
 await page.getByText('Insurance').click();
 await page.getByLabel('Client').click();
   await page.getByRole('combobox', { name: 'Client' }).fill('shiva');
@@ -569,8 +584,7 @@ await page.getByLabel('Client').click();
   await page.getByRole('button', { name: 'Create claim' }).nth(1).click();
   await page.waitForTimeout(5000);
   await page.getByRole('button', { name: 'Create Claim Without' }).nth(1).click();
-  // await page.goto('https://leafs-ehr-web-stage-nmvorvf7ga-as.a.run.app/insurance/?active=Claims');
-  // await page.waitForTimeout(4000);
+ 
   await page.getByText('Access Integra').click();
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
   await page.getByPlaceholder('Start typing here').click();
@@ -592,25 +606,285 @@ await page.getByLabel('Client').click();
   // Auto accidents
   await page.locator('div').filter({ hasText: /^Yes No statestate$/ }).getByLabel('No').check();
   await page.waitForTimeout(7000);
-// others Accidents
-
-// await page.locator('div:nth-child(3) > ._questionBody_hmd23_32 > ._radioContainer_hmd23_54 > ._options_hmd23_62 > div > .MuiFormControl-root > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input').first().click();
-// await page.waitForTimeout(9000);
-
-// // 91,9a other Health Benefits
-// await page.locator('div:nth-child(5) > ._questionBody_hmd23_32 > ._radioContainer_hmd23_54 > ._options_hmd23_62 > div:nth-child(2) > .MuiFormControl-root > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input').click();
-// await page.waitForTimeout(5000);
+ 
 
 // Assignements
-// await page.locator('div:nth-child(27) > ._questionBody_hmd23_32 > ._radioContainer_hmd23_54 > ._options_hmd23_62 > div > .MuiFormControl-root > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input').first().click();
-// await page.waitForTimeout(9000);
+// await page.waitForSelector('div:nth-child(27) > ._questionBody_hmd23_32 > ._radioContainer_hmd23_54 > ._options_hmd23_62 > div > .MuiFormControl-root > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input', { state: 'visible' });
+// await page.locator('div:nth-child(27) > ._questionBody_hmd23_32 > ._radioContainer_hmd23_54 > ._options_hmd23_62 > div > .MuiFormControl-root > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input').first().check();
+await page.locator('div:nth-child(27) > ._questionBody_hmd23_32 > ._radioContainer_hmd23_54 > ._options_hmd23_62 > div > .MuiFormControl-root > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input').first().click({ force: true });
+await page.waitForTimeout(2000);
 
-  // await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  // await page.waitForTimeout(9000);
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.waitForTimeout(9000);
   await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
   await page.waitForTimeout(10000);
-  // await page.getByRole('tab', { name: 'Claim History' }).click();
-  // await page.pause();
-  // await page.getByText('Insurance', { exact: true }).click();
+  
+  await page.getByRole('tab', { name: 'Claim History' }).click();
+  await page.getByRole('tab', { name: 'Claim', exact: true }).click();
+  await page.getByText('Insurance', { exact: true }).click();
+  await page.waitForTimeout(3000);
+
+  // STATUS :Rejected Cliams 
+  // await page.getByLabel('Client').click();
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
+  await page.getByText('Insurance').click();
+  await page.getByLabel('Client').click();
+  await page.getByRole('option', { name: 'Rajesh (OT)' }).click();
+  await page.getByRole('combobox', { name: 'Client' }).click();
+  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+  await page.waitForTimeout(5000);
+  await page.getByRole('button', { name: 'Create claim' }).nth(1).click();
+  await page.waitForTimeout(8000);
+  await page.getByRole('button', { name: 'Create Claim Without' }).nth(1).click();
+  await page.getByRole('button', { name: 'Created' }).click();
+  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+  await page.waitForTimeout(3000);
+  await page.getByRole('button', { name: 'All' }).click();
+  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click()
+  await page.waitForTimeout(3000);
+  await page.getByText('Absolute Total Care').click();
+  await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+  await page.getByPlaceholder('Start typing here').click();
+  await page.getByPlaceholder('Start typing here').fill('First Claims Added here');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.waitForTimeout(3000);
+
+  await page.getByRole('button', { name: 'Edit' }).nth(3).click();
+  await page.waitForTimeout(9000);
+  await page.getByLabel('Insured\'s ID number').clear();
+  await page.getByLabel('Insured\'s ID number').fill('REJECTED');
+  await page.waitForTimeout(3000);
+  // Gender Select
+  await page.getByLabel('Female').first().check();
+  await page.waitForTimeout(9000);
+  // Add Diagnosis code
+  await page.getByLabel('A', { exact: true }).click();
+  await page.getByLabel('A', { exact: true }).fill('K5289');
+  await page.waitForTimeout(5000);
+  // Employement (Current)
+  await page.locator('div:nth-child(3) > div > ._questionBody_hmd23_32 > ._radioContainer_hmd23_54 > ._options_hmd23_62 > div > .MuiFormControl-root > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input').first().check();
+  // Auto accidents
+  await page.locator('div').filter({ hasText: /^Yes No statestate$/ }).getByLabel('No').check();
+  await page.waitForTimeout(7000);
+// Assignement
+await page.locator('div:nth-child(27) > ._questionBody_hmd23_32 > ._radioContainer_hmd23_54 > ._options_hmd23_62 > div > .MuiFormControl-root > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input').first().click({ force: true });
+await page.waitForTimeout(2000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(10000);
+ await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
+  await page.waitForTimeout(11000);
+  
+  await page.getByRole('tab', { name: 'Claim History' }).click();
+  await page.getByRole('tab', { name: 'Claim', exact: true }).click();
+  await page.getByText('Insurance', { exact: true }).click();
+  await page.waitForTimeout(4000);
+
+  // STATUS:  Denied Claims 
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
+  await page.getByText('Insurance').click();
+  await page.getByLabel('Client').click();
+  await page.getByRole('option', { name: 'Rajesh (OT)' }).click();
+  await page.getByRole('combobox', { name: 'Client' }).click();
+  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+  await page.waitForTimeout(5000);
+  await page.getByRole('button', { name: 'Create claim' }).nth(1).click();
+  await page.waitForTimeout(8000);
+  await page.getByRole('button', { name: 'Create Claim Without' }).nth(1).click();
+  await page.getByRole('button', { name: 'Created' }).click();
+  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click();
+  await page.waitForTimeout(3000);
+  await page.getByRole('button', { name: 'All' }).click();
+  await page.getByRole('button', { name: 'Apply filters' }).nth(1).click()
+  await page.waitForTimeout(3000);
+  await page.getByText('Absolute Total Care').nth(1).click();
+  await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+  await page.getByPlaceholder('Start typing here').click();
+  await page.getByPlaceholder('Start typing here').fill('First Claims Added here');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.waitForTimeout(3000);
+
+  await page.getByRole('button', { name: 'Edit' }).nth(3).click();
+  await page.waitForTimeout(9000);
+  await page.getByLabel('Insured\'s ID number').clear();
+  await page.getByLabel('Insured\'s ID number').fill('DENIED');
+  await page.waitForTimeout(3000);
+  // Gender Select
+  await page.getByLabel('Female').first().check();
+  await page.waitForTimeout(9000);
+  // Add Diagnosis code
+  await page.getByLabel('A', { exact: true }).click();
+  await page.getByLabel('A', { exact: true }).fill('K5289');
+  await page.waitForTimeout(5000);
+  // Employement (Current)
+  await page.locator('div:nth-child(3) > div > ._questionBody_hmd23_32 > ._radioContainer_hmd23_54 > ._options_hmd23_62 > div > .MuiFormControl-root > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input').first().check();
+  // Auto accidents
+  await page.locator('div').filter({ hasText: /^Yes No statestate$/ }).getByLabel('No').check();
+  await page.waitForTimeout(7000);
+// Assignement
+await page.locator('div:nth-child(27) > ._questionBody_hmd23_32 > ._radioContainer_hmd23_54 > ._options_hmd23_62 > div > .MuiFormControl-root > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input').first().click({ force: true });
+await page.waitForTimeout(2000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(11000);
+ await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
+  await page.waitForTimeout(11000);
+  
+  await page.getByRole('tab', { name: 'Claim History' }).click();
+  await page.getByRole('tab', { name: 'Claim', exact: true }).click();
+  await page.getByText('Insurance', { exact: true }).click();
+
+  // Claims Status: Scrub Status
+  
+  await page.getByRole('button', { name: 'Create claim' }).nth(1).click();
+  await page.waitForTimeout(5000);
+  await page.getByRole('button', { name: 'Create Claim Without' }).nth(1).click();
+  await page.getByRole('cell', { name: 'Access Integra' }).nth(1).click();
+  await page.getByRole('button', { name: 'Edit' }).nth(1).click();
+  await page.waitForTimeout(9000);
+
+  // Gender Select
+  await page.getByLabel('Female').first().check();
+  await page.waitForTimeout(9000);
+  // Add Diagnosis code
+  await page.getByLabel('A', { exact: true }).click();
+  await page.getByLabel('A', { exact: true }).fill('ABCDF');
+  await page.waitForTimeout(5000);
+  // Employement (Current)
+  await page.locator('div:nth-child(3) > div > ._questionBody_hmd23_32 > ._radioContainer_hmd23_54 > ._options_hmd23_62 > div > .MuiFormControl-root > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input').first().check();
+  // Auto accidents
+  await page.locator('div').filter({ hasText: /^Yes No statestate$/ }).getByLabel('No').check();
+  await page.waitForTimeout(7000);
+// Assignement
+await page.locator('div:nth-child(27) > ._questionBody_hmd23_32 > ._radioContainer_hmd23_54 > ._options_hmd23_62 > div > .MuiFormControl-root > .MuiFormControlLabel-root > .MuiButtonBase-root > .PrivateSwitchBase-input').first().click({ force: true });
+await page.waitForTimeout(2000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(11000);
+ await page.getByRole('button', { name: 'Submit claim' }).nth(1).click();
+ await page.waitForTimeout(11000);
+
+ try {
+  await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+} catch (error) {
+  console.log('Failed to find first locator, trying second locator');
+   await page.getByText('Settings').click();
+}
+
+await page.getByText('Clinician settings').click();
+
+  await page.getByPlaceholder('Enter first name').click();
+  await page.getByPlaceholder('Enter first name').fill('Owner');
+  await page.getByPlaceholder('Enter last name').click();
+  await page.getByPlaceholder('Enter last name').fill('Team');
+  await page.getByLabel('Select gender you identify').click();
+  await page.getByText('Male', { exact: true }).click();
+  await page.getByLabel('Select your pronouns').click();
+  await page.getByRole('option', { name: 'He/Him' }).click();
+  await page.getByLabel('Address Line 1').click();
+  await page.getByLabel('Address Line 1').fill('Name');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
+  await page.getByRole('tab', { name: 'Clinical' }).click();
+  await page.getByLabel('License Type*').click();
+  await page.getByRole('combobox', { name: 'License Type*' }).fill('ALC');
+  await page.getByRole('option', { name: 'ALC' }).click();
+  await page.getByLabel('License State').click();
+  await page.getByRole('combobox', { name: 'License State' }).fill('ca');
+  await page.getByText('California').click();
+  await page.getByLabel('License No.').click();
+  await page.getByLabel('License No.').press('CapsLock');
+  await page.getByLabel('License No.').fill('QEY355');
+
+  await page.getByLabel('Select accepted payment').click();
+  await page.getByRole('option', { name: 'Self Pay' }).click();
+  await page.getByLabel('Select your specializations').click();
+ 
+  await page.getByText('Adolescent Issues').click();
+  await page.getByLabel('Select treatment methods you').click();
+  await page.getByRole('option', { name: 'Art Therapy', exact: true }).click();
+  await page.getByLabel('Select accepted payment').click();
+  await page.getByRole('option', { name: 'Insurance' }).click();
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  
+  await page.getByRole('tab', { name: 'Locations' }).click();
+  await page.getByRole('button', { name: 'Add new' }).nth(1).click();
+  await page.getByLabel('Office name').click();
+  await page.getByLabel('Office name').fill('KanTime Healthcare System');
+  await page.getByLabel('Address').click();
+  await page.getByLabel('Address').fill('New Jersy main road #3');
+  await page.getByLabel('State').click();
+  await page.getByRole('combobox', { name: 'State' }).fill('New');
+  await page.getByText('New York', { exact: true }).click();
+  await page.getByLabel('City').click();
+  await page.getByRole('combobox', { name: 'City' }).fill('Ut');
+  await page.getByText('Utica').click();
+  await page.getByPlaceholder('Zip code').click();
+  await page.getByPlaceholder('Zip code').fill('561202');
+  await page.getByLabel('Make default location').check();
+  await page.getByRole('button', { name: 'Add location' }).nth(1).click();
+
+  await page.getByRole('tab', { name: 'Services' }).click();
+  await page.getByRole('button', { name: 'Add new' }).nth(1).click();
+  await page.getByLabel('CPT Code').click();
+  await page.getByRole('combobox', { name: 'CPT Code' }).fill('90792');
+  await page.getByText('90792, Psychiatric diagnostic').click();
+  await page.getByLabel('Fee *').click();
+  await page.getByLabel('Fee *').fill('10000');
+  await page.getByLabel('Duration *').click();
+  await page.getByLabel('Duration *').fill('3');
+  await page.getByLabel('Make default service').check();
+  await page.getByRole('button', { name: 'Add service' }).nth(1).click();
+
+  // Practice Settings
+  await page.getByText('Practice settings').click();
+  await page.getByLabel('Practice Name').click();
+  await page.getByLabel('Practice Name').fill('Mind Simple Hospital');
+  await page.getByLabel('About').click();
+  await page.getByLabel('About').fill('This Nice company');
+  await page.getByPlaceholder('Enter phone').click();
+  await page.getByPlaceholder('Enter phone').fill('(975) 734-53565');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
+  //   Privacy Policy
+await page.getByText('Website Privacy Policy').click();
+await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
+await page.getByText('Terms & Conditions').click();
+await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
+
+await page.getByText('Insurance').click();
+  await page.getByRole('tab', { name: 'ERA\'s' }).click();
+  await page.getByText('Access Integra').click();
+  await page.getByTestId('ArrowBackIcon').click();
+  
+
+  await page.getByText('Billing').click();
+  await page.getByRole('button', { name: 'Insurance' }).click();
+  await page.getByRole('cell', { name: '$100' }).nth(1).click();
+  await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+  await page.getByPlaceholder('Start typing here').click();
+  await page.getByPlaceholder('Start typing here').fill('Insurance Claims');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.getByText('Reports').click();
+
+  await page.getByText('Billing').first().click();
+  await page.getByRole('button', { name: 'Insurance' }).click();
+  await page.getByRole('cell', { name: '$100' }).nth(3).click();
+  await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+  await page.getByPlaceholder('Start typing here').click();
+  await page.getByPlaceholder('Start typing here').fill('Second Cliams Added');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.getByRole('button', { name: 'Edit billing address' }).nth(1).click();
+  await page.getByRole('button', { name: 'Cancel' }).nth(1).click();
+  await page.getByText('Reports').click();
+
+
 });
 });
