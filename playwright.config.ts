@@ -38,8 +38,8 @@ export default defineConfig({
     
     colorScheme: 'dark',
 
-    locale: 'en-US',
-    timezoneId: 'America/Los_Angeles',
+    // locale: 'en-US',
+    // timezoneId: 'America/Los_Angeles',
     
 
     launchOptions: {
