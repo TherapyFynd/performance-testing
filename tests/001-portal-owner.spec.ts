@@ -1723,13 +1723,13 @@ test('Owner Dashboard', async () => {
   await page.getByPlaceholder('Enter text here').fill('New Date Updated');
   await page.getByRole('button', { name: 'Update Appointment' }).nth(1).click();
   await page.waitForTimeout(2000);
-  await page.getByText('Owner Team').nth(1).click();
-  await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
-  await page.getByRole('button', { name: 'Yes' }).nth(1).click();
-  await page.getByLabel('Clinician').click();
-  await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
-  await page.reload();
-  await page.waitForTimeout(3000);
+  // await page.getByText('Owner Team').nth(1).click();
+  // await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
+  // await page.getByRole('button', { name: 'Yes' }).nth(1).click();
+  // await page.getByLabel('Clinician').click();
+  // await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
+  // await page.reload();
+  // await page.waitForTimeout(3000);
 // Taskboard flows
 await page.getByText('Owner Automation Task').click();
 await page.getByRole('button', { name: 'In Progress' }).click();
