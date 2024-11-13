@@ -13,10 +13,10 @@ Terminal Enter Command:    npm init playwright@latest
 
 Things will Install While Entering the Command Step by step
 
-Choose between TypeScript or JavaScript (default is TypeScript) ( Choose typescript)
-Name of your Tests folder (default is tests or e2e if you already have a tests folder in your project)
-Add a GitHub Actions workflow to easily run tests on CI
-Install Playwright browsers (default is true)
+Choose between TypeScript or JavaScript (default is TypeScript) ( Choose typescript),
+Name of your Tests folder (default is tests or e2e if you already have a tests folder in your project),
+Add a GitHub Actions workflow to easily run tests on CI,
+Install Playwright browsers (default is true).
 
 
 **You tube Link Playwright setup**
