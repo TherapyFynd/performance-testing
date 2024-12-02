@@ -85,7 +85,7 @@ test('Request Booking Appoinment', async () => {
   //  Book Appoinment
   await page.getByRole('button', { name: 'Book appointment' }).nth(1).click();
   await page.getByLabel('Select service').click();
-  await page.getByText('Psychotherapy, 45 mins').click();
+  await page.getByText('Therapeutic exercises').click();
   await page.waitForTimeout(4000);
    // Logic For Fail Locator
    try {
