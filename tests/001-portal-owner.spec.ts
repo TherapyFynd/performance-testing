@@ -63,7 +63,7 @@ test('Owner login and  onboarding ', async ({ request }) => {
   
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('Office name').click();
-  await page.getByLabel('Office name').fill('KanTime Healthcare System ');
+  await page.getByLabel('Office name').fill('KANTIME HEALTHCARE');
   await page.getByLabel('Address').click();
   await page.getByLabel('Address').fill('New area City');
   await page.getByLabel('State').click();
@@ -148,9 +148,9 @@ test('Settings Flows', async () => {
   await page.getByRole('tab', { name: 'Locations' }).click();
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('Office name').click();
-  await page.getByLabel('Office name').fill('KanTime Healthcare System');
+  await page.getByLabel('Office name').fill('Owner Clinican Settings Location');
   await page.getByLabel('Address').click();
-  await page.getByLabel('Address').fill('New Jersy main road #3');
+  await page.getByLabel('Address').fill('New Jersy main');
   await page.getByLabel('State').click();
   await page.getByRole('combobox', { name: 'State' }).fill('New');
   await page.getByText('New York', { exact: true }).click();
@@ -194,6 +194,60 @@ test('Settings Flows', async () => {
   await page.getByPlaceholder('Enter phone').click();
   await page.getByPlaceholder('Enter phone').fill('(975) 734-53565');
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  
+  await page.getByRole('tab', { name: 'Locations' }).click();
+  await page.getByRole('button', { name: 'Add new' }).nth(1).click();
+  await page.getByLabel('Office name').click();
+  await page.getByLabel('Office name').fill('Practice Wide Locations @1');
+  await page.getByLabel('Address').click();
+  await page.getByLabel('Address').fill('practice Address @1');
+  await page.getByLabel('State').click();
+  await page.getByText('Oregon').click();
+  await page.getByLabel('City').click();
+  await page.getByText('Bend').click();
+  await page.getByPlaceholder('Zip code').click();
+  await page.getByPlaceholder('Zip code').fill('89766');
+  await page.getByLabel('Make default location').check();
+  await page.getByRole('button', { name: 'Add location' }).nth(1).click();
+  await page .waitForTimeout(4000);
+  await page.getByRole('button', { name: 'Add new' }).nth(1).click();
+  await page.getByLabel('Office name').click();
+  await page.getByLabel('Office name').fill('Owner Adding Practice Locations @2');
+  await page.getByLabel('Address').click();
+  await page.getByLabel('Address').fill('New Location Added @2');
+  await page.getByLabel('State').click();
+  await page.getByText('Ohio').click();
+  await page.getByLabel('City').click();
+  await page.getByText('Canton').click();
+  await page.getByPlaceholder('Zip code').click();
+  await page.getByPlaceholder('Zip code').fill('56788');
+  await page.getByRole('button', { name: 'Add location' }).nth(1).click();
+  await page .waitForTimeout(4000);
+
+  await page.getByRole('tab', { name: 'Services' }).click();
+  await page.getByRole('button', { name: 'Add new' }).nth(1).click();
+  await page.getByLabel('CPT Code').click();
+  await page.getByRole('combobox', { name: 'CPT Code' }).fill('90849');
+  await page.getByText('Multiple-family group psychotherapy').click();
+  await page.getByLabel('Fee *').click();
+  await page.getByLabel('Fee *').fill('50');
+  await page.getByLabel('Duration *').click();
+  await page.getByLabel('Duration *').fill('5');
+  await page.getByLabel('Make default service').check();
+  await page.getByLabel('Make default service').uncheck();
+  await page.getByRole('button', { name: 'Add service' }).nth(1).click();
+  await page .waitForTimeout(4000);
+
+  await page.getByRole('button', { name: 'Add new' }).nth(1).click();
+  await page.getByLabel('CPT Code').click();
+  await page.getByRole('combobox', { name: 'CPT Code' }).fill('96136');
+  await page.getByText('96136, Psychological or').click();
+  await page.getByLabel('Fee *').click();
+  await page.getByLabel('Fee *').fill('100');
+  await page.getByLabel('Duration *').click();
+  await page.getByLabel('Duration *').fill('10');
+  await page.getByRole('button', { name: 'Add service' }).nth(1).click();
+  await page .waitForTimeout(4000);
 
   // Subscriptions Feature
 //   await page.getByText('Subscription').click();
@@ -588,6 +642,27 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   // await page.getByText('AARP - UnitedHealthcare').click();
   // await page.getByRole('button', { name: 'Save' }).nth(1).click();
   // await page.waitForTimeout(2000);
+
+
+  // System Emails 
+  await page.getByText('System Emails').click();
+  await page.getByRole('button', { name: 'Edit' }).nth(1).click();
+  await page.getByLabel('Clinician').click();
+  await page.getByRole('option', { name: 'Clinician Full Name' }).click();
+  await page.getByLabel('Practice').click();
+  await page.getByRole('option', { name: 'Practice Name' }).click();
+  await page.getByLabel('Client').click();
+  await page.getByRole('option', { name: 'Client First Name' }).click();
+  await page.getByLabel('Links').click();
+  await page.getByRole('option', { name: 'Account Login Link' }).click();
+  await page.getByLabel('Appointments').click();
+  await page.getByRole('option', { name: 'Appointment Date' }).click();
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
+  await page.getByText('Reminders').click();
+  await page.getByRole('checkbox').check();
+  await page.getByRole('tab', { name: 'SMS' }).click();
+  await page.getByRole('checkbox').check();
 
  //   Privacy Policy
 await page.getByText('Website Privacy Policy').click();
@@ -1050,6 +1125,8 @@ test('Create Appoinment', async () => {
   await page.getByText('Developmental Testing, ...').click();
   await page.getByPlaceholder('Enter text here').click();
   await page.getByPlaceholder('Enter text here').fill('New every day testing');
+  await page.getByLabel('Select location *').click();
+await page.getByText('Telehealth : Online video').click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(1000);
   // Past Date Appoinments
@@ -1064,6 +1141,8 @@ test('Create Appoinment', async () => {
   await page.getByText('Developmental Testing, ...').click();
   await page.getByPlaceholder('Enter text here').click();
   await page.getByPlaceholder('Enter text here').fill('New every day testing');
+  await page.getByLabel('Select location *').click();
+  await page.getByText('KANTIME HEALTHCARE').click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 
   // Create Appoinment Button( top Bar)
@@ -1076,6 +1155,8 @@ test('Create Appoinment', async () => {
   await page.getByText('Family psychotherapy...').click();
   await page.getByPlaceholder('Enter text here').click();
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
+  await page.getByLabel('Select location *').click();
+  await page.getByText('Practice Wide Locations @').click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(4000);
   
@@ -1201,6 +1282,11 @@ test('Client File', async () => {
   // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
   // await page.getByRole('button', { name: 'Send' }).nth(1).click();
 
+//  Bills tabs
+  await page.getByRole('tab', { name: 'Bills' }).click();
+  await page.getByRole('spinbutton').first().click();
+  await page.getByRole('spinbutton').first().fill('100');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
   //   Notes Section
   await page.getByRole('tab', { name: 'Notes' }).click();
   await page.getByRole('button', { name: 'Add note' }).nth(1).click();
@@ -1286,6 +1372,8 @@ test('Client File', async () => {
   await page.getByRole('button', { name: 'Add' }).nth(3).click();
   await page.getByRole('menuitem', { name: 'Appointment' }).getByRole('img').click();
   await page.waitForTimeout(12000);
+  await page.getByLabel('Select location *').click();
+  await page.getByText('Owner Adding Practice').click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(4000);
 });
@@ -1713,6 +1801,8 @@ test('Owner Dashboard', async () => {
   await page.getByText('Family psychotherapy...').click();
   await page.getByPlaceholder('Enter text here').click();
   await page.getByPlaceholder('Enter text here').fill('Quick demo Please');
+  await page.locator('div').filter({ hasText: /^Select location \*$/ }).getByLabel('Open').click();
+  await page.getByText('Owner Clinican Settings').click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(3000);
   await page.locator('div').filter({ hasText: /^Dashboard$/ }).getByRole('img').click();
@@ -1723,13 +1813,13 @@ test('Owner Dashboard', async () => {
   await page.getByPlaceholder('Enter text here').fill('New Date Updated');
   await page.getByRole('button', { name: 'Update Appointment' }).nth(1).click();
   await page.waitForTimeout(2000);
-  await page.getByText('Owner Team').nth(1).click();
-  await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
-  await page.getByRole('button', { name: 'Yes' }).nth(1).click();
-  await page.getByLabel('Clinician').click();
-  await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
-  await page.reload();
-  await page.waitForTimeout(3000);
+  // await page.getByText('Owner Team').nth(1).click();
+  // await page.locator('button').filter({ hasText: 'Cancel appointment' }).nth(1).click();
+  // await page.getByRole('button', { name: 'Yes' }).nth(1).click();
+  // await page.getByLabel('Clinician').click();
+  // await page.getByRole('option', { name: 'Owner Team' }).getByRole('checkbox').check();
+  // await page.reload();
+  // await page.waitForTimeout(3000);
 // Taskboard flows
 await page.getByText('Owner Automation Task').click();
 await page.getByRole('button', { name: 'In Progress' }).click();
@@ -1768,8 +1858,181 @@ await page.getByRole('button', { name: 'Save' }).nth(1).click();
 await page.waitForTimeout(3000);
 await page.reload();
 await page.waitForTimeout(5000);
+});
+test('Recurring Appoinments',async () => {
+  await page.getByRole('button', { name: 'Month' }).click();
+  await page.getByRole('button', { name: 'Next' }).click();
+
+  await page.locator('div').filter({ hasText: /^10$/ }).click();
+  await page.getByLabel('Select client profile*').click();
+  await page.getByText('Automation (OT)').click();
+  await page.getByLabel('Recurrencing Appointment').check();
+  await page.getByLabel('Span').click();
+  await page.getByRole('option', { name: 'days' }).click();
+  await page.getByLabel('After').click();
+  await page.getByLabel('After').fill('2');
+  await page.getByLabel('Select location *').click();
+  await page.getByText('Telehealth : Online video').click();
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  await page.waitForTimeout(4000);
+  
+  await page.locator('div').filter({ hasText: /^12$/ }).click();
+  await page.getByLabel('Select client profile*').click();
+  await page.getByText('Automation (OT)').click();
+  await page.getByLabel('Recurrencing Appointment').check();
+  await page.getByLabel('Span').click();
+  await page.getByRole('option', { name: 'days' }).click();
+  await page.getByLabel('Every').click();
+  await page.getByLabel('Every').fill('2');
+  await page.getByLabel('After').click();
+  await page.getByLabel('After').fill('2');
+  await page.getByLabel('Select location *').click();
+  await page.getByText('Telehealth : Online video').click();
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click()
+  await page.waitForTimeout(9000);
+
+await page.locator('div').filter({ hasText: /^13$/ }).click();
+await page.getByLabel('Select client profile*').click();
+await page.getByText('Automation (OT)').click();
+await page.getByLabel('Recurrencing Appointment').check();
+await page.getByLabel('Every').click();
+await page.getByLabel('Every').fill('3');
+await page.getByLabel('Span').click();
+await page.getByRole('option', { name: 'days' }).click();
+await page.getByLabel('After').click();
+await page.getByLabel('After').fill('3');
+await page.getByLabel('Select location *').click();
+await page.getByText('KANTIME HEALTHCARE').click();
+await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+await page.waitForTimeout(9000);
+
+await page.locator('div').filter({ hasText: /^17$/ }).click();
+await page.getByLabel('Select client profile*').click();
+await page.getByText('Automation (OT)').click();
+await page.getByLabel('Recurrencing Appointment').check();
+await page.getByLabel('Span').click();
+await page.getByRole('option', { name: 'weeks' }).click();
+await page.getByLabel('Mon', { exact: true }).check();
+await page.getByLabel('After').click();
+await page.getByLabel('After').fill('2');
+await page.getByLabel('Select location *').click();
+await page.getByText('KANTIME HEALTHCARE').click();
+await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+await page.waitForTimeout(9000);
+
+await page.locator('div').filter({ hasText: /^17$/ }).click();
+await page.getByLabel('Select client profile*').click();
+await page.getByText('Automation (OT)').click();
+await page.getByLabel('Recurrencing Appointment').check();
+await page.getByLabel('Tue').check();
+await page.getByLabel('Every').click();
+await page.getByLabel('Every').fill('2');
+await page.getByLabel('After').click();
+await page.getByLabel('After').fill('2');
+await page.getByLabel('Select location *').click();
+await page.getByText('Practice Wide Locations @').click();
+await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+await page.waitForTimeout(9000);
+
+await page.getByRole('cell', { name: '04' }).first().click();
+await page.getByLabel('Select client profile*').click();
+await page.getByText('Automation (OT)').click();
+await page.getByLabel('Recurrencing Appointment').check();
+await page.getByLabel('Every').click();
+await page.getByLabel('Every').fill('3');
+await page.getByLabel('Wed').check();
+await page.getByLabel('After').click();
+await page.getByLabel('After').fill('3');
+await page.getByLabel('Select location *').click();
+await page.getByText('Practice Wide Locations @').click();
+await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+await page.waitForTimeout(9000);
 
 
+  await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
+  await page.getByRole('menuitem', { name: 'Create Appointment' }).click();
+  await page.waitForTimeout(6000);
+  await page.getByLabel('Select client profile*').click();
+  await page.getByText('Automation (OT)').click();
+  await page.waitForTimeout(2000);
+  await page.getByLabel('Recurrencing Appointment').check();
+  await page.getByLabel('Span').click();
+  await page.getByRole('option', { name: 'days' }).click();
+  await page.getByLabel('After').click();
+  await page.getByLabel('After').fill('2')
+  await page.getByLabel('Select location *').click();
+  await page.getByText('Owner Adding Practice').click();
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  await page.waitForTimeout(2000);
+  
+ 
+});
+test('Multi Locations', async () => {
+
+  await page.getByLabel('Office Locations').click();
+  await page.getByRole('option', { name: 'All' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'Telehealth : Onli...' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+  await page.getByLabel('1 Office Location').click();
+  await page.getByRole('option', { name: 'Telehealth : Onli...' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'KANTIME HEALTHCAR...' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+  await page.getByLabel('1 Office Location').click();
+  await page.getByRole('option', { name: 'KANTIME HEALTHCAR...' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'Practice Wide Loc...' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+  await page.getByLabel('1 Office Location').click();
+  await page.getByRole('option', { name: 'Practice Wide Loc...' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'Owner Adding Prac...' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+  await page.getByLabel('1 Office Location').click();
+  await page.getByRole('option', { name: 'Owner Adding Prac...' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'Owner Clinican Se...' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+  await page.getByLabel('1 Office Location').click();
+  await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+
+
+  await page.getByText('Billing').click();
+  await page.getByLabel('Office Locations').click();
+  await page.getByRole('option', { name: 'Telehealth : Onli...' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'Telehealth : Onli...' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'KANTIME HEALTHCAR...' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'KANTIME HEALTHCAR...' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'Practice Wide Loc...' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'Practice Wide Loc...' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
+  await page.reload();
+
+  await page.locator('div').filter({ hasText: /^Reports$/ }).click();
+  await page.getByText('Payment Status').click();
+  await page.getByLabel('Office Locations').click();
+  await page.getByRole('option', { name: 'All' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'Telehealth : Onli...' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+  await page.getByLabel('1 Office Location').click();
+  await page.getByRole('option', { name: 'Telehealth : Onli...' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'KANTIME HEALTHCAR...' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+  await page.getByLabel('1 Office Location').click();
+  await page.getByRole('option', { name: 'KANTIME HEALTHCAR...' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'Practice Wide Loc...' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+  await page.getByLabel('1 Office Location').click();
+  await page.getByRole('option', { name: 'Practice Wide Loc...' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'Owner Adding Prac...' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+  await page.getByLabel('1 Office Location').click();
+  await page.getByRole('option', { name: 'Owner Adding Prac...' }).getByRole('checkbox').uncheck();
+  await page.getByRole('option', { name: 'Owner Clinican Se...' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+  await page.getByLabel('1 Office Location').click();
+  await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Apply' }).nth(1).click();
+  await page.getByTestId('ArrowBackIcon').locator('path').click();
+
+});
   });
 test('Global search', async () => {
   try {
@@ -1844,4 +2107,3 @@ test('DP Update and Logout', async () => {
 
 });
 
-});
