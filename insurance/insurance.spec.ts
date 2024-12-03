@@ -1185,7 +1185,7 @@ test('Create Clients', async () => {
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(6000);
 
-  
+  await page.getByRole('button', { name: 'Back' }).click();
   await page.getByRole('cell', { name: '25' }).first().click();
   await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
   await page.getByLabel('Select client profile*').click();

@@ -1,237 +1,258 @@
-// import { test, type Page } from '@playwright/test';
-// import path from 'path';
-// import { generatePasswordlessLoginLink } from '../helpers/api';
-// import { createNewEmail } from '../helpers/mailsurp';
-// import {
-//   BASE_FRONTEND_URL,
-//   isRunningOnLocal,
-//   localBaseUrl,
-// } from '../localemails.js/const';
-// import { IEmail, readEmails } from '../localemails.js/emails';
+import { test, type Page } from '@playwright/test';
+import path from 'path';
+import { generatePasswordlessLoginLink } from '../helpers/api';
+import { createNewEmail } from '../helpers/mailsurp';
+import {
+  BASE_FRONTEND_URL,
+  isRunningOnLocal,
+  localBaseUrl,
+} from '../localemails.js/const';
+import { IEmail, readEmails } from '../localemails.js/emails';
 
 
-// // Annotate entire file as serial.
-// test.describe.configure({ mode: 'serial' });
+// Annotate entire file as serial.
+test.describe.configure({ mode: 'serial' });
 
-// let page: Page;
+let page: Page;
 
-// test.beforeAll(async ({ browser }) => {
-//   const myEmails: IEmail = await readEmails();
-//   console.log(myEmails);
-//   if (!myEmails?.billingsection?.length) {
-//     throw new Error(`billerSectionEmail not present returning...`);
-//   }
-//   page = await browser.newPage();
-// });
+test.beforeAll(async ({ browser }) => {
+  const myEmails: IEmail = await readEmails();
+  console.log(myEmails);
+  if (!myEmails?.billingsection?.length) {
+    throw new Error(`billerSectionEmail not present returning...`);
+  }
+  page = await browser.newPage();
+});
 
-// test.afterAll(async () => {
-//   await page.close();
-// });
-// test.describe.skip('All BillerSectionRole Test case ', () => {
-// test('BillingSection  login and  onboarding ', async ({ request }) => {
-//   let myEmails: IEmail = await readEmails();
-//     const data = await generatePasswordlessLoginLink({
-//       email: myEmails.billingsection!,
+test.afterAll(async () => {
+  await page.close();
+});
+test.describe('All BillerSectionRole Test case ', () => {
+test('BillingSection  login and  onboarding ', async ({ request }) => {
+  let myEmails: IEmail = await readEmails();
+    const data = await generatePasswordlessLoginLink({
+      email: myEmails.billingsection!,
       
-//       request: request,
-//     });
-//     await page.goto(data!);
+      request: request,
+    });
+    await page.goto(data!);
   
-//   // Onbaording flows for Practice Manager
+  // Onbaording flows for Practice Manager
   
-// await page.getByPlaceholder('Enter first name').click();
-// await page.getByPlaceholder('Enter first name').fill('Billing');
-// await page.getByPlaceholder('Enter last name').click();
-// await page.getByPlaceholder('Enter last name').fill('Section');
-// await page.getByPlaceholder('Enter phone').click();
-// await page.getByPlaceholder('Enter phone').fill('(846) 534-65833');
-// await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-// await page.waitForTimeout(2000);
-// await page.getByLabel('', { exact: true }).check();
-//    await page.waitForTimeout(1000);
-//    await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
-//    await page.waitForTimeout(1000);
-//    await page.getByLabel('', { exact: true }).check();
-//    await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
-//    await page.waitForTimeout(6000);
-//    });
-//    test('Insurance Features', async () => {
-//     const { chromium } = require('playwright');
+await page.getByPlaceholder('Enter first name').click();
+await page.getByPlaceholder('Enter first name').fill('Billing');
+await page.getByPlaceholder('Enter last name').click();
+await page.getByPlaceholder('Enter last name').fill('Section');
+await page.getByPlaceholder('Enter phone').click();
+await page.getByPlaceholder('Enter phone').fill('(846) 534-65833');
+await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+await page.waitForTimeout(2000);
+await page.getByLabel('', { exact: true }).check();
+   await page.waitForTimeout(1000);
+   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+   await page.waitForTimeout(1000);
+   await page.getByLabel('', { exact: true }).check();
+   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+   await page.waitForTimeout(6000);
+   });
+   test('Team Internal Chat', async () => {
 
-// (async () => {
-//   const browser = await chromium.launch({
-//     headless: false
-//   });
-//   const context = await browser.newContext();
-//   await page.getByText('Billing').nth(2).click();
-//   await page.getByRole('tab', { name: 'Insurance' }).click();
-//   await page.getByLabel('Practice name*').click();
-//   await page.getByLabel('Practice name*').fill('Testing Insurance Practice');
-//   await page.getByLabel('NPI*').click();
-//   await page.getByLabel('NPI*').fill('1111111112');
-//   await page.getByLabel('Taxonomy code').click();
-//   await page.getByLabel('Taxonomy code').fill('207R00000X');
-//   await page.getByLabel('Tax ID*').click();
-//   await page.getByLabel('Tax ID*').fill('111111112');
-//   await page.getByLabel('SSN').click();
-//   await page.getByLabel('SSN').fill('1234567890');
-//   await page.getByPlaceholder('Address line').click();
-//   await page.getByPlaceholder('Address line').fill('New Testing Insurance Locations');
-//   await page.getByLabel('State').click();
-//   await page.getByRole('combobox', { name: 'State' }).fill('Vir');
-//   await page.getByLabel('Clear').click();
-//   await page.getByLabel('State').click();
-//   await page.getByLabel('State').click();
-//   await page.locator('div').filter({ hasText: /^City$/ }).click();
-//   await page.getByLabel('State').click();
-//   await page.getByRole('option', { name: 'Texas' }).click();
-//   await page.getByLabel('City').click();
-//   await page.getByRole('option', { name: 'Abilene' }).click();
-//   await page.getByPlaceholder('Zip code').click();
-//   await page.getByPlaceholder('Zip code').fill('45700');
-//   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-//   
+    try {
+      await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Settings').click();
+    }
+    
+  await page.getByText('Messages').click();
+  await page.getByRole('tab', { name: 'SMS' }).click();
+  await page.getByRole('tab', { name: 'Internal Chat' }).click();
+  await page.getByPlaceholder('Search').nth(1).click();
+  await page.getByPlaceholder('Search').nth(1).fill('Owner');
+  await page.getByTestId('message-input').click();
+  await page.getByTestId('message-input').fill('Hey I owner team How Are u man');
+  await page.getByTestId('SendOutlinedIcon').click();
+  await page.waitForTimeout(3000);
 
-// await page.getByText('Payers').click();
-//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-//   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByLabel('Search for insurance payers').fill('Cenpatico Kan');
-//   await page.getByText('- Cenpatico Kansas').click();
-//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
-//   const page1Promise = page.waitForEvent('popup');
-//   await page.getByRole('button', { name: 'Enroll' }).nth(1).click();
-//   const page1 = await page1Promise;
-//   await page1.close();
-//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-//   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByLabel('Search for insurance payers').fill('AIG');
-//   await page.getByText('- AIG').click();
-//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
-//   await page.getByRole('button', { name: 'Enroll' }).nth(3).click();
-//   await page2.close();
-//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-//   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByLabel('Search for insurance payers').fill('Alliant Energy');
-//   await page.getByText('J1619- Alliant Energy').click();
-//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
-//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-//   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByLabel('Search for insurance payers').fill('AlohaCare');
-//   await page.getByText('ALOHA- AlohaCare').click();
-//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
-//   await page.getByRole('row', { name: 'ALOHA AlohaCare Enroll Enroll' }).getByRole('button').nth(1).click();
-//   await page3.getByRole('button', { name: 'Continue' }).click();
-//   await page3.locator('#field_11').click();
-//   await page3.locator('#field_11').fill('Test');
-//   await page3.locator('#field_13').click();
-//   await page3.locator('#field_13').fill('Test');
-//   await page3.locator('#field_15').click();
-//   await page3.locator('#field_15').fill('343546456');
-//   await page3.locator('#field_14').click();
-//   await page3.locator('#field_15').click();
-//   await page3.locator('#field_15').click();
-//   await page3.locator('#field_15').fill('3435464356');
-//   await page3.locator('#field_14').click();
-//   await page3.locator('#field_14').fill('She');
-//   await page3.locator('#field_16').click();
-//   await page3.locator('#field_16').fill('Test');
-//   await page3.locator('#field_18').click();
-//   await page3.locator('#field_18').fill('testmail@djjd.com');
-//   await page3.locator('#field_17').click();
-//   await page3.locator('#field_17').fill('MR');
-//   await page3.locator('#field_19').click();
-//   await page3.locator('#field_19').fill('8105671022');
-//   await page3.getByText('SIGN HERE').click();
-//   await page3.locator('#signature-canvas').click({
-//     position: {
-//       x: 148,
-//       y: 184
-//     }
-//   });
-//   await page3.getByRole('button', { name: 'Apply Signature' }).click();
-//   await page3.close();
-//   await page.getByRole('row', { name: 'ALOHA AlohaCare Enroll Enroll' }).getByRole('button').nth(4).click();
-//   await page.getByText('Delete', { exact: true }).click();
-//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-//   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByLabel('Search for insurance payers').fill('\t Arrowpoint');
-//   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').fill('Arrowpoint');
-//   await page.getByText('J1564- Arrowpoint').click();
-//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
-//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-//   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByLabel('Search for insurance payers').fill('Bass Pro Group, LLC');
-//   await page.getByText('J1958- Bass Pro Group, LLC').click();
-//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
-//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-//   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByLabel('Search for insurance payers').fill('\t Carhartt');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').fill('Carhartt');
-//   await page.getByText('J1931- Carhartt').click();
-//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
-//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-//   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByLabel('Search for insurance payers').fill('Absolute');
-//   await page.getByText('68055- Absolute Total Care').click();
-//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
-//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-//   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByLabel('Search for insurance payers').fill('\t CarePlus Health Plans Inc');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').fill('CarePlus Health Plans Inc');
-//   await page.getByText('- CarePlus Health Plans Inc').click();
-//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
-//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-//   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByLabel('Search for insurance payers').fill('Boler Com');
-//   await page.getByText('J1870- Boler Company').click();
-//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
-//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-//   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByLabel('Search for insurance payers').fill('Dean Health');
-//   await page.getByText('39113- Dean Health Plan').click();
-//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
-//   await page.getByRole('button', { name: 'Add Payer' }).nth(1).click();
-//   await page.getByLabel('Search for insurance payers').click();
-//   await page.getByLabel('Search for insurance payers').fill('\t Access Integra');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').press('ArrowLeft');
-//   await page.getByLabel('Search for insurance payers').fill('Access Integra');
-//   await page.getByText('INTEG- Access Integra').click();
-//   await page.getByRole('button', { name: 'Add' }).nth(1).click();
+  await page.getByPlaceholder('Search').nth(1).click();
+  await page.getByPlaceholder('Search').nth(1).fill('Pract');
+  await page.getByText('Practice 1').click();
+  await page.getByTestId('message-input').click();
+  await page.getByTestId('message-input').fill('Hey I Practice Manager  how are u man cool rights');
+  await page.getByTestId('SendOutlinedIcon').click();
+  await page.waitForTimeout(3000);
 
-//   // ---------------------
-//   await context.close();
-//   await browser.close();
-// })();
+  await page.getByPlaceholder('Search').nth(1).click();
+  await page.getByPlaceholder('Search').nth(1).fill('Bil'); 
+try {
+    await page.getByText('Biller 1').click();  
+  } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+       await page.locator('p').filter({ hasText: 'Biller' }).click();
+    }
+  await page.getByTestId('message-input').click();
+  await page.getByTestId('message-input').fill('Hey Biller How are u man');
+  await page.getByTestId('SendOutlinedIcon').click();
+  await page.waitForTimeout(3000);
+
+  await page.getByPlaceholder('Search').nth(1).click();
+  await page.getByPlaceholder('Search').nth(1).fill('Sc');
+  await page.getByTestId('message-input').click();
+  await page.getByTestId('message-input').fill('Hey how are u Scheduler');
+  await page.getByTestId('SendOutlinedIcon').click();
+  await page.waitForTimeout(3000);
+
+  await page.getByPlaceholder('Search').nth(1).click();
+  await page.getByPlaceholder('Search').nth(1).fill('Intake');
+  await page.getByTestId('message-input').click();
+  await page.getByTestId('message-input').fill('Hey man how are u ');
+  await page.getByTestId('SendOutlinedIcon').click();
+  await page.waitForTimeout(3000);
+
+  await page.getByPlaceholder('Search').nth(1).click();
+  await page.getByPlaceholder('Search').nth(1).fill('Thera');
+  try {
+    await page.getByText('Therapist 1Nothing yet...').click();
+} catch (error) {
+     console.log('Failed to find first locator, trying second locator');
+       await page.getByText('Nothing yet...').click();
+   }
+
+  await page.getByTestId('message-input').click();
+  await page.getByTestId('message-input').fill('Hey Man How are u ');
+  await page.getByTestId('SendOutlinedIcon').click();
+  await page.waitForTimeout(3000);
+
+  await page.getByPlaceholder('Search').nth(1).click();
+  await page.getByPlaceholder('Search').nth(1).fill('Automat');
+  await page.getByText('Automation Test').first().click();
+  await page.getByTestId('message-input').click();
+  await page.getByTestId('message-input').fill('Hey i clients how are u doing man');
+  await page.getByTestId('SendOutlinedIcon').click();
+  await page.waitForTimeout(3000);
+  
+  await page.getByPlaceholder('Search').nth(1).click();
+  await page.getByPlaceholder('Search').nth(1).fill('Shiva');
+  await page.getByTestId('message-input').click();
+  await page.getByTestId('message-input').fill('Hey Very Good man how are u ');
+  await page.getByTestId('SendOutlinedIcon').click();
+  await page.waitForTimeout(3000);
+
+  await page.getByRole('button', { name: 'Clients' }).click();
+  await page.waitForTimeout(3000);
+  await page.getByRole('button', { name: 'Team' }).click();
+  await page.waitForTimeout(3000);
+  await page.getByRole('button', { name: 'All chats' }).click();
+
+  await page.getByRole('tab', { name: 'SMS' }).click();
+  await page.getByPlaceholder('Search').nth(1).click();
+  await page.getByPlaceholder('Search').nth(1).fill('New');
+  await page.getByTestId('message-input').click();
+  await page.getByTestId('message-input').fill('Hey new clients this Biller Manager Your Session are clear');
+  await page.getByTestId('SendOutlinedIcon').click();
+  await page.waitForTimeout(3000);
+
+  await page.getByPlaceholder('Search').nth(1).click();
+  await page.getByPlaceholder('Search').nth(1).fill('Combine');
+  await page.getByTestId('message-input').click();
+  await page.getByTestId('message-input').fill('Hey How are u man ');
+  await page.getByTestId('SendOutlinedIcon').click();
+  await page.waitForTimeout(3000);
+
+  await page.getByRole('button', { name: 'Clients' }).click();
+  await page.waitForTimeout(3000);
+  await page.getByRole('button', { name: 'All chats' }).click();
+  await page.getByRole('tab', { name: 'Internal Chat' }).click();
+  await page.waitForTimeout(3000);
+
+});
+test('Billing tab', async () => {
+
+  await page.getByText('Billing').first().click();
+  await page.getByLabel('Office Locations').click();
+  await page.getByRole('option', { name: 'Telehealth : Onli...' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'Telehealth : Onli...' }).getByRole('checkbox').uncheck();
+  await page.waitForTimeout(3000);
+  await page.getByRole('option', { name: 'KANTIME HEALTHCAR...', exact: true }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'KANTIME HEALTHCAR...', exact: true }).getByRole('checkbox').uncheck();
+  await page.waitForTimeout(3000);
+  await page.getByRole('option', { name: 'Practice Wide Loc...' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'Practice Wide Loc...' }).getByRole('checkbox').uncheck();
+  await page.waitForTimeout(3000);
+  await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'All' }).getByRole('checkbox').uncheck();
+  await page.reload();
+  await page.waitForTimeout(3000);
+
+  await page.getByRole('button', { name: 'New' }).click();
+  await page.waitForTimeout(3000);
+  await page.getByRole('button', { name: 'All' }).click();
+  await page.getByRole('button', { name: 'Ready to post' }).click();
+  await page.waitForTimeout(3000);
+  await page.getByRole('button', { name: 'All' }).click();
+  await page.getByRole('button', { name: 'Ready to charge' }).click();
+  await page.waitForTimeout(3000);
+  await page.getByRole('button', { name: 'All' }).click();
+
+  await page.getByLabel('Client').click();
+  await page.getByRole('option', { name: 'James (OT)' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'James (OT)' }).getByRole('checkbox').uncheck();
+  await page.waitForTimeout(3000);
+  await page.getByRole('option', { name: 'Automation (OT)' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'Automation (OT)' }).getByRole('checkbox').uncheck();
+  await page.waitForTimeout(3000);
+  await page.getByRole('option', { name: 'Rajesh@' }).getByRole('checkbox').check();
+  await page.getByRole('option', { name: 'Rajesh@' }).getByRole('checkbox').uncheck();
+  await page.getByRole('combobox', { name: 'Client' }).click();
+  await page.reload();
+  await page.waitForTimeout(3000);
+
+  await page.getByLabel('Client').click();
+  await page.getByRole('option', { name: 'James (OT)' }).getByRole('checkbox').check();
+  await page.getByRole('combobox', { name: 'Client' }).click();
+    try {
+await page.getByRole('cell', { name: '$100' }).first().click();
+} catch (error) {
+     console.log('Failed to find first locator, trying second locator');
+  await page.getByRole('cell', { name: 'SelfPay' }).first().click();
+   }
+  await page.getByRole('button', { name: 'Add note' }).nth(1).click();
+  await page.getByPlaceholder('Start typing here').click();
+  await page.getByPlaceholder('Start typing here').fill('Adding Invoices Note Here');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
+  await page.getByRole('button', { name: 'Edit billing address' }).nth(1).click();
+  await page.getByLabel('Address Line').click();
+  await page.getByLabel('Address Line').fill('New State Added here');
+  await page.getByLabel('State').click();
+  await page.getByRole('option', { name: 'Texas' }).click();
+  await page.getByLabel('City').click();
+  await page.getByText('Abilene').click();
+  await page.getByPlaceholder('Zip code').click();
+  await page.getByPlaceholder('Zip code').fill('56230');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
+  await page.getByRole('button', { name: 'Edit', exact: true }).nth(3).click();
+  await page.getByPlaceholder('Amount').click();
+  await page.getByPlaceholder('Amount').fill('150');
+  await page.locator('div').filter({ hasText: /^Bill ItemsSave$/ }).getByRole('button').nth(1).click();
+
+  await page.locator('input[name="clientCopayAmount"]').click();
+  await page.locator('input[name="clientCopayAmount"]').fill('50');
+  await page.locator('input[name="writeOffAmount"]').click();
+  await page.locator('input[name="writeOffAmount"]').fill('50');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+
+});
+  // Update DP and Logout Flow
+  test('Update and Logout Flow', async () => {
+    try {
+      await page.getByRole('img').nth(1).click();
+    } catch (error) {
+      console.log('Failed to find first locator, trying second locator');
+      await page.locator('.MuiAvatar-img').click();
+    }  
+  
+      await page.getByRole('menuitem', { name: 'Logout' }).click();
+  });
+});
