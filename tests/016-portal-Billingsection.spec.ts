@@ -56,7 +56,7 @@ await page.getByLabel('', { exact: true }).check();
    await page.waitForTimeout(6000);
    });
    test('Team Internal Chat', async () => {
-
+   
     try {
       await page.locator('div').filter({ hasText: /^Settings$/ }).click();
     } catch (error) {
@@ -66,9 +66,17 @@ await page.getByLabel('', { exact: true }).check();
     
   await page.getByText('Messages').click();
   await page.getByRole('tab', { name: 'SMS' }).click();
+  await page.waitForTimeout(6000);
   await page.getByRole('tab', { name: 'Internal Chat' }).click();
+  await page.waitForTimeout(6000);
+
   await page.getByPlaceholder('Search').nth(1).click();
   await page.getByPlaceholder('Search').nth(1).fill('Owner');
+  await page.waitForTimeout(6000);
+  await page.getByRole('tab', { name: 'SMS' }).click();
+  await page.waitForTimeout(6000);
+  await page.getByRole('tab', { name: 'Internal Chat' }).click();
+  await page.waitForTimeout(6000);
   await page.getByTestId('message-input').click();
   await page.getByTestId('message-input').fill('Hey I owner team How Are u man');
   await page.getByTestId('SendOutlinedIcon').click();
@@ -76,6 +84,7 @@ await page.getByLabel('', { exact: true }).check();
 
   await page.getByPlaceholder('Search').nth(1).click();
   await page.getByPlaceholder('Search').nth(1).fill('Pract');
+  await page.waitForTimeout(6000);
   await page.getByText('Practice 1').click();
   await page.getByTestId('message-input').click();
   await page.getByTestId('message-input').fill('Hey I Practice Manager  how are u man cool rights');
@@ -84,6 +93,7 @@ await page.getByLabel('', { exact: true }).check();
 
   await page.getByPlaceholder('Search').nth(1).click();
   await page.getByPlaceholder('Search').nth(1).fill('Bil'); 
+  await page.waitForTimeout(6000);
 try {
     await page.getByText('Biller 1').click();  
   } catch (error) {
@@ -97,6 +107,7 @@ try {
 
   await page.getByPlaceholder('Search').nth(1).click();
   await page.getByPlaceholder('Search').nth(1).fill('Sc');
+  await page.waitForTimeout(6000);
   await page.getByTestId('message-input').click();
   await page.getByTestId('message-input').fill('Hey how are u Scheduler');
   await page.getByTestId('SendOutlinedIcon').click();
@@ -104,6 +115,7 @@ try {
 
   await page.getByPlaceholder('Search').nth(1).click();
   await page.getByPlaceholder('Search').nth(1).fill('Intake');
+  await page.waitForTimeout(6000);
   await page.getByTestId('message-input').click();
   await page.getByTestId('message-input').fill('Hey man how are u ');
   await page.getByTestId('SendOutlinedIcon').click();
@@ -111,6 +123,7 @@ try {
 
   await page.getByPlaceholder('Search').nth(1).click();
   await page.getByPlaceholder('Search').nth(1).fill('Thera');
+  await page.waitForTimeout(6000);
   try {
     await page.getByText('Therapist 1Nothing yet...').click();
 } catch (error) {
@@ -125,6 +138,7 @@ try {
 
   await page.getByPlaceholder('Search').nth(1).click();
   await page.getByPlaceholder('Search').nth(1).fill('Automat');
+  await page.waitForTimeout(6000);
   await page.getByText('Automation Test').first().click();
   await page.getByTestId('message-input').click();
   await page.getByTestId('message-input').fill('Hey i clients how are u doing man');
@@ -133,6 +147,7 @@ try {
   
   await page.getByPlaceholder('Search').nth(1).click();
   await page.getByPlaceholder('Search').nth(1).fill('Shiva');
+  await page.waitForTimeout(6000);
   await page.getByTestId('message-input').click();
   await page.getByTestId('message-input').fill('Hey Very Good man how are u ');
   await page.getByTestId('SendOutlinedIcon').click();
@@ -147,6 +162,7 @@ try {
   await page.getByRole('tab', { name: 'SMS' }).click();
   await page.getByPlaceholder('Search').nth(1).click();
   await page.getByPlaceholder('Search').nth(1).fill('New');
+  await page.waitForTimeout(6000);
   await page.getByTestId('message-input').click();
   await page.getByTestId('message-input').fill('Hey new clients this Biller Manager Your Session are clear');
   await page.getByTestId('SendOutlinedIcon').click();
@@ -154,6 +170,7 @@ try {
 
   await page.getByPlaceholder('Search').nth(1).click();
   await page.getByPlaceholder('Search').nth(1).fill('Combine');
+  await page.waitForTimeout(6000);
   await page.getByTestId('message-input').click();
   await page.getByTestId('message-input').fill('Hey How are u man ');
   await page.getByTestId('SendOutlinedIcon').click();
