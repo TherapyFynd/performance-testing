@@ -826,6 +826,8 @@ await page.getByLabel('After').fill('2');
 await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 await page.waitForTimeout(9000);
 
+await page.getByRole('button', { name: 'Next' }).click();
+await page.waitForTimeout(3000);
 await page.getByRole('cell', { name: '04' }).first().click();
 await page.getByLabel('Select client profile*').click();
 await page.getByText('Rajesh (T1)').click();

@@ -1906,7 +1906,7 @@ await page.getByText('KANTIME HEALTHCARE').click();
 await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 await page.waitForTimeout(9000);
 
-await page.locator('div').filter({ hasText: /^17$/ }).click();
+await page.locator('div').filter({ hasText: /^22$/ }).click();
 await page.getByLabel('Select client profile*').click();
 await page.getByText('Automation (OT)').click();
 await page.getByLabel('Recurrencing Appointment').check();
@@ -1920,7 +1920,7 @@ await page.getByText('KANTIME HEALTHCARE').click();
 await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
 await page.waitForTimeout(9000);
 
-await page.locator('div').filter({ hasText: /^17$/ }).click();
+await page.locator('div').filter({ hasText: /^22$/ }).click();
 await page.getByLabel('Select client profile*').click();
 await page.getByText('Automation (OT)').click();
 await page.getByLabel('Recurrencing Appointment').check();
