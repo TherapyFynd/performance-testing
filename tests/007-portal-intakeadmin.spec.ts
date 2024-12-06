@@ -41,7 +41,7 @@ test('Intake admin login and  onboarding ', async ({ request }) => {
 // Onbaording flows for Practice Manager
 
 await page.getByPlaceholder('Enter first name').click();
-await page.getByPlaceholder('Enter first name').fill('IntakeAdmin ');
+await page.getByPlaceholder('Enter first name').fill('IntakeAdmin');
 await page.getByPlaceholder('Enter last name').click();
 await page.getByPlaceholder('Enter last name').fill('1');
 await page.getByPlaceholder('Enter phone').click();
