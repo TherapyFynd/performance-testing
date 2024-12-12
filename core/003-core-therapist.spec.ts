@@ -776,7 +776,7 @@ test('Recurring Appoinments',async () => {
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(4000);
   
-  await page.locator('div').filter({ hasText: /^12$/ }).click();
+  await page.locator('div').filter({ hasText: /^14$/ }).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByText('Rajesh (T1)').click();
   await page.getByLabel('Recurrencing Appointment').check();
