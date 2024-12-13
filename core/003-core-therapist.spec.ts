@@ -763,8 +763,9 @@ await page.waitForTimeout(5000);
 
 test('Recurring Appoinments',async () => {
   await page.getByRole('button', { name: 'Month' }).click();
-  // await page.getByRole('button', { name: 'Next' }).click();
-
+  await page.getByRole('button', { name: 'Next' }).click();
+  await page.getByRole('button', { name: 'Next' }).click();
+  await page.waitForTimeout(4000);
   await page.locator('div').filter({ hasText: /^10$/ }).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByText('Rajesh (T1)').click();
