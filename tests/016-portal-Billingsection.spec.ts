@@ -166,7 +166,7 @@ try {
   await page.getByPlaceholder('Search').nth(1).click();
   await page.getByPlaceholder('Search').nth(1).fill('Combine');
   await page.waitForTimeout(6000);
- 
+
   await page.getByTestId('message-input').click();
   await page.getByTestId('message-input').fill('Hey How are u man ');
   await page.getByTestId('SendOutlinedIcon').click();
