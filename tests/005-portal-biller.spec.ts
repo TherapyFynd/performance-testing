@@ -35,11 +35,13 @@ test('Biller  login and  onboarding ', async ({ request }) => {
       
       request: request,
     });
-    await page.goto(data!);
-  
-  // Onbaording flows for Practice Manager
-  
 
+    // await page.goto(data!);
+   
+      await page.goto(data!);
+ 
+  // Onbaording flows for Practice Manager
+await page.waitForTimeout(5000);
 await page.getByPlaceholder('Enter first name').click();
 await page.getByPlaceholder('Enter first name').fill('Biller ');
 await page.getByPlaceholder('Enter last name').click();

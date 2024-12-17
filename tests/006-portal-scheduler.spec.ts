@@ -35,6 +35,7 @@ test('Scheduler login and  onboarding ', async ({ request }) => {
      
       request: request,
     });
+
     await page.goto(data!);
   
   // Onbaording flows for Practice Manager
