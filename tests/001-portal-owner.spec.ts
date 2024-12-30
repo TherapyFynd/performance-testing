@@ -60,7 +60,6 @@ test('Owner login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Enter Group Practice name').fill('KanTime Healthcare System ');
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   
-  
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('Office name').click();
   await page.getByLabel('Office name').fill('KANTIME HEALTHCARE');
@@ -249,6 +248,14 @@ test('Settings Flows', async () => {
   await page.getByRole('button', { name: 'Add service' }).nth(1).click();
   await page .waitForTimeout(4000);
 
+  await page.getByRole('tab', { name: 'Appointment Cancellation' }).click();
+  await page.getByLabel('No Show Fee Type').click();
+  await page.getByRole('option', { name: '75% of session fee' }).click();
+  await page.getByLabel('Late Cancel Fee Type').click();
+  await page.getByRole('option', { name: '25% of session fee' }).click();
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page .waitForTimeout(6000);
+  
   // Subscriptions Feature
 //   await page.getByText('Subscription').click();
 //   await page.getByText('Frontdesk').click();
@@ -1230,10 +1237,15 @@ test('Client File', async () => {
   await page.getByLabel('Enter file name').nth(1).fill('Test Pdf 2');
   await page.getByRole('button', { name: 'Request' }).nth(1).click();
 
-    await page.getByRole('tab', { name: 'Insurance Eligibility' }).click();
-    await page.waitForTimeout(6000);
-    await page.getByRole('button', { name: 'Verify Benefits' }).nth(1).click();
-    await page.waitForTimeout(8000);
+  await page.getByRole('tab', { name: 'Insurance Eligibility' }).click();
+  await page.waitForTimeout(6000);
+  await page.getByRole('button', { name: 'Verify Benefits' }).nth(1).click();
+  await page.waitForTimeout(8000);
+  
+  await page.getByRole('tab', { name: 'Payment' }).click();
+  await page.getByLabel('Self Pay').check();
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.waitForTimeout(8000);
 
   await page.locator('div').filter({ hasText: /^Basic InfoIndividual$/ }).getByRole('button').click();
 
@@ -1251,36 +1263,36 @@ test('Client File', async () => {
   await page.getByRole('button', { name: 'Send' }).nth(1).click();
 
   // Template Add in Client File (CF) in Stage only
-  await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
-  await page.getByRole('tab', { name: 'Templates' }).click();
-  await page.getByText('Questionnaires').click();
-  await page.getByLabel('Select Forms to send').click();
-  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('100');
-  await page.getByRole('option', { name: 'question' }).click();
-  await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
-  await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
-  await page.getByText('Consent forms').click();
-  await page.getByLabel('Select Forms to send').click();
-  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('demo');
-  await page.getByRole('option', { name: 'Template demo for consent' }).click();
-  await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
-  await page.getByRole('button', { name: 'Send' }).nth(1).click();
-
-    // Template Add in Client File (CF) in Production only
   // await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
   // await page.getByRole('tab', { name: 'Templates' }).click();
   // await page.getByText('Questionnaires').click();
   // await page.getByLabel('Select Forms to send').click();
-  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Demo');
-  // await page.getByRole('option', { name: 'Demographic form' }).click();
+  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('100');
+  // await page.getByRole('option', { name: 'question' }).click();
   // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
   // await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   // await page.getByText('Consent forms').click();
   // await page.getByLabel('Select Forms to send').click();
-  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Pra');
-  // await page.getByRole('option', { name: 'Practice Policies' }).click();
+  // await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('demo');
+  // await page.getByRole('option', { name: 'Template demo for consent' }).click();
   // await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
   // await page.getByRole('button', { name: 'Send' }).nth(1).click();
+
+    // Template Add in Client File (CF) in Production only
+  await page.getByRole('button', { name: 'Send forms' }).nth(1).click();
+  await page.getByRole('tab', { name: 'Templates' }).click();
+  await page.getByText('Questionnaires').click();
+  await page.getByLabel('Select Forms to send').click();
+  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Demo');
+  await page.getByRole('option', { name: 'Demographic form' }).click();
+  await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
+  await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
+  await page.getByText('Consent forms').click();
+  await page.getByLabel('Select Forms to send').click();
+  await page.getByRole('combobox', { name: 'Select Forms to send' }).fill('Pra');
+  await page.getByRole('option', { name: 'Practice Policies' }).click();
+  await page.getByRole('combobox', { name: 'Select Forms to send' }).click();
+  await page.getByRole('button', { name: 'Send' }).nth(1).click();
 
 //  Bills tabs
   await page.getByRole('tab', { name: 'Bills' }).click();
@@ -1376,6 +1388,7 @@ test('Client File', async () => {
   await page.getByText('Owner Adding Practice').click();
   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
   await page.waitForTimeout(4000);
+
 });
 
 // test('Insurance Tab', async () => {
@@ -1866,7 +1879,7 @@ test('Recurring Appoinments',async () => {
   await page.locator('div').filter({ hasText: /^10$/ }).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByText('Automation (OT)').click();
-  await page.getByLabel('Recurrencing Appointment').check();
+  await page.getByLabel('Recurring Appointment').check();
   await page.getByLabel('Span').click();
   await page.getByRole('option', { name: 'days' }).click();
   await page.getByLabel('After').click();
@@ -1879,7 +1892,7 @@ test('Recurring Appoinments',async () => {
   await page.locator('div').filter({ hasText: /^12$/ }).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByText('Automation (OT)').click();
-  await page.getByLabel('Recurrencing Appointment').check();
+  await page.getByLabel('Recurring Appointment').check();
   await page.getByLabel('Span').click();
   await page.getByRole('option', { name: 'days' }).click();
   await page.getByLabel('Every').click();
@@ -1894,7 +1907,7 @@ test('Recurring Appoinments',async () => {
 await page.locator('div').filter({ hasText: /^13$/ }).click();
 await page.getByLabel('Select client profile*').click();
 await page.getByText('Automation (OT)').click();
-await page.getByLabel('Recurrencing Appointment').check();
+await page.getByLabel('Recurring Appointment').check();
 await page.getByLabel('Every').click();
 await page.getByLabel('Every').fill('3');
 await page.getByLabel('Span').click();
@@ -1909,7 +1922,7 @@ await page.waitForTimeout(9000);
 await page.locator('div').filter({ hasText: /^22$/ }).click();
 await page.getByLabel('Select client profile*').click();
 await page.getByText('Automation (OT)').click();
-await page.getByLabel('Recurrencing Appointment').check();
+await page.getByLabel('Recurring Appointment').check();
 await page.getByLabel('Span').click();
 await page.getByRole('option', { name: 'weeks' }).click();
 await page.getByLabel('Mon', { exact: true }).check();
@@ -1923,7 +1936,7 @@ await page.waitForTimeout(9000);
 await page.locator('div').filter({ hasText: /^22$/ }).click();
 await page.getByLabel('Select client profile*').click();
 await page.getByText('Automation (OT)').click();
-await page.getByLabel('Recurrencing Appointment').check();
+await page.getByLabel('Recurring Appointment').check();
 await page.getByLabel('Tue').check();
 await page.getByLabel('Every').click();
 await page.getByLabel('Every').fill('2');
@@ -1937,7 +1950,7 @@ await page.waitForTimeout(9000);
 await page.getByRole('cell', { name: '04' }).first().click();
 await page.getByLabel('Select client profile*').click();
 await page.getByText('Automation (OT)').click();
-await page.getByLabel('Recurrencing Appointment').check();
+await page.getByLabel('Recurring Appointment').check();
 await page.getByLabel('Every').click();
 await page.getByLabel('Every').fill('3');
 await page.getByLabel('Wed').check();
@@ -1955,7 +1968,7 @@ await page.waitForTimeout(9000);
   await page.getByLabel('Select client profile*').click();
   await page.getByText('Automation (OT)').click();
   await page.waitForTimeout(2000);
-  await page.getByLabel('Recurrencing Appointment').check();
+  await page.getByLabel('Recurring Appointment').check();
   await page.getByLabel('Span').click();
   await page.getByRole('option', { name: 'days' }).click();
   await page.getByLabel('After').click();
@@ -2031,6 +2044,136 @@ test('Multi Locations', async () => {
   await page.getByRole('option', { name: 'All' }).getByRole('checkbox').check();
   await page.getByRole('button', { name: 'Apply' }).nth(1).click();
   await page.getByTestId('ArrowBackIcon').locator('path').click();
+
+});
+test('Appointment cancellation policy', async () => {
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
+  await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
+  await page.getByText('Automation Test').click();
+  await page.getByRole('tab', { name: 'Sessions' }).click();
+  await page.getByRole('cell', { name: 'Charge' }).getByRole('button').nth(2).click();
+  await page.getByRole('menuitem', { name: 'View details' }).click();
+  await page.getByLabel('').click();
+  await page.getByRole('option', { name: 'No Show' }).click();
+  await page.locator('button').filter({ hasText: 'Add note' }).nth(1).click();
+  await page.getByRole('button', { name: 'Add psychotherapy note' }).nth(1).click();
+  await page.getByPlaceholder('Enter your response here').click();
+  await page.getByPlaceholder('Enter your response here').fill('Test Added here');
+  await page.getByRole('button', { name: 'Save' }).nth(1).click();
+  await page.waitForTimeout(3000);
+  await page.getByRole('tab', { name: 'Sessions' }).click();
+  await page.getByRole('cell', { name: 'Charge' }).getByRole('button').nth(2).click();
+  await page.getByRole('menuitem', { name: 'View details' }).click();
+  await page.locator('._appointmentHeader_b2iyx_8 > .MuiButtonBase-root').click();
+  
+  await page.getByText('Calendar').first().click();
+  await page.getByLabel('Color').click();
+  await page.getByRole('option', { name: 'Clinician' }).click();
+  await page.waitForTimeout(5000);
+  await page.reload();
+  await page.waitForTimeout(5000);
+  await page.getByRole('button', { name: 'Month' }).click();
+  await page.getByRole('button', { name: 'Back' }).click();
+  await page.locator('div').filter({ hasText: /^14$/ }).click();
+  await page.getByLabel('Select client profile*').click();
+  await page.getByRole('option', { name: 'James (OT)' }).click();
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  await page.waitForTimeout(5000);
+  await page.getByText('OT:').click();
+  await page.getByLabel('Show').click();
+  await page.getByRole('option', { name: 'Late Cancel' }).click();
+  await page.locator('._appointmentHeader_b2iyx_8 > .MuiButtonBase-root').click();
+
+  await page.locator('div').filter({ hasText: /^16$/ }).click();
+  await page.getByLabel('Select client profile*').click();
+  await page.getByText('James (OT)').click();
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  await page.waitForTimeout(3000);
+
+  await page.locator('div').filter({ hasText: /^19$/ }).click();
+  await page.getByLabel('Select client profile*').click();
+  await page.getByText('James (OT)').click();
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  await page.waitForTimeout(3000);
+
+  await page.locator('div').filter({ hasText: /^21$/ }).click();
+  await page.getByLabel('Select client profile*').click();
+  await page.getByText('Automation (OT)').click();
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  await page.waitForTimeout(3000);
+
+  await page.locator('div').filter({ hasText: /^23$/ }).click();
+  await page.getByLabel('Select client profile*').click();
+  await page.getByText('Automation (OT)').click();
+  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+  await page.waitForTimeout(3000);
+
+  await page.getByText('OT:').first().click();
+  await page.getByLabel('Show').click();
+  await page.getByRole('option', { name: 'No Show' }).click();
+  await page.locator('._appointmentHeader_b2iyx_8 > .MuiButtonBase-root').click();
+  await page.waitForTimeout(3000);
+
+  await page.getByText('OT:').nth(1).click();
+  await page.getByLabel('Show').click();
+  await page.getByRole('option', { name: 'Late Cancel' }).click();
+  await page.locator('._appointmentHeader_b2iyx_8 > .MuiButtonBase-root').click();
+  await page.waitForTimeout(3000);
+
+  await page.getByText('OT:').nth(1).click();
+  await page.getByLabel('Show').click();
+  await page.getByRole('option', { name: 'Late Cancel' }).click();
+  await page.locator('._appointmentHeader_b2iyx_8 > .MuiButtonBase-root').click();
+  await page.waitForTimeout(3000);
+
+  await page.getByText('OT:').nth(1).click();
+  await page.getByLabel('Show').click();
+  await page.getByRole('option', { name: 'No Show' }).click();
+  await page.locator('._appointmentHeader_b2iyx_8 > .MuiButtonBase-root').click();
+  await page.waitForTimeout(3000);
+
+  await page.getByLabel('Color').click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Service Code' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Appointment Status' }).click();
+
+await page.getByRole('option', { name: 'Payment Type' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.reload();
+await page.waitForTimeout(3000);
+
+  await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
+  await page.getByText('Automation Test').click();
+  await page.getByRole('tab', { name: 'Sessions' }).click();
+  await page.waitForTimeout(5000);
+
+  try {
+    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+  } catch (error) {
+    console.log('Failed to find first locator, trying second locator');
+     await page.getByText('Settings').click();
+  }
+  await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
+  await page.getByText('James Willy').click();
+  await page.getByRole('tab', { name: 'Sessions' }).click();
+  await page.waitForTimeout(5000);
 
 });
   });

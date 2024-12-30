@@ -38,27 +38,27 @@ export const generatePasswordlessLoginLink = async ({
   }
 };
 
-export const deleteAccounts = async ({
-  inboxes,
-  request,
-}: {
-  inboxes: string[];
-  request: APIRequestContext;
-}) => {
-  try {
-    const emails = inboxes;
+// const deleteAccounts = async ({
+//   inboxes,
+//   request,
+// }: {
+//   inboxes: string[];
+//   request: APIRequestContext;
+// }) => {
+//   try {
+//     const emails = inboxes;
 
-    await request.delete(`${BASE_BACKEND_URL}/test/user/delete`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'x-test-key': `omnipractice_random_a83500678d`,
-      },
-      data: { emails: emails },
-    });
+//     await request.delete(`${BASE_BACKEND_URL}/test/user/delete`, {
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'x-test-key': `omnipractice_random_a83500678d`,
+//       },
+//       data: { emails: emails },
+//     });
 
-    console.log(`Account deleted (${emails?.length}) : ${emails?.join(',')} `);
-    return true;
-  } catch (error) {
-    console.log(`Error while deleting emails`, error);
-  }
-};
+//     console.log(`Account deleted (${emails?.length}) : ${emails?.join(',')} `);
+//     return true;
+//   } catch (error) {
+//     console.log(`Error while deleting emails`, error);
+//   }
+// };

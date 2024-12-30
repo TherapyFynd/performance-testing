@@ -656,6 +656,7 @@ test.describe('All owner Test case ', () => {
     await page.getByText('Telehealth : Online video').click();
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(2000);
+    
     // Taskboard view
     await page.getByRole('button', { name: 'Add Task' }).nth(1).click();
     await page.getByPlaceholder('Task Name').click();
@@ -754,7 +755,7 @@ test.describe('All owner Test case ', () => {
     await page.locator('div').filter({ hasText: /^10$/ }).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByText('Automation (OT)').click();
-    await page.getByLabel('Recurrencing Appointment').check();
+    await page.getByLabel('Recurring Appointment').check();
     await page.getByLabel('Span').click();
     await page.getByRole('option', { name: 'days' }).click();
     await page.getByLabel('After').click();
@@ -767,7 +768,7 @@ test.describe('All owner Test case ', () => {
     await page.locator('div').filter({ hasText: /^12$/ }).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByText('Automation (OT)').click();
-    await page.getByLabel('Recurrencing Appointment').check();
+    await page.getByLabel('Recurring Appointment').check();
     await page.getByLabel('Span').click();
     await page.getByRole('option', { name: 'days' }).click();
     await page.getByLabel('Every').click();
@@ -782,7 +783,7 @@ test.describe('All owner Test case ', () => {
   await page.locator('div').filter({ hasText: /^13$/ }).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByText('Automation (OT)').click();
-  await page.getByLabel('Recurrencing Appointment').check();
+  await page.getByLabel('Recurring Appointment').check();
   await page.getByLabel('Every').click();
   await page.getByLabel('Every').fill('3');
   await page.getByLabel('Span').click();
@@ -797,7 +798,7 @@ test.describe('All owner Test case ', () => {
   await page.locator('div').filter({ hasText: /^17$/ }).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByText('Automation (OT)').click();
-  await page.getByLabel('Recurrencing Appointment').check();
+  await page.getByLabel('Recurring Appointment').check();
   await page.getByLabel('Span').click();
   await page.getByRole('option', { name: 'weeks' }).click();
   await page.getByLabel('Mon', { exact: true }).check();
@@ -811,7 +812,7 @@ test.describe('All owner Test case ', () => {
   await page.locator('div').filter({ hasText: /^17$/ }).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByText('Automation (OT)').click();
-  await page.getByLabel('Recurrencing Appointment').check();
+  await page.getByLabel('Recurring Appointment').check();
   await page.getByLabel('Tue').check();
   await page.getByLabel('Every').click();
   await page.getByLabel('Every').fill('2');
@@ -825,7 +826,7 @@ test.describe('All owner Test case ', () => {
   await page.getByRole('cell', { name: '04' }).first().click();
   await page.getByLabel('Select client profile*').click();
   await page.getByText('Automation (OT)').click();
-  await page.getByLabel('Recurrencing Appointment').check();
+  await page.getByLabel('Recurring Appointment').check();
   await page.getByLabel('Every').click();
   await page.getByLabel('Every').fill('3');
   await page.getByLabel('Wed').check();
@@ -843,7 +844,7 @@ test.describe('All owner Test case ', () => {
     await page.getByLabel('Select client profile*').click();
     await page.getByText('Automation (OT)').click();
     await page.waitForTimeout(2000);
-    await page.getByLabel('Recurrencing Appointment').check();
+    await page.getByLabel('Recurring Appointment').check();
     await page.getByLabel('Span').click();
     await page.getByRole('option', { name: 'days' }).click();
     await page.getByLabel('After').click();

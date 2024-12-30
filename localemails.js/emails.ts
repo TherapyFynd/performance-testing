@@ -27,6 +27,36 @@ export interface IEmail {
   combinerole1?: string;
   combinerole2?: string;
   billingsection?: string;
+  therapist1?: string;
+  therapist2?: string;
+  therapist3?: string;
+  therapist4?: string;
+  therapist5?: string;
+  therapist6?: string;
+  therapist7?: string;
+  therapist8?: string;
+  therapist9?: string;
+  therapist10?: string;
+  therapist11?: string;
+  therapist12?: string;
+  therapist13?: string;
+  therapist14?: string;
+  therapist15?: string;
+  therapist16?: string;
+  therapist17?: string;
+  therapist18?: string;
+  therapist19?: string;
+  therapist20?: string;
+  practice2?: string;
+  practice3?: string;
+  practice4?: string;
+  practice5?: string;
+  supervisor1?: string;
+  supervisor2?: string;
+  supervisor3?: string;
+  supervisor4?: string;
+  supervisor5?: string;
+  
   
 }
 

@@ -1494,7 +1494,7 @@ await page.waitForTimeout(5000);
         await page.locator('div').filter({ hasText: /^10$/ }).click();
         await page.getByLabel('Select client profile*').click();
         await page.getByText('Rajesh (T1)').click();
-        await page.getByLabel('Recurrencing Appointment').check();
+        await page.getByLabel('Recurring Appointment').check();
         await page.getByLabel('Span').click();
         await page.getByRole('option', { name: 'days' }).click();
         await page.getByLabel('After').click();
@@ -1507,7 +1507,7 @@ await page.waitForTimeout(5000);
         await page.locator('div').filter({ hasText: /^14$/ }).click();
         await page.getByLabel('Select client profile*').click();
         await page.getByText('Rajesh (T1)').click();
-        await page.getByLabel('Recurrencing Appointment').check();
+        await page.getByLabel('Recurring Appointment').check();
         await page.getByLabel('Span').click();
         await page.getByRole('option', { name: 'days' }).click();
         await page.getByLabel('Every').click();
@@ -1522,7 +1522,7 @@ await page.waitForTimeout(5000);
       await page.locator('div').filter({ hasText: /^13$/ }).click();
       await page.getByLabel('Select client profile*').click();
       await page.getByText('Rajesh (T1)').click();
-      await page.getByLabel('Recurrencing Appointment').check();
+      await page.getByLabel('Recurring Appointment').check();
       await page.getByLabel('Every').click();
       await page.getByLabel('Every').fill('3');
       await page.getByLabel('Span').click();
@@ -1537,7 +1537,7 @@ await page.waitForTimeout(5000);
       await page.locator('div').filter({ hasText: /^17$/ }).click();
       await page.getByLabel('Select client profile*').click();
       await page.getByText('Rajesh (T1)').click();
-      await page.getByLabel('Recurrencing Appointment').check();
+      await page.getByLabel('Recurring Appointment').check();
       await page.getByLabel('Span').click();
       await page.getByRole('option', { name: 'weeks' }).click();
       await page.getByLabel('Mon', { exact: true }).check();
@@ -1551,7 +1551,7 @@ await page.waitForTimeout(5000);
       await page.locator('div').filter({ hasText: /^17$/ }).click();
       await page.getByLabel('Select client profile*').click();
       await page.getByText('Rajesh (T1)').click();
-      await page.getByLabel('Recurrencing Appointment').check();
+      await page.getByLabel('Recurring Appointment').check();
       await page.getByLabel('Fri').check();
       await page.getByLabel('Every').click();
       await page.getByLabel('Every').fill('2');
@@ -1567,7 +1567,7 @@ await page.waitForTimeout(5000);
       await page.getByRole('cell', { name: '04' }).first().click();
       await page.getByLabel('Select client profile*').click();
       await page.getByText('Rajesh (T1)').click();
-      await page.getByLabel('Recurrencing Appointment').check();
+      await page.getByLabel('Recurring Appointment').check();
       await page.getByLabel('Every').click();
       await page.getByLabel('Every').fill('3');
       await page.getByLabel('Wed').check();
@@ -1585,7 +1585,7 @@ await page.waitForTimeout(5000);
         await page.getByLabel('Select client profile*').click();
         await page.getByText('Rajesh (T1)').click();
         await page.waitForTimeout(2000);
-        await page.getByLabel('Recurrencing Appointment').check();
+        await page.getByLabel('Recurring Appointment').check();
         await page.getByLabel('Span').click();
         await page.getByRole('option', { name: 'days' }).click();
         await page.getByLabel('After').click();
@@ -1594,10 +1594,160 @@ await page.waitForTimeout(5000);
         await page.getByText('Practice Wide Locations @').click();
         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
         await page.waitForTimeout(2000);
-      
+       
 
       });
+      test('Appointment cancellation policy', async () => {
+        try {
+          await page.locator('div').filter({ hasText: /^Settings$/ }).click();
+        } catch (error) {
+          console.log('Failed to find first locator, trying second locator');
+           await page.getByText('Settings').click();
+        }
+        await page.locator('div').filter({ hasText: /^Clients$/ }).getByRole('img').click();
+        await page.getByText('Rajesh Das').click();
+        await page.getByRole('tab', { name: 'Sessions' }).click();
+        await page.getByRole('cell', { name: 'Charge' }).getByRole('button').nth(2).click();
+        await page.getByRole('menuitem', { name: 'View details' }).click();
+        await page.getByLabel('').click();
+        await page.getByRole('option', { name: 'No Show' }).click();
+        await page.locator('button').filter({ hasText: 'Add note' }).nth(1).click();
+        await page.getByRole('button', { name: 'Add psychotherapy note' }).nth(1).click();
+        await page.getByPlaceholder('Enter your response here').click();
+        await page.getByPlaceholder('Enter your response here').fill('Test Added here');
+        await page.getByRole('button', { name: 'Save' }).nth(1).click();
+        await page.waitForTimeout(3000);
+        await page.getByRole('tab', { name: 'Sessions' }).click();
+        await page.getByRole('cell', { name: 'Charge' }).getByRole('button').nth(2).click();
+        await page.getByRole('menuitem', { name: 'View details' }).click();
+        await page.locator('._appointmentHeader_b2iyx_8 > .MuiButtonBase-root').click();
+      
+        await page.getByText('Calendar').first().click();
+        await page.getByLabel('Color').click();
+        await page.getByRole('option', { name: 'Clinician' }).click();
+        await page.waitForTimeout(5000);
+        await page.reload();
+        await page.waitForTimeout(5000);
+        await page.getByRole('button', { name: 'Month' }).click();
+        await page.locator('div').filter({ hasText: /^Calendar$/ }).first().click();
+        await page.getByRole('button', { name: 'Month' }).click();
+        await page.getByRole('button', { name: 'Back' }).click();
+        await page.getByRole('button', { name: 'Back' }).click();
+        
+        await page.locator('div').filter({ hasText: /^08$/ }).click();
+        await page.getByLabel('Select client profile*').click();
+        await page.getByText('New (T1)').click();
+        await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+        await page.waitForTimeout(3000);
+        
+        await page.locator('div').filter({ hasText: /^09$/ }).click();
+        await page.getByLabel('Select client profile*').click();
+        await page.getByText('Rajesh (T1)').click();
+        await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+        await page.waitForTimeout(3000);
+      
+        await page.locator('div').filter({ hasText: /^10$/ }).click();
+        await page.getByLabel('Select client profile*').click();
+        await page.getByText('Shiva & Venkatesh (T1)').click();
+        await page.getByLabel('Select location *').click();
+        await page.getByText('Practice Wide Locations @').click();
+        await page.getByLabel('Fee *').click();
+        await page.getByLabel('Fee *').fill('150');
+        await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+        await page.waitForTimeout(3000);
+      
+        await page.locator('div').filter({ hasText: /^11$/ }).click();
+        await page.getByLabel('Select client profile*').click();
+        await page.getByText('Rakesh & Poornima (T1)').click();
+        await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+        await page.waitForTimeout(3000);
+      
+        await page.locator('div').filter({ hasText: /^13$/ }).click();
+        await page.getByLabel('Select client profile*').click();
+        await page.getByText('Rakesh (T1)').click();
+        await page.getByLabel('Select location *').click();
+        await page.getByText('KANTIME HEALTHCARE').click();
+        await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+        await page.waitForTimeout(3000);
+      
+        await page.locator('div').filter({ hasText: /^19$/ }).click();
+        await page.getByLabel('Select client profile*').click();
+        await page.getByText('Alfred (T1)').click();
+        await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+        await page.waitForTimeout(3000);
+      
+        await page.locator('.primary-ov-bold').first().click();
+        await page.getByLabel('Show').click();
+        await page.getByRole('option', { name: 'No Show' }).click();
+        await page.getByLabel('No Show').click();
+        await page.getByRole('option', { name: 'Late Cancel' }).click();
+        await page.locator('._appointmentHeader_b2iyx_8 > .MuiButtonBase-root').click();
+        await page.waitForTimeout(3000);
 
+        await page.getByText('T1:').first().click();
+        await page.getByLabel('Show').click();
+        await page.getByRole('option', { name: 'No Show' }).click();
+        await page.locator('._appointmentHeader_b2iyx_8 > .MuiButtonBase-root').click();
+        await page.waitForTimeout(3000);
+
+        await page.getByText('T1:').nth(1).click();
+        await page.getByLabel('Show').click();
+        await page.getByRole('option', { name: 'Late Cancel' }).click();
+        await page.locator('._appointmentHeader_b2iyx_8 > .MuiButtonBase-root').click();
+        await page.waitForTimeout(3000);
+
+        await page.getByText('T1:').nth(1).click();
+        await page.getByLabel('Show').click();
+        await page.getByRole('option', { name: 'Clinician Cancelled' }).click();
+        await page.locator('._appointmentHeader_b2iyx_8 > .MuiButtonBase-root').click();
+        await page.waitForTimeout(3000);
+
+        await page.getByText('T1:').nth(1).click();
+        await page.getByLabel('Show').click();
+        await page.getByRole('option', { name: 'No Show' }).click();
+        await page.getByLabel('No Show').click();
+        await page.getByRole('option', { name: 'Late Cancel' }).click();
+        await page.getByLabel('Late Cancel').click();
+        await page.getByRole('option', { name: 'No Show' }).click();
+        await page.locator('._appointmentHeader_b2iyx_8 > .MuiButtonBase-root').click();
+        await page.waitForTimeout(3000);
+
+        await page.getByText('T1:').nth(2).click();
+        await page.locator('button').filter({ hasText: 'Edit' }).nth(1).click();
+        await page.getByPlaceholder('Enter text here').click();
+        await page.getByPlaceholder('Enter text here').fill('Added new session fees');
+        await page.getByLabel('Fee *').click();
+        await page.getByLabel('Fee *').fill('200');
+        await page.getByRole('button', { name: 'Update Appointment' }).nth(1).click();
+        await page.waitForTimeout(3000);
+        await page.getByText('T1:').nth(2).click();
+        await page.getByLabel('Show').click();
+        await page.getByRole('option', { name: 'No Show' }).click();
+        await page.locator('._appointmentHeader_b2iyx_8 > .MuiButtonBase-root').click();
+
+        await page.getByLabel('Color').click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Service Code' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+
+await page.getByRole('option', { name: 'Appointment Status' }).click();
+
+await page.getByRole('option', { name: 'Payment Type' }).click();
+await page.getByRole('button', { name: 'Customize colors' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.getByRole('button', { name: 'Save' }).nth(1).click();
+await page.waitForTimeout(3000);
+await page.reload();
+await page.waitForTimeout(3000);
+
+    });
 test('Global search', async () => {
   try {
     await page.locator('div').filter({ hasText: /^Settings$/ }).click();

@@ -638,7 +638,6 @@ test('Client File', async () => {
   await page.waitForTimeout(5000);
 
 });
-
 // test('Insurance Tab', async () => {
 //   await page.locator('div').filter({ hasText: /^Insurance$/ }).getByRole('img').click();
 //   await page.getByRole('button', { name: 'Select all' }).nth(1).click();
@@ -769,7 +768,7 @@ test('Recurring Appoinments',async () => {
   await page.locator('div').filter({ hasText: /^10$/ }).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByText('Rajesh (T1)').click();
-  await page.getByLabel('Recurrencing Appointment').check();
+  await page.getByLabel('Recurring Appointment').check();
   await page.getByLabel('Span').click();
   await page.getByRole('option', { name: 'days' }).click();
   await page.getByLabel('After').click();
@@ -780,7 +779,7 @@ test('Recurring Appoinments',async () => {
   await page.locator('div').filter({ hasText: /^14$/ }).click();
   await page.getByLabel('Select client profile*').click();
   await page.getByText('Rajesh (T1)').click();
-  await page.getByLabel('Recurrencing Appointment').check();
+  await page.getByLabel('Recurring Appointment').check();
   await page.getByLabel('Span').click();
   await page.getByRole('option', { name: 'days' }).click();
   await page.getByLabel('Every').click();
@@ -793,7 +792,7 @@ test('Recurring Appoinments',async () => {
 await page.locator('div').filter({ hasText: /^13$/ }).click();
 await page.getByLabel('Select client profile*').click();
 await page.getByText('Rajesh (T1)').click();
-await page.getByLabel('Recurrencing Appointment').check();
+await page.getByLabel('Recurring Appointment').check();
 await page.getByLabel('Every').click();
 await page.getByLabel('Every').fill('3');
 await page.getByLabel('Span').click();
@@ -806,7 +805,7 @@ await page.waitForTimeout(9000);
 await page.locator('div').filter({ hasText: /^17$/ }).click();
 await page.getByLabel('Select client profile*').click();
 await page.getByText('Rajesh (T1)').click();
-await page.getByLabel('Recurrencing Appointment').check();
+await page.getByLabel('Recurring Appointment').check();
 await page.getByLabel('Span').click();
 await page.getByRole('option', { name: 'weeks' }).click();
 await page.getByLabel('Mon', { exact: true }).check();
@@ -818,7 +817,7 @@ await page.waitForTimeout(9000);
 await page.locator('div').filter({ hasText: /^17$/ }).click();
 await page.getByLabel('Select client profile*').click();
 await page.getByText('Rajesh (T1)').click();
-await page.getByLabel('Recurrencing Appointment').check();
+await page.getByLabel('Recurring Appointment').check();
 await page.getByLabel('Fri').check();
 await page.getByLabel('Every').click();
 await page.getByLabel('Every').fill('2');
@@ -832,7 +831,7 @@ await page.waitForTimeout(3000);
 await page.getByRole('cell', { name: '04' }).first().click();
 await page.getByLabel('Select client profile*').click();
 await page.getByText('Rajesh (T1)').click();
-await page.getByLabel('Recurrencing Appointment').check();
+await page.getByLabel('Recurring Appointment').check();
 await page.getByLabel('Every').click();
 await page.getByLabel('Every').fill('3');
 await page.getByLabel('Wed').check();
@@ -848,7 +847,7 @@ await page.waitForTimeout(9000);
   await page.getByLabel('Select client profile*').click();
   await page.getByText('Rajesh (T1)').click();
   await page.waitForTimeout(2000);
-  await page.getByLabel('Recurrencing Appointment').check();
+  await page.getByLabel('Recurring Appointment').check();
   await page.getByLabel('Span').click();
   await page.getByRole('option', { name: 'days' }).click();
   await page.getByLabel('After').click();

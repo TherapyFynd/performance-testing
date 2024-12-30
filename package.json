@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test:parallel": "npx playwright test largepractice/parallel",
+    "test:sequence": "npx playwright test largepractice/serial"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
