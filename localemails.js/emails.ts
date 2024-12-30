@@ -47,10 +47,33 @@ export interface IEmail {
   therapist18?: string;
   therapist19?: string;
   therapist20?: string;
+  therapist21?: string;
+  therapist22?: string;
+  therapist23?: string;
+  therapist24?: string;
+  therapist25?: string;
+  therapist26?: string;
+  therapist27?: string;
+  therapist28?: string;
+  therapist29?: string;
+  therapist30?: string;
+  therapist31?: string;
+  therapist32?: string;
+  therapist33?: string;
+  therapist34?: string;
+  therapist35?: string;
+  therapist36?: string;
+  therapist37?: string;
+  therapist38?: string;
+  therapist39?: string;
+  therapist40?: string;
+  
+  practice1?: string;
   practice2?: string;
   practice3?: string;
   practice4?: string;
   practice5?: string;
+
   supervisor1?: string;
   supervisor2?: string;
   supervisor3?: string;

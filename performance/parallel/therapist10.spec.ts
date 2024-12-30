@@ -250,7 +250,7 @@ test.afterAll(async () => {
                          await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
                         await page.waitForTimeout(4000);
                      
-                         await page.locator('div').filter({ hasText: /^24$/ }).click();
+                         await page.locator('div').filter({ hasText: /^24$/ }).nth(2).click();
                          await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
                          await page.getByLabel('Select client profile*').click();
                          await page.getByText('Therapist (T1)').click();

@@ -12,7 +12,7 @@ let page: Page;
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
 
-  if (!myEmails?.therapist9?.length) {
+  if (!myEmails?.therapist29?.length) {
     throw new Error(`TherapistEmail not present returning...`);
   }
   page = await browser.newPage();
@@ -23,13 +23,13 @@ test.afterAll(async () => {
 });
 
 
-  test.describe('All Therapist9 Role Test case ', () => {
+  test.describe('All Therapist29 Role Test case ', () => {
     // test.describe.configure({ mode: 'parallel' });
-    test('Therapist9 login and  onboarding ', async ({ request }) => {
+    test('Therapist29 login and  onboarding ', async ({ request }) => {
       const myEmails: IEmail = await readEmails();
     
       const data = await generatePasswordlessLoginLink({
-        email: myEmails.therapist9!,
+        email: myEmails.therapist29!,
         request: request,
       });
     
@@ -39,7 +39,7 @@ test.afterAll(async () => {
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Therapist ');
   await page.getByPlaceholder('Enter last name').click();
-  await page.getByPlaceholder('Enter last name').fill('9');
+  await page.getByPlaceholder('Enter last name').fill('29');
   await page.getByPlaceholder('Enter phone').click();
   await page.getByPlaceholder('Enter phone').fill('(846) 534-65836');
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
@@ -249,7 +249,7 @@ test.afterAll(async () => {
                       await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
                      await page.waitForTimeout(4000);
                   
-                      await page.locator('div').filter({ hasText: /^24$/ }).click();
+                     await page.locator('div').filter({ hasText: /^24$/ }).nth(2).click();
                       await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
                       await page.getByLabel('Select client profile*').click();
                       await page.getByText('Therapist (T1)').click();

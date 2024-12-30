@@ -12,8 +12,8 @@ let page: Page;
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
 
-  if (!myEmails?.therapist5?.length) {
-    throw new Error(`TherapistEmail not present returning...`);
+  if (!myEmails?.therapist25?.length) {
+    throw new Error(`Therapist Email not present returning...`);
   }
   page = await browser.newPage();
 });
@@ -23,13 +23,13 @@ test.afterAll(async () => {
 });
 
 
-  test.describe('All Therapist5 Role Test case ', () => {
+  test.describe('All Therapist25 Role Test case ', () => {
     // test.describe.configure({ mode: 'parallel' });
-    test('Therapist5 login and  onboarding ', async ({ request }) => {
+    test('Therapist25 login and  onboarding ', async ({ request }) => {
       const myEmails: IEmail = await readEmails();
     
       const data = await generatePasswordlessLoginLink({
-        email: myEmails.therapist5!,
+        email: myEmails.therapist25!,
         request: request,
       });
     
@@ -39,7 +39,7 @@ test.afterAll(async () => {
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Therapist ');
   await page.getByPlaceholder('Enter last name').click();
-  await page.getByPlaceholder('Enter last name').fill('5');
+  await page.getByPlaceholder('Enter last name').fill('25');
   await page.getByPlaceholder('Enter phone').click();
   await page.getByPlaceholder('Enter phone').fill('(846) 534-65836');
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();

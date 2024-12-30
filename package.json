@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:parallel": "npx playwright test largepractice/parallel",
-    "test:sequence": "npx playwright test largepractice/serial"
+    "test:parallel": "npx playwright test performance/parallel",
+    "test:sequence": "npx playwright test performance/serial"
   },
   "keywords": [],
   "author": "",

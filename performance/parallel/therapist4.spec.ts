@@ -13,7 +13,7 @@ test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
 
   if (!myEmails?.therapist4?.length) {
-    throw new Error(`TherapistEmail not present returning...`);
+    throw new Error(`Therapist4 Email not present returning...`);
   }
   page = await browser.newPage();
 });

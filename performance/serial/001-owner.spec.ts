@@ -552,6 +552,470 @@ await page.getByText('Team members').first().click();
   await page.waitForTimeout(4000);
   await page.reload();
 
+// Therapist 21
+
+ await page.getByText('Team members').first().click();
+  await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+  await page.getByLabel('First Name*').click();
+  await page.getByLabel('First Name*').fill('Therapist');
+  await page.getByLabel('Last Name*').click();
+  await page.getByLabel('Last Name*').fill('21');
+  await page.getByLabel('Email*').click();
+
+  //
+  const Large20 = await createNewEmail();
+  await page.getByLabel('Email*').fill(Large20!);
+  myEmails = await readEmails();
+  await setEmails({ ...myEmails, therapist21: Large20! });
+  console.log(myEmails);
+
+  await page.getByRole('button', { name: 'Next' }).nth(1).click();
+  await page.getByLabel('Therapist').check();
+  await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+  await page.waitForTimeout(4000);
+  await page.reload();
+
+// Therapist 22
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('22');
+await page.getByLabel('Email*').click();
+
+//
+const Large21 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large21!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist22: Large21! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+// Therapist 23
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('23');
+await page.getByLabel('Email*').click();
+
+//
+const Large22 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large22!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist23: Large22! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+// Therapist 24
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('24');
+await page.getByLabel('Email*').click();
+
+//
+const Large23 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large23!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist24: Large23! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+// Therapist 25
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('25');
+await page.getByLabel('Email*').click();
+
+//
+const Large24 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large24!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist25: Large24! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+// Therapist 26
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('26');
+await page.getByLabel('Email*').click();
+
+//
+const Large25 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large25!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist26: Large25! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+// Therapist 27
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('27');
+await page.getByLabel('Email*').click();
+
+//
+const Large26 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large26!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist27: Large26! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+// Therapist 28 
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('28');
+await page.getByLabel('Email*').click();
+
+//
+const Large27 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large27!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist28: Large27! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+
+// Therapist 29
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('29');
+await page.getByLabel('Email*').click();
+
+//
+const Large28 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large28!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist29: Large28! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+// Therapist 30 
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('30');
+await page.getByLabel('Email*').click();
+
+//
+const Large29 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large29!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist30: Large29! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+
+// Therapist 31
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('31');
+await page.getByLabel('Email*').click();
+
+//
+const Large30 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large30!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist31: Large30! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+// Therapist 32
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('32');
+await page.getByLabel('Email*').click();
+
+//
+const Large31 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large31!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist32: Large31! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+// Therapist 33
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('33');
+await page.getByLabel('Email*').click();
+
+//
+const Large32 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large32!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist33: Large32! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+
+// Therapist 34
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('34');
+await page.getByLabel('Email*').click();
+
+//
+const Large33 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large33!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist34: Large33! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+// Therapist 35
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('35');
+await page.getByLabel('Email*').click();
+
+//
+const Large34 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large34!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist35: Large34! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+// Therapist 36
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('36');
+await page.getByLabel('Email*').click();
+
+//
+const Large35 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large35!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist36: Large35! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+
+// Therapist 37
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('37');
+await page.getByLabel('Email*').click();
+
+//
+const Large36 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large36!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist37: Large36! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+// Therapist 38
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('38');
+await page.getByLabel('Email*').click();
+
+//
+const Large37 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large37!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist38: Large37! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+// Therapist 39
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('39');
+await page.getByLabel('Email*').click();
+
+//
+const Large38 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large38!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist39: Large38! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
+// Therapist 40
+
+await page.getByText('Team members').first().click();
+await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
+await page.getByLabel('First Name*').click();
+await page.getByLabel('First Name*').fill('Therapist');
+await page.getByLabel('Last Name*').click();
+await page.getByLabel('Last Name*').fill('40');
+await page.getByLabel('Email*').click();
+
+//
+const Large39 = await createNewEmail();
+await page.getByLabel('Email*').fill(Large39!);
+myEmails = await readEmails();
+await setEmails({ ...myEmails, therapist40: Large39! });
+console.log(myEmails);
+
+await page.getByRole('button', { name: 'Next' }).nth(1).click();
+await page.getByLabel('Therapist').check();
+await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
+await page.waitForTimeout(4000);
+await page.reload();
+
   // Supervisor 1
     await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
     await page.getByLabel('First Name*').click();
@@ -666,7 +1130,7 @@ await page.waitForTimeout(2000);
   const Bookinginbox3 = await createNewEmail();
   await page.getByLabel('Email*').fill(Bookinginbox3!);
   myEmails = await readEmails();
-  await setEmails({ ...myEmails, practiceAdminEmail: Bookinginbox3! });
+  await setEmails({ ...myEmails, practice1: Bookinginbox3! });
   console.log(myEmails);
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();

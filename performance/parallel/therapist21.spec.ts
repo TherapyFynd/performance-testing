@@ -11,9 +11,9 @@ let page: Page;
 
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
-
-  if (!myEmails?.therapist1?.length) {
-    throw new Error(`Therapist1 Email not present returning...`);
+  // await page.tracing.start({ path: './performance/trace.json', screenshots: true });
+  if (!myEmails?.therapist21?.length) {
+    throw new Error(`Therapist21 Email not present returning...`);
   }
   page = await browser.newPage();
 });
@@ -21,12 +21,12 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
-test.describe('All Therapist1 Role Test case ', () => {
-test('Therapist1 login and  onboarding ', async ({ request }) => {
+test.describe('All Therapist21 Role Test case ', () => {
+test('Therapist21 login and  onboarding ', async ({ request }) => {
   const myEmails: IEmail = await readEmails();
 
   const data = await generatePasswordlessLoginLink({
-    email: myEmails.therapist1!,
+    email: myEmails.therapist21!,
     request: request,
   });
 
@@ -37,7 +37,7 @@ test('Therapist1 login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Therapist ');
   await page.getByPlaceholder('Enter last name').click();
-  await page.getByPlaceholder('Enter last name').fill('1');
+  await page.getByPlaceholder('Enter last name').fill('21');
   await page.getByPlaceholder('Enter phone').click();
   await page.getByPlaceholder('Enter phone').fill('(846) 534-65836');
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
@@ -146,7 +146,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
     await page.waitForTimeout(2000);
 
-    // Calendar Create Appoinments
+    // Calendar Create Appoinments 24 Appoinments
     await page.getByText('Calendar').first().click();
     await page.getByRole('button', { name: 'Month' }).click();
     // Appoinments
@@ -258,7 +258,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(8000);
 
-  
+  // Logout 
   try {
     await page.getByRole('img').nth(1).click();
   } catch (error) {
@@ -268,6 +268,9 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
 
     await page.getByRole('menuitem', { name: 'Logout' }).click();
     await page.waitForTimeout(5000);
+  //   await page.tracing.stop();
+
+  // console.log('Performance metrics saved to trace.json');
 });
 });
 
