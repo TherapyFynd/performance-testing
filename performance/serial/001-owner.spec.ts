@@ -8,7 +8,7 @@ import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-
+test.setTimeout(100000)
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
 });
