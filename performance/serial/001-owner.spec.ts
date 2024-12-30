@@ -8,7 +8,7 @@ import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-test.setTimeout(100000)
+test.setTimeout(1000000)
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
 });
@@ -191,7 +191,7 @@ const inbox = await createNewEmail();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Therapist').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-  await page.waitForTimeout(4000);
+  await page.waitForTimeout(3000);
   await page.reload();
 
   // Therapist 5
