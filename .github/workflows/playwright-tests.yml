@@ -1,9 +1,9 @@
 name: Load Test
 
-# on:
-#   workflow_dispatch:
-#   schedule:
-#     - cron: "30 10 * * *" # Runs at 04:00 PM IST everyday
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 10 * * *" # Runs at 04:00 PM IST everyday
 
   pull_request:
     branches: [issue-80]
