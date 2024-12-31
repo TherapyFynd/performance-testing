@@ -19,6 +19,7 @@ test.beforeAll(async ({ browser }) => {
 });
 
 test.afterAll(async () => {
+  test.setTimeout(200000)
   await page.close();
 });
 

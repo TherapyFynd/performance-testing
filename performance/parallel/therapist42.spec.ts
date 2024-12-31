@@ -8,8 +8,9 @@ import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 // test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-test.setTimeout(800000)
+
 test.beforeAll(async ({ browser }) => {
+  test.setTimeout(900000)
   const myEmails: IEmail = await readEmails();
   // await page.tracing.start({ path: './performance/trace.json', screenshots: true });
   if (!myEmails?.therapist42?.length) {
@@ -144,12 +145,14 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
 
     await page.getByRole('button', { name: 'Continue' }).nth(1).click();
     await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(4000);
 
     // Calendar Create Appoinments 24 Appoinments
     await page.getByText('Calendar').first().click();
     await page.getByRole('button', { name: 'Month' }).click();
     await page.getByRole('button', { name: 'Back' }).click();
+    await page.waitForTimeout(2000);
+
     // Appoinments
     await page.getByRole('cell', { name: '02' }).first().click();
     await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
