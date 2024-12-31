@@ -13,8 +13,9 @@ import { createNewEmail } from '../../helpers/mailsurp';
 // test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-test.setTimeout(600000)
+
 test.beforeAll(async ({ browser }) => {
+  test.setTimeout(250000)
   const myEmails: IEmail = await readEmails();
   console.log(myEmails);
   if (!myEmails?.practice2?.length) {

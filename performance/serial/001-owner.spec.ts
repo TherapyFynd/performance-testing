@@ -126,7 +126,7 @@ const inbox = await createNewEmail();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
 //  Therapist 2
   await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -148,7 +148,7 @@ const inbox = await createNewEmail();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
   // Therapist 3
   await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -171,7 +171,7 @@ const inbox = await createNewEmail();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
   // Therapist 4
   await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -193,7 +193,7 @@ const inbox = await createNewEmail();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(3000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
   // Therapist 5
   await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -215,7 +215,7 @@ const inbox = await createNewEmail();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
   // Therapist 6
 
   await page.getByText('Team members').first().click();
@@ -238,7 +238,7 @@ const inbox = await createNewEmail();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
   // Therapist 7
 
   await page.getByText('Team members').first().click();
@@ -261,7 +261,7 @@ const inbox = await createNewEmail();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
   // Therapist 8
   await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -283,7 +283,7 @@ const inbox = await createNewEmail();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
 
 // Therapist 9
   await page.getByText('Team members').first().click();
@@ -306,7 +306,7 @@ const inbox = await createNewEmail();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
 //  Therapist 10
   await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -328,7 +328,7 @@ const inbox = await createNewEmail();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
 // Therapist 11
 await page.getByText('Team members').first().click();
 await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -350,7 +350,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 
 // Therapist 12
 await page.getByText('Team members').first().click();
@@ -373,7 +373,7 @@ await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
 // Therapist 13
 await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -395,7 +395,7 @@ await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
 // Therapist 14
 await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -417,7 +417,7 @@ await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
 // Therapist 15
 await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -439,7 +439,7 @@ await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
 
 // Therapist 16
 await page.getByText('Team members').first().click();
@@ -462,7 +462,7 @@ await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
 // Therapist 17
 await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -484,7 +484,7 @@ await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
 // Therapist 18
 await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -506,7 +506,7 @@ await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
 
 // Therapist 19
 await page.getByText('Team members').first().click();
@@ -529,7 +529,7 @@ await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
 // Therapist 20
 await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -551,7 +551,7 @@ await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
 // Therapist 21
 
  await page.getByText('Team members').first().click();
@@ -574,7 +574,7 @@ await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
 // Therapist 22
 
 await page.getByText('Team members').first().click();
@@ -597,7 +597,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 23
 
 await page.getByText('Team members').first().click();
@@ -620,7 +620,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 24
 
 await page.getByText('Team members').first().click();
@@ -643,7 +643,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 25
 
 await page.getByText('Team members').first().click();
@@ -666,7 +666,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 26
 
 await page.getByText('Team members').first().click();
@@ -689,7 +689,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 27
 
 await page.getByText('Team members').first().click();
@@ -712,7 +712,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 28 
 
 await page.getByText('Team members').first().click();
@@ -735,7 +735,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 
 // Therapist 29
 
@@ -759,7 +759,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 30 
 
 await page.getByText('Team members').first().click();
@@ -782,7 +782,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 
 // Therapist 31
 
@@ -806,7 +806,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 32
 
 await page.getByText('Team members').first().click();
@@ -829,7 +829,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 33
 
 await page.getByText('Team members').first().click();
@@ -852,7 +852,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 
 // Therapist 34
 
@@ -876,7 +876,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 35
 
 await page.getByText('Team members').first().click();
@@ -899,7 +899,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 36
 
 await page.getByText('Team members').first().click();
@@ -922,6 +922,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
+await page.waitForTimeout(2000);
 
 
 // Therapist 37
@@ -946,7 +947,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 38
 
 await page.getByText('Team members').first().click();
@@ -969,7 +970,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 39
 
 await page.getByText('Team members').first().click();
@@ -992,7 +993,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 40
 
 await page.getByText('Team members').first().click();
@@ -1015,7 +1016,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 
 // Therapist 41 
 
@@ -1039,7 +1040,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 
 // Therapist 42
 
@@ -1063,7 +1064,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 43
 
 await page.getByText('Team members').first().click();
@@ -1086,7 +1087,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 44
 
 await page.getByText('Team members').first().click();
@@ -1109,7 +1110,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 45
 
 await page.getByText('Team members').first().click();
@@ -1132,7 +1133,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 46
 
 await page.getByText('Team members').first().click();
@@ -1155,7 +1156,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 47
 
 await page.getByText('Team members').first().click();
@@ -1178,7 +1179,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 
 // Therapist 48
 
@@ -1202,7 +1203,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 
 // Therapist 49
 
@@ -1226,7 +1227,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Therapist 50
 
 await page.getByText('Team members').first().click();
@@ -1249,7 +1250,7 @@ await page.getByLabel('Therapist').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 
 
   // Supervisor 1
@@ -1271,7 +1272,7 @@ await page.reload();
     await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
     await page.waitForTimeout(4000);
     await page.reload();
-
+    await page.waitForTimeout(2000);
 // Supervsior 2 
 await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
 await page.getByLabel('First Name*').click();
@@ -1291,7 +1292,7 @@ await page.getByLabel('Supervisor').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Supervisor 3
 await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
 await page.getByLabel('First Name*').click();
@@ -1311,7 +1312,7 @@ await page.getByLabel('Supervisor').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 // Supervisor 4
 
 await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -1332,7 +1333,7 @@ await page.getByLabel('Supervisor').check();
 await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
 await page.waitForTimeout(4000);
 await page.reload();
-
+await page.waitForTimeout(2000);
 
 // Supervisor 5
 await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -1374,7 +1375,7 @@ await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
   // Practice 2
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
   await page.getByLabel('First Name*').click();
@@ -1394,7 +1395,7 @@ await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
   // Practice 3
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
   await page.getByLabel('First Name*').click();
@@ -1414,7 +1415,7 @@ await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
   // Practice 4 
 
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -1435,7 +1436,7 @@ await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
   await page.reload();
-
+  await page.waitForTimeout(2000);
    // Practice 5
 
    await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
@@ -1456,7 +1457,8 @@ await page.waitForTimeout(2000);
    await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
    await page.waitForTimeout(4000);
    await page.reload();
-
+   await page.waitForTimeout(2000);
+   
   try {
     await page.getByRole('img').nth(1).click();
   } catch (error) {

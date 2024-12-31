@@ -7,8 +7,9 @@ import { IEmail, readEmails } from '../../localemails.js/emails';
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-test.setTimeout(600000)
+
 test.beforeAll(async ({ browser }) => {
+  test.setTimeout(250000)
   const myEmails: IEmail = await readEmails();
 
   if (!myEmails?.supervisor2?.length) {

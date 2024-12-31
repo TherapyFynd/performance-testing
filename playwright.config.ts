@@ -25,6 +25,8 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 
   use: {
+    actionTimeout: 200000, // Optional: Set timeout for individual actions (10 seconds)
+    navigationTimeout: 200000, // Optional: Set timeout for navigation actions (15 seconds)
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
 
