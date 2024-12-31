@@ -12,8 +12,8 @@ test.setTimeout(800000)
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
   // await page.tracing.start({ path: './performance/trace.json', screenshots: true });
-  if (!myEmails?.therapist1?.length) {
-    throw new Error(`Therapist1 Email not present returning...`);
+  if (!myEmails?.therapist44?.length) {
+    throw new Error(`Therapist Email not present returning...`);
   }
   page = await browser.newPage();
 });
@@ -21,12 +21,12 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
-test.describe('All Therapist1 Role Test case ', () => {
-test('Therapist1 login and  onboarding ', async ({ request }) => {
+test.describe('All Therapist44 Role Test case ', () => {
+test('Therapist44 login and  onboarding ', async ({ request }) => {
   const myEmails: IEmail = await readEmails();
 
   const data = await generatePasswordlessLoginLink({
-    email: myEmails.therapist1!,
+    email: myEmails.therapist44!,
     request: request,
   });
 
@@ -37,7 +37,7 @@ test('Therapist1 login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Therapist ');
   await page.getByPlaceholder('Enter last name').click();
-  await page.getByPlaceholder('Enter last name').fill('1');
+  await page.getByPlaceholder('Enter last name').fill('44');
   await page.getByPlaceholder('Enter phone').click();
   await page.getByPlaceholder('Enter phone').fill('(846) 534-65836');
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
@@ -93,7 +93,7 @@ test('Therapist1 login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Therapist');
   await page.getByPlaceholder('Enter last name').click();
-  await page.getByPlaceholder('Enter last name').fill('1');
+  await page.getByPlaceholder('Enter last name').fill('44');
   await page.getByLabel('Address Line').click();
   await page.getByLabel('Address Line').fill('Name');
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
@@ -149,8 +149,11 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     // Calendar Create Appoinments 24 Appoinments
     await page.getByText('Calendar').first().click();
     await page.getByRole('button', { name: 'Month' }).click();
+    await page.getByRole('button', { name: 'Back' }).click();
+    await page.getByRole('button', { name: 'Back' }).click();
+    await page.getByRole('button', { name: 'Back' }).click();
     // Appoinments
-    await page.getByRole('cell', { name: '01' }).first().click();
+    await page.getByRole('cell', { name: '02' }).first().click();
     await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByText('Therapist (T1)').click();
@@ -159,7 +162,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(2000);
 
-    await page.getByRole('cell', { name: '03' }).first().click();
+    await page.getByRole('cell', { name: '04' }).first().click();
     await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByText('Therapist (T1)').click();
@@ -168,7 +171,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(2000);
 
-    await page.getByRole('cell', { name: '05' }).first().click();
+    await page.locator('div').filter({ hasText: /^06$/ }).click();
     await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByText('Therapist (T1)').click();
@@ -177,7 +180,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(2000);
 
-    await page.locator('div').filter({ hasText: /^07$/ }).click();
+    await page.locator('div').filter({ hasText: /^08$/ }).click();
     await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByText('Therapist (T1)').click();
@@ -186,8 +189,8 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
    await page.waitForTimeout(2000);
 
-    await page.locator('div').filter({ hasText: /^09$/ }).click();
-    await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
+   await page.locator('div').filter({ hasText: /^10$/ }).click();
+   await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByText('Therapist (T1)').click();
     await page.getByLabel('Select location *').click();
@@ -195,8 +198,8 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
    await page.waitForTimeout(2000);
 
-    await page.locator('div').filter({ hasText: /^11$/ }).click();
-    await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
+   await page.locator('div').filter({ hasText: /^12$/ }).click();
+   await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByRole('option', { name: 'Therapist (T1)' }).click();
     await page.getByLabel('Select location *').click();
@@ -204,36 +207,36 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
    await page.waitForTimeout(2000);
 
-    await page.locator('div').filter({ hasText: /^13$/ }).click();
-    await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
+   await page.locator('div').filter({ hasText: /^14$/ }).click();
+   await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByText('Therapist (T1)').click();
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
    await page.waitForTimeout(2000);
 
-    await page.locator('div').filter({ hasText: /^15$/ }).click();
-    await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
+   await page.locator('div').filter({ hasText: /^17$/ }).click();
+   await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByText('Therapist (T1)').click();
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
    await page.waitForTimeout(2000);
 
-    await page.locator('div').filter({ hasText: /^16$/ }).click();
-    await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
+   await page.locator('div').filter({ hasText: /^20$/ }).click();
+   await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByText('Therapist (T1)').click();
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
    await page.waitForTimeout(2000);
 
-    await page.locator('div').filter({ hasText: /^18$/ }).click();
-    await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
+   await page.locator('div').filter({ hasText: /^21$/ }).click();
+   await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByText('Therapist (T1)').click();
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
    await page.waitForTimeout(2000);
 
-    await page.locator('div').filter({ hasText: /^19$/ }).click();
-    await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
+   await page.locator('div').filter({ hasText: /^22$/ }).click();
+   await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByText('Therapist (T1)').click();
     await page.getByLabel('Recurring Appointment').check();
@@ -244,7 +247,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
    await page.waitForTimeout(4000);
 
-    await page.locator('div').filter({ hasText: /^24$/ }).click();
+    await page.locator('div').filter({ hasText: /^23$/ }).click();
     await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByText('Therapist (T1)').click();

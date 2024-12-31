@@ -13,7 +13,7 @@ import { createNewEmail } from '../../helpers/mailsurp';
 // test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-
+test.setTimeout(600000)
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
   console.log(myEmails);

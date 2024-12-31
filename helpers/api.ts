@@ -35,6 +35,7 @@ export const generatePasswordlessLoginLink = async ({
     return c;
   } catch (error) {
     console.log(`Error while generating passwordless link for ${email}`, error);
+    
   }
 };
 
