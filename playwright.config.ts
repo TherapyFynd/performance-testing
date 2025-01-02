@@ -57,10 +57,10 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
       teardown: 'tr',
     },
-    // {
-    //   name: 'tr',
-    //   testMatch: 'global.teardown.ts',
-    // },
+    {
+      name: 'tr',
+      testMatch: 'global.teardown.ts',
+    },
 
     // {
     //   name: 'firefox',
