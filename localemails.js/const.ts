@@ -16,8 +16,8 @@ const TYPE_OF_URLS_FRONTEND = {
   DEV: 'https://leafs-ehr-web-dev-nmvorvf7ga-uc.a.run.app',
 };
 
-export const BASE_BACKEND_URL = TYPE_OF_URLS_BACKEND.PROD;
-export const BASE_FRONTEND_URL = TYPE_OF_URLS_FRONTEND.PROD;
+export const BASE_BACKEND_URL = TYPE_OF_URLS_BACKEND.STAGE;
+export const BASE_FRONTEND_URL = TYPE_OF_URLS_FRONTEND.STAGE;
 
 export const TAG_NAMESPACE = `tag`;
 export const BASE_EMAIL_NAMESPACE = `z7knk.${TAG_NAMESPACE}@inbox.testmail.app`;
