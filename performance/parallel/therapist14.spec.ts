@@ -5,13 +5,13 @@ import { createNewEmail } from '../../helpers/mailsurp';
 import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 
 // Annotate entire file as serial.
-// test.describe.configure({ mode: 'serial' });
-import fs from 'fs';
+// // test.describe.configure({ mode: 'serial' });
+// import fs from 'fs';
 
-const artifactsDir = './test-results/.playwright-artifacts';
-if (!fs.existsSync(artifactsDir)) {
-  fs.mkdirSync(artifactsDir, { recursive: true });
-}
+// const artifactsDir = './test-results/.playwright-artifacts';
+// if (!fs.existsSync(artifactsDir)) {
+//   fs.mkdirSync(artifactsDir, { recursive: true });
+// }
 let page: Page;
 test.setTimeout(900000)
 test.beforeAll(async ({ browser }) => {

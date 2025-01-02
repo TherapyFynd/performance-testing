@@ -7,12 +7,12 @@ import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 // Annotate entire file as serial.
 // test.describe.configure({ mode: 'serial' });
 
-import fs from 'fs';
+// import fs from 'fs';
 
-const artifactsDir = './test-results/.playwright-artifacts';
-if (!fs.existsSync(artifactsDir)) {
-  fs.mkdirSync(artifactsDir, { recursive: true });
-}
+// const artifactsDir = './test-results/.playwright-artifacts';
+// if (!fs.existsSync(artifactsDir)) {
+//   fs.mkdirSync(artifactsDir, { recursive: true });
+// }
 let page: Page;
 test.setTimeout(900000)
 
@@ -263,7 +263,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.getByText('Therapist (T1)').click();
     await page.getByLabel('Recurring Appointment').check();
     await page.getByLabel('After').click();
-    await page.getByLabel('After').fill('8');
+    await page.getByLabel('After').fill('4');
     await page.getByLabel('Span').click();
     await page.getByRole('option', { name: 'days' }).click();
     await page.getByLabel('Select location *').click();
