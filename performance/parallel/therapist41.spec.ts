@@ -12,6 +12,7 @@ import fs from 'fs';
 const artifactsDir = './test-results/.playwright-artifacts';
 if (!fs.existsSync(artifactsDir)) {
   fs.mkdirSync(artifactsDir, { recursive: true });
+  
 }
 let page: Page;
 test.setTimeout(900000)
