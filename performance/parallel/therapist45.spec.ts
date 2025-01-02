@@ -94,7 +94,7 @@ test('Therapist45 login and  onboarding ', async ({ request }) => {
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Therapist');
   await page.getByPlaceholder('Enter last name').click();
-  await page.getByPlaceholder('Enter last name').fill('44');
+  await page.getByPlaceholder('Enter last name').fill('1');
   await page.getByLabel('Address Line').click();
   await page.getByLabel('Address Line').fill('Name');
   await page.getByRole('button', { name: 'Save' }).nth(1).click();

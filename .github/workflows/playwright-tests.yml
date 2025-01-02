@@ -78,11 +78,11 @@ jobs:
           if-no-files-found: error
         if: always()
 
-            # Step 11: Cleanup accounts/emails
-      - name: Cleanup accounts/emails
-        run: |
-          node cleanup.ts
-        if: always()
+      #       # Step 11: Cleanup accounts/emails
+      # - name: Cleanup accounts/emails
+      #   run: |
+      #     node cleanup.ts
+      #   if: always()
 
       # - name: Make POST request on failure
       #   if: ${{ failure() }}
