@@ -7,10 +7,17 @@ import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 // Annotate entire file as serial.
 // test.describe.configure({ mode: 'serial' });
 
+import fs from 'fs';
+
+const artifactsDir = './test-results/.playwright-artifacts';
+if (!fs.existsSync(artifactsDir)) {
+  fs.mkdirSync(artifactsDir, { recursive: true });
+}
 let page: Page;
+test.setTimeout(900000)
 
 test.beforeAll(async ({ browser }) => {
-  test.setTimeout(900000)
+ 
   const myEmails: IEmail = await readEmails();
   // await page.tracing.start({ path: './performance/trace.json', screenshots: true });
   if (!myEmails?.therapist42?.length) {
@@ -199,7 +206,7 @@ await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
    await page.waitForTimeout(2000);
 
-   await page.locator('div').filter({ hasText: /^12$/ }).click();
+   await page.locator('div').filter({ hasText: /^13$/ }).click();
    await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
     await page.getByRole('option', { name: 'Therapist (T1)' }).click();
