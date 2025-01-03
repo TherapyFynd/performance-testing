@@ -1,11 +1,13 @@
 import { defineConfig, devices } from '@playwright/test';
-
+import path from 'path';
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
 // require('dotenv').config();
-
+// Log the directory name
+console.log('Current Directory:', __dirname);
+console.log(path.join(__dirname, '/helpers/teardown.ts'),"path")
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -43,12 +45,14 @@ export default defineConfig({
     // locale: 'en-US',
     // timezoneId: 'America/Los_Angeles',
     
-
+    
     launchOptions: {
       // 1
       args: ['--start-maximized'],
     },
   },
+   /* Add `globalTeardown` here */
+  globalTeardown: path.join(__dirname, '/helpers/teardown.ts'),
 
   /* Configure projects for major browsers */
   projects: [
@@ -61,7 +65,7 @@ export default defineConfig({
       name: 'tr',
       testMatch: 'global.teardown.ts',
     },
-
+    
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },
