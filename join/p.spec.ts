@@ -67,7 +67,6 @@ await page.getByLabel('Address').click();
 await page.getByLabel('Address').fill('New area City');
 await page.getByLabel('State').click();
 await page.getByRole('combobox', { name: 'State' }).fill('New york');
-// await page.getByText('New York').click();
 await page.getByLabel('City').click();
 await page.getByRole('combobox', { name: 'City' }).fill('Fre');
 await page.getByText('Freeport').click();
