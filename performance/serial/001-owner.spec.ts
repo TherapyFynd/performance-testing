@@ -3,6 +3,7 @@ import path from 'path';
 import { generatePasswordlessLoginLink } from '../../helpers/api';
 import { createNewEmail } from '../../helpers/mailsurp';
 import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
+import { logPerformanceMetrics } from '../../performanceUtils'; // Import utility
 
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
@@ -26,9 +27,9 @@ const inbox = await createNewEmail();
     request: request,
   });
   await page.goto(data!);
-
+  await logPerformanceMetrics(page, 'Navigate to Login Page');
   // Onboarding Flows for Owner
- 
+ await logPerformanceMetrics(page, 'Start: OwnerRole login and onboarding');
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Owner ');
   await page.getByPlaceholder('Enter last name').click();
@@ -87,12 +88,15 @@ const inbox = await createNewEmail();
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
  
   await page.getByRole('checkbox').check();
-    await page.waitForTimeout(2000);
+  await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
   await page.waitForTimeout(2000);
   await page.getByRole('checkbox').check();
-    await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
-
+  await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
+  await logPerformanceMetrics(page, 'Completed: Onboarding Flow');
+});
+  test('Invite Team member', async () => {
+  
   try {
     await page.locator('div').filter({ hasText: /^Settings$/ }).click();
   } catch (error) {
@@ -102,10 +106,10 @@ const inbox = await createNewEmail();
   //Clinican Settings Flows
   await page.getByText('Clinician settings').click();
 
-
   // Invite team 100 Therapist , 10 Supervisor, 5 Admins.
 
   //   Therapist 1
+  await logPerformanceMetrics(page, 'Start: Therapist=1');
   await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
   await page.getByLabel('First Name*').click();
@@ -125,8 +129,10 @@ const inbox = await createNewEmail();
   await page.getByLabel('Therapist').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
-  
+  await logPerformanceMetrics(page, 'Completed: Therapist=1');
+
 //  Therapist 2
+  await logPerformanceMetrics(page, 'Start: Therapist=2');
   await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
   await page.getByLabel('First Name*').click();
@@ -146,7 +152,7 @@ const inbox = await createNewEmail();
   await page.getByLabel('Therapist').check();
   await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
   await page.waitForTimeout(4000);
- 
+  await logPerformanceMetrics(page, 'Completed: Therapist=2');
   // Therapist 3
   await page.getByText('Team members').first().click();
   await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
