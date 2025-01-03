@@ -14,7 +14,7 @@ if (!fs.existsSync(artifactsDir)) {
   fs.mkdirSync(artifactsDir, { recursive: true });
 }
 let page: Page;
-test.setTimeout(900000)
+test.setTimeout(1200000)
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
 

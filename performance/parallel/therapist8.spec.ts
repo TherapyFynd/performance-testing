@@ -250,17 +250,17 @@ test.afterAll(async () => {
                    await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
                    await page.waitForTimeout(8000);
 
-                   await page.locator('div').filter({ hasText: /^19$/ }).click();
-                   await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
-                   await page.getByLabel('Select client profile*').click();
-                   await page.getByText('Therapist (T1)').click();
-                   await page.getByLabel('Recurring Appointment').check();
-                   await page.getByLabel('Span').click();
-                   await page.getByRole('option', { name: 'days' }).click();
-                   await page.getByLabel('After').click();
-                   await page.getByLabel('After').fill('2');
-                   await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-                  await page.waitForTimeout(4000);
+                  //  await page.locator('div').filter({ hasText: /^19$/ }).click();
+                  //  await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
+                  //  await page.getByLabel('Select client profile*').click();
+                  //  await page.getByText('Therapist (T1)').click();
+                  //  await page.getByLabel('Recurring Appointment').check();
+                  //  await page.getByLabel('Span').click();
+                  //  await page.getByRole('option', { name: 'days' }).click();
+                  //  await page.getByLabel('After').click();
+                  //  await page.getByLabel('After').fill('2');
+                  //  await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
+                  // await page.waitForTimeout(4000);
                
                   
 

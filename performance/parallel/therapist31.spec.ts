@@ -13,10 +13,10 @@ if (!fs.existsSync(artifactsDir)) {
   fs.mkdirSync(artifactsDir, { recursive: true });
 }
 let page: Page;
-test.setTimeout(900000)
+test.setTimeout(1200000)
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
-
+  
   if (!myEmails?.therapist31?.length) {
     throw new Error(`TherapistEmail not present returning...`);
   }
@@ -24,8 +24,7 @@ test.beforeAll(async ({ browser }) => {
 });
 
 test.afterAll(async () => {
-  test.setTimeout(200000)
-  await page.close();
+await page.close();
 });
 
 

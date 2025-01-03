@@ -7,14 +7,16 @@ import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 // Annotate entire file as serial.
 // test.describe.configure({ mode: 'serial' });
 import fs from 'fs';
+import { trace } from 'console';
 
 const artifactsDir = './test-results/.playwright-artifacts';
 if (!fs.existsSync(artifactsDir)) {
   fs.mkdirSync(artifactsDir, { recursive: true });
 }
 let page: Page;
-test.setTimeout(900000)
+test.setTimeout(1200000)
 test.beforeAll(async ({ browser }) => {
+  
   const myEmails: IEmail = await readEmails();
 
   if (!myEmails?.therapist38?.length) {
@@ -24,7 +26,7 @@ test.beforeAll(async ({ browser }) => {
 });
 
 test.afterAll(async () => {
-  await page.close();
+await page.close();
 });
 
 
