@@ -10,9 +10,6 @@ import {
 import { createNewEmail } from '../../helpers/mailsurp';
 
 
-// Annotate entire file as serial.
-
-
 let page: Page;
 test.beforeAll(async ({ browser }) => {
 test.setTimeout(250000)

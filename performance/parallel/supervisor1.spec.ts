@@ -4,7 +4,7 @@ import { generatePasswordlessLoginLink } from '../../helpers/api';
 import { IEmail, readEmails } from '../../localemails.js/emails';
 
 // Annotate entire file as serial.
-test.describe.configure({ mode: 'serial' });
+
 
 let page: Page;
 

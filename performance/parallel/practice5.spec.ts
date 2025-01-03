@@ -9,8 +9,7 @@ import {
 } from '../../localemails.js/const';
 import { createNewEmail } from '../../helpers/mailsurp';
 
-// Annotate entire file as serial.
-// test.describe.configure({ mode: 'serial' });
+
 
 let page: Page;
 
