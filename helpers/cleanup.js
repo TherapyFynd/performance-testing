@@ -1,6 +1,6 @@
 import { APIRequestContext, request } from '@playwright/test';
 import { BASE_BACKEND_URL } from '../localemails.js/const';
-import { readJSONFromFileAsync, makeFileEmpty } from '../helpers/file-helper';
+import { readJSONFromFileAsync, makeFileEmpty } from './file-helper';
 import path from 'path';
 
 (async () => {
@@ -9,10 +9,10 @@ import path from 'path';
 
   try {
     // Read email and inbox data from files
-    const emails: string[] = await readJSONFromFileAsync(filePathEmails) as string[];
-    const inboxes: string[] = await readJSONFromFileAsync(filePathInboxes) as string[];
+    const emails= await readJSONFromFileAsync(filePathEmails);
+    const inboxes = await readJSONFromFileAsync(filePathInboxes);
 
-    const context: APIRequestContext = await request.newContext({
+    const context= await request.newContext({
       baseURL: BASE_BACKEND_URL,
     });
 

@@ -81,7 +81,7 @@ jobs:
       #       # Step 11: Cleanup accounts/emails
       - name: Cleanup accounts/emails
         run: |
-          node cleanup.ts
+          node helpers/cleanup.js
         if: always()
 
       # - name: Make POST request on failure

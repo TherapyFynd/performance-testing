@@ -5,14 +5,43 @@ import { createNewEmail } from '../../helpers/mailsurp';
 import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 import { logPerformanceMetrics } from '../../performanceUtils'; // Import utility
 // Annotate entire file as serial.
-// test.describe.configure({ mode: 'serial' });
+import { measureActionTime } from '../../localemails.js/const';
 
-import fs from 'fs';
+// // Wrap Page Object for Load Time Measurement
+// function wrapPageWithMetrics(page: Page, thresholdInMilliseconds = 2500): Page {
+//   const handler = {
+//     get(target: any, prop: string) {
+//       const originalMethod = target[prop];
 
-const artifactsDir = './test-results/.playwright-artifacts';
-if (!fs.existsSync(artifactsDir)) {
-  fs.mkdirSync(artifactsDir, { recursive: true });
-}
+//       if (typeof originalMethod === 'function') {
+//         return async function (...args: any[]) {
+//           const measuredActions = ['click', 'goto', 'fill', 'check', 'setContent', 'type', 'waitForNavigation'];
+//           if (measuredActions.includes(prop)) {
+//             const startTime = performance.now();
+//             const result = await originalMethod.apply(target, args);
+//             const endTime = performance.now();
+
+//             const loadTime = endTime - startTime;
+//             console.log(`Action '${prop}' took ${loadTime.toFixed(2)} ms`);
+
+//             if (loadTime > thresholdInMilliseconds) {
+//               console.warn(`WARNING: '${prop}' exceeded ${thresholdInMilliseconds} ms (${loadTime.toFixed(2)} ms).`);
+//             }
+
+//             return result;
+//           }
+//           return originalMethod.apply(target, args);
+//         };
+//       }
+
+//       return originalMethod;
+//     },
+//   };
+
+//   return new Proxy(page, handler);
+// }
+
+
 let page: Page;
 test.setTimeout(900000)
 test.beforeAll(async ({ browser }) => {
@@ -22,7 +51,10 @@ test.beforeAll(async ({ browser }) => {
     throw new Error(`Therapist1 Email not present returning...`);
   }
   page = await browser.newPage();
+  const originalPage = await browser.newPage();
+  // page = wrapPageWithMetrics(originalPage); // Wrap page for monitoring
 });
+
 
 test.afterAll(async () => {
   await page.close();
@@ -38,9 +70,8 @@ test('Therapist1 login and  onboarding ', async ({ request }) => {
 
   // goto page
   await page.goto(data!);
-  await logPerformanceMetrics(page, 'Navigate to Login Page');
   // Onbaording flows for therapist
-  await logPerformanceMetrics(page, 'Start: Therapist1 login and onboarding');
+
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Therapist ');
   await page.getByPlaceholder('Enter last name').click();
@@ -88,9 +119,7 @@ test('Therapist1 login and  onboarding ', async ({ request }) => {
   await page.getByRole('checkbox').check();
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
   await page.waitForTimeout(5000);
-  await logPerformanceMetrics(page, 'Completed: Therapist1 Onboarding Flow');
 // // Performance 1
-await logPerformanceMetrics(page, 'Start: Therapist1 Settings Flows');
   try {
     await page.locator('div').filter({ hasText: /^Settings$/ }).click();
   } catch (error) {
@@ -137,10 +166,9 @@ await page.getByText('Website Privacy Policy').click();
 await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
 await page.getByText('Terms & Conditions').click();
 await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
-await logPerformanceMetrics(page, 'Completed: Therapist1 Settings tab');
+
 
 // Performance 2
-    await logPerformanceMetrics(page, 'Start: Therapist1 Single Create Client');
   // Create Clients
     await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
     await page.getByRole('menuitem', { name: 'Create client' }).click();
@@ -156,14 +184,12 @@ await logPerformanceMetrics(page, 'Completed: Therapist1 Settings tab');
     await page.getByRole('button', { name: 'Continue' }).nth(1).click();
     await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
     await page.waitForTimeout(2000);
-    await logPerformanceMetrics(page, 'Completed: Therapist1 Create Client');
 
 // Performance 3
     // Calendar Create Appoinments 24 Appoinments
     await page.getByText('Calendar').first().click();
     await page.getByRole('button', { name: 'Month' }).click();
     // Appoinments
-    await logPerformanceMetrics(page, 'Start: Therapist1 Create Appoinments 20');
     await page.getByRole('cell', { name: '01' }).first().click();
     await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
@@ -271,7 +297,6 @@ await logPerformanceMetrics(page, 'Completed: Therapist1 Settings tab');
     await page.getByRole('option', { name: 'Therapist 1 Office Locations' }).click();
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(8000);
-    await logPerformanceMetrics(page, 'Completed: Therapist1 Create Appoinement 20');
 // 
 // Performance 4
   // Logout 

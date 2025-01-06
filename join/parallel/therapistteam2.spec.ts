@@ -7,19 +7,20 @@ import { logPerformanceMetrics } from '../../performanceUtils'; // Import utilit
 // Annotate entire file as serial.
 // test.describe.configure({ mode: 'serial' });
 
-import fs from 'fs';
+// import fs from 'fs';
 
-const artifactsDir = './test-results/.playwright-artifacts';
-if (!fs.existsSync(artifactsDir)) {
-  fs.mkdirSync(artifactsDir, { recursive: true });
-}
+// const artifactsDir =''
+ 
+// if (!fs.existsSync(artifactsDir)) {
+//   fs.mkdirSync(artifactsDir, { recursive: true });
+// }
 let page: Page;
 test.setTimeout(900000)
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
   // await page.tracing.start({ path: './performance/trace.json', screenshots: true });
   if (!myEmails?.therapist2?.length) {
-    throw new Error(`Therapist1 Email not present returning...`);
+    throw new Error(`Therapist Email not present returning...`);
   }
   page = await browser.newPage();
 });
@@ -38,9 +39,7 @@ test('Therapist2 login and  onboarding ', async ({ request }) => {
 
   // goto page
   await page.goto(data!);
-  await logPerformanceMetrics(page, 'Navigate to Login Page');
   // Onbaording flows for therapist
-  await logPerformanceMetrics(page, 'Start: Therapist2 login and onboarding');
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Therapist ');
   await page.getByPlaceholder('Enter last name').click();
@@ -88,10 +87,8 @@ test('Therapist2 login and  onboarding ', async ({ request }) => {
   await page.getByRole('checkbox').check();
   await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
   await page.waitForTimeout(5000);
-  await logPerformanceMetrics(page, 'Completed: Therapist2 Onboarding Flow');
 //  // Performance 1
 
-    await logPerformanceMetrics(page, 'Start: Therapist2 Settings Flows');
   try {
     await page.locator('div').filter({ hasText: /^Settings$/ }).click();
   } catch (error) {
@@ -138,10 +135,8 @@ await page.getByText('Website Privacy Policy').click();
 await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
 await page.getByText('Terms & Conditions').click();
 await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
-await logPerformanceMetrics(page, 'Completed: Therapist2 Settings tab');
 
 // // Performance 2
-    await logPerformanceMetrics(page, 'Start: Therapist1 Single Create Client');
   // Create Clients
     await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
     await page.getByRole('menuitem', { name: 'Create client' }).click();
@@ -157,14 +152,12 @@ await logPerformanceMetrics(page, 'Completed: Therapist2 Settings tab');
     await page.getByRole('button', { name: 'Continue' }).nth(1).click();
     await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
     await page.waitForTimeout(2000);
-    await logPerformanceMetrics(page, 'Completed: Therapist2 Single Create Client');
 
     // // Performance 3
     // Calendar Create Appoinments 24 Appoinments
     await page.getByText('Calendar').first().click();
     await page.getByRole('button', { name: 'Month' }).click();
     // Appoinments
-    await logPerformanceMetrics(page, 'Start: Therapist2 Create Appoinments 20');
     await page.getByRole('cell', { name: '01' }).first().click();
     await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
     await page.getByLabel('Select client profile*').click();
@@ -272,7 +265,6 @@ await logPerformanceMetrics(page, 'Completed: Therapist2 Settings tab');
     await page.getByRole('option', { name: 'Therapist 1 Office Locations' }).click();
     await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     await page.waitForTimeout(8000);
-    await logPerformanceMetrics(page, 'Completed: Therapist2 Create Appoinement 20');
 
     // Performance 4
   // Logout 

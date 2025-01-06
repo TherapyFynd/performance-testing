@@ -53,7 +53,7 @@ export default defineConfig({
   },
    /* Add `globalTeardown` here */
   globalTeardown: path.join(__dirname, '/helpers/teardown.ts'),
-
+  
   /* Configure projects for major browsers */
   projects: [
     {

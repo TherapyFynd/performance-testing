@@ -3,7 +3,7 @@ import path from 'path';
 import { generatePasswordlessLoginLink } from '../../helpers/api';
 import { createNewEmail } from '../../helpers/mailsurp';
 import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
-
+import { measureActionTime } from '../../localemails.js/const';
 
 let page: Page;
 test.setTimeout(900000)
@@ -25,7 +25,7 @@ test.afterAll(async () => {
     // test.describe.configure({ mode: 'parallel' });
     test('Therapist4 login and  onboarding ', async ({ request }) => {
       const myEmails: IEmail = await readEmails();
-    
+     await measureActionTime(async () => {
       const data = await generatePasswordlessLoginLink({
         email: myEmails.therapist4!,
         request: request,
@@ -36,11 +36,15 @@ test.afterAll(async () => {
       //   // Onbaording flows for therapist
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Therapist ');
+  await page.waitForLoadState('load');}, "Navigate to login page");
   await page.getByPlaceholder('Enter last name').click();
   await page.getByPlaceholder('Enter last name').fill('4');
   await page.getByPlaceholder('Enter phone').click();
   await page.getByPlaceholder('Enter phone').fill('(846) 534-65836');
-  await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+
+  await measureActionTime(async () => {
+            await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+          }, "Click Continue button");
 
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.waitForTimeout(3000);
@@ -60,7 +64,8 @@ test.afterAll(async () => {
   await page.getByLabel('Make default location').check();
   await page.getByRole('button', { name: 'Add location' }).nth(1).click();
 
-  await page.getByRole('button', { name: 'Next' }).nth(1).click();
+  await measureActionTime(async () => {
+       await page.getByRole('button', { name: 'Next' }).nth(1).click();}, "Click After Adding Add Location Next button");
 
   await page.getByRole('button', { name: 'Add new' }).nth(1).click();
   await page.getByLabel('CPT Code').click();
@@ -72,32 +77,39 @@ test.afterAll(async () => {
   await page.getByLabel('Duration *').fill('10');
 
   await page.getByRole('button', { name: 'Add service' }).nth(1).click();
-  await page.getByRole('button', { name: 'Next' }).nth(1).click();
-
-  await page.getByRole('checkbox').check();
-  await page.waitForTimeout(2000);
-  await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
-  await page.waitForTimeout(2000);
-  await page.getByRole('checkbox').check();
-  await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
-  await page.waitForTimeout(5000);
-  
-  try {
-    await page.locator('div').filter({ hasText: /^Settings$/ }).click();
-  } catch (error) {
-    console.log('Failed to find first locator, trying second locator');
-     await page.getByText('Settings').click();
-  }
-  //Clinican Settings Flows
-       await page.getByText('Clinician settings').click();
+  await measureActionTime(async () => {
+                  await page.getByRole('button', { name: 'Next' }).nth(1).click();}, "Click After adding Add Service Next button");
+      
+                  await measureActionTime(async () => {
+                    await page.getByRole('checkbox').check();
+                    await page.waitForTimeout(2000);
+                    await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();},"Click Agree and Continue");
+         
+                    await measureActionTime(async () => {
+                        await page.getByRole('checkbox').check();
+                        await page.waitForTimeout(2000);
+                        await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();},"Click Agree and Continue");
+                        await page.waitForTimeout(2000);
+    
+     await measureActionTime(async () => {
+     
+         await page.locator('div').filter({ hasText: /^Settings$/ }).click();}, "Navigate to Settings");
+     
+         // Measure action for Clinician settings flow
+       await measureActionTime(async () => {
+         await page.getByText('Clinician settings').click();}, "Click Clinician setting");
        await page.getByPlaceholder('Enter first name').click();
        await page.getByPlaceholder('Enter first name').fill('Therapist');
        await page.getByPlaceholder('Enter last name').click();
        await page.getByPlaceholder('Enter last name').fill('1');
        await page.getByLabel('Address Line').click();
        await page.getByLabel('Address Line').fill('Name');
-       await page.getByRole('button', { name: 'Save' }).nth(1).click();
-       await page.getByRole('tab', { name: 'Clinical' }).click();
+       await measureActionTime(async () => {
+                await page.getByRole('button', { name: 'Save' }).nth(1).click();},"Save Clinican setting Info");
+              
+                await measureActionTime(async () => {
+                await page.getByRole('tab', { name: 'Clinical' }).click(); },"Swtich tab Clinical");
+
        await page.getByLabel('License Type*').click();
        await page.getByRole('combobox', { name: 'License Type*' }).fill('ALC');
        await page.getByRole('option', { name: 'ALC' }).click();
@@ -107,8 +119,11 @@ test.afterAll(async () => {
        await page.getByLabel('License No.').click();
        await page.getByLabel('License No.').press('CapsLock');
        await page.getByLabel('License No.').fill('QEY355');
-       await page.getByRole('button', { name: 'Save' }).nth(1).click();
-       await page.getByRole('tab', { name: 'Locations' }).click();
+       await measureActionTime(async () => {
+                  await page.getByRole('button', { name: 'Save' }).nth(1).click();},"Save Clinican Info");
+              
+                  await measureActionTime(async () => {
+                  await page.getByRole('tab', { name: 'Locations' }).click(); },"Swtich tab Add Location");
      
        await page.getByRole('button', { name: 'Add new' }).nth(1).click();
        await page.getByLabel('Office name').click();
@@ -124,15 +139,19 @@ test.afterAll(async () => {
        await page.getByRole('button', { name: 'Add location' }).nth(1).click();
      
        //   Privacy Policy
-     await page.getByText('Website Privacy Policy').click();
-     await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
-     await page.getByText('Terms & Conditions').click();
-     await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
+                 await measureActionTime(async () => { 
+               await page.getByText('Website Privacy Policy').click(); },"WPP page");
+               await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
+               
+               await measureActionTime(async () => { 
+               await page.getByText('Terms & Conditions').click(); },"Terms and condition");
+               await page.locator('#root > div > div > div > div._stickyHeader_8mx9g_22 > div._tiltleNavigation_8mx9g_39 > button > svg > path').click();
      
      
        // Create Clients
          await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
-         await page.getByRole('menuitem', { name: 'Create client' }).click();
+         await measureActionTime(async () => { 
+                       await page.getByRole('menuitem', { name: 'Create client' }).click(); } ,"Create Client pop page");
          await page.getByLabel('First Name*').click();
          await page.getByLabel('First Name*').fill('Therapist');
          await page.getByLabel('Last Name*').click();
@@ -142,9 +161,11 @@ test.afterAll(async () => {
          const invitesinbox2 = await createNewEmail();
          await page.getByLabel('Email*').fill(invitesinbox2!);
      
-         await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-         await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
-         await page.waitForTimeout(2000);
+          await measureActionTime(async () => { 
+                         await page.getByRole('button', { name: 'Continue' }).nth(1).click();
+                     
+                         await page.getByRole('button', { name: 'Create Client' }).nth(1).click(); }, "Create Client");
+                     await page.waitForTimeout(2000);
      
          // Calendar Create Appoinments
          await page.getByText('Calendar').first().click();
@@ -153,89 +174,130 @@ test.afterAll(async () => {
          await page.getByRole('button', { name: 'Back' }).click();
          await page.getByRole('button', { name: 'Back' }).click();
 
-         await page.getByRole('cell', { name: '01' }).first().click();
+       // Appoinments 1
+                      await measureActionTime(async () => { 
+                      await page.getByRole('cell', { name: '01' }).first().click(); },"01 First Appoinment");
+
          await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
          await page.getByLabel('Select client profile*').click();
          await page.getByText('Therapist (T1)').click();
          await page.getByLabel('Select location *').click();
          await page.getByText('KANTIME HEALTHCARE').click();
-         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-         await page.waitForTimeout(2000);
+         await measureActionTime(async () => { 
+                         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click(); },"Create Appoinment");
+                         await page.waitForTimeout(2000);
      
-         await page.getByRole('cell', { name: '03' }).first().click();
+        // Appoinment 2
+                   await measureActionTime(async () => { 
+                   await page.getByRole('cell', { name: '03' }).first().click(); },"03 First Appoinments");
          await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
          await page.getByLabel('Select client profile*').click();
          await page.getByText('Therapist (T1)').click();
          await page.getByLabel('Select location *').click();
          await page.getByText('KANTIME HEALTHCARE').click();
-         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-         await page.waitForTimeout(2000);
+         await measureActionTime(async () => { 
+                         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click(); },"Create Appoinment");
+                         await page.waitForTimeout(2000);
      
-         await page.getByRole('cell', { name: '05' }).first().click();
+         // Appoinment 3
+                      await measureActionTime(async () => {
+                      await page.getByRole('cell', { name: '05' }).first().click(); },"05 Appoinment");
          await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
          await page.getByLabel('Select client profile*').click();
          await page.getByText('Therapist (T1)').click();
          await page.getByLabel('Select location *').click();
          await page.getByText('KANTIME HEALTHCARE').click();
-         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-         await page.waitForTimeout(2000);
+        await measureActionTime(async () => { 
+                        await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click(); },"Create Appoinment");
+                        await page.waitForTimeout(2000);
      
-         await page.locator('div').filter({ hasText: /^07$/ }).click();
+        // Appoinment 4
+                        await measureActionTime(async () => {
+                        await page.locator('div').filter({ hasText: /^07$/ }).click(); }, "07 Appoinment" );
+
          await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
          await page.getByLabel('Select client profile*').click();
          await page.getByText('Therapist (T1)').click();
          await page.getByLabel('Select location *').click();
          await page.getByText('KANTIME HEALTHCARE').click();
-         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-        await page.waitForTimeout(2000);
+         await measureActionTime(async () => { 
+                         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click(); },"Create Appoinment");
+                         await page.waitForTimeout(2000);
      
-         await page.locator('div').filter({ hasText: /^09$/ }).click();
+          // Appoinment 5
+                         await measureActionTime(async () => {
+                         await page.locator('div').filter({ hasText: /^09$/ }).click(); },"09 Appoinment" );
+
          await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
          await page.getByLabel('Select client profile*').click();
          await page.getByText('Therapist (T1)').click();
          await page.getByLabel('Select location *').click();
          await page.getByText('KANTIME HEALTHCARE').click();
-         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-        await page.waitForTimeout(2000);
+         await measureActionTime(async () => { 
+                         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click(); },"Create Appoinment");
+                         await page.waitForTimeout(2000);
      
-         await page.locator('div').filter({ hasText: /^11$/ }).click();
+        // Appoinments 6
+                       await measureActionTime(async () => {
+                       await page.locator('div').filter({ hasText: /^11$/ }).click(); }, "11 Appoinment" );
+
          await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
          await page.getByLabel('Select client profile*').click();
          await page.getByRole('option', { name: 'Therapist (T1)' }).click();
          await page.getByLabel('Select location *').click();
          await page.getByText('KANTIME HEALTHCARE').click();
-         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-        await page.waitForTimeout(2000);
+        await measureActionTime(async () => { 
+                        await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click(); },"Create Appoinment");
+                        await page.waitForTimeout(2000);
      
-         await page.locator('div').filter({ hasText: /^13$/ }).click();
+          // Appoinment 7
+                      await measureActionTime(async () => {
+                      await page.locator('div').filter({ hasText: /^13$/ }).click(); }, "13 Appoinment");
+
          await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
          await page.getByLabel('Select client profile*').click();
          await page.getByText('Therapist (T1)').click();
-         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-        await page.waitForTimeout(2000);
+         await measureActionTime(async () => { 
+                         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click(); },"Create Appoinment");
+                         await page.waitForTimeout(2000);
      
-         await page.locator('div').filter({ hasText: /^15$/ }).click();
+         // Appoinment 8 
+                         await measureActionTime(async () => { 
+                         await page.locator('div').filter({ hasText: /^15$/ }).click(); }, "15 Appoinment" );
+
          await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
          await page.getByLabel('Select client profile*').click();
          await page.getByText('Therapist (T1)').click();
-         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-        await page.waitForTimeout(2000);
+         await measureActionTime(async () => { 
+                         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click(); },"Create Appoinment");
+                         await page.waitForTimeout(2000);
      
-         await page.locator('div').filter({ hasText: /^16$/ }).click();
+         // Appoinment 9
+                         await measureActionTime(async () => { 
+                         await page.locator('div').filter({ hasText: /^16$/ }).click(); }," 16 Appoinment");
+
          await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
          await page.getByLabel('Select client profile*').click();
          await page.getByText('Therapist (T1)').click();
-         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-        await page.waitForTimeout(2000);
+        await measureActionTime(async () => { 
+                        await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click(); },"Create Appoinment");
+                        await page.waitForTimeout(2000);
      
-         await page.locator('div').filter({ hasText: /^18$/ }).click();
+        // Appoinment 10
+                       await measureActionTime(async () => { 
+                       await page.locator('div').filter({ hasText: /^18$/ }).click(); }, "18 Appoinment" );
+
          await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
          await page.getByLabel('Select client profile*').click();
          await page.getByText('Therapist (T1)').click();
-         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-        await page.waitForTimeout(2000);
+         await measureActionTime(async () => { 
+                         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click(); },"Create Appoinment");
+                         await page.waitForTimeout(2000);
      
-         await page.locator('div').filter({ hasText: /^19$/ }).click();
+         // Appoinment 11
+                         await measureActionTime(async () => { 
+                         await page.locator('div').filter({ hasText: /^19$/ }).click(); }, "19 Appoinment");
+
          await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
          await page.getByLabel('Select client profile*').click();
          await page.getByText('Therapist (T1)').click();
@@ -244,10 +306,14 @@ test.afterAll(async () => {
          await page.getByRole('option', { name: 'days' }).click();
          await page.getByLabel('After').click();
          await page.getByLabel('After').fill('5');
-         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-        await page.waitForTimeout(4000);
+        await measureActionTime(async () => { 
+                        await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click(); },"Create Appoinment");
+                        await page.waitForTimeout(2000);
      
-         await page.locator('div').filter({ hasText: /^24$/ }).click();
+           // Appoinment 12
+                        await measureActionTime(async () => { 
+                        await page.locator('div').filter({ hasText: /^24$/ }).click(); }, "24 Appoinment");
+                        
          await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
          await page.getByLabel('Select client profile*').click();
          await page.getByText('Therapist (T1)').click();
@@ -258,8 +324,9 @@ test.afterAll(async () => {
          await page.getByRole('option', { name: 'days' }).click();
          await page.getByLabel('Select location *').click();
          await page.getByRole('option', { name: 'Therapist 1 Office Locations' }).click();
-         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
-         await page.waitForTimeout(8000);
+         await measureActionTime(async () => { 
+                         await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click(); },"Create Appoinment");
+                         await page.waitForTimeout(2000);
 
   try {
     await page.getByRole('img').nth(1).click();
