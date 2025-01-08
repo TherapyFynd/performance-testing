@@ -3,7 +3,6 @@ import path from 'path';
 import { generatePasswordlessLoginLink } from '../../helpers/api';
 import { createNewEmail } from '../../helpers/mailsurp';
 import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
-import { measureActionTime } from '../../localemails.js/const';
 
 // Annotate entire file as serial.
 test.describe.configure({ mode: 'serial' });
@@ -11,6 +10,29 @@ test.describe.configure({ mode: 'serial' });
 let page: Page;
 test.setTimeout(1000000)
 
+// Utility function to measure and validate action time
+async function measureActionTime(
+  actionCallback: () => Promise<void>,
+  actionName: string,
+  rolePrefix: string = " ",
+  thresholdInMilliseconds = 1500
+) {
+  const startTime = performance.now();
+  await actionCallback();
+  const endTime = performance.now();
+
+  const loadTimeInMilliseconds = endTime - startTime; // Calculate load time in milliseconds
+  const loadTimeInSeconds = loadTimeInMilliseconds / 1000; // Convert to seconds
+
+  // Log action time including the role prefix
+  console.log(`${rolePrefix}Time for '${actionName}': ${loadTimeInSeconds.toFixed(2)} seconds`);
+
+  if (loadTimeInMilliseconds > thresholdInMilliseconds) {
+      console.warn(
+          `${rolePrefix}WARNING: '${actionName}' took longer than ${thresholdInMilliseconds / 1000} seconds (${loadTimeInSeconds.toFixed(2)} seconds)`
+      );
+  }
+}
 
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage();
@@ -23,6 +45,8 @@ test.describe('All OwnerRole Test case ', () => {
   test('Owner login and  onboarding ', async ({ request }) => {
     const inbox = await createNewEmail();
 
+    // Add "Owner Team" prefix to the log
+    const rolePrefix = "Owner Role";
     // Measure time for navigating to the login page
     await measureActionTime(async () => {
 
@@ -32,11 +56,12 @@ test.describe('All OwnerRole Test case ', () => {
       });
 
       await page.goto(data!);
-      await page.waitForLoadState('load');
-    }, "Owner role Navigate to login page");
+      
     // Onboarding Flows for Owner
     await page.getByPlaceholder('Enter first name').click();
     await page.getByPlaceholder('Enter first name').fill('Owner ');
+    await page.waitForLoadState('load');
+    }, "Owner role Navigate to login page", rolePrefix);
     await page.getByPlaceholder('Enter last name').click();
     await page.getByPlaceholder('Enter last name').fill('Team');
     await page.getByPlaceholder('Enter phone').click();
@@ -46,7 +71,7 @@ test.describe('All OwnerRole Test case ', () => {
       await page.getByRole('button', { name: 'Continue' }).nth(1).click();
 
       await page.getByPlaceholder('Enter Group Practice name').click();
-    }, "Click Continue button");
+    }, "Click Continue button", rolePrefix);
     await page.getByPlaceholder('Enter Group Practice name').fill('KanTime Healthcare System ');
     await page.getByLabel('Address Line').click();
     await page.getByLabel('Address Line').fill('New York City');
@@ -66,7 +91,7 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click After filling practice details Next button");
+    }, "Click After filling practice details Next button", rolePrefix);
 
     await page.getByRole('button', { name: 'Add new' }).nth(1).click();
     await page.getByLabel('Office name').click();
@@ -85,7 +110,7 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click Add New Locations Next button");
+    }, "Click Add New Locations Next button", rolePrefix);
 
     await page.getByRole('button', { name: 'Add new' }).nth(1).click();
     await page.getByLabel('CPT Code').click();
@@ -100,38 +125,39 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click Add New Services Next button");
+    }, "Click Add New Services Next button", rolePrefix);
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click Invite Role Next button");
+    }, "Click Invite Role Next button", rolePrefix);
 
     await measureActionTime(async () => {
       await page.getByRole('checkbox').check();
       await page.waitForTimeout(2000);
       await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
-    }, "Click Agree and Continue");
+    }, "Click Agree and Continue", rolePrefix);
 
     await measureActionTime(async () => {
       await page.getByRole('checkbox').check();
       await page.waitForTimeout(2000);
       await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
-    }, "Click Agree and Continue");
+    }, "Click Agree and Continue", rolePrefix);
     await page.waitForTimeout(2000);
 
   });
   test('Invite Team member', async () => {
+    const rolePrefix = "Owner Role";
     // Measure action for navigating to Settings
     await measureActionTime(async () => {
       await page.locator('div').filter({ hasText: /^Settings$/ }).click();
-    }, "Navigate to Settings");
+    }, "Navigate to Settings", rolePrefix);
 
 
     //Clinican Settings Flows
     // Measure action for Clinician settings flow
     await measureActionTime(async () => {
       await page.getByText('Clinician settings').click();
-    }, "Click Clinician setting");
+    }, "Click Clinician setting", rolePrefix);
 
     // Invite team 100 Therapist , 10 Supervisor, 5 Admins.
 
@@ -140,7 +166,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -157,13 +183,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist1");
+    }, "Send invite for therapist1", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
     await page.waitForTimeout(2000);
@@ -174,7 +200,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -191,13 +217,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist2");
+    }, "Send invite for therapist2", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
     await page.waitForTimeout(2000);
@@ -208,7 +234,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -226,13 +252,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist3");
+    }, "Send invite for therapist3", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
     await page.waitForTimeout(2000);
@@ -242,7 +268,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -259,13 +285,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist4");
+    }, "Send invite for therapist4", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
     await page.waitForTimeout(2000);
@@ -275,7 +301,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -293,13 +319,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist5");
+    }, "Send invite for therapist5", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
     await page.waitForTimeout(2000);
@@ -310,7 +336,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
     await page.getByLabel('Last Name*').click();
@@ -326,13 +352,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist6");
+    }, "Send invite for therapist6", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
     await page.waitForTimeout(2000);
@@ -342,7 +368,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -359,13 +385,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist7");
+    }, "Send invite for therapist7", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
     await page.waitForTimeout(2000);
@@ -375,7 +401,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -392,13 +418,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist8");
+    }, "Send invite for therapist8", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
     await page.waitForTimeout(2000);
@@ -409,7 +435,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -426,13 +452,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist9");
+    }, "Send invite for therapist9", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
     await page.waitForTimeout(2000);
@@ -443,7 +469,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -460,13 +486,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist10");
+    }, "Send invite for therapist10", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -476,7 +502,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -493,13 +519,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist11");
+    }, "Send invite for therapist11", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -510,7 +536,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -527,13 +553,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist12");
+    }, "Send invite for therapist12", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -543,7 +569,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -560,13 +586,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist13");
+    }, "Send invite for therapist13", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -576,7 +602,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -593,13 +619,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist14");
+    }, "Send invite for therapist14", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -609,7 +635,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -626,13 +652,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist15");
+    }, "Send invite for therapist15", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -643,7 +669,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -660,13 +686,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist16");
+    }, "Send invite for therapist16", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -676,7 +702,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -693,13 +719,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist17");
+    }, "Send invite for therapist17", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -709,7 +735,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -726,13 +752,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist18");
+    }, "Send invite for therapist18", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -743,7 +769,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -760,13 +786,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist19");
+    }, "Send invite for therapist19", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -776,7 +802,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -793,13 +819,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist20");
+    }, "Send invite for therapist20", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -810,7 +836,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -827,13 +853,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist21");
+    }, "Send invite for therapist21", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -844,7 +870,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -861,13 +887,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist22");
+    }, "Send invite for therapist22", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -878,7 +904,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -895,13 +921,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist23");
+    }, "Send invite for therapist23", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -912,7 +938,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -929,13 +955,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist24");
+    }, "Send invite for therapist24", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -946,7 +972,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -963,13 +989,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist25");
+    }, "Send invite for therapist25", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -980,7 +1006,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -997,13 +1023,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist26");
+    }, "Send invite for therapist26", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1014,7 +1040,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1031,13 +1057,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist27");
+    }, "Send invite for therapist27", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1048,7 +1074,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1065,13 +1091,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist28");
+    }, "Send invite for therapist28", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1083,7 +1109,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1100,13 +1126,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist29");
+    }, "Send invite for therapist29", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1117,7 +1143,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1134,13 +1160,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist30");
+    }, "Send invite for therapist30", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1152,7 +1178,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1169,13 +1195,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist31");
+    }, "Send invite for therapist31", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1186,7 +1212,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1203,13 +1229,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist32");
+    }, "Send invite for therapist32", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1220,7 +1246,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1237,13 +1263,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist33");
+    }, "Send invite for therapist33", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1255,7 +1281,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1272,13 +1298,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist34");
+    }, "Send invite for therapist34", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1289,7 +1315,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1306,13 +1332,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist35");
+    }, "Send invite for therapist35", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1323,7 +1349,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1340,13 +1366,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist36");
+    }, "Send invite for therapist36", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1358,7 +1384,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1375,13 +1401,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist37");
+    }, "Send invite for therapist37", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1392,7 +1418,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1409,13 +1435,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist38");
+    }, "Send invite for therapist38", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1426,7 +1452,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1443,13 +1469,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist39");
+    }, "Send invite for therapist39", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1460,7 +1486,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1477,13 +1503,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist40");
+    }, "Send invite for therapist40", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1495,7 +1521,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1512,13 +1538,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist41");
+    }, "Send invite for therapist41", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1530,7 +1556,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1547,13 +1573,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist42");
+    }, "Send invite for therapist42", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1564,7 +1590,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1581,13 +1607,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist43");
+    }, "Send invite for therapist43", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1598,7 +1624,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1615,13 +1641,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist44");
+    }, "Send invite for therapist44", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1632,7 +1658,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1649,13 +1675,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist45");
+    }, "Send invite for therapist45", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1666,7 +1692,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1683,13 +1709,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist46");
+    }, "Send invite for therapist46", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1700,7 +1726,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1717,13 +1743,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist47");
+    }, "Send invite for therapist47", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1735,7 +1761,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1752,13 +1778,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist48");
+    }, "Send invite for therapist48", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1770,7 +1796,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1787,13 +1813,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist49");
+    }, "Send invite for therapist49", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1804,7 +1830,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Therapist');
@@ -1821,13 +1847,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Therapist').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for therapist50");
+    }, "Send invite for therapist50", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1839,7 +1865,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Supervisor');
@@ -1855,14 +1881,14 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
    
     await page.getByLabel('Supervisor').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for supervisor1");
+    }, "Send invite for supervisor1", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1872,7 +1898,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Supervisor');
@@ -1888,14 +1914,14 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     
     await page.getByLabel('Supervisor').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for supervisor2");
+    }, "Send invite for supervisor2", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1905,7 +1931,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Supervisor');
@@ -1921,14 +1947,14 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     
     await page.getByLabel('Supervisor').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for supervisor3");
+    }, "Send invite for supervisor3", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1939,7 +1965,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Supervisor');
@@ -1955,14 +1981,14 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
    
     await page.getByLabel('Supervisor').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for supervisor4");
+    }, "Send invite for supervisor4", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -1973,7 +1999,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Supervisor');
@@ -1989,14 +2015,14 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     
     await page.getByLabel('Supervisor').check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for supervisor5");
+    }, "Send invite for supervisor5", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -2007,7 +2033,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Practice');
@@ -2023,13 +2049,13 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     await page.getByLabel('Practice manager', { exact: true }).check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for PracticeManager1");
+    }, "Send invite for PracticeManager1", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
     await page.waitForTimeout(2000);
@@ -2039,7 +2065,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Practice');
@@ -2055,14 +2081,14 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     
     await page.getByLabel('Practice manager', { exact: true }).check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for PracticeManager2");
+    }, "Send invite for PracticeManager2", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -2072,7 +2098,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Practice');
@@ -2088,14 +2114,14 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
     
     await page.getByLabel('Practice manager', { exact: true }).check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for PracticeManager3");
+    }, "Send invite for PracticeManager3", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
     await page.waitForTimeout(2000);
@@ -2106,7 +2132,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Practice');
@@ -2122,14 +2148,14 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
    
     await page.getByLabel('Practice manager', { exact: true }).check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for PracticeManager4");
+    }, "Send invite for PracticeManager4", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);
@@ -2140,7 +2166,7 @@ test.describe('All OwnerRole Test case ', () => {
     await measureActionTime(async () => {
       await page.getByText('Team members').first().click();
       await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-    }, "Click invite team member page");
+    }, "Click invite team member page", rolePrefix);
 
     await page.getByLabel('First Name*').click();
     await page.getByLabel('First Name*').fill('Practice');
@@ -2156,14 +2182,14 @@ test.describe('All OwnerRole Test case ', () => {
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
-    }, "Click on Next Button");
+    }, "Click on Next Button", rolePrefix);
 
    
     await page.getByLabel('Practice manager', { exact: true }).check();
 
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-    }, "Send invite for PracticeManager5");
+    }, "Send invite for PracticeManager5", rolePrefix);
     await page.waitForTimeout(4000);
     await page.reload();
   await page.waitForTimeout(2000);

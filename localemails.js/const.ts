@@ -22,12 +22,9 @@ export const BASE_FRONTEND_URL = TYPE_OF_URLS_FRONTEND.PROD;
 export const TAG_NAMESPACE = `tag`;
 export const BASE_EMAIL_NAMESPACE = `z7knk.${TAG_NAMESPACE}@inbox.testmail.app`;
 
-export // Utility function to measure and validate action time
+ // Utility function to measure and validate action time
 async function measureActionTime(
-  actionCallback: () => Promise<void>, 
-  actionName: string, 
-  thresholdInMilliseconds = 1500
-) {
+actionCallback: () => Promise<void>, actionName: string, thresholdInMilliseconds = 1500) {
   const startTime = performance.now();
   await actionCallback();
   const endTime = performance.now();

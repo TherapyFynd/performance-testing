@@ -7,41 +7,6 @@ import { logPerformanceMetrics } from '../../performanceUtils'; // Import utilit
 // Annotate entire file as serial.
 import { measureActionTime } from '../../localemails.js/const';
 
-// // Wrap Page Object for Load Time Measurement
-// function wrapPageWithMetrics(page: Page, thresholdInMilliseconds = 2500): Page {
-//   const handler = {
-//     get(target: any, prop: string) {
-//       const originalMethod = target[prop];
-
-//       if (typeof originalMethod === 'function') {
-//         return async function (...args: any[]) {
-//           const measuredActions = ['click', 'goto', 'fill', 'check', 'setContent', 'type', 'waitForNavigation'];
-//           if (measuredActions.includes(prop)) {
-//             const startTime = performance.now();
-//             const result = await originalMethod.apply(target, args);
-//             const endTime = performance.now();
-
-//             const loadTime = endTime - startTime;
-//             console.log(`Action '${prop}' took ${loadTime.toFixed(2)} ms`);
-
-//             if (loadTime > thresholdInMilliseconds) {
-//               console.warn(`WARNING: '${prop}' exceeded ${thresholdInMilliseconds} ms (${loadTime.toFixed(2)} ms).`);
-//             }
-
-//             return result;
-//           }
-//           return originalMethod.apply(target, args);
-//         };
-//       }
-
-//       return originalMethod;
-//     },
-//   };
-
-//   return new Proxy(page, handler);
-// }
-
-
 let page: Page;
 test.setTimeout(900000)
 test.beforeAll(async ({ browser }) => {
@@ -52,7 +17,6 @@ test.beforeAll(async ({ browser }) => {
   }
   page = await browser.newPage();
   const originalPage = await browser.newPage();
-  // page = wrapPageWithMetrics(originalPage); // Wrap page for monitoring
 });
 
 

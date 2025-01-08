@@ -2,9 +2,8 @@ import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../../helpers/api';
 import { IEmail, readEmails } from '../../localemails.js/emails';
-import { measureActionTime } from '../../localemails.js/const';
+// import { measureActionTime } from '../../localemails.js/const';
 // Annotate entire file as serial.
-
 import fs from 'fs';
 // Ensure directory exists
 const traceDir = path.resolve(__dirname, './playwright-report./trace/trace.json');
@@ -13,12 +12,36 @@ if (!fs.existsSync(traceDir)) {
 }
 
 let page: Page;
+test.setTimeout(250000)
 
+// Utility function to measure and validate action time
+async function measureActionTime(
+  actionCallback: () => Promise<void>,
+  actionName: string,
+  rolePrefix: string = " ",
+  thresholdInMilliseconds = 1500
+) {
+  const startTime = performance.now();
+  await actionCallback();
+  const endTime = performance.now();
+
+  const loadTimeInMilliseconds = endTime - startTime; // Calculate load time in milliseconds
+  const loadTimeInSeconds = loadTimeInMilliseconds / 1000; // Convert to seconds
+
+  // Log action time including the role prefix
+  console.log(`${rolePrefix}Time for '${actionName}': ${loadTimeInSeconds.toFixed(2)} seconds`);
+
+  if (loadTimeInMilliseconds > thresholdInMilliseconds) {
+      console.warn(
+          `${rolePrefix}WARNING: '${actionName}' took longer than ${thresholdInMilliseconds / 1000} seconds (${loadTimeInSeconds.toFixed(2)} seconds)`
+      );
+  }
+}
 test.beforeAll(async ({ browser }) => {
-  test.setTimeout(250000)
+ 
   const myEmails: IEmail = await readEmails();
 
-  if (!myEmails?.supervisor5?.length) {
+  if (!myEmails?.supervisor1?.length) {
     throw new Error(`SupervisorEmail not present returning...`);
   }
   page = await browser.newPage();
@@ -29,52 +52,57 @@ test.afterAll(async () => {
 });
 test.describe('All SuperVisorRole Test case ', () => {
 
-  test('Supervisor 5 login and onboarding ', async ({ request }) => {
+  test('Supervisor 1 login and onboarding ', async ({ request }) => {
     const myEmails: IEmail = await readEmails();
+
+     // Add "Owner Team" prefix to the log
+     const rolePrefix = "Supervisor Role 5";
+
     await measureActionTime(async () => {
       const data = await generatePasswordlessLoginLink({
-        email: myEmails.supervisor5!,
+        email: myEmails.supervisor1!,
         request: request,
       });
       await page.goto(data!);
+      
+    // Onbaording flows for Supervisor
 
-      // Onbaording flows for Supervisor
-
-      await page.getByPlaceholder('Enter first name').click();
-      await page.getByPlaceholder('Enter first name').fill('Supervisor ');
-      await page.waitForLoadState('load');
-    }, "Supervisor5 Navigate to login page");
+    await page.getByPlaceholder('Enter first name').click();
+    await page.getByPlaceholder('Enter first name').fill('Supervisor');
+    await page.waitForLoadState('load');
+    }, "Supervisor 5 Navigate to login page", rolePrefix);
     await page.getByPlaceholder('Enter last name').click();
     await page.getByPlaceholder('Enter last name').fill('5');
     await page.getByPlaceholder('Enter phone').click();
     await page.getByPlaceholder('Enter phone').fill('(846) 534-65831');
+
     await measureActionTime(async () => {
       await page.getByRole('button', { name: 'Continue' }).nth(1).click();
-    }, "Click Continue button");
+    }, "Click Continue button", rolePrefix);
+
     await page.waitForTimeout(2000);
     await measureActionTime(async () => {
       await page.getByRole('checkbox').check();
       await page.waitForTimeout(2000);
       await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
-    }, "Click Agree and Continue");
+    }, "Click Agree and Continue", rolePrefix);
 
     await measureActionTime(async () => {
       await page.getByRole('checkbox').check();
       await page.waitForTimeout(2000);
       await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
-    }, "Click Agree and Continue");
+    }, "Click Agree and Continue", rolePrefix);
     await page.waitForTimeout(2000);
 
     await measureActionTime(async () => {
 
       await page.locator('div').filter({ hasText: /^Settings$/ }).click();
-    }, "Navigate to Settings");
-
+    }, "Navigate to Settings", rolePrefix);
 
     // Associate Mangaments
     await measureActionTime(async () => {
       await page.getByText('Associate management').click();
-    }, " click on associate managment");
+    }, " click on associate managment", rolePrefix);
 
     try {
       await page.getByRole('img').nth(1).click();

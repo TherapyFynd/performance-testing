@@ -5,20 +5,11 @@ import { createNewEmail } from '../../helpers/mailsurp';
 import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 import { logPerformanceMetrics } from '../../performanceUtils'; // Import utility
 // Annotate entire file as serial.
-// test.describe.configure({ mode: 'serial' });
 
-// import fs from 'fs';
-
-// const artifactsDir =''
- 
-// if (!fs.existsSync(artifactsDir)) {
-//   fs.mkdirSync(artifactsDir, { recursive: true });
-// }
 let page: Page;
 test.setTimeout(900000)
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
-  // await page.tracing.start({ path: './performance/trace.json', screenshots: true });
   if (!myEmails?.therapist2?.length) {
     throw new Error(`Therapist Email not present returning...`);
   }
