@@ -4,6 +4,12 @@ import { generatePasswordlessLoginLink } from '../../helpers/api';
 import { createNewEmail } from '../../helpers/mailsurp';
 import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 import { measureActionTime } from '../../localemails.js/const';
+import fs from 'fs';
+// Ensure directory exists
+const traceDir = path.resolve(__dirname, './playwright-report./trace/trace.json');
+if (!fs.existsSync(traceDir)) {
+  fs.mkdirSync(traceDir, { recursive: true }); // Create the directory if it doesn't exist
+}
 
 let page: Page;
 test.setTimeout(900000)
@@ -32,11 +38,10 @@ test.afterAll(async () => {
 
         // goto page
         await page.goto(data!);
-        
+        await page.waitForLoadState('load');}, "Therapist 2 Navigate to login page");
       //   // Onbaording flows for therapist
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Therapist ');
-  await page.waitForLoadState('load');}, "Navigate to login page");
   await page.getByPlaceholder('Enter last name').click();
   await page.getByPlaceholder('Enter last name').fill('2');
   await page.getByPlaceholder('Enter phone').click();

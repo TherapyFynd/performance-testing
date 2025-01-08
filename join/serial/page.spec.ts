@@ -33,6 +33,7 @@ async function measureActionTime(
     }
 }
 
+
 test.beforeAll(async ({ browser }) => {
     page = await browser.newPage();
 });

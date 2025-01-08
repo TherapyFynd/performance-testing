@@ -4,6 +4,12 @@ import { generatePasswordlessLoginLink } from '../../helpers/api';
 import { createNewEmail } from '../../helpers/mailsurp';
 import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 import { measureActionTime } from '../../localemails.js/const';
+import fs from 'fs';
+// Ensure directory exists
+const traceDir = path.resolve(__dirname, './playwright-report./trace/trace.json');
+if (!fs.existsSync(traceDir)) {
+  fs.mkdirSync(traceDir, { recursive: true }); // Create the directory if it doesn't exist
+}
 
 let page: Page;
 test.setTimeout(900000)
@@ -33,10 +39,10 @@ test.afterAll(async () => {
     
       // goto page
       await page.goto(data!);
+      await page.waitForLoadState('load');}, "Therapist 4 Navigate to login page");
       //   // Onbaording flows for therapist
   await page.getByPlaceholder('Enter first name').click();
   await page.getByPlaceholder('Enter first name').fill('Therapist ');
-  await page.waitForLoadState('load');}, "Navigate to login page");
   await page.getByPlaceholder('Enter last name').click();
   await page.getByPlaceholder('Enter last name').fill('4');
   await page.getByPlaceholder('Enter phone').click();
@@ -313,7 +319,7 @@ test.afterAll(async () => {
            // Appoinment 12
                         await measureActionTime(async () => { 
                         await page.locator('div').filter({ hasText: /^24$/ }).click(); }, "24 Appoinment");
-                        
+
          await page.getByRole('button', { name: 'Skip for now' }).nth(1).click();
          await page.getByLabel('Select client profile*').click();
          await page.getByText('Therapist (T1)').click();
