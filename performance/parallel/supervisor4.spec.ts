@@ -41,7 +41,7 @@ test.beforeAll(async ({ browser }) => {
  
   const myEmails: IEmail = await readEmails();
 
-  if (!myEmails?.supervisor1?.length) {
+  if (!myEmails?.supervisor4?.length) {
     throw new Error(`SupervisorEmail not present returning...`);
   }
   page = await browser.newPage();
@@ -60,7 +60,7 @@ test.describe('All SuperVisorRole Test case ', () => {
 
     await measureActionTime(async () => {
       const data = await generatePasswordlessLoginLink({
-        email: myEmails.supervisor1!,
+        email: myEmails.supervisor4!,
         request: request,
       });
       await page.goto(data!);

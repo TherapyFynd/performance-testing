@@ -45,7 +45,7 @@ test.beforeAll(async ({ browser }) => {
   
   const myEmails: IEmail = await readEmails();
   console.log(myEmails);
-  if (!myEmails?.practice1?.length) {
+  if (!myEmails?.practice5?.length) {
     throw new Error(`practiceAdminEmail not present returning...`);
   }
   page = await browser.newPage();
@@ -62,7 +62,7 @@ test.describe('All PracticeRole Test case ', () => {
     const rolePrefix = "Practice Manager 5";
     await measureActionTime(async () => {
       const data = await generatePasswordlessLoginLink({
-        email: myEmails.practice1!,
+        email: myEmails.practice5!,
         request: request,
       });
       await page.goto(data!);

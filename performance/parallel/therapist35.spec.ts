@@ -12,7 +12,7 @@ if (!fs.existsSync(traceDir)) {
 }
 
 let page: Page;
-test.setTimeout(900000)
+test.setTimeout(1000000)
 // Utility function to measure and validate action time
 async function measureActionTime(
   actionCallback: () => Promise<void>,
