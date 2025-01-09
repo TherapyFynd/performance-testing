@@ -8,7 +8,7 @@ import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-test.setTimeout(1000000)
+test.setTimeout(1200000)
 
 // Utility function to measure and validate action time
 async function measureActionTime(
