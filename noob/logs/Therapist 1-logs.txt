@@ -1,0 +1,5 @@
+[2025-01-09T13:32:59.109Z] [Open Invite Team Member dialog] Therapist 1Time for 'Open Invite Team Member dialog': 3.08 seconds
+[2025-01-09T13:32:59.111Z] [Open Invite Team Member dialog] Therapist 1WARNING: 'Open Invite Team Member dialog' took longer than 1.5 seconds (3.08 seconds)
+[2025-01-09T13:32:59.811Z] [Fill details and click Next] Therapist 1Time for 'Fill details and click Next': 0.31 seconds
+[2025-01-09T13:33:03.291Z] [Send Invite for Therapist 1] Therapist 1Time for 'Send Invite for Therapist 1': 1.69 seconds
+[2025-01-09T13:33:03.292Z] [Send Invite for Therapist 1] Therapist 1WARNING: 'Send Invite for Therapist 1' took longer than 1.5 seconds (1.69 seconds)

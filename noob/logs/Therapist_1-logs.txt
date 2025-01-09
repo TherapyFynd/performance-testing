@@ -1,0 +1,3 @@
+[2025-01-09T13:35:10.604Z] [Therapist 1 Navigate to login page] Therapist 1Time for 'Therapist 1 Navigate to login page': 40.84 seconds
+[2025-01-09T13:35:10.608Z] [Therapist 1 Navigate to login page] Therapist 1WARNING: 'Therapist 1 Navigate to login page' took longer than 1.5 seconds (40.84 seconds)
+[2025-01-09T13:35:11.092Z] [Click Continue button] Therapist 1Time for 'Click Continue button': 0.16 seconds

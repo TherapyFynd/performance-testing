@@ -1,0 +1,16 @@
+[2025-01-09T13:31:05.553Z] [Console Event] Failed to load resource: the server responded with a status of 404 ()
+[2025-01-09T13:31:05.637Z] [Console Event] Failed to load resource: the server responded with a status of 404 ()
+[2025-01-09T13:32:04.558Z] [Console Event] Failed to load resource: the server responded with a status of 400 ()
+[2025-01-09T13:32:04.680Z] [Console Event] WS Not Connected
+[2025-01-09T13:32:04.756Z] [Console Event] Failed to load resource: the server responded with a status of 500 ()
+[2025-01-09T13:32:05.619Z] [Console Event] Intake web package initiated for user z7knk.nuyht@inbox.testmail.app
+[2025-01-09T13:32:12.111Z] [Console Event] Failed to load resource: the server responded with a status of 500 ()
+[2025-01-09T13:32:12.123Z] [Console Event] Failed to load resource: the server responded with a status of 400 ()
+[2025-01-09T13:32:12.677Z] [Console Event] Intake web package initiated for user z7knk.nuyht@inbox.testmail.app
+[2025-01-09T13:32:12.678Z] [Console Event] Consecutive calls to connectUser is detected, ideally you should only call this function once in your app.
+[2025-01-09T13:32:39.358Z] [Console Event] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://leafs-ehr-web-stage-nmvorvf7ga-as.a.run.app/assets/Metropolis-Bold-3e441b07.ttf
+[2025-01-09T13:32:49.660Z] [Console Event] Intake web package initiated for user z7knk.nuyht@inbox.testmail.app
+[2025-01-09T13:32:49.663Z] [Console Event] Consecutive calls to connectUser is detected, ideally you should only call this function once in your app.
+[2025-01-09T13:32:54.426Z] [Console Event] Intake web package initiated for user z7knk.nuyht@inbox.testmail.app
+[2025-01-09T13:32:54.427Z] [Console Event] Consecutive calls to connectUser is detected, ideally you should only call this function once in your app.
+[2025-01-09T13:33:09.364Z] [Console Event] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://leafs-ehr-web-stage-nmvorvf7ga-as.a.run.app/assets/Metropolis-Regular-b5068085.ttf
