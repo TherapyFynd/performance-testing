@@ -17,7 +17,7 @@ let page: Page;
 
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
-  console.log(myEmails);
+  //console.log(myEmails);
   if (!myEmails?.billerEmail?.length) {
     throw new Error(`billerEmail not present returning...`);
   }

@@ -11,7 +11,7 @@ let page: Page;
 
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
-  console.log(myEmails);
+  //console.log(myEmails);
   if (!myEmails?.combinerole2?.length) {
     throw new Error(`CombineRole2  not present returning...`);
   }

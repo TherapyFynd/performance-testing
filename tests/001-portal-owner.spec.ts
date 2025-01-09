@@ -375,7 +375,7 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.getByLabel('Email*').fill(Bookinginbox1!);
   let myEmails = await readEmails();
   await setEmails({ ...myEmails, therapistEmail: Bookinginbox1! });
-  console.log(myEmails);
+  //console.log(myEmails);
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Therapist').check();
@@ -394,7 +394,7 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.getByLabel('Email*').fill(Bookinginbox2!);
   myEmails = await readEmails();
   await setEmails({ ...myEmails, supervisorEmail: Bookinginbox2! });
-  console.log(myEmails);
+  //console.log(myEmails);
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Supervisor').check();
@@ -413,7 +413,7 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.getByLabel('Email*').fill(Bookinginbox3!);
   myEmails = await readEmails();
   await setEmails({ ...myEmails, practiceAdminEmail: Bookinginbox3! });
-  console.log(myEmails);
+  //console.log(myEmails);
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Practice manager', { exact: true }).check();
@@ -432,7 +432,7 @@ await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
   await page.getByLabel('Email*').fill(Bookinginbox4!);
   myEmails = await readEmails();
   await setEmails({ ...myEmails, customroleEmail: Bookinginbox4! });
-  console.log(myEmails);
+  //console.log(myEmails);
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Custom PracticeLead').check();

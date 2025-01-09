@@ -178,7 +178,7 @@ test.describe('All OwnerRole Test case', () => {
         await page.getByLabel('Email*').fill(Bookinginbox1!);
         let myEmails = await readEmails();
         await setEmails({ ...myEmails, therapist1: Bookinginbox1! });
-        console.log(myEmails);
+        //console.log(myEmails);
 
         await measureActionTime(async () => {
             await page.getByRole('button', { name: 'Next' }).nth(1).click();

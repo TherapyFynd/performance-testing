@@ -44,7 +44,7 @@ async function measureActionTime(
 test.beforeAll(async ({ browser }) => {
   
   const myEmails: IEmail = await readEmails();
-  console.log(myEmails);
+  //console.log(myEmails);
   if (!myEmails?.practice1?.length) {
     throw new Error(`practiceAdminEmail not present returning...`);
   }

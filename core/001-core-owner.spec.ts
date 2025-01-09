@@ -339,7 +339,7 @@ test.describe('All owner Test case ', () => {
 
     let myEmails = await readEmails();
     await setEmails({ ...myEmails, therapistEmail: Bookinginbox1! });
-    console.log(myEmails);
+    //console.log(myEmails);
 
     await page.getByRole('button', { name: 'Next' }).nth(1).click();
     await page.getByLabel('Therapist').check();
@@ -358,7 +358,7 @@ test.describe('All owner Test case ', () => {
     const invitesinbox1 = await createNewEmail();
     myEmails = await readEmails();
     await setEmails({ ...myEmails, intakeAdminEmail: invitesinbox1! });
-    console.log(myEmails);
+    //console.log(myEmails);
 
     await page.getByLabel('Email*').fill(invitesinbox1!);
     await page.getByRole('button', { name: 'Next' }).nth(1).click();

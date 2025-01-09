@@ -404,7 +404,7 @@ test('Create Clients', async () => {
   const Bookinginbox1 = await createNewEmail();
   let myEmails = await readEmails();
   await setEmails({ ...myEmails, clientEmail: Bookinginbox1! });
-  console.log(myEmails);
+  //console.log(myEmails);
   await page.getByLabel('Email*').fill(Bookinginbox1!);
 
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
