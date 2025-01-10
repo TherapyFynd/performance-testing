@@ -4,6 +4,7 @@ import { generatePasswordlessLoginLink } from '../../helpers/api';
 import { createNewEmail } from '../../helpers/mailsurp';
 import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 
+
 import fs from 'fs';
 // Ensure directory exists
 const traceDir = path.resolve(__dirname, './playwright-report./trace/trace.json');
