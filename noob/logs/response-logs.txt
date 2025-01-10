@@ -1,0 +1,20 @@
+[2025-01-10T05:59:53.879Z] [Owner role Navigate to login page] Owner RoleTime for 'Owner role Navigate to login page': 20.86 seconds
+[2025-01-10T05:59:53.881Z] [Owner role Navigate to login page] Owner RoleWARNING: 'Owner role Navigate to login page' took longer than 1.5 seconds (20.86 seconds)
+[2025-01-10T05:59:59.215Z] [Click Continue button] Owner RoleTime for 'Click Continue button': 4.77 seconds
+[2025-01-10T05:59:59.215Z] [Click Continue button] Owner RoleWARNING: 'Click Continue button' took longer than 1.5 seconds (4.77 seconds)
+[2025-01-10T06:00:03.622Z] [Click After filling practice details Next button] Owner RoleTime for 'Click After filling practice details Next button': 0.13 seconds
+[2025-01-10T06:00:16.346Z] [Click Add New Locations Next button] Owner RoleTime for 'Click Add New Locations Next button': 3.94 seconds
+[2025-01-10T06:00:16.347Z] [Click Add New Locations Next button] Owner RoleWARNING: 'Click Add New Locations Next button' took longer than 1.5 seconds (3.94 seconds)
+[2025-01-10T06:00:24.081Z] [Click Add New Services Next button] Owner RoleTime for 'Click Add New Services Next button': 3.90 seconds
+[2025-01-10T06:00:24.082Z] [Click Add New Services Next button] Owner RoleWARNING: 'Click Add New Services Next button' took longer than 1.5 seconds (3.90 seconds)
+[2025-01-10T06:00:25.238Z] [Click Invite Role Next button] Owner RoleTime for 'Click Invite Role Next button': 1.15 seconds
+[2025-01-10T06:00:29.108Z] [Click Agree and Continue] Owner RoleTime for 'Click Agree and Continue': 3.87 seconds
+[2025-01-10T06:00:29.111Z] [Click Agree and Continue] Owner RoleWARNING: 'Click Agree and Continue' took longer than 1.5 seconds (3.87 seconds)
+[2025-01-10T06:00:33.629Z] [Click Agree and Continue] Owner RoleTime for 'Click Agree and Continue': 4.52 seconds
+[2025-01-10T06:00:33.631Z] [Click Agree and Continue] Owner RoleWARNING: 'Click Agree and Continue' took longer than 1.5 seconds (4.52 seconds)
+[2025-01-10T06:00:41.405Z] [Navigate to Settings] Owner RoleTime for 'Navigate to Settings': 0.29 seconds
+[2025-01-10T06:00:41.848Z] [Open Team Members page] Owner RoleTime for 'Open Team Members page': 0.44 seconds
+[2025-01-10T06:00:44.702Z] [Open invite team member dialog] Owner RoleTime for 'Open invite team member dialog': 2.85 seconds
+[2025-01-10T06:00:44.704Z] [Open invite team member dialog] Owner RoleWARNING: 'Open invite team member dialog' took longer than 1.5 seconds (2.85 seconds)
+[2025-01-10T06:00:45.622Z] [Fill therapist details and click Next] Owner RoleTime for 'Fill therapist details and click Next': 0.33 seconds
+[2025-01-10T06:00:48.963Z] [Send therapist invite] Owner RoleTime for 'Send therapist invite': 1.41 seconds

@@ -6,10 +6,10 @@ on:
     - cron: "30 10 * * *" # Runs at 04:00 PM IST everyday
 
   push:
-    branches: [issue-80]
+    branches: [issue-5]
 
   pull_request:
-    branches: [issue-80]
+    branches: [issue-5]
 
 
 

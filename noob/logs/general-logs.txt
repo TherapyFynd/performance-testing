@@ -1,0 +1,15 @@
+[2025-01-10T05:59:36.816Z] [Console Event] Failed to load resource: the server responded with a status of 404 ()
+[2025-01-10T05:59:36.925Z] [Console Event] Failed to load resource: the server responded with a status of 404 ()
+[2025-01-10T05:59:52.142Z] [Console Event] Failed to load resource: the server responded with a status of 500 ()
+[2025-01-10T05:59:52.169Z] [Console Event] Failed to load resource: the server responded with a status of 400 ()
+[2025-01-10T05:59:52.280Z] [Console Event] WS Not Connected
+[2025-01-10T05:59:52.892Z] [Console Event] Intake web package initiated for user z7knk.pi3rs@inbox.testmail.app
+[2025-01-10T05:59:58.750Z] [Console Event] Failed to load resource: the server responded with a status of 500 ()
+[2025-01-10T05:59:58.762Z] [Console Event] Failed to load resource: the server responded with a status of 400 ()
+[2025-01-10T05:59:59.643Z] [Console Event] Intake web package initiated for user z7knk.pi3rs@inbox.testmail.app
+[2025-01-10T05:59:59.644Z] [Console Event] Consecutive calls to connectUser is detected, ideally you should only call this function once in your app.
+[2025-01-10T06:00:32.850Z] [Console Event] Intake web package initiated for user z7knk.pi3rs@inbox.testmail.app
+[2025-01-10T06:00:32.852Z] [Console Event] Consecutive calls to connectUser is detected, ideally you should only call this function once in your app.
+[2025-01-10T06:00:38.172Z] [Console Event] Intake web package initiated for user z7knk.pi3rs@inbox.testmail.app
+[2025-01-10T06:00:38.173Z] [Console Event] Consecutive calls to connectUser is detected, ideally you should only call this function once in your app.
+[2025-01-10T06:01:01.405Z] [Console Event] Intake web package initiated for user z7knk.pi3rs@inbox.testmail.app
