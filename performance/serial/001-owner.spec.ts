@@ -1,5 +1,4 @@
-import { test, type Page } from '@playwright/test';
-import fs from 'fs';
+import { test, type Page, } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../../helpers/api';
 import { createNewEmail } from '../../helpers/mailsurp';
@@ -9,74 +8,54 @@ import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-test.setTimeout(1200000);
-
-// Directory to store logs
-const logsDir = path.resolve(__dirname, 'logs');
-if (!fs.existsSync(logsDir)) {
-    fs.mkdirSync(logsDir);
-}
-
-// File paths for logs
-const generalLogsFile = path.join(logsDir, 'general-logs.txt');
-const responseLogsFile = path.join(logsDir, 'ownerrole-logs.txt');
-
-// Function to append logs to a file
-function saveLog(filePath: string, actionName: string, message: string) {
-    const logMessage = `[${new Date().toISOString()}] [${actionName}] ${message}\n`;
-    fs.appendFileSync(filePath, logMessage);
-}
+test.setTimeout(1200000)
 
 // Utility function to measure and validate action time
 async function measureActionTime(
-    actionCallback: () => Promise<void>,
-    actionName: string,
-    rolePrefix = "",
-    thresholdInMilliseconds = 1500
+  actionCallback: () => Promise<void>,
+  actionName: string,
+  rolePrefix: string = " ",
+  thresholdInMilliseconds = 1500
 ) {
-    const startTime = performance.now();
-    await actionCallback();
-    const endTime = performance.now();
+  const startTime = performance.now();
+  await actionCallback();
+  const endTime = performance.now();
 
-    const loadTimeInMilliseconds = endTime - startTime;
-    const loadTimeInSeconds = loadTimeInMilliseconds / 1000;
+  const loadTimeInMilliseconds = endTime - startTime; // Calculate load time in milliseconds
+  const loadTimeInSeconds = loadTimeInMilliseconds / 1000; // Convert to seconds
 
-    const logMessage = `${rolePrefix}Time for '${actionName}': ${loadTimeInSeconds.toFixed(2)} seconds`;
-    saveLog(responseLogsFile, actionName, logMessage);
-    console.log(logMessage);
+  // Log action time including the role prefix
+  console.log(`${rolePrefix}Time for '${actionName}': ${loadTimeInSeconds.toFixed(2)} seconds`);
 
-    if (loadTimeInMilliseconds > thresholdInMilliseconds) {
-        const warningMessage = `${rolePrefix}WARNING: '${actionName}' took longer than ${thresholdInMilliseconds / 1000} seconds (${loadTimeInSeconds.toFixed(2)} seconds)`;
-        saveLog(responseLogsFile, actionName, warningMessage);
-        console.warn(warningMessage);
-    }
+  if (loadTimeInMilliseconds > thresholdInMilliseconds) {
+      console.warn(
+          `${rolePrefix}WARNING: '${actionName}' took longer than ${thresholdInMilliseconds / 1000} seconds (${loadTimeInSeconds.toFixed(2)} seconds)`
+      );
+  }
 }
 
 test.beforeAll(async ({ browser }) => {
-    page = await browser.newPage();
-
-    // Capture console events and save them in the general logs
-    page.on('console', (msg) => {
-        saveLog(generalLogsFile, 'Console Event', msg.text());
-    });
+  page = await browser.newPage();
 });
 
 test.afterAll(async () => {
-    await page.close();
+  await page.close();
 });
+test.describe('All OwnerRole Test case ', () => {
+  test('Owner login and  onboarding ', async ({ request }) => {
+    const inbox = await createNewEmail();
 
-// Tests for Owner Role
-test.describe('All OwnerRole Test case', () => {
-    test('Owner login and onboarding', async ({ request }) => {
-        const inbox = await createNewEmail();
-        const rolePrefix = "Owner Role";
+    // Add "Owner Team" prefix to the log
+    const rolePrefix = "Owner Role";
+    // Measure time for navigating to the login page
+    await measureActionTime(async () => {
 
-        await measureActionTime(async () => {
-            const data = await generatePasswordlessLoginLink({
-                email: inbox!,
-                request: request,
-            });
-            await page.goto(data!);
+      const data = await generatePasswordlessLoginLink({
+        email: inbox!,
+        request: request,
+      });
+
+      await page.goto(data!);
       
     // Onboarding Flows for Owner
     await page.getByPlaceholder('Enter first name').click();
@@ -114,7 +93,6 @@ test.describe('All OwnerRole Test case', () => {
       await page.getByRole('button', { name: 'Next' }).nth(1).click();
     }, "Click After filling practice details Next button", rolePrefix);
 
-    
     await page.getByRole('button', { name: 'Add new' }).nth(1).click();
     await page.getByLabel('Office name').click();
     await page.getByLabel('Office name').fill('KANTIME HEALTHCARE');
