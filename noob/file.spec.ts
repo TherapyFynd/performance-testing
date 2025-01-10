@@ -17,11 +17,14 @@ if (!fs.existsSync(logsDir)) {
     fs.mkdirSync(logsDir);
 }
 
-// Function to append logs to a file based on role
-function saveLog(role: string, actionName: string, message: string) {
-    const fileName = path.join(logsDir, `${role}-logs.txt`);
+// File paths for logs
+const generalLogsFile = path.join(logsDir, 'general-logs.txt');
+const responseLogsFile = path.join(logsDir, 'response-logs.txt');
+
+// Function to append logs to a file
+function saveLog(filePath: string, actionName: string, message: string) {
     const logMessage = `[${new Date().toISOString()}] [${actionName}] ${message}\n`;
-    fs.appendFileSync(fileName, logMessage);
+    fs.appendFileSync(filePath, logMessage);
 }
 
 // Utility function to measure and validate action time
@@ -39,12 +42,12 @@ async function measureActionTime(
     const loadTimeInSeconds = loadTimeInMilliseconds / 1000;
 
     const logMessage = `${rolePrefix}Time for '${actionName}': ${loadTimeInSeconds.toFixed(2)} seconds`;
-    saveLog(rolePrefix.trim(), actionName, logMessage);
+    saveLog(responseLogsFile, actionName, logMessage);
     console.log(logMessage);
 
     if (loadTimeInMilliseconds > thresholdInMilliseconds) {
         const warningMessage = `${rolePrefix}WARNING: '${actionName}' took longer than ${thresholdInMilliseconds / 1000} seconds (${loadTimeInSeconds.toFixed(2)} seconds)`;
-        saveLog(rolePrefix.trim(), actionName, warningMessage);
+        saveLog(responseLogsFile, actionName, warningMessage);
         console.warn(warningMessage);
     }
 }
@@ -52,16 +55,15 @@ async function measureActionTime(
 test.beforeAll(async ({ browser }) => {
     page = await browser.newPage();
 
-    // Capture console events and save them based on role
+    // Capture console events and save them in the general logs
     page.on('console', (msg) => {
-        saveLog('General', 'Console Event', msg.text());
+        saveLog(generalLogsFile, 'Console Event', msg.text());
     });
 });
 
 test.afterAll(async () => {
     await page.close();
 });
-
 
 // Tests for Owner Role
 test.describe('All OwnerRole Test case', () => {
@@ -173,17 +175,17 @@ test.describe('All OwnerRole Test case', () => {
             await page.locator('div').filter({ hasText: /^Settings$/ }).click();
         }, "Navigate to Settings", rolePrefix);
 
-        // Navigate to Team members
+        // Navigate to Team Members
         await measureActionTime(async () => {
             await page.getByText('Team members').first().click();
         }, "Open Team Members page", rolePrefix);
 
-        // Invite Therapist
-        const therapistRolePrefix = "Therapist 1";
+        // // Invite a therapist
+        // const therapistRolePrefix = "Therapist";
 
         await measureActionTime(async () => {
             await page.getByRole('button', { name: 'Invite team member' }).nth(1).click();
-        }, "Open Invite Team Member dialog", therapistRolePrefix);
+        }, "Open invite team member dialog",rolePrefix);
 
         const therapistEmail = await createNewEmail();
         await page.getByLabel('First Name*').fill('Therapist');
@@ -195,13 +197,13 @@ test.describe('All OwnerRole Test case', () => {
 
         await measureActionTime(async () => {
             await page.getByRole('button', { name: 'Next' }).nth(1).click();
-        }, "Fill details and click Next", therapistRolePrefix);
+        }, "Fill therapist details and click Next", rolePrefix);
 
         await page.getByLabel('Therapist').check();
 
         await measureActionTime(async () => {
             await page.getByRole('button', { name: 'Send Invite' }).nth(1).click();
-        }, "Send Invite for Therapist 1", therapistRolePrefix);
+        }, "Send therapist invite", rolePrefix);
 
         await page.waitForTimeout(4000);
         await page.reload();

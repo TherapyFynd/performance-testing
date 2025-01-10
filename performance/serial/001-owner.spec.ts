@@ -9,7 +9,7 @@ import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
 test.describe.configure({ mode: 'serial' });
 
 let page: Page;
-test.setTimeout(1200000)
+test.setTimeout(1200000);
 
 // Directory to store logs
 const logsDir = path.resolve(__dirname, 'logs');
@@ -17,11 +17,14 @@ if (!fs.existsSync(logsDir)) {
     fs.mkdirSync(logsDir);
 }
 
-// Function to append logs to a file based on role
-function saveLog(role: string, actionName: string, message: string) {
-    const fileName = path.join(logsDir, `${role}-logs.txt`);
+// File paths for logs
+const generalLogsFile = path.join(logsDir, 'general-logs.txt');
+const responseLogsFile = path.join(logsDir, 'ownerrole-logs.txt');
+
+// Function to append logs to a file
+function saveLog(filePath: string, actionName: string, message: string) {
     const logMessage = `[${new Date().toISOString()}] [${actionName}] ${message}\n`;
-    fs.appendFileSync(fileName, logMessage);
+    fs.appendFileSync(filePath, logMessage);
 }
 
 // Utility function to measure and validate action time
@@ -39,12 +42,12 @@ async function measureActionTime(
     const loadTimeInSeconds = loadTimeInMilliseconds / 1000;
 
     const logMessage = `${rolePrefix}Time for '${actionName}': ${loadTimeInSeconds.toFixed(2)} seconds`;
-    saveLog(rolePrefix.trim(), actionName, logMessage);
+    saveLog(responseLogsFile, actionName, logMessage);
     console.log(logMessage);
 
     if (loadTimeInMilliseconds > thresholdInMilliseconds) {
         const warningMessage = `${rolePrefix}WARNING: '${actionName}' took longer than ${thresholdInMilliseconds / 1000} seconds (${loadTimeInSeconds.toFixed(2)} seconds)`;
-        saveLog(rolePrefix.trim(), actionName, warningMessage);
+        saveLog(responseLogsFile, actionName, warningMessage);
         console.warn(warningMessage);
     }
 }
@@ -52,30 +55,28 @@ async function measureActionTime(
 test.beforeAll(async ({ browser }) => {
     page = await browser.newPage();
 
-    // Capture console events and save them based on role
+    // Capture console events and save them in the general logs
     page.on('console', (msg) => {
-        saveLog('General', 'Console Event', msg.text());
+        saveLog(generalLogsFile, 'Console Event', msg.text());
     });
-
+});
 
 test.afterAll(async () => {
-  await page.close();
+    await page.close();
 });
-test.describe('All OwnerRole Test case ', () => {
-  test('Owner login and  onboarding ', async ({ request }) => {
-    const inbox = await createNewEmail();
 
-    // Add "Owner Team" prefix to the log
-    const rolePrefix = "Owner Role";
-    // Measure time for navigating to the login page
-    await measureActionTime(async () => {
+// Tests for Owner Role
+test.describe('All OwnerRole Test case', () => {
+    test('Owner login and onboarding', async ({ request }) => {
+        const inbox = await createNewEmail();
+        const rolePrefix = "Owner Role";
 
-      const data = await generatePasswordlessLoginLink({
-        email: inbox!,
-        request: request,
-      });
-
-      await page.goto(data!);
+        await measureActionTime(async () => {
+            const data = await generatePasswordlessLoginLink({
+                email: inbox!,
+                request: request,
+            });
+            await page.goto(data!);
       
     // Onboarding Flows for Owner
     await page.getByPlaceholder('Enter first name').click();
@@ -2230,4 +2231,3 @@ test.describe('All OwnerRole Test case ', () => {
 });
 
 
-});
