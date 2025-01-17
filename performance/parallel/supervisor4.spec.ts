@@ -1,18 +1,26 @@
 import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../../helpers/api';
+import { createNewEmail } from '../../helpers/mailsurp';
 import { IEmail, readEmails } from '../../localemails.js/emails';
-// import { measureActionTime } from '../../localemails.js/const';
-// Annotate entire file as serial.
 import fs from 'fs';
-// Ensure directory exists
-const traceDir = path.resolve(__dirname, './playwright-report./trace/trace.json');
-if (!fs.existsSync(traceDir)) {
-  fs.mkdirSync(traceDir, { recursive: true }); // Create the directory if it doesn't exist
+
+// Directory paths
+const logsDir = path.resolve(__dirname, 'logs');
+const responseLogsFile = path.join(logsDir, 'supervisor4-responses.txt');
+
+// Ensure logs directory exists
+if (!fs.existsSync(logsDir)) {
+  fs.mkdirSync(logsDir);
 }
 
 let page: Page;
 test.setTimeout(250000)
+
+// Function to append logs to a file
+function saveResponseLog(message: string) {
+  fs.appendFileSync(responseLogsFile, `${message}\n`);
+}
 
 // Utility function to measure and validate action time
 async function measureActionTime(
@@ -25,45 +33,57 @@ async function measureActionTime(
   await actionCallback();
   const endTime = performance.now();
 
-  const loadTimeInMilliseconds = endTime - startTime; // Calculate load time in milliseconds
-  const loadTimeInSeconds = loadTimeInMilliseconds / 1000; // Convert to seconds
+  const loadTimeInMilliseconds = endTime - startTime;
+  const loadTimeInSeconds = loadTimeInMilliseconds / 1000;
 
-  // Log action time including the role prefix
-  console.log(`${rolePrefix}Time for '${actionName}': ${loadTimeInSeconds.toFixed(2)} seconds`);
+  const logMessage = `${rolePrefix}Time for '${actionName}': ${loadTimeInSeconds.toFixed(2)} seconds`;
+
+  // Log to console and save to file
+  console.log(logMessage);
+  saveResponseLog(logMessage);
 
   if (loadTimeInMilliseconds > thresholdInMilliseconds) {
-      console.warn(
-          `${rolePrefix}WARNING: '${actionName}' took longer than ${thresholdInMilliseconds / 1000} seconds (${loadTimeInSeconds.toFixed(2)} seconds)`
-      );
+    const warningMessage = `${rolePrefix}WARNING: '${actionName}' took longer than ${thresholdInMilliseconds / 1000} seconds (${loadTimeInSeconds.toFixed(2)} seconds)`;
+    console.warn(warningMessage);
+    saveResponseLog(warningMessage);
   }
 }
-test.beforeAll(async ({ browser }) => {
- 
-  const myEmails: IEmail = await readEmails();
 
+// Test setup before all test cases
+test.beforeAll(async ({ browser }) => {
+  const myEmails: IEmail = await readEmails();
   if (!myEmails?.supervisor4?.length) {
-    throw new Error(`SupervisorEmail not present returning...`);
+    throw new Error(`Supervisor Email not present. Exiting tests.`);
   }
+
   page = await browser.newPage();
 });
 
+// Cleanup after tests
 test.afterAll(async () => {
   await page.close();
 });
-test.describe('All SuperVisorRole Test case ', () => {
 
-  test('Supervisor 1 login and onboarding ', async ({ request }) => {
+// Main test cases
+test.describe('All Supervisor4 Role Test Cases', () => {
+  test('Supervisor4 login and onboarding', async ({ request }) => {
     const myEmails: IEmail = await readEmails();
+    const rolePrefix = "Supervisor 4";
 
-     // Add "Owner Team" prefix to the log
-     const rolePrefix = "Supervisor Role 4";
+       // Repeat test actions twice
+       for (let i = 0; i < 2; i++) {
+        const iterationLogMessage = `Test iteration: ${i + 1}`;
+        console.log(iterationLogMessage);
+        saveResponseLog(iterationLogMessage);
 
-    await measureActionTime(async () => {
-      const data = await generatePasswordlessLoginLink({
-        email: myEmails.supervisor4!,
-        request: request,
-      });
-      await page.goto(data!);
+      await measureActionTime(async () => {
+        const data = await generatePasswordlessLoginLink({
+          email: myEmails.supervisor4!,
+          request: request,
+        });
+
+        // Navigate to generated login page
+        await page.goto(data!);
       
     // Onbaording flows for Supervisor
 
@@ -112,6 +132,6 @@ test.describe('All SuperVisorRole Test case ', () => {
     }
     await page.getByRole('menuitem', { name: 'Logout' }).click();
     await page.waitForTimeout(5000);
-
+  }
   });
 });

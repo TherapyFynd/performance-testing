@@ -3,17 +3,25 @@ import path from 'path';
 import { generatePasswordlessLoginLink } from '../../helpers/api';
 import { createNewEmail } from '../../helpers/mailsurp';
 import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
-
-
 import fs from 'fs';
-// Ensure directory exists
-const traceDir = path.resolve(__dirname, './playwright-report./trace/trace.json');
-if (!fs.existsSync(traceDir)) {
-  fs.mkdirSync(traceDir, { recursive: true }); // Create the directory if it doesn't exist
+
+// Directory paths
+const logsDir = path.resolve(__dirname, 'logs');
+const responseLogsFile = path.join(logsDir, 'therapist11-responses.txt');
+
+// Ensure logs directory exists
+if (!fs.existsSync(logsDir)) {
+  fs.mkdirSync(logsDir);
 }
 
 let page: Page;
-test.setTimeout(900000)
+test.setTimeout(900000); // Set timeout to 15 minutes
+
+// Function to append logs to a file
+function saveResponseLog(message: string) {
+  fs.appendFileSync(responseLogsFile, `${message}\n`);
+}
+
 // Utility function to measure and validate action time
 async function measureActionTime(
   actionCallback: () => Promise<void>,
@@ -25,47 +33,57 @@ async function measureActionTime(
   await actionCallback();
   const endTime = performance.now();
 
-  const loadTimeInMilliseconds = endTime - startTime; // Calculate load time in milliseconds
-  const loadTimeInSeconds = loadTimeInMilliseconds / 1000; // Convert to seconds
+  const loadTimeInMilliseconds = endTime - startTime;
+  const loadTimeInSeconds = loadTimeInMilliseconds / 1000;
 
-  // Log action time including the role prefix
-  console.log(`${rolePrefix}Time for '${actionName}': ${loadTimeInSeconds.toFixed(2)} seconds`);
+  const logMessage = `${rolePrefix}Time for '${actionName}': ${loadTimeInSeconds.toFixed(2)} seconds`;
+
+  // Log to console and save to file
+  console.log(logMessage);
+  saveResponseLog(logMessage);
 
   if (loadTimeInMilliseconds > thresholdInMilliseconds) {
-    console.warn(
-      `${rolePrefix}WARNING: '${actionName}' took longer than ${thresholdInMilliseconds / 1000} seconds (${loadTimeInSeconds.toFixed(2)} seconds)`
-    );
+    const warningMessage = `${rolePrefix}WARNING: '${actionName}' took longer than ${thresholdInMilliseconds / 1000} seconds (${loadTimeInSeconds.toFixed(2)} seconds)`;
+    console.warn(warningMessage);
+    saveResponseLog(warningMessage);
   }
 }
+
+// Test setup before all test cases
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
-
   if (!myEmails?.therapist11?.length) {
-    throw new Error(`TherapistEmail not present returning...`);
+    throw new Error(`Therapist Email not present. Exiting tests.`);
   }
+
   page = await browser.newPage();
 });
 
+// Cleanup after tests
 test.afterAll(async () => {
   await page.close();
 });
 
-
-test.describe('All Therapist11 Role Test case ', () => {
-  // test.describe.configure({ mode: 'parallel' });
-  test('Therapist11 login and  onboarding ', async ({ request }) => {
+// Main test cases
+test.describe('All Therapist11 Role Test Cases', () => {
+  test('Therapist11 login and onboarding', async ({ request }) => {
     const myEmails: IEmail = await readEmails();
-    // Add "Owner Team" prefix to the log
     const rolePrefix = "Therapist 11";
 
-    await measureActionTime(async () => {
-    const data = await generatePasswordlessLoginLink({
-      email: myEmails.therapist11!,
-      request: request,
-    });
+        // Repeat test actions twice
+        for (let i = 0; i < 2; i++) {
+          const iterationLogMessage = `Test iteration: ${i + 1}`;
+          console.log(iterationLogMessage);
+          saveResponseLog(iterationLogMessage);
 
-    // goto page
-    await page.goto(data!);
+      await measureActionTime(async () => {
+        const data = await generatePasswordlessLoginLink({
+          email: myEmails.therapist11!,
+          request: request,
+        });
+
+        // Navigate to generated login page
+        await page.goto(data!);
     
     //   // Onbaording flows for therapist
     await page.getByPlaceholder('Enter first name').click();
@@ -396,7 +414,7 @@ test.describe('All Therapist11 Role Test case ', () => {
       await page.getByRole('button', { name: 'Create Appointment' }).nth(1).click();
     }, "Create Appoinment", rolePrefix);
     await page.waitForTimeout(2000);
-
+  }
     try {
       await page.getByRole('img').nth(1).click();
     } catch (error) {

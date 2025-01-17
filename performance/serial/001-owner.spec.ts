@@ -19,7 +19,7 @@ if (!fs.existsSync(logsDir)) {
 
 // File paths for logs
 const generalLogsFile = path.join(logsDir, 'general-logs.txt');
-const responseLogsFile = path.join(logsDir, 'response-logs.txt');
+const responseLogsFile = path.join(logsDir, 'ownerrole-logs.txt');
 
 // Function to append logs to a file
 function saveLog(filePath: string, actionName: string, message: string) {

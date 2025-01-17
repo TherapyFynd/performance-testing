@@ -1,23 +1,27 @@
 import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../../helpers/api';
-import { IEmail, readEmails, setEmails } from '../../localemails.js/emails';
-import {
-  BASE_FRONTEND_URL,
-  isRunningOnLocal,
-  localBaseUrl,
-} from '../../localemails.js/const';
 import { createNewEmail } from '../../helpers/mailsurp';
+import { IEmail, readEmails } from '../../localemails.js/emails';
 import fs from 'fs';
 
-// Ensure directory exists
-const traceDir = path.resolve(__dirname, './playwright-report./trace/trace.json');
-if (!fs.existsSync(traceDir)) {
-  fs.mkdirSync(traceDir, { recursive: true }); // Create the directory if it doesn't exist
+// Directory paths
+const logsDir = path.resolve(__dirname, 'logs');
+const responseLogsFile = path.join(logsDir, 'practice3-responses.txt');
+
+// Ensure logs directory exists
+if (!fs.existsSync(logsDir)) {
+  fs.mkdirSync(logsDir);
 }
 
 let page: Page;
 test.setTimeout(250000)
+
+// Function to append logs to a file
+function saveResponseLog(message: string) {
+  fs.appendFileSync(responseLogsFile, `${message}\n`);
+}
+
 // Utility function to measure and validate action time
 async function measureActionTime(
   actionCallback: () => Promise<void>,
@@ -29,43 +33,57 @@ async function measureActionTime(
   await actionCallback();
   const endTime = performance.now();
 
-  const loadTimeInMilliseconds = endTime - startTime; // Calculate load time in milliseconds
-  const loadTimeInSeconds = loadTimeInMilliseconds / 1000; // Convert to seconds
+  const loadTimeInMilliseconds = endTime - startTime;
+  const loadTimeInSeconds = loadTimeInMilliseconds / 1000;
 
-  // Log action time including the role prefix
-  console.log(`${rolePrefix}Time for '${actionName}': ${loadTimeInSeconds.toFixed(2)} seconds`);
+  const logMessage = `${rolePrefix}Time for '${actionName}': ${loadTimeInSeconds.toFixed(2)} seconds`;
+
+  // Log to console and save to file
+  console.log(logMessage);
+  saveResponseLog(logMessage);
 
   if (loadTimeInMilliseconds > thresholdInMilliseconds) {
-      console.warn(
-          `${rolePrefix}WARNING: '${actionName}' took longer than ${thresholdInMilliseconds / 1000} seconds (${loadTimeInSeconds.toFixed(2)} seconds)`
-      );
+    const warningMessage = `${rolePrefix}WARNING: '${actionName}' took longer than ${thresholdInMilliseconds / 1000} seconds (${loadTimeInSeconds.toFixed(2)} seconds)`;
+    console.warn(warningMessage);
+    saveResponseLog(warningMessage);
   }
 }
+
+// Test setup before all test cases
 test.beforeAll(async ({ browser }) => {
-  
   const myEmails: IEmail = await readEmails();
-  //console.log(myEmails);
   if (!myEmails?.practice3?.length) {
-    throw new Error(`practiceAdminEmail not present returning...`);
+    throw new Error(`Practice Email not present. Exiting tests.`);
   }
+
   page = await browser.newPage();
 });
 
+// Cleanup after tests
 test.afterAll(async () => {
   await page.close();
 });
-test.describe('All PracticeRole Test case ', () => {
 
-  test('Practice 1  login and  onboarding ', async ({ request }) => {
-    let myEmails: IEmail = await readEmails();
-    // Add "Owner Team" prefix to the log
-    const rolePrefix = "Practice Manager 3";
-    await measureActionTime(async () => {
-      const data = await generatePasswordlessLoginLink({
-        email: myEmails.practice3!,
-        request: request,
-      });
-      await page.goto(data!);
+// Main test cases
+test.describe('All Practice3 Role Test Cases', () => {
+  test('Practice3 login and onboarding', async ({ request }) => {
+    const myEmails: IEmail = await readEmails();
+    const rolePrefix = "Practice 3";
+
+        // Repeat test actions twice
+        for (let i = 0; i < 2; i++) {
+          const iterationLogMessage = `Test iteration: ${i + 1}`;
+          console.log(iterationLogMessage);
+          saveResponseLog(iterationLogMessage);
+
+      await measureActionTime(async () => {
+        const data = await generatePasswordlessLoginLink({
+          email: myEmails.practice3!,
+          request: request,
+        });
+
+        // Navigate to generated login page
+        await page.goto(data!);
       
     // Onbaording flows for Practice Manager
 
@@ -110,5 +128,6 @@ test.describe('All PracticeRole Test case ', () => {
 
     await page.getByRole('menuitem', { name: 'Logout' }).click();
     await page.waitForTimeout(7000);
+  }
   });
 });

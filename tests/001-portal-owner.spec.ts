@@ -685,10 +685,10 @@ test('Forms Tab', async () => {
       console.log('Failed to find first locator, trying second locator');
        await page.getByText('Documents').click();
     }
-  await page.getByRole('button', { name: 'Create new' }).nth(1).click();
-
-  // // Questionaries Form Code
-  await page.getByText('Questionnaire').click();
+    
+    await page.getByRole('tab', { name: 'Private' }).click();
+    await page.getByRole('button', { name: 'Create new' }).nth(1).click();
+    await page.getByText('Questionnaire', { exact: true }).click();
   await page.getByPlaceholder('type here').click();
   await page.getByPlaceholder('type here').fill('Automation Forms');
   await page.getByRole('button', { name: 'Done' }).nth(1).click();

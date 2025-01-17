@@ -1,0 +1,8 @@
+Test iteration: 1
+Therapist 1Time for 'Therapist 1 Navigate to login page': 24.40 seconds
+Therapist 1WARNING: 'Therapist 1 Navigate to login page' took longer than 1.5 seconds (24.40 seconds)
+Therapist 1Time for 'Click Continue button': 0.35 seconds
+Test iteration: 2
+Therapist 1Time for 'Therapist 1 Navigate to login page': 15.75 seconds
+Therapist 1WARNING: 'Therapist 1 Navigate to login page' took longer than 1.5 seconds (15.75 seconds)
+Therapist 1Time for 'Click Continue button': 0.30 seconds

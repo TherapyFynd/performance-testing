@@ -1,13 +1,12 @@
 import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { generatePasswordlessLoginLink } from '../../helpers/api';
-import { createNewEmail } from '../../helpers/mailsurp';
 import { IEmail, readEmails } from '../../localemails.js/emails';
 import fs from 'fs';
 
 // Directory paths
 const logsDir = path.resolve(__dirname, 'logs');
-const responseLogsFile = path.join(logsDir, 'practice1-responses.txt');
+const responseLogsFile = path.join(logsDir, 'clinican2-responses.txt');
 
 // Ensure logs directory exists
 if (!fs.existsSync(logsDir)) {
@@ -15,7 +14,7 @@ if (!fs.existsSync(logsDir)) {
 }
 
 let page: Page;
-test.setTimeout(250000)
+test.setTimeout(900000); // Set timeout to 15 minutes
 
 // Function to append logs to a file
 function saveResponseLog(message: string) {
@@ -52,8 +51,8 @@ async function measureActionTime(
 // Test setup before all test cases
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
-  if (!myEmails?.practice1?.length) {
-    throw new Error(`Practice Email not present. Exiting tests.`);
+  if (!myEmails?.therapist2?.length) {
+    throw new Error(`Therapist Email not present. Exiting tests.`);
   }
 
   page = await browser.newPage();
@@ -65,69 +64,40 @@ test.afterAll(async () => {
 });
 
 // Main test cases
-test.describe('All Practice1 Role Test Cases', () => {
-  test('Practice1 login and onboarding', async ({ request }) => {
+test.describe('All Therapist2 Role Test Cases', () => {
+  test('Therapist2 login and onboarding', async ({ request }) => {
     const myEmails: IEmail = await readEmails();
-    const rolePrefix = "Practice 1";
+    const rolePrefix = "Therapist 2";
 
     // Repeat test actions twice
     for (let i = 0; i < 2; i++) {
-      const iterationLogMessage = `Test iteration: ${i + 1}`;
-      console.log(iterationLogMessage);
-      saveResponseLog(iterationLogMessage);
+        const iterationLogMessage = `Test iteration: ${i + 1}`;
+        console.log(iterationLogMessage);
+        saveResponseLog(iterationLogMessage);
 
       await measureActionTime(async () => {
         const data = await generatePasswordlessLoginLink({
-          email: myEmails.practice1!,
+          email: myEmails.therapist2!,
           request: request,
         });
 
         // Navigate to generated login page
         await page.goto(data!);
 
-        // Onbaording flows for Practice Manager
-
+        // Onboarding flows for therapist
         await page.getByPlaceholder('Enter first name').click();
-        await page.getByPlaceholder('Enter first name').fill('Practice ');
+        await page.getByPlaceholder('Enter first name').fill('Therapist ');
         await page.waitForLoadState('load');
-      }, "Practice 1 Navigate to login page", rolePrefix);
+      }, "Therapist 2 Navigate to login page", rolePrefix);
+
       await page.getByPlaceholder('Enter last name').click();
       await page.getByPlaceholder('Enter last name').fill('1');
       await page.getByPlaceholder('Enter phone').click();
-      await page.getByPlaceholder('Enter phone').fill('(846) 534-65832');
+      await page.getByPlaceholder('Enter phone').fill('(846) 534-65836');
 
       await measureActionTime(async () => {
         await page.getByRole('button', { name: 'Continue' }).nth(1).click();
       }, "Click Continue button", rolePrefix);
-
-      await page.waitForTimeout(2000);
-      await measureActionTime(async () => {
-        await page.getByRole('checkbox').check();
-        await page.waitForTimeout(2000);
-        await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
-      }, "Click Agree and Continue", rolePrefix);
-
-      await measureActionTime(async () => {
-        await page.getByRole('checkbox').check();
-        await page.waitForTimeout(2000);
-        await page.getByRole('button', { name: 'Agree & Continue' }).nth(1).click();
-      }, "Click Agree and Continue", rolePrefix);
-      await page.waitForTimeout(2000);
-
-      await measureActionTime(async () => {
-
-        await page.locator('div').filter({ hasText: /^Settings$/ }).click();
-      }, "Navigate to Settings", rolePrefix);
-
-      try {
-        await page.getByRole('img').nth(1).click();
-      } catch (error) {
-        console.log('Failed to find first locator, trying second locator');
-        await page.locator('.MuiAvatar-img').click();
-      }
-
-      await page.getByRole('menuitem', { name: 'Logout' }).click();
-      await page.waitForTimeout(7000);
     }
   });
 });

@@ -1,0 +1,52 @@
+[Console Event] Failed to load resource: the server responded with a status of 404 ()
+[Console Event] Failed to load resource: the server responded with a status of 500 ()
+[Console Event] Failed to load resource: the server responded with a status of 400 ()
+[Console Event] WS Not Connected
+[Console Event] Intake web package initiated for user z7knk.bg1kr@inbox.testmail.app
+[Owner role Navigate to login page] Owner RoleTime for 'Owner role Navigate to login page': 16.61 seconds
+[Owner role Navigate to login page] Owner RoleWARNING: 'Owner role Navigate to login page' took longer than 1.5 seconds (16.61 seconds)
+[Click Continue button] Owner RoleTime for 'Click Continue button': 3.64 seconds
+[Click Continue button] Owner RoleWARNING: 'Click Continue button' took longer than 1.5 seconds (3.64 seconds)
+[Console Event] Failed to load resource: the server responded with a status of 500 ()
+[Console Event] Failed to load resource: the server responded with a status of 400 ()
+[Console Event] Intake web package initiated for user z7knk.bg1kr@inbox.testmail.app
+[Console Event] Consecutive calls to connectUser is detected, ideally you should only call this function once in your app.
+[Click After filling practice details Next button] Owner RoleTime for 'Click After filling practice details Next button': 0.09 seconds
+[Click Add New Locations Next button] Owner RoleTime for 'Click Add New Locations Next button': 3.53 seconds
+[Click Add New Locations Next button] Owner RoleWARNING: 'Click Add New Locations Next button' took longer than 1.5 seconds (3.53 seconds)
+[Click Add New Services Next button] Owner RoleTime for 'Click Add New Services Next button': 3.53 seconds
+[Click Add New Services Next button] Owner RoleWARNING: 'Click Add New Services Next button' took longer than 1.5 seconds (3.53 seconds)
+[Click Invite Role Next button] Owner RoleTime for 'Click Invite Role Next button': 0.49 seconds
+[Click Agree and Continue] Owner RoleTime for 'Click Agree and Continue': 3.98 seconds
+[Click Agree and Continue] Owner RoleWARNING: 'Click Agree and Continue' took longer than 1.5 seconds (3.98 seconds)
+[Click Agree and Continue] Owner RoleTime for 'Click Agree and Continue': 4.09 seconds
+[Click Agree and Continue] Owner RoleWARNING: 'Click Agree and Continue' took longer than 1.5 seconds (4.09 seconds)
+[Console Event] Intake web package initiated for user z7knk.bg1kr@inbox.testmail.app
+[Console Event] Consecutive calls to connectUser is detected, ideally you should only call this function once in your app.
+[Console Event] Intake web package initiated for user z7knk.bg1kr@inbox.testmail.app
+[Console Event] Consecutive calls to connectUser is detected, ideally you should only call this function once in your app.
+[Navigate to Settings] Owner RoleTime for 'Navigate to Settings': 0.45 seconds
+[Click Clinician setting] Owner RoleTime for 'Click Clinician setting': 0.96 seconds
+[Click invite team member page] Owner RoleTime for 'Click invite team member page': 3.64 seconds
+[Click invite team member page] Owner RoleWARNING: 'Click invite team member page' took longer than 1.5 seconds (3.64 seconds)
+[Click on Next Button] Owner RoleTime for 'Click on Next Button': 0.17 seconds
+[Send invite for therapist1] Owner RoleTime for 'Send invite for therapist1': 1.66 seconds
+[Send invite for therapist1] Owner RoleWARNING: 'Send invite for therapist1' took longer than 1.5 seconds (1.66 seconds)
+[Console Event] Intake web package initiated for user z7knk.bg1kr@inbox.testmail.app
+[Click invite team member page] Owner RoleTime for 'Click invite team member page': 2.41 seconds
+[Click invite team member page] Owner RoleWARNING: 'Click invite team member page' took longer than 1.5 seconds (2.41 seconds)
+[Click on Next Button] Owner RoleTime for 'Click on Next Button': 0.18 seconds
+[Send invite for therapist2] Owner RoleTime for 'Send invite for therapist2': 1.12 seconds
+[Console Event] Intake web package initiated for user z7knk.bg1kr@inbox.testmail.app
+[Click invite team member page] Owner RoleTime for 'Click invite team member page': 3.04 seconds
+[Click invite team member page] Owner RoleWARNING: 'Click invite team member page' took longer than 1.5 seconds (3.04 seconds)
+[Click on Next Button] Owner RoleTime for 'Click on Next Button': 0.17 seconds
+[Send invite for supervisor1] Owner RoleTime for 'Send invite for supervisor1': 1.60 seconds
+[Send invite for supervisor1] Owner RoleWARNING: 'Send invite for supervisor1' took longer than 1.5 seconds (1.60 seconds)
+[Console Event] Intake web package initiated for user z7knk.bg1kr@inbox.testmail.app
+[Click invite team member page] Owner RoleTime for 'Click invite team member page': 1.84 seconds
+[Click invite team member page] Owner RoleWARNING: 'Click invite team member page' took longer than 1.5 seconds (1.84 seconds)
+[Click on Next Button] Owner RoleTime for 'Click on Next Button': 0.21 seconds
+[Send invite for PracticeManager1] Owner RoleTime for 'Send invite for PracticeManager1': 1.60 seconds
+[Send invite for PracticeManager1] Owner RoleWARNING: 'Send invite for PracticeManager1' took longer than 1.5 seconds (1.60 seconds)
+[Console Event] Intake web package initiated for user z7knk.bg1kr@inbox.testmail.app
