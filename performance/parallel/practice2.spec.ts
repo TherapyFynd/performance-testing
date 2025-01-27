@@ -5,6 +5,7 @@ import { createNewEmail } from '../../helpers/mailsurp';
 import { IEmail, readEmails } from '../../localemails.js/emails';
 import fs from 'fs';
 
+
 // Directory paths
 const logsDir = path.resolve(__dirname, 'logs');
 const responseLogsFile = path.join(logsDir, 'practice2-responses.txt');
