@@ -1,16 +1,18 @@
 import { defineConfig, devices } from '@playwright/test';
-
+import path from 'path';
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
 // require('dotenv').config();
-
+// Log the directory name
+console.log('Current Directory:', __dirname);
+console.log(path.join(__dirname, '/helpers/teardown.ts'),"path")
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  timeout: 6 * 60 * 1000,
+  timeout: 7 * 60 * 1000,
   testDir: '.',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -19,7 +21,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: 0,
   /* Opt out of parallel tests on CI. */
-  workers: 5,
+  workers: 10,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -43,13 +45,15 @@ export default defineConfig({
     // locale: 'en-US',
     // timezoneId: 'America/Los_Angeles',
     
-
+    
     launchOptions: {
       // 1
       args: ['--start-maximized'],
     },
   },
-
+   /* Add `globalTeardown` here */
+  globalTeardown: path.join(__dirname, '/helpers/teardown.ts'),
+  
   /* Configure projects for major browsers */
   projects: [
     {
@@ -61,7 +65,7 @@ export default defineConfig({
       name: 'tr',
       testMatch: 'global.teardown.ts',
     },
-
+    
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },

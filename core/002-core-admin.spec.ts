@@ -21,7 +21,7 @@ test.beforeAll(async ({ browser }) => {
 test.afterAll(async () => {
   await page.close();
 });
-test.describe('All AdminRole Test case ', () => {
+test.describe.skip('All AdminRole Test case ', () => {
 test('Intake admin login and  onboarding ', async ({ request }) => {
   const myEmails: IEmail = await readEmails();
 

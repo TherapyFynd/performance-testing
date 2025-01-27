@@ -17,7 +17,7 @@ let page: Page;
 
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
-  console.log(myEmails);
+  //console.log(myEmails);
   if (!myEmails?.practiceAdminEmail?.length) {
     throw new Error(`practiceAdminEmail not present returning...`);
   }
@@ -75,7 +75,7 @@ await page.getByRole('checkbox').check();
   await page.getByLabel('Email*').fill(Bookinginbox1!);
   let myEmails = await readEmails();
   await setEmails({ ...myEmails, billerEmail: Bookinginbox1! });
-  console.log(myEmails);
+  //console.log(myEmails);
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Biller').check();
@@ -96,7 +96,7 @@ await page.getByRole('checkbox').check();
   await page.getByLabel('Email*').fill(Bookinginbox5!);
   myEmails = await readEmails();
   await setEmails({ ...myEmails, schedulerEmail: Bookinginbox5! });
-  console.log(myEmails);
+  //console.log(myEmails);
 
  await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Scheduler').check();
@@ -117,7 +117,7 @@ await page.getByRole('checkbox').check();
   await page.getByLabel('Email*').fill(Bookinginbox6!);
   myEmails = await readEmails();
   await setEmails({ ...myEmails, intakeadminroleEmail: Bookinginbox6! });
-  console.log(myEmails);
+  //console.log(myEmails);
 
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('Intake admin').check();

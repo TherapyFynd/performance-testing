@@ -16,7 +16,7 @@ let page: Page;
 
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
-  console.log(myEmails);
+  //console.log(myEmails);
   if (!myEmails?.schedulerEmail?.length) {
     throw new Error(`schedulerEmail not present returning...`);
   }

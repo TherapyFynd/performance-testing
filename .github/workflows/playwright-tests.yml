@@ -1,16 +1,12 @@
-name: Load Test
+name: Performance Tesing
 
 on:
   workflow_dispatch:
   schedule:
     - cron: "30 10 * * *" # Runs at 04:00 PM IST everyday
 
-  push:
-    branches: [issue-80]
-
   pull_request:
-    branches: [issue-80]
-
+    branches: [main, master]
 
 
 jobs:
@@ -78,10 +74,10 @@ jobs:
           if-no-files-found: error
         if: always()
 
-            # Step 11: Cleanup accounts/emails
+      #       # Step 11: Cleanup accounts/emails
       - name: Cleanup accounts/emails
         run: |
-          node cleanup.ts
+          node helpers/cleanup.js
         if: always()
 
       # - name: Make POST request on failure

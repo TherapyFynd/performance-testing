@@ -31,7 +31,7 @@ export const createNewEmail = async () => {
     }
     await writeJSONToFileAsync(data, filePath);
 
-    console.log(`Email created : ${email}`);
+    // console.log(`Email created : ${email}`);
     return email;
   } catch (error) {
     console.log(`Error while creating inbox : `, error);

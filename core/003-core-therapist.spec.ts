@@ -232,9 +232,10 @@ test('Settings Flows', async () => {
 test('Forms Tab', async () => {
   // All Forms create Forms
   await page.locator('div').filter({ hasText: /^Documents$/ }).getByRole('img').click();
+
+  await page.getByRole('tab', { name: 'Private' }).click();
   await page.getByRole('button', { name: 'Create new' }).nth(1).click();
-  // Questionaries Form Code
-  await page.getByText('Questionnaire').click();
+  await page.getByText('Questionnaire', { exact: true }).click();
   await page.getByPlaceholder('type here').click();
   await page.getByPlaceholder('type here').fill('Therapist Automation Forms');
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
@@ -292,12 +293,12 @@ test('Forms Tab', async () => {
   await page.getByRole('button', { name: 'Preview' }).nth(1).click();
   await page.getByRole('button').first().click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.getByTestId('ArrowBackRoundedIcon').click();
+ 
   // Progress Note
   await page.getByRole('button', { name: 'Create new' }).nth(1).click();
   await page.getByText('Progress note', { exact: true }).click();
   await page.getByPlaceholder('type here').click();
-  await page.getByPlaceholder('type here').fill('Therapist Automation Testing');
+  await page.getByPlaceholder('type here').fill('Therapist Automation P.Note');
   await page.getByRole('button', { name: 'Done' }).nth(1).click();
   await page.getByPlaceholder('Please enter a question').click();
   await page
@@ -388,8 +389,8 @@ test('Forms Tab', async () => {
   await page.getByRole('button', { name: 'Preview' }).nth(1).click();
   await page.getByRole('button').first().click();
   await page.getByRole('button', { name: 'Save' }).nth(1).click();
-  await page.getByTestId('ArrowBackRoundedIcon').locator('path').click();
  
+ await page.pause();
 });
 test('Create Clients', async () => {
   await page.getByRole('button', { name: 'addIcon Create' }).nth(1).click();
@@ -404,7 +405,7 @@ test('Create Clients', async () => {
   const Bookinginbox1 = await createNewEmail();
   let myEmails = await readEmails();
   await setEmails({ ...myEmails, clientEmail: Bookinginbox1! });
-  console.log(myEmails);
+  //console.log(myEmails);
   await page.getByLabel('Email*').fill(Bookinginbox1!);
 
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();

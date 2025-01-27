@@ -11,7 +11,7 @@ let page: Page;
 
 test.beforeAll(async ({ browser }) => {
   const myEmails: IEmail = await readEmails();
-  console.log(myEmails);
+  //console.log(myEmails);
   if (!myEmails?.therapistEmail?.length) {
     throw new Error(`TherapistEmail not present returning...`);
   }
@@ -770,7 +770,7 @@ await page.getByRole('menuitem', { name: 'Create client' }).click();
 
   let myEmails = await readEmails();
   await setEmails({ ...myEmails, clientEmail: Bookinginbox1! });
-  console.log(myEmails);
+  //console.log(myEmails);
 
   await page.getByRole('button', { name: 'Continue' }).nth(1).click();
   await page.getByRole('button', { name: 'Create Client' }).nth(1).click();
@@ -791,7 +791,7 @@ await page.getByRole('menuitem', { name: 'Create client' }).click();
   
   myEmails = await readEmails();
   await setEmails({ ...myEmails, minorclient: Bookinginboxe1! });
-  console.log(myEmails);
+  //console.log(myEmails);
   await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('First Name*').click();
@@ -805,7 +805,7 @@ await page.getByRole('menuitem', { name: 'Create client' }).click();
   
   myEmails = await readEmails();
   await setEmails({ ...myEmails, guardinclient: Bookinginboxe2! });
-  console.log(myEmails);
+  //console.log(myEmails);
 
   await page.getByLabel('Guardian relationship to').click();
   await page.getByLabel('Guardian relationship to').fill('Brother');
@@ -830,7 +830,7 @@ await page.getByRole('menuitem', { name: 'Create client' }).click();
   
   myEmails = await readEmails();
   await setEmails({ ...myEmails, couplemaleclient: Bookinginboxe3! });
-  console.log(myEmails);
+  //console.log(myEmails);
   await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Next' }).nth(1).click();
   await page.getByLabel('First Name*').click();
@@ -844,7 +844,7 @@ await page.getByRole('menuitem', { name: 'Create client' }).click();
   
   myEmails = await readEmails();
   await setEmails({ ...myEmails, couplefemaleclient: Bookinginboxe4! });
-  console.log(myEmails);
+  //console.log(myEmails);
 
   await page.getByLabel('Phone').click();
   await page.getByLabel('Phone').fill('(506) 704-23454');
