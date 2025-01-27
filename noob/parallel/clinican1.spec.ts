@@ -63,6 +63,7 @@ test.afterAll(async () => {
   await page.close();
 });
 
+
 // Main test cases
 test.describe('All Therapist1 Role Test Cases', () => {
   test('Therapist1 login and onboarding', async ({ request }) => {
